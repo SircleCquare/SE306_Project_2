@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
     public float airTime = 1f;
+	
+	public float switchSearchRadius = 5.0f;
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     private float forceY = 0;
@@ -23,6 +25,16 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+		updateMovement();
+		if (inputControl.getSide() == PlayerSide) {
+			if (inputControl.isActivate()) {
+				activateSwitchs();
+			}
+		}
+    }
+	
+	
+	private void updateMovement() {
 		float horizontalMag;
 		bool jump;
 		if (inputControl.getSide() != PlayerSide) {
@@ -53,5 +65,26 @@ public class PlayerController : MonoBehaviour {
         forceY -= gravity * Time.deltaTime * gravityForce;
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);		
-    }
+	}
+	
+	private void activateSwitchs() {
+		Switch closeSwitch = getNearbySwitch();
+		if (closeSwitch != null) {
+			closeSwitch.toggle();
+		}
+		
+	}
+	
+	
+	private Switch getNearbySwitch() {
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
+		for (int i = 0; i < hitColliders.Length; i++) {
+			Switch switchObj = hitColliders[i].gameObject.GetComponent<Switch>();
+			if (switchObj != null) {
+				Debug.Log("Switch found and returning");
+				return switchObj;
+			}
+		}
+		return null;
+	}
 }

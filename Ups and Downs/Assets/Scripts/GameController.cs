@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 	
 	public Side currentSide = Side.Dark;
 	public KeyCode flipAction = KeyCode.F;
+	public KeyCode activateAction = KeyCode.E;
 	private bool disableInput = false;
 	
 	public CameraPinController cameraPinController;
@@ -52,6 +53,14 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	
+	
+	public bool isActivate() {
+		if (!disableInput) {
+			return Input.GetKeyDown(activateAction);
+		} else {
+			return false;
+		}
+	}
 	/*
 	*	Will return true as long as the move right action key is being held down.
 	*	

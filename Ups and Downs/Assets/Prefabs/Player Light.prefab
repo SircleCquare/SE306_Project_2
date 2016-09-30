@@ -91,12 +91,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSide: 0
   inputControl: {fileID: 0}
-  boundsPadding: 0.05
   speed: 6
   jumpSpeed: 20
   gravity: 20
   gravityForce: 3
   airTime: 1
+  switchSearchRadius: 2
 --- !u!143 &14391220
 CharacterController:
   m_ObjectHideFlags: 1
