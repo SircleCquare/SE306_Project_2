@@ -15,22 +15,13 @@ public class CameraPinController : MonoBehaviour {
 	
 	private int flipStep = 0;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		middle = (player1.position + player2.position) * 0.5f;
 		if (isFlipping) {
 			flip();
 		}
-		//else {
-			setPosition();
-			//keepOnScreen(player1);
-			//keepOnScreen(player2);
-		//}
+		setPosition();
 	}
 	
 	public void doFlip() {
