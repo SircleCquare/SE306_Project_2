@@ -954,6 +954,10 @@ Prefab:
       propertyPath: targetList.Array.data[0]
       value: 
       objectReference: {fileID: 515883192}
+    - target: {fileID: 11440572, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
+      propertyPath: initialState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
   m_IsPrefabParent: 0

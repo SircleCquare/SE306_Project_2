@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+	An implementation of the Switchable abstract class.
+	A door chances colour when de/activated.
+	Additionally the Doors collider is only active when the door is active.
+*/
 public class Door : Switchable {
 	
 	/** The material which will be rendered when this object is active */

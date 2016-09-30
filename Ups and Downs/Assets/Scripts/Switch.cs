@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+	A switch can be activated by the player when they are close enough by pressing E.
+	
+	A switch will then toggle the state of all attached Switchables to the new state of
+	this switch.
+
+*/
 public  class Switch : MonoBehaviour {
 	
 	public Switchable[] targetList;
