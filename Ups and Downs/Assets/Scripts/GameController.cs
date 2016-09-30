@@ -8,11 +8,13 @@ public class GameController : MonoBehaviour {
 	public KeyCode flipAction = KeyCode.F;
 	private bool disableInput = false;
 	
+	public CameraPinController cameraPinController;
 	
 	void Update() {
 		if (isFlipDown()) {
 			Debug.Log("Flipping");
 			flipWorld();
+
 			//TODO: Implement some sort of Coroutine to trigger camera pan + animation before
 			// 	programatically switching sides.
 			return;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour {
 	*/
 	private void flipWorld() {
 		Debug.Log("Side: " + currentSide);
+		cameraPinController.doFlip();
 		if (currentSide == Side.Dark) {
 			currentSide = Side.Light;
 		} else {
@@ -83,8 +86,12 @@ public class GameController : MonoBehaviour {
 	*	If the user is pressing the right action key (Default D), this value will be positive.
 	*/
 	public float getHorizontalMagnitude() {
+		float adjust = 1f;
+		if (currentSide == Side.Light) {
+			adjust = -1f;
+		}
 		if (!disableInput) {
-			return Input.GetAxis("Horizontal");
+			return adjust * Input.GetAxis("Horizontal");
 		} else {
 			return 0f;
 		}
