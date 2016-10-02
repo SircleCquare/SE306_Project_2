@@ -815,6 +815,10 @@ Prefab:
       propertyPath: inputControl
       value: 
       objectReference: {fileID: 474401189}
+    - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
+      propertyPath: rate
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
   m_IsPrefabParent: 0
