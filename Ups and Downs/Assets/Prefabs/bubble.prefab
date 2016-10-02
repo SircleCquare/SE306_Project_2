@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e936171604fd70c4885c05d6d1403c62, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -76,9 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6756e5e933349c4faba82cc6d21b2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeMin: 1
-  lifeMax: 3
-  growth: 0.2
+  lifeMin: 0.3
+  lifeMax: 1.2
+  growth: 1.5
 --- !u!135 &13549090
 SphereCollider:
   m_ObjectHideFlags: 1
