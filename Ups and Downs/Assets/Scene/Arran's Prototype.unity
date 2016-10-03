@@ -276,6 +276,10 @@ Prefab:
       propertyPath: inputControl
       value: 
       objectReference: {fileID: 474401189}
+    - target: {fileID: 6523980, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
   m_IsPrefabParent: 0
@@ -901,6 +905,18 @@ Prefab:
     - target: {fileID: 153912, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
       propertyPath: m_Name
       value: GroundCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559364, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153912, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141430, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
