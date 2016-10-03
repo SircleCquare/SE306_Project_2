@@ -2,17 +2,22 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-
+    /** The side of the player assigned this Controller */
 	public Side PlayerSide;
+    /** Must be set to an active game controller object */
     public GameController inputControl;
-
+    /** The checkpoint this player has initially. */
+    public Checkpoint initialCheckpoint;
 	public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
     public float airTime = 1f;
 	
+    /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
+    // The most recent check point this player has.
+    private Vector3 mostRecentCheckpoint;
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     private float forceY = 0;
@@ -21,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         invertGrav = gravity + airTime;
         controller = GetComponent<CharacterController>();
+        mostRecentCheckpoint = initialCheckpoint.getPosition();
     }
 
     void Update()
@@ -33,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-
+    /** Updates the users horizontal and vertical movement based on input */
     private void updateMovement() {
 		float horizontalMag;
 		bool jump;
@@ -67,6 +73,9 @@ public class PlayerController : MonoBehaviour {
         controller.Move(moveDirection * Time.deltaTime);		
 	}
 	
+    /**
+        Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
+    */
 	private void activateSwitchs() {
 		Switch closeSwitch = getNearbySwitch();
 		if (closeSwitch != null) {
@@ -75,7 +84,9 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
-	
+	/**
+        A helper method which searchs for switchs that are nearby to the player.
+    */
 	private Switch getNearbySwitch() {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
 		for (int i = 0; i < hitColliders.Length; i++) {
@@ -87,4 +98,26 @@ public class PlayerController : MonoBehaviour {
 		}
 		return null;
 	}
+
+    /** Updates the players checkpoint */
+    public void addCheckPoint(Checkpoint checkPoint)
+    {
+        if (checkPoint.checkpointSide == PlayerSide)
+        {
+            if (checkPoint.isActive())
+            {
+                mostRecentCheckpoint = checkPoint.getPosition();
+                checkPoint.activate();
+            }
+        }
+    }
+
+    /**
+        Called to kill the player and return them to their last respawn point.
+    */
+    public void kill()
+    {
+        Debug.Log("Killing");
+        transform.position = mostRecentCheckpoint;
+    }
 }

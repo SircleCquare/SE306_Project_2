@@ -91,7 +91,6 @@ public class PressurePlate : Switchable {
 
     public override void activate()
     {
-
         standingOn = true;
     }
 

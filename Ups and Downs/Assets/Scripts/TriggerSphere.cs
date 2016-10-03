@@ -6,6 +6,9 @@ public class TriggerSphere : MonoBehaviour {
     public Switchable[] targetList;
 
 
+    /**
+        Activates the target list when a player enters the target sphere.
+    */
     void OnTriggerEnter(Collider col)
     {
 
@@ -16,6 +19,9 @@ public class TriggerSphere : MonoBehaviour {
 
     }
 
+    /**
+       Deactivates the target list when a player leaves the target sphere.
+   */
     void OnTriggerExit(Collider col)
     {
 
@@ -26,6 +32,7 @@ public class TriggerSphere : MonoBehaviour {
 
     }
 
+    /** Activates all targets in the target list. Effectively calls activate() on all switchables */
     private void setActive()
     {
         for (int i = 0; i < targetList.Length; i++)
@@ -35,6 +42,7 @@ public class TriggerSphere : MonoBehaviour {
         }
     }
 
+    /** Deactivates all targets in the target list. Effectively calls deactivate() on all switchables */
     private void setDeactive()
     {
         for (int i = 0; i < targetList.Length; i++)
