@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
     }
-	
-	
-	private void updateMovement() {
+
+
+    private void updateMovement() {
 		float horizontalMag;
 		bool jump;
 		if (inputControl.getSide() != PlayerSide) {

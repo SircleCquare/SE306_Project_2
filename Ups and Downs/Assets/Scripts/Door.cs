@@ -12,6 +12,8 @@ public class Door : Switchable {
 	public Material activeMaterial;
 	/** The material which will be rendered when this object is deactive */
 	public Material deactiveMaterial;
+
+    public bool lockedState = true;
 	
 	private Renderer rend;
 	private Collider doorCollider;
@@ -21,6 +23,13 @@ public class Door : Switchable {
 	void Start () {
 		doorCollider = GetComponent<Collider>();
 		rend = GetComponent<Renderer>();
+        if (lockedState)
+        {
+            activate();
+        } else
+        {
+            deactivate();
+        }
 	}
 	
 	public override void activate() {

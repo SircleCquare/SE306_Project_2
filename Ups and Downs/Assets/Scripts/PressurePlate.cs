@@ -1,61 +1,112 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PressurePlate : MonoBehaviour {
-	
+public class PressurePlate : Switchable {
 
-	public float buttonActivateTime = 1.0f;
-	public float compressionRatio = 0.5f;
-	public bool initialState = false;
-	
-	private bool standingOn;
-	private float standingTime;
-	private Vector3 activeSize;
-	private Vector3 deactiveSize;
+    /** A list of switchs which this pressure pad should trigger when completely compressed */
+    public Switchable[] targetList;
+    /* How long the pressure pad takes to compress */
+	public float buttonCompressionTime = 1.0f;
+    /* Public to be visible by GUI only, DO NOT CHANGE */
+    public bool standingOn = false;
+    /** Use this switch if you want the pressure pad to deactive targets when completely compressed */
+    public bool inverseSwitch = false;
+
+    private Vector3 initialPos;
+    private float compressionDistance;
 
 
 	// Use this for initialization
 	void Start () {
-		activeSize = transform.localScale;
-		deactiveSize = activeSize;
-		deactiveSize.y = activeSize.y * compressionRatio;
+        initialPos = transform.position;
+        Debug.Log(initialPos);
+        compressionDistance = transform.localScale.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (standingOn) {
+            Debug.Log("Lowering");
+            lowerPlate();
+        } else {
+            Debug.Log("Raising");
+            raisePlate();
+        }
+        Vector3 currentPos = transform.position;
+        currentPos.y = Mathf.Clamp(currentPos.y, initialPos.y - compressionDistance, initialPos.y);
+        transform.position = currentPos;
+        if (isActive())
+        {
+            activateAllTargets();
+        }
+        else
+        {
+            deactivateAllTargets();
+        }
 	}
-	
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.tag == "Player") {
-			if (!standingOn) {
-				standingOn = true;
-				standingTime = buttonActivateTime;
-			}
-		}
-		
-	}
-	// On the assumption that no 2 players can stand on one plate
-	void OnCollisionStay(Collision collision) {
-		if (collision.gameObject.tag == "Player") {
-			Debug.Log("Player on block");
-			standingTime -= Time.deltaTime;
-			if (standingTime < 0) {
-				transform.localScale = deactiveSize;
-			} else {
-				float frac = standingTime / buttonActivateTime;
-				transform.localScale = Vector3.Lerp(deactiveSize, activeSize, frac);
-			}
-		}
-		Debug.Log("Not player on block");
-		
-	}
-	
-	
-	void OnCollisionExit(Collision collision) {
-		if (collision.gameObject.tag == "Player") {
-			standingOn = false;
-			standingTime = buttonActivateTime;
-		}
-	}
+
+    /**
+       Returns true if the pressure pad is fully compressed. Else returns false.
+    */
+    private bool isActive()
+    {   
+        if (transform.position.y <= (initialPos.y - compressionDistance))
+        {   
+            if (inverseSwitch)
+            {
+                return false;
+            }
+            return true;
+        }
+        if (inverseSwitch)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+       Activates all targets attached to this pressure pad.
+    */
+    private void activateAllTargets()
+    {
+        for (int i = 0; i < targetList.Length; i++)
+        {
+            Switchable target = targetList[i];
+            target.activate();
+        }
+    }
+
+    /**
+        Deactivates all targets attached to this pressure pad.
+    */
+    private void deactivateAllTargets()
+    {
+        for (int i = 0; i < targetList.Length; i++)
+        {
+            Switchable target = targetList[i];
+            target.deactivate();
+        }
+    }
+
+    public override void activate()
+    {
+
+        standingOn = true;
+    }
+
+    public override void deactivate()
+    {
+        standingOn = false;
+    }
+
+    private void lowerPlate(){
+        transform.Translate(compressionDistance * Vector3.down * Time.deltaTime / buttonCompressionTime);
+    }
+
+    private void raisePlate()
+    {
+        transform.Translate(compressionDistance * Vector3.up * Time.deltaTime / buttonCompressionTime);
+    }
+
 }
