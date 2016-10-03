@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSide: 0
   inputControl: {fileID: 0}
+  initialCheckpoint: {fileID: 0}
   speed: 5
   jumpSpeed: 0
   gravity: 0

@@ -22,8 +22,19 @@ public class CameraMovement : MonoBehaviour {
 	private void keepOnScreen(Transform trans) {
 		Vector3 pos = Camera.main.WorldToViewportPoint (trans.position);
         pos.x = Mathf.Clamp(pos.x, 0 + boundsPadding, 1- boundsPadding);
-        pos.y = Mathf.Clamp(pos.y, 0 + boundsPadding, 1- boundsPadding);
-        trans.position = Camera.main.ViewportToWorldPoint(pos);
+        //pos.y = Mathf.Clamp(pos.y, 0 + boundsPadding, 1- boundsPadding);
+        if (pos.y < 0)
+        {
+            PlayerController controller = trans.gameObject.GetComponent<PlayerController>();
+            if (controller != null)
+            {
+                controller.kill();
+            }
+        } else
+        {
+            trans.position = Camera.main.ViewportToWorldPoint(pos);
+        }
+       
 	}
 	
 }
