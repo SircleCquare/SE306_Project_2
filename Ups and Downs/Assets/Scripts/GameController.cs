@@ -2,24 +2,42 @@
 using System.Collections;
 
 public class GameController : MonoBehaviour {
-	
-	
+
+    /** The number of seconds a player has to wait between flips */
+    public float flipCoolDown = 2.0f;
 	public Side currentSide = Side.Dark;
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
-	private bool disableInput = false;
+	
 	
 	public CameraPinController cameraPinController;
-	
-	void Update() {
-		if (isFlipDown()) {
-			Debug.Log("Flipping");
-			flipWorld();
+    private bool disableInput = false;
+    private float coolDownCount;
 
-			//TODO: Implement some sort of Coroutine to trigger camera pan + animation before
-			// 	programatically switching sides.
-			return;
-		}
+    void Start()
+    {
+        coolDownCount = flipCoolDown;
+    }
+
+    void Update() {
+        if (coolDownCount < 0)
+        {
+            if (isFlipDown())
+            {
+                Debug.Log("Flipping");
+                flipWorld();
+                coolDownCount = flipCoolDown;
+                return;
+            }
+        }
+        else
+        {
+            coolDownCount -= Time.deltaTime;
+            if (isFlipDown())
+            {
+                Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
+            }
+        }
 	}
 	
 	/*
