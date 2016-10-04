@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
     /** Game State */
-
+    private int score;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -42,6 +42,15 @@ public class GameController : MonoBehaviour {
             }
         }
 	}
+    public void addScore(int addition)
+    {
+        score = score + addition;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
 
     public PlayerController getActivePlayer()
     {

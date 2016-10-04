@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     /** Player State */
-    private int score;
+    
     private int health;
     private int time;
 
@@ -49,16 +49,6 @@ public class PlayerController : MonoBehaviour {
 			currentPosition.z = (inputControl.getSide () == Side.Dark) ? darkSideZ : lightSideZ;
 			transform.position = currentPosition;
 		}
-    }
-
-    public void addScore(int addition)
-    {
-        score = score + addition;
-    }
-
-    public int getScore()
-    {
-        return score;
     }
 
     public int getTime()

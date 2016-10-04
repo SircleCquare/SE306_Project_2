@@ -1,18 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+    The coin collectible provides a direct score benefit to the player that picks it up.
+
+*/
 public class Coin : Collectible {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	public override void onPickup() {
 		base.onPickup();
 		Debug.Log("Coin picked up");
