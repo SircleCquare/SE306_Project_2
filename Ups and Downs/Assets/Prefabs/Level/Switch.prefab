@@ -7,12 +7,13 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 457076}
-  - 33: {fileID: 3307592}
-  - 65: {fileID: 6513146}
-  - 23: {fileID: 2339304}
+  - 4: {fileID: 444218}
+  - 33: {fileID: 3392630}
+  - 65: {fileID: 6576204}
+  - 23: {fileID: 2397238}
+  - 114: {fileID: 11461674}
   m_Layer: 0
-  m_Name: Pressure Pad Block
+  m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,8 +108,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD:Ups and Downs/Assets/Prefabs/Level/Pressure Pad Block.prefab
-=======
 --- !u!114 &11457958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +175,6 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
->>>>>>> 274a777e9ca9d0ca3314f2ff089ce01864a0cc56:Ups and Downs/Assets/Prefabs/Level/Switch.prefab
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
