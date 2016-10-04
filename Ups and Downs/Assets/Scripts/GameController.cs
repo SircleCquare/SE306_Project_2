@@ -21,13 +21,18 @@ public class GameController : MonoBehaviour {
 	public CameraPinController cameraPinController;
     private bool disableInput = false;
     private float coolDownCount;
+    private bool coolDownActive; 
 
+
+    /* UI components */
     public Slider healthBar;
-
-    public Text timeDisplay;
-
+    public Text timeText;
     public Text characterName;
-    public Image characterAvatar; 
+    public Image characterAvatar;
+    public Text flipText;
+
+    // Used to color flip text to show flipping is disabled
+    private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
 
     void Start()
     {
@@ -42,7 +47,12 @@ public class GameController : MonoBehaviour {
         healthBar.maxValue = MAX_HEALTH;
 
         // Update current character selected
-        updateCurrentCharacterDisplay(); 
+        updateCurrentCharacterDisplay();
+
+        // Update whether flip is active
+        coolDownActive = (coolDownCount > 0) ? true : false;
+        updateFlipText(); 
+
     }
 
     void Update() {
@@ -51,6 +61,13 @@ public class GameController : MonoBehaviour {
 
         if (coolDownCount < 0)
         {
+            // Only updates text on first detection of cool down ending, rather than every frame
+            if (coolDownActive)
+            {
+                coolDownActive = false;
+                updateFlipText(); 
+            }
+
             if (isFlipDown())
             {
                 Debug.Log("Flipping");
@@ -127,13 +144,18 @@ public class GameController : MonoBehaviour {
 	*/
 	private void flipWorld() {
 		Debug.Log("Side: " + currentSide);
-		cameraPinController.doFlip();
+
+        // Since a flip has occurred, set cool down as active
+        coolDownActive = true;
+
+        cameraPinController.doFlip();
 		if (currentSide == Side.Dark) {
 			currentSide = Side.Light;
 		} else {
 			currentSide = Side.Dark;
 		}
-        updateCurrentCharacterDisplay(); 
+        updateCurrentCharacterDisplay();
+        updateFlipText(); 
 	}
 	
 	/*
@@ -226,7 +248,7 @@ public class GameController : MonoBehaviour {
      */
     void updateTimeDisplay()
     {
-        timeDisplay.text = string.Format("Time: {0:#0.00} seconds", time); 
+        timeText.text = string.Format("Time: {0:#0.00} seconds", time); 
     }
 
     /*
@@ -243,6 +265,14 @@ public class GameController : MonoBehaviour {
         {
             characterName.text = "Younger brother";
         }
+    }
+
+    /*
+     * Update the color of the flip text to show if flipping is enabled or not
+     */ 
+    void updateFlipText()
+    {
+        flipText.color = (coolDownActive) ? nearlyTransparentWhite : flipText.color = Color.white;
     }
 
 }
