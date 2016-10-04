@@ -5,8 +5,7 @@ public class PlayerController : MonoBehaviour {
     /** Player State */
     private int score;
     private int health;
-
-    
+    private int time;
 
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
@@ -47,7 +46,27 @@ public class PlayerController : MonoBehaviour {
 
     public void addScore(int addition)
     {
+        score = score + addition;
+    }
 
+    public int getScore()
+    {
+        return score;
+    }
+
+    public int getTime()
+    {
+        return time;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
     /** Updates the users horizontal and vertical movement based on input */
