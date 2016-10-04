@@ -34,7 +34,7 @@ public  class Switch : MonoBehaviour {
         }
 	}
 
-    private void setActive()
+    public virtual void setActive()
     {
         for (int i = 0; i < targetList.Length; i++)
         {
@@ -43,7 +43,7 @@ public  class Switch : MonoBehaviour {
         }
     }
 
-    private void setDeactive()
+    public virtual void setDeactive()
     {
         for (int i = 0; i < targetList.Length; i++)
         {
