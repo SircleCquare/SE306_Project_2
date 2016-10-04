@@ -25,6 +25,7 @@ public class Coin : Collectible {
             return;
         }
         controller.foundCoin();
+        base.onPickup();
 		Debug.Log("Coin picked up");
 		//Play a coin-specific sound?
 	}

@@ -4,7 +4,7 @@ using System.Collections;
 public class GameController : MonoBehaviour {
     /** Game State */
     /** The number of Coins the player has found in this play through */
-    private int coinsFound = 0;
+    public int coinsFound = 0;
     private int totalNumberOfCoins;
     public float time = 0.0f;
     private int health;
