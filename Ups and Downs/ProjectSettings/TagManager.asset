@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PressurePlate
+  - MovingGround
   layers:
   - Default
   - TransparentFX
