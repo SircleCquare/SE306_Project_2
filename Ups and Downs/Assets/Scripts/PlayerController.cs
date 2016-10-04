@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour {
 	
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
+	public float darkSideZ = -2.5f;
+	public float lightSideZ = 2.5f;
+
     // The most recent check point this player has.
     private Vector3 mostRecentCheckpoint;
     private Vector3 moveDirection = Vector3.zero;
@@ -41,6 +44,10 @@ public class PlayerController : MonoBehaviour {
 			if (inputControl.isActivate()) {
 				activateSwitchs();
 			}
+
+			Vector3 currentPosition = transform.position;
+			currentPosition.z = (inputControl.getSide () == Side.Dark) ? darkSideZ : lightSideZ;
+			transform.position = currentPosition;
 		}
     }
 
