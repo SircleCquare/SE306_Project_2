@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PressurePlate
   - MovingGround
+  - PlayerGround
   layers:
   - Default
   - TransparentFX

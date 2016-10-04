@@ -10,9 +10,9 @@ public class ToggleBlock : Switchable {
 	/** The material which will be rendered when this object is active */
 	public Material activeMaterial;
 	/** The material which will be rendered when this object is deactive */
-	public Material deactiveMaterial;
+	public Material inactiveMaterial;
 
-    public bool lockedState = true;
+    public bool locked = true;
 	
 	private Renderer rend;
 	private Collider doorCollider;
@@ -22,21 +22,23 @@ public class ToggleBlock : Switchable {
 	void Start () {
 		doorCollider = GetComponent<Collider>();
 		rend = GetComponent<Renderer>();
-        if (lockedState)
-        {
-            activate();
-        } else
-        {
-            deactivate();
-        }
+        doorCollider.enabled = locked;
+		if (locked) {
+			rend.material = activeMaterial;
+		} else {
+			rend.material = inactiveMaterial;
+		}
 	}
 	
-	public override void activate() {
-		rend.material = activeMaterial;
-		doorCollider.enabled = true;
-	}
-	public override void deactivate() {
-		rend.material = deactiveMaterial;
-		doorCollider.enabled = false;
+	public override void toggle() {
+		if (locked) {
+			rend.material = inactiveMaterial;
+			doorCollider.enabled = false;
+			locked = false;
+		} else {
+			rend.material = activeMaterial;
+			doorCollider.enabled = true;
+			locked = true;
+		}
 	}
 }

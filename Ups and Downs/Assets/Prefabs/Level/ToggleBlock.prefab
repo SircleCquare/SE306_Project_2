@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMaterial: {fileID: 2100000, guid: e936171604fd70c4885c05d6d1403c62, type: 2}
-  deactiveMaterial: {fileID: 2100000, guid: 3b029fd062485794aa022542a4c80a6a, type: 2}
-  lockedState: 1
+  inactiveMaterial: {fileID: 2100000, guid: 3b029fd062485794aa022542a4c80a6a, type: 2}
+  locked: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

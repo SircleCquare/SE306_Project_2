@@ -16,13 +16,14 @@ public class PushableObjectScript : Switch {
 	void Update () {
 		
 	}
+	
 		
-	public override void setActive(){
+	/*public override void setActive(){
 		// forces on character also affect the block
 
 	}
 
 	public override void setDeactive(){
 		//forces on character now do not affect the block
-	}
+	}*/
 }

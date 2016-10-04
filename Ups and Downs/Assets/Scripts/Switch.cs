@@ -24,17 +24,21 @@ public  class Switch : MonoBehaviour {
 		Toggles the state of this switch
 	*/
 	public void toggle() {
-		state = !state;
+		for (int i = 0; i < targetList.Length; i++) {
+			Switchable target = targetList[i];
+			target.toggle();
+		}
+		/*state = !state;
 		if (state)
         {
             setActive();
         } else
         {
             setDeactive();
-        }
+        }*/
 	}
 
-    public virtual void setActive()
+    /*public virtual void setActive()
     {
         for (int i = 0; i < targetList.Length; i++)
         {
@@ -50,5 +54,5 @@ public  class Switch : MonoBehaviour {
             Switchable target = targetList[i];
             target.deactivate();
         }
-    }
+    }*/
 }

@@ -11,9 +11,8 @@ GameObject:
   - 33: {fileID: 3307592}
   - 65: {fileID: 6513146}
   - 23: {fileID: 2339304}
-  - 114: {fileID: 11440572}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: Pressure Pad Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,20 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11440572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0379859f052b044ca5143efd3b0a3c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetList:
-  - {fileID: 0}
-  state: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
