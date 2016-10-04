@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -8,7 +9,7 @@ public class GameController : MonoBehaviour {
     private int totalNumberOfCoins;
     public float time = 0.0f;
     private int health;
-    public int maxHealth;
+    private const int MAX_HEALTH = 100;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -21,6 +22,13 @@ public class GameController : MonoBehaviour {
     private bool disableInput = false;
     private float coolDownCount;
 
+    public Slider healthBar;
+
+    public Text timeDisplay;
+
+    public Text characterName;
+    public Image characterAvatar; 
+
     void Start()
     {
         coolDownCount = flipCoolDown;
@@ -29,10 +37,18 @@ public class GameController : MonoBehaviour {
         GameObject[] coinObjectList;
         coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
         totalNumberOfCoins = coinObjectList.Length;
+
+        // Set limit for healthbar to allow proper proportion highlighted
+        healthBar.maxValue = MAX_HEALTH;
+
+        // Update current character selected
+        updateCurrentCharacterDisplay(); 
     }
 
     void Update() {
         time += Time.deltaTime;
+        updateTimeDisplay();
+
         if (coolDownCount < 0)
         {
             if (isFlipDown())
@@ -53,6 +69,7 @@ public class GameController : MonoBehaviour {
             }
         }
 	}
+
     public void foundCoin()
     {
         coinsFound++;
@@ -73,9 +90,13 @@ public class GameController : MonoBehaviour {
         return (int)time;
     }
 
+    /*
+     * Updates the player's current health and adjusts their health bar accordingly
+     */
     public void setHealth(int newHealth)
     {
         health = newHealth;
+        healthBar.value = newHealth; 
     }
 
     public int getHealth()
@@ -112,6 +133,7 @@ public class GameController : MonoBehaviour {
 		} else {
 			currentSide = Side.Dark;
 		}
+        updateCurrentCharacterDisplay(); 
 	}
 	
 	/*
@@ -198,5 +220,29 @@ public class GameController : MonoBehaviour {
 			return false;
 		}
 	}
+
+    /*
+     * Updates the time displayed in the UI 
+     */
+    void updateTimeDisplay()
+    {
+        timeDisplay.text = string.Format("Time: {0:#0.00} seconds", time); 
+    }
+
+    /*
+     * Updates the character name and avatar displayed in the UI, based on the current world side
+     */ 
+    void updateCurrentCharacterDisplay()
+    {
+        //TODO character avatar once a suitable image available
+        //TODO need to update character names
+        if(currentSide == Side.Dark)
+        {
+            characterName.text = "Older brother";
+        }else
+        {
+            characterName.text = "Younger brother";
+        }
+    }
 
 }
