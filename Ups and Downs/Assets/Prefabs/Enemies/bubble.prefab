@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13549090}
   - 23: {fileID: 2315856}
   - 114: {fileID: 11497036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
