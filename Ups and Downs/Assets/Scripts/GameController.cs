@@ -35,7 +35,8 @@ public class GameController : MonoBehaviour {
             coolDownCount -= Time.deltaTime;
             if (isFlipDown())
             {
-                Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
+				//Logging on every frame is bad, mkay?
+               // Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
             }
         }
 	}
