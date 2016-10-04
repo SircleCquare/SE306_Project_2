@@ -106,12 +106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liftHeight: 14.1
   userSpeed: 10
-  systemSpeed: 0
-  finalSpeed: 0
-  lerpValue: 0
-  startHeight: {x: 0, y: 0, z: 0}
-  currentHeight: 0
-  isAscending: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
