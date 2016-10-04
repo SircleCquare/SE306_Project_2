@@ -3,7 +3,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     /** Player State */
+    private int score;
+    private int health;
 
+    
 
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
@@ -40,6 +43,11 @@ public class PlayerController : MonoBehaviour {
 				activateSwitchs();
 			}
 		}
+    }
+
+    public void addScore(int addition)
+    {
+
     }
 
     /** Updates the users horizontal and vertical movement based on input */
