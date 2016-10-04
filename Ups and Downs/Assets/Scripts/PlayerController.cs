@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+    /** Player State */
+
+
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
     /** Must be set to an active game controller object */
