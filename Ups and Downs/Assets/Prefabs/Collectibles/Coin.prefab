@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764b60f3d4c3710448927f6e62b204ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doFloat: 1
+  spinFactor: 1
 --- !u!114 &11445212
 MonoBehaviour:
   m_ObjectHideFlags: 1
