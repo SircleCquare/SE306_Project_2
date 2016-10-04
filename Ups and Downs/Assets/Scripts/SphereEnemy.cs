@@ -9,6 +9,7 @@ public class SphereEnemy : MonoBehaviour {
 	public float minDist = 5.0f;
 	public float maxDist = 15.0f;
 	public float speed = 10.0f;
+	public GameController inputControl;
 
 	// Use this for initialization
 	void Start() {
@@ -18,12 +19,13 @@ public class SphereEnemy : MonoBehaviour {
 	void update(){
 		Debug.Log("updating");
 		transform.LookAt(player);
-		if (Vector3.Distance(transform.position, player.position) >= minDist) {
-			transform.position += transform.forward * speed * Time.deltaTime;
-			Debug.Log("moving");
-			if (Vector3.Distance(transform.position, player.position) <= maxDist) {
+		bool triggered = Vector3.Distance (transform.position, player.position) <= maxDist;
+		if (triggered && inputControl.getSide() == Side.Dark) {
+//			if (Vector3.Distance(transform.position, player.position) >= minDist) {
+				transform.position += (new Vector3(transform.forward.x, 0, 0) * speed * Time.deltaTime);
+				Debug.Log("moving");
 				// range limit to do action
-			}
+//			}
 		}
 	}
 	

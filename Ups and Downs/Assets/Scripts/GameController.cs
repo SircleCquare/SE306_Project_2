@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class GameController : MonoBehaviour {
+    /** Game State */
+
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -35,10 +37,29 @@ public class GameController : MonoBehaviour {
             coolDownCount -= Time.deltaTime;
             if (isFlipDown())
             {
-                Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
+				//Logging on every frame is bad, mkay?
+               // Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
             }
         }
 	}
+
+    public PlayerController getActivePlayer()
+    {
+        GameObject[] playerObjectList;
+        playerObjectList = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in playerObjectList)
+        {
+            PlayerController player = obj.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                if (player.PlayerSide == getSide())
+                {
+                    return player;
+                }
+            }
+        }
+        return null;
+    }
 	
 	/*
 		Called by the Game Controller to flip the world.

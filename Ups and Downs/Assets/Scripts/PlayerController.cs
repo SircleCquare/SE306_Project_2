@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+    /** Player State */
+    private int score;
+    private int health;
+    private int time;
+
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
     /** Must be set to an active game controller object */
@@ -16,6 +21,9 @@ public class PlayerController : MonoBehaviour {
 	
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
+	public float darkSideZ = -2.5f;
+	public float lightSideZ = 2.5f;
+
     // The most recent check point this player has.
     private Vector3 mostRecentCheckpoint;
     private Vector3 moveDirection = Vector3.zero;
@@ -36,7 +44,36 @@ public class PlayerController : MonoBehaviour {
 			if (inputControl.isActivate()) {
 				activateSwitchs();
 			}
+
+			Vector3 currentPosition = transform.position;
+			currentPosition.z = (inputControl.getSide () == Side.Dark) ? darkSideZ : lightSideZ;
+			transform.position = currentPosition;
 		}
+    }
+
+    public void addScore(int addition)
+    {
+        score = score + addition;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public int getTime()
+    {
+        return time;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
     /** Updates the users horizontal and vertical movement based on input */
