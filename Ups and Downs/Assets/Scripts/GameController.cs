@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
     /** Game State */
     /** The number of Coins the player has found in this play through */
-    private int coinsFound = 0;
+    public int coinsFound = 0;
     private int totalNumberOfCoins;
+    public float time = 0.0f;
+    private int health;
+    private const int MAX_HEALTH = 100;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -17,6 +21,18 @@ public class GameController : MonoBehaviour {
 	public CameraPinController cameraPinController;
     private bool disableInput = false;
     private float coolDownCount;
+    private bool coolDownActive; 
+
+
+    /* UI components */
+    public Slider healthBar;
+    public Text timeText;
+    public Text characterName;
+    public Image characterAvatar;
+    public Text flipText;
+
+    // Used to color flip text to show flipping is disabled
+    private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
 
     void Start()
     {
@@ -26,11 +42,32 @@ public class GameController : MonoBehaviour {
         GameObject[] coinObjectList;
         coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
         totalNumberOfCoins = coinObjectList.Length;
+
+        // Set limit for healthbar to allow proper proportion highlighted
+        healthBar.maxValue = MAX_HEALTH;
+
+        // Update current character selected
+        updateCurrentCharacterDisplay();
+
+        // Update whether flip is active
+        coolDownActive = (coolDownCount > 0) ? true : false;
+        updateFlipText(); 
+
     }
 
     void Update() {
+        time += Time.deltaTime;
+        updateTimeDisplay();
+
         if (coolDownCount < 0)
         {
+            // Only updates text on first detection of cool down ending, rather than every frame
+            if (coolDownActive)
+            {
+                coolDownActive = false;
+                updateFlipText(); 
+            }
+
             if (isFlipDown())
             {
                 Debug.Log("Flipping");
@@ -49,6 +86,7 @@ public class GameController : MonoBehaviour {
             }
         }
 	}
+
     public void foundCoin()
     {
         coinsFound++;
@@ -63,6 +101,26 @@ public class GameController : MonoBehaviour {
     {
         return totalNumberOfCoins;
     }
+
+    public int getTime()
+    {
+        return (int)time;
+    }
+
+    /*
+     * Updates the player's current health and adjusts their health bar accordingly
+     */
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+        healthBar.value = newHealth; 
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
     public PlayerController getActivePlayer()
     {
         GameObject[] playerObjectList;
@@ -86,12 +144,18 @@ public class GameController : MonoBehaviour {
 	*/
 	private void flipWorld() {
 		Debug.Log("Side: " + currentSide);
-		cameraPinController.doFlip();
+
+        // Since a flip has occurred, set cool down as active
+        coolDownActive = true;
+
+        cameraPinController.doFlip();
 		if (currentSide == Side.Dark) {
 			currentSide = Side.Light;
 		} else {
 			currentSide = Side.Dark;
 		}
+        updateCurrentCharacterDisplay();
+        updateFlipText(); 
 	}
 	
 	/*
@@ -178,5 +242,37 @@ public class GameController : MonoBehaviour {
 			return false;
 		}
 	}
+
+    /*
+     * Updates the time displayed in the UI 
+     */
+    void updateTimeDisplay()
+    {
+        timeText.text = string.Format("Time: {0:#0.00} seconds", time); 
+    }
+
+    /*
+     * Updates the character name and avatar displayed in the UI, based on the current world side
+     */ 
+    void updateCurrentCharacterDisplay()
+    {
+        //TODO character avatar once a suitable image available
+        //TODO need to update character names
+        if(currentSide == Side.Dark)
+        {
+            characterName.text = "Older brother";
+        }else
+        {
+            characterName.text = "Younger brother";
+        }
+    }
+
+    /*
+     * Update the color of the flip text to show if flipping is enabled or not
+     */ 
+    void updateFlipText()
+    {
+        flipText.color = (coolDownActive) ? nearlyTransparentWhite : flipText.color = Color.white;
+    }
 
 }
