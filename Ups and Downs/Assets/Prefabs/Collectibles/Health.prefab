@@ -14,8 +14,8 @@ GameObject:
   - 114: {fileID: 11424584}
   - 114: {fileID: 11418302}
   m_Layer: 0
-  m_Name: De-Leech
-  m_TagString: Untagged
+  m_Name: Health
+  m_TagString: Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
