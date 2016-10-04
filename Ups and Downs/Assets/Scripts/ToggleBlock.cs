@@ -3,10 +3,9 @@ using System.Collections;
 
 /**
 	An implementation of the Switchable abstract class.
-	A door chances colour when de/activated.
-	Additionally the Doors collider is only active when the door is active.
+	A toggleable block changes transparency and collision when activated.
 */
-public class Door : Switchable {
+public class ToggleBlock : Switchable {
 	
 	/** The material which will be rendered when this object is active */
 	public Material activeMaterial;

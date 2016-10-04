@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2333838}
   - 114: {fileID: 11497036}
   m_Layer: 0
-  m_Name: Door
+  m_Name: ToggleBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 127190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 2, z: -2.5}
-  m_LocalScale: {x: 1, y: 3, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3b029fd062485794aa022542a4c80a6a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMaterial: {fileID: 2100000, guid: e936171604fd70c4885c05d6d1403c62, type: 2}
-  deactiveMaterial: {fileID: 2100000, guid: 807984ba4e79e044786d2ea90223204c, type: 2}
+  deactiveMaterial: {fileID: 2100000, guid: 3b029fd062485794aa022542a4c80a6a, type: 2}
   lockedState: 1
 --- !u!1001 &100100000
 Prefab:
