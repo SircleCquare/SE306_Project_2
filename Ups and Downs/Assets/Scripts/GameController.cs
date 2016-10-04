@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
     /** Game State */
-    private int score;
+    /** The number of Coins the player has found in this play through */
+    private int coinsFound = 0;
+    private int totalNumberOfCoins;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -19,6 +21,11 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         coolDownCount = flipCoolDown;
+
+        //Calculates the number of coins in this level based on the number of objects tagged as Coin.
+        GameObject[] coinObjectList;
+        coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
+        totalNumberOfCoins = coinObjectList.Length;
     }
 
     void Update() {
@@ -42,16 +49,20 @@ public class GameController : MonoBehaviour {
             }
         }
 	}
-    public void addScore(int addition)
+    public void foundCoin()
     {
-        score = score + addition;
+        coinsFound++;
     }
 
-    public int getScore()
+    public int getCoinsFound()
     {
-        return score;
+        return coinsFound;
     }
 
+    public int getTotalCoins()
+    {
+        return totalNumberOfCoins;
+    }
     public PlayerController getActivePlayer()
     {
         GameObject[] playerObjectList;

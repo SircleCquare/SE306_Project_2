@@ -24,7 +24,7 @@ public class Coin : Collectible {
             Debug.LogError("Could not find active Game Controller Object");
             return;
         }
-        controller.addScore(score);
+        controller.foundCoin();
 		Debug.Log("Coin picked up");
 		//Play a coin-specific sound?
 	}
