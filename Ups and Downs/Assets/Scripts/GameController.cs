@@ -6,6 +6,9 @@ public class GameController : MonoBehaviour {
     /** The number of Coins the player has found in this play through */
     private int coinsFound = 0;
     private int totalNumberOfCoins;
+    public float time = 0.0f;
+    private int health;
+    public int maxHealth;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -29,6 +32,7 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
+        time += Time.deltaTime;
         if (coolDownCount < 0)
         {
             if (isFlipDown())
@@ -63,6 +67,22 @@ public class GameController : MonoBehaviour {
     {
         return totalNumberOfCoins;
     }
+
+    public int getTime()
+    {
+        return (int)time;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
     public PlayerController getActivePlayer()
     {
         GameObject[] playerObjectList;

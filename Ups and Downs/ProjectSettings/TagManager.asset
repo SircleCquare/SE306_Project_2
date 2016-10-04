@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PressurePlate
   - MovingGround
+  - Coin
   layers:
   - Default
   - TransparentFX
