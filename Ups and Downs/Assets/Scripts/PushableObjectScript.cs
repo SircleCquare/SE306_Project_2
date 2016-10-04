@@ -32,8 +32,8 @@ public class PushableObjectScript : Switch {
 		//forces on character now do not affect the block
 	}*/
 		// forces on character now do not affect the block
-		this.transform.SetParent(null);
-		pushingPlayer = null;
+		//this.transform.SetParent(null);
+		//pushingPlayer = null;
 		// TODO: change back all variables that were set in setActive()
-	}
+	//}
 }
