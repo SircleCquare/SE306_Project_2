@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private float forceY = 0;
     private float invertGrav;
+	public bool carryingObject { get; set; }
 	
     void Start() {
         invertGrav = gravity + airTime;
