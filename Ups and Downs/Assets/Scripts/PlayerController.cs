@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour {
         transform.position = mostRecentCheckpoint;
 		inputControl.resetHealth();
 		Invoke("Unlock", 2);
+		StartCoroutine(DamageFlash());
     }
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour {
 		inputControl.setHealth((health - damage));
 		Debug.Log("health: " + (health - damage).ToString());
 		Invoke("Unlock", 2);
+		StartCoroutine(DamageFlash());
 	}
 
 	void Unlock(){
@@ -165,5 +167,15 @@ public class PlayerController : MonoBehaviour {
 
 	void Lock(){
 		locked = true;
+	}
+
+	IEnumerator DamageFlash(){
+		for (int i = 0; i < 10; i++) {
+			Color32 normalColour = GetComponent<Renderer>().material.color;
+			GetComponent<Renderer>().material.color = Color.white;
+			yield return new WaitForSeconds(.1f);
+			GetComponent<Renderer>().material.color = normalColour;
+			yield return new WaitForSeconds(.1f);
+		}
 	}
 }
