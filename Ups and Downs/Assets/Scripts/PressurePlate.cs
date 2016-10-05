@@ -56,6 +56,7 @@ public class PressurePlate : MonoBehaviour
         // Toggle switch as leaving
         if (!standingOn)
         {
+			Debug.Log("Toggling A");
             field.setToggle();
         }
         stationary = false;
@@ -66,6 +67,7 @@ public class PressurePlate : MonoBehaviour
         if (transform.position.y <= (initialPos.y - compressionDistance))
         {
             stationary = true;
+			Debug.Log("Toggling B");
             field.setToggle();
         } else if (transform.position.y >= initialPos.y)
         {
