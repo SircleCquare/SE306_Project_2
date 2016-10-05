@@ -100,6 +100,8 @@ public class GameController : MonoBehaviour {
         // Make sure save folder exists
         if (!Directory.Exists(SAVE_FOLDER_PATH))
         {
+            Debug.Log("Save folder does not exist, creating");
+
             Directory.CreateDirectory(SAVE_FOLDER_PATH);
         }
 
@@ -112,7 +114,6 @@ public class GameController : MonoBehaviour {
             saveFile.Close();  
         }
         Debug.Log("Game saved");
-
     }
 
     /** 
@@ -120,19 +121,20 @@ public class GameController : MonoBehaviour {
      */
     public void LoadGame()
     {
-        if (!Directory.Exists(SAVE_FILE_PATH))
+        if (!File.Exists(SAVE_FILE_PATH))
         {
             // If no save exists, create new game data and save
             gameData = new GameData();
             Debug.Log("No save file found");
             SaveGame();
-        }else
+        }
+        else
         {
             // Load file
             using (FileStream saveFile = File.Open(SAVE_FILE_PATH, FileMode.Open))
             {
                 BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Deserialize(saveFile);
+                gameData = serializer.Deserialize(saveFile) as GameData;
                 saveFile.Close();
                 Debug.Log("Save data loaded");
             }
