@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
 
 public class GameController : MonoBehaviour {
-    /** Game State */
-    private const int MAX_HEALTH = 100;
 
-    GameData gameData; 
+    private GameData gameData;
+
+    private const string SAVE_FOLDER_PATH = "save_data";
+    private const string SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/save.ser";
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
 	public Side currentSide = Side.Dark;
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
-	
-	public CameraPinController cameraPinController;
+
+    private const int MAX_HEALTH = 100;
+
+    public CameraPinController cameraPinController;
     private bool disableInput = false;
     private float coolDownCount;
     private bool coolDownActive; 
@@ -32,7 +37,9 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-        gameData = new GameData(); 
+        Debug.Log("Loading save");
+
+        LoadGame();
         coolDownCount = flipCoolDown;
 
         //Calculates the number of coins in this level based on the number of objects tagged as Coin.
@@ -48,8 +55,7 @@ public class GameController : MonoBehaviour {
 
         // Update whether flip is active
         coolDownActive = (coolDownCount > 0) ? true : false;
-        updateFlipText(); 
-
+        updateFlipText();
     }
 
     void Update() {
@@ -85,6 +91,53 @@ public class GameController : MonoBehaviour {
 
 		score.text = "Score: " + getScore();
 	}
+
+    /** 
+     * Save the game data to a save file
+     */
+    public void SaveGame()
+    {
+        // Make sure save folder exists
+        if (!Directory.Exists(SAVE_FOLDER_PATH))
+        {
+            Directory.CreateDirectory(SAVE_FOLDER_PATH);
+        }
+
+        // Serialise data and save to save file
+        using (FileStream saveFile = File.Create(SAVE_FILE_PATH))
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
+            serializer.Serialize(saveFile, gameData);
+
+            saveFile.Close();  
+        }
+        Debug.Log("Game saved");
+
+    }
+
+    /** 
+     * Load the game data from a save file
+     */
+    public void LoadGame()
+    {
+        if (!Directory.Exists(SAVE_FILE_PATH))
+        {
+            // If no save exists, create new game data and save
+            gameData = new GameData();
+            Debug.Log("No save file found");
+            SaveGame();
+        }else
+        {
+            // Load file
+            using (FileStream saveFile = File.Open(SAVE_FILE_PATH, FileMode.Open))
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Deserialize(saveFile);
+                saveFile.Close();
+                Debug.Log("Save data loaded");
+            }
+        }
+    }
 
     public void foundCoin()
     {
@@ -159,13 +212,16 @@ public class GameController : MonoBehaviour {
 			currentSide = Side.Dark;
 		}
         updateCurrentCharacterDisplay();
-        updateFlipText(); 
-	}
-	
-	/*
+        updateFlipText();
+
+        SaveGame();
+
+    }
+
+    /*
 		Gets the current side which is active
 	*/
-	public Side getSide() {
+    public Side getSide() {
 		return currentSide;
 	}
 	
