@@ -31,10 +31,11 @@ public class MapSwitch : MonoBehaviour {
         else if (field != null)
         {
             destList = new Transform[field.targetList.Length];
-            Debug.Log("field confirmed");
+            Debug.Log("field confirmed: " + destList.Length);
             for (int i = 0; i < field.targetList.Length; i++)
             {
                 Switchable switchableObj = field.targetList[i];
+                Debug.Log("Add Field " + switchableObj.gameObject.name);
                 destList[i] = switchableObj.gameObject.transform;
             }
         }

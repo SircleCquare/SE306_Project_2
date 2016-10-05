@@ -380,8 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8036dfa4c89093a4491f7b5f7fb073e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsFound: 0
-  time: 0
   flipCoolDown: 2
   currentSide: 0
   flipAction: 102
@@ -392,6 +390,7 @@ MonoBehaviour:
   characterName: {fileID: 11448496}
   characterAvatar: {fileID: 11483066}
   flipText: {fileID: 11445026}
+  score: {fileID: 11432868}
 --- !u!114 &11437454
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -60,6 +60,10 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
+    public void addToInventory(SpecialCollectible specialItem)
+    {
+        Debug.Log("Added");
+    }
   
 
     /** Updates the users horizontal and vertical movement based on input */
