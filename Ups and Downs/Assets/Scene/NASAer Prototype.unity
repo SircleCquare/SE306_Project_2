@@ -2631,25 +2631,13 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
-      propertyPath: inputControl
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1486740176}
     - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
-      propertyPath: movementRadius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
-      propertyPath: triggerRadius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11423658, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
-      propertyPath: moveY
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: inputControl
+      value: 
+      objectReference: {fileID: 902508141}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
   m_IsPrefabParent: 0
