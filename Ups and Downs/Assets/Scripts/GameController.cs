@@ -6,6 +6,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    public bool renderSwitchPaths = false;
+
     private GameData gameData;
 
     private const string SAVE_FOLDER_PATH = "save_data";

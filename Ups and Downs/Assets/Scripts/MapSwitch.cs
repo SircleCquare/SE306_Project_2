@@ -55,6 +55,7 @@ public class MapSwitch : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        line.enabled = debugLinesOn();
         for (int i = 0; i < destList.Length; i++)
         {
             Transform dest = destList[i];
@@ -62,4 +63,27 @@ public class MapSwitch : MonoBehaviour {
             line.SetPosition(2*i + 1, dest.position);
         }
 	}
+
+
+    private bool debugLinesOn()
+    {
+        GameController controller = getGameController();
+        return controller.renderSwitchPaths;
+    }
+
+    private GameController getGameController()
+    {
+        GameObject[] gameControllerList;
+        gameControllerList = GameObject.FindGameObjectsWithTag("GameController");
+        GameController controller = null;
+        foreach (GameObject obj in gameControllerList)
+        {
+            controller = obj.GetComponent<GameController>();
+            if (controller != null)
+            {
+                break;
+            }
+        }
+        return controller;
+    }
 }
