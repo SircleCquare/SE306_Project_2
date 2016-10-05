@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviour {
     private float invertGrav;
 	private bool locked = false;
 	public bool carryingObject { get; set; }
+	private Color32 normalColour;
 	
     void Start() {
         invertGrav = gravity + airTime;
         controller = GetComponent<CharacterController>();
         mostRecentCheckpoint = initialCheckpoint.getPosition();
+		normalColour = GetComponent<Renderer>().material.color;
     }
 
     void Update()
@@ -139,7 +141,8 @@ public class PlayerController : MonoBehaviour {
         transform.position = mostRecentCheckpoint;
 		inputControl.resetHealth();
 		Invoke("Unlock", 2);
-		StartCoroutine(DamageFlash());
+		StopCoroutine("DamageFlash");
+		StartCoroutine("DamageFlash");
     }
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
@@ -158,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 		inputControl.setHealth((health - damage));
 		Debug.Log("health: " + (health - damage).ToString());
 		Invoke("Unlock", 2);
-		StartCoroutine(DamageFlash());
+		StartCoroutine("DamageFlash");
 	}
 
 	void Unlock(){
@@ -171,7 +174,6 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator DamageFlash(){
 		for (int i = 0; i < 10; i++) {
-			Color32 normalColour = GetComponent<Renderer>().material.color;
 			GetComponent<Renderer>().material.color = Color.white;
 			yield return new WaitForSeconds(.1f);
 			GetComponent<Renderer>().material.color = normalColour;
