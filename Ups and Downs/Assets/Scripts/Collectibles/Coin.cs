@@ -8,17 +8,7 @@ public class Coin : Collectible {
     public int score;
 
 	public override void onPickup() {
-        GameObject[] gameControllerList;
-        gameControllerList = GameObject.FindGameObjectsWithTag("GameController");
-        GameController controller = null;
-        foreach (GameObject obj in gameControllerList)
-        {
-            controller = obj.GetComponent<GameController>();
-            if (controller != null)
-            {
-                break;
-            }
-        }
+        GameController controller = getGameController();
         if (controller == null)
         {
             Debug.LogError("Could not find active Game Controller Object");
