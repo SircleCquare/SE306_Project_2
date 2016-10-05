@@ -4,12 +4,9 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
     /** Game State */
-    /** The number of Coins the player has found in this play through */
-    public int coinsFound = 0;
-    private int totalNumberOfCoins;
-    public float time = 0.0f;
-    private int health;
     private const int MAX_HEALTH = 100;
+
+    GameData gameData; 
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -17,12 +14,10 @@ public class GameController : MonoBehaviour {
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 	
-	
 	public CameraPinController cameraPinController;
     private bool disableInput = false;
     private float coolDownCount;
     private bool coolDownActive; 
-
 
     /* UI components */
     public Slider healthBar;
@@ -36,12 +31,13 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
+        gameData = new GameData(); 
         coolDownCount = flipCoolDown;
 
         //Calculates the number of coins in this level based on the number of objects tagged as Coin.
         GameObject[] coinObjectList;
         coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
-        totalNumberOfCoins = coinObjectList.Length;
+        gameData.totalNumberOfCoins = coinObjectList.Length;
 
         // Set limit for healthbar to allow proper proportion highlighted
         healthBar.maxValue = MAX_HEALTH;
@@ -56,7 +52,7 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
-        time += Time.deltaTime;
+        gameData.time += Time.deltaTime;
         updateTimeDisplay();
 
         if (coolDownCount < 0)
@@ -89,22 +85,22 @@ public class GameController : MonoBehaviour {
 
     public void foundCoin()
     {
-        coinsFound++;
+        gameData.coinsFound++;
     }
 
     public int getCoinsFound()
     {
-        return coinsFound;
+        return gameData.coinsFound;
     }
 
     public int getTotalCoins()
     {
-        return totalNumberOfCoins;
+        return gameData.totalNumberOfCoins;
     }
 
     public int getTime()
     {
-        return (int)time;
+        return (int)gameData.time;
     }
 
     /*
@@ -112,13 +108,13 @@ public class GameController : MonoBehaviour {
      */
     public void setHealth(int newHealth)
     {
-        health = newHealth;
+        gameData.health = newHealth;
         healthBar.value = newHealth; 
     }
 
     public int getHealth()
     {
-        return health;
+        return gameData.health;
     }
 
     public PlayerController getActivePlayer()
@@ -248,7 +244,7 @@ public class GameController : MonoBehaviour {
      */
     void updateTimeDisplay()
     {
-        timeText.text = string.Format("Time: {0:#0.00} seconds", time); 
+        timeText.text = string.Format("Time: {0:#0.00} seconds", gameData.time); 
     }
 
     /*
