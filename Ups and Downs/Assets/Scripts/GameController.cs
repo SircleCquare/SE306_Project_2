@@ -220,9 +220,6 @@ public class GameController : MonoBehaviour {
 		}
         updateCurrentCharacterDisplay();
         updateFlipText();
-
-        SaveGame();
-
     }
 
     /*
