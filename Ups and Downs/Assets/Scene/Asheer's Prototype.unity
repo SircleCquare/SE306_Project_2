@@ -439,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &358982448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1022,6 +1022,18 @@ Prefab:
       propertyPath: achievementPopUp
       value: 
       objectReference: {fileID: 1020028100}
+    - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: dialogBox
+      value: 
+      objectReference: {fileID: 358982447}
+    - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: dialogBoxCharacterName
+      value: 
+      objectReference: {fileID: 1941543203}
+    - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: dialogBoxMessage
+      value: 
+      objectReference: {fileID: 332770441}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
   m_IsPrefabParent: 0
@@ -1041,7 +1053,7 @@ GameObject:
   - 222: {fileID: 901962172}
   - 114: {fileID: 901962171}
   m_Layer: 5
-  m_Name: Next
+  m_Name: Space for next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1788,7 +1800,7 @@ GameObject:
   - 222: {fileID: 1941543204}
   - 114: {fileID: 1941543203}
   m_Layer: 5
-  m_Name: Player Name
+  m_Name: Character Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

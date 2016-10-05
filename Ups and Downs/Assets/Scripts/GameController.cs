@@ -34,7 +34,10 @@ public class GameController : MonoBehaviour {
     public Text flipText;
 	public Text score;
     public GameObject achievementPopUp;
-    public Text achievementText; 
+    public Text achievementText;
+    public GameObject dialogBox;
+    public Text dialogBoxCharacterName;
+    public Text dialogBoxMessage; 
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -63,6 +66,14 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
+
+        // Try to hide the dialog box if it is visible
+        if (dialogBox.activeSelf)
+        {
+            // Hides the dialog box if space is pressed
+            tryHideDialogBox(); 
+        }
+
         gameData.time += Time.deltaTime;
         updateTimeDisplay();
 
@@ -221,7 +232,7 @@ public class GameController : MonoBehaviour {
 			currentSide = Side.Light;
 		} else {
 			currentSide = Side.Dark;
-		}
+        }
         updateCurrentCharacterDisplay();
         updateFlipText();
     }
@@ -366,6 +377,29 @@ public class GameController : MonoBehaviour {
     void hideAchivementPopup()
     {
         achievementPopUp.SetActive(false);
+    }
+
+    /*
+     * Show dialog on screen for a character, as described by their name, until space is pressed. 
+     */
+    void showDialogbox(string characterName, string message)
+    {
+        dialogBoxCharacterName.text = characterName;
+        dialogBoxMessage.text = message;
+        dialogBox.SetActive(true);
+        disableInput = true; 
+    }
+
+    /*
+     * Hide the dialog box if the correct key is being pressed (space) 
+     */
+    void tryHideDialogBox()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            dialogBox.SetActive(false);
+            disableInput = false; 
+        }
     }
 
 }
