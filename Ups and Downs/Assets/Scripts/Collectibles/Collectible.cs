@@ -4,6 +4,7 @@ using System.Collections;
 public class Collectible : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
+        Debug.Log("Collectible Pickup");
 		onPickup();
     }
 	
