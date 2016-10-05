@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fe7bd0b9064aa4189fae14eef36b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: e936171604fd70c4885c05d6d1403c62, type: 2}
+  activeMaterial: {fileID: 2100000, guid: 5800f7dbcaca6c349a64f031f947e102, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: 3b029fd062485794aa022542a4c80a6a, type: 2}
   locked: 1
 --- !u!1001 &100100000
