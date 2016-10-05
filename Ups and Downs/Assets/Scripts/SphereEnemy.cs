@@ -10,26 +10,40 @@ public class SphereEnemy : MonoBehaviour {
 	public float triggerRadius = 15.0f;
 	public float speed = 10.0f;
 	public GameController inputControl;
-
+	public bool moveY;
+	private float runTime;
+	private float spawnTime;
+	private float forwardY;
 	private Vector3 homePosition;
 
 	// Use this for initialization
 	void Start() {
-		InvokeRepeating("SpawnSphere", 0.5f , 1.0f / rate);
+		runTime = 0.0f;
+		spawnTime = 1.0f / rate;
 		homePosition = transform.position;
+		forwardY = 0.0f;
 	}
 
-	void update(){
-		Debug.Log("updating");
+	void Update(){
+		Debug.Log("started");
+		runTime += Time.deltaTime;
+
+		while (runTime >= spawnTime) {
+			runTime -= spawnTime;
+			SpawnSphere();
+		}
+
 		transform.LookAt(player);
 
 		bool triggered = Vector3.Distance (transform.position, player.position) <= triggerRadius;
 		bool returnHome = Vector3.Distance (transform.position, homePosition) >= movementRadius;
 
 		if (inputControl.getSide() == Side.Dark) {
-			if (triggered && !returnHome) {
-				transform.position += (new Vector3 (transform.forward.x, 0, 0) * speed * Time.deltaTime);
-				Debug.Log ("moving");
+			if (moveY) {
+				forwardY = transform.forward.y;
+			}
+			if (triggered && !returnHome && CanSeePlayer(transform.forward)) {
+				transform.position += (new Vector3 (transform.forward.x, forwardY, 0) * speed * Time.deltaTime);
 			} else if (returnHome) {
 				transform.position = homePosition;
 			}
@@ -41,6 +55,20 @@ public class SphereEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void SpawnSphere() {
 		Instantiate(bubble, Random.insideUnitSphere + transform.position, Quaternion.identity);
-		update();
+	}
+
+	bool CanSeePlayer(Vector3 rayDirection) {
+		bool canSee;
+
+		// TODO: check if self can see player
+		RaycastHit hit = new RaycastHit();
+		if (Physics.Raycast(transform.position, rayDirection, out hit)) {
+			if (hit.transform == player) {
+				Debug.Log ("can see");
+				return true;
+			} 
+		}
+		Debug.Log ("cannot see");
+		return false;
 	}
 }
