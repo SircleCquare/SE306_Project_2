@@ -58,9 +58,6 @@ public class SphereEnemy : MonoBehaviour {
 	}
 
 	bool CanSeePlayer(Vector3 rayDirection) {
-		bool canSee;
-
-		// TODO: check if self can see player
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(transform.position, rayDirection, out hit)) {
 			if (hit.transform == player) {
