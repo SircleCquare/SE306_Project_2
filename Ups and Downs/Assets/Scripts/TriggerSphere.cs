@@ -17,6 +17,7 @@ public class TriggerSphere : MonoBehaviour {
 			}
     }
 
+
     /**
        Deactivates the target list when a player leaves the target sphere.
     */
@@ -29,7 +30,7 @@ public class TriggerSphere : MonoBehaviour {
 		}
     }
 	
-	private void setToggle() {
+	public virtual void setToggle() {
 		for (int i = 0; i < targetList.Length; i++)
         {
             Switchable target = targetList[i];
