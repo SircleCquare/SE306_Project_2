@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private float forceY = 0;
     private float invertGrav;
+	private bool locked = false;
 	public bool carryingObject { get; set; }
 	
     void Start() {
@@ -136,5 +137,33 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Killing");
         transform.position = mostRecentCheckpoint;
+		inputControl.resetHealth();
+		Invoke("Unlock", 2);
     }
+
+	void OnControllerColliderHit(ControllerColliderHit hit){
+		if(hit.gameObject.tag == "enemy" && !locked){
+			DecreaseHealth(hit.gameObject.GetComponent<Damage>().damage);
+		}
+	}
+
+	void DecreaseHealth(int damage){
+		Lock();
+		int health = inputControl.getHealth();
+		if (health <= damage) {
+			kill();
+			return;
+		}
+		inputControl.setHealth((health - damage));
+		Debug.Log("health: " + (health - damage).ToString());
+		Invoke("Unlock", 2);
+	}
+
+	void Unlock(){
+		locked = false;
+	}
+
+	void Lock(){
+		locked = true;
+	}
 }
