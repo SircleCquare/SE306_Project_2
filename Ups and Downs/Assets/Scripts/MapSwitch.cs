@@ -11,9 +11,13 @@ public class MapSwitch : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         line = GetComponent<LineRenderer>();
+        
         GameObject parentObj = gameObject.transform.parent.gameObject;
         origin = parentObj.transform;
+
         Switch switchObj = parentObj.GetComponent<Switch>();
+        PressureField field = parentObj.GetComponent<PressureField>();
+        TriggerSphere sphere = parentObj.GetComponent<TriggerSphere>();
         if (switchObj != null)
         {
             destList = new Transform[switchObj.targetList.Length];
@@ -21,6 +25,26 @@ public class MapSwitch : MonoBehaviour {
             for (int i = 0; i < switchObj.targetList.Length; i++)
             {
                 Switchable switchableObj = switchObj.targetList[i];
+                destList[i] = switchableObj.gameObject.transform;
+            }
+        }
+        else if (field != null)
+        {
+            destList = new Transform[field.targetList.Length];
+            Debug.Log("field confirmed");
+            for (int i = 0; i < field.targetList.Length; i++)
+            {
+                Switchable switchableObj = field.targetList[i];
+                destList[i] = switchableObj.gameObject.transform;
+            }
+        }
+        else if (sphere != null)
+        {
+            destList = new Transform[sphere.targetList.Length];
+            Debug.Log("sphere confirmed");
+            for (int i = 0; i < sphere.targetList.Length; i++)
+            {
+                Switchable switchableObj = sphere.targetList[i];
                 destList[i] = switchableObj.gameObject.transform;
             }
         }

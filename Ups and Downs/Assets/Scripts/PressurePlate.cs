@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PressurePlate : Switchable {
+public class PressurePlate : MonoBehaviour
+{
+
+    public PressureField field;
 
     /* How long the pressure pad takes to compress */
 	public float buttonCompressionTime = 1.0f;
@@ -17,6 +20,7 @@ public class PressurePlate : Switchable {
 	
 	private bool isInactive = false;
 
+    private bool stationary = true;
 
 	// Use this for initialization
 	void Start () {
@@ -24,53 +28,58 @@ public class PressurePlate : Switchable {
         Debug.Log(initialPos);
         compressionDistance = transform.localScale.y;
 	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!stationary)
+        {
+            if (standingOn)
+            {
+                Debug.Log("Lowering");
+                lowerPlate();
+            }
+            else {
+                Debug.Log("Raising");
+                raisePlate();
+            }
+            Vector3 currentPos = transform.position;
+            currentPos.y = Mathf.Clamp(currentPos.y, initialPos.y - compressionDistance, initialPos.y);
+            transform.position = currentPos;
+            checkMovementDone();
+        }
+    }
+
+    public void setPlayerStandingOn(bool standing)
+    {
+        standingOn = standing;
+        // Toggle switch as leaving
+        if (!standingOn)
+        {
+            field.setToggle();
+        }
+        stationary = false;
+    }
 	
-	// Update is called once per frame
-	void Update () {
-        //if (standingOn) {
-            //Debug.Log("Lowering");
-            lowerPlate();
-        //} else {
-            //Debug.Log("Raising");
-            raisePlate();
-        //}
-        Vector3 currentPos = transform.position;
-        currentPos.y = Mathf.Clamp(currentPos.y, initialPos.y - compressionDistance, initialPos.y);
-        transform.position = currentPos;
-	}
-	
-	public override void toggle() {
-		return;
-		if (isActive) {
-			raisePlate();
-		} else if (isInactive) {
-			lowerPlate();
-		}
-	}
+    private void checkMovementDone()
+    {
+        if (transform.position.y <= (initialPos.y - compressionDistance))
+        {
+            stationary = true;
+            field.setToggle();
+        } else if (transform.position.y >= initialPos.y)
+        {
+            stationary = true;
+        }
+    }
 
     private void lowerPlate(){
-		if (!isActive) {
-			transform.Translate(compressionDistance * Vector3.down * Time.deltaTime / buttonCompressionTime);
-			if (transform.position.y >= (initialPos.y - compressionDistance)) {
-				isActive = true;
-				isInactive = false;
-			} else {
-				isActive = false;
-			}
-		}
+		transform.Translate(compressionDistance * Vector3.down * Time.deltaTime / buttonCompressionTime);
     }
 
     private void raisePlate()
     {
-		if (!isInactive) {
-			transform.Translate(compressionDistance * Vector3.up * Time.deltaTime / buttonCompressionTime);
-			if (transform.position.y <= (initialPos.y - compressionDistance)) {
-				isInactive = true;
-				isActive = true;
-			} else {
-				isInactive = false;
-			}
-		}
+		transform.Translate(compressionDistance * Vector3.up * Time.deltaTime / buttonCompressionTime);
     }
 
 }
