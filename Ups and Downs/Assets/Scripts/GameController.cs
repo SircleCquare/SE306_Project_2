@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour {
     public Image characterAvatar;
     public Text flipText;
 	public Text score;
+    public GameObject achievementPopUp;
+    public Text achievementText; 
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -337,6 +339,31 @@ public class GameController : MonoBehaviour {
     void updateFlipText()
     {
         flipText.color = (coolDownActive) ? nearlyTransparentWhite : flipText.color = Color.white;
+    }
+
+    /*
+     * Record an achievement as unlocked and display it, if this is the first time it was unlocked
+     */
+    void unlockAchievement(string achievementName)
+    {
+        // Only pop achievement description when achievement first awarded
+        if (!gameData.awardedAchievements.Contains(achievementName))
+        {
+            // Record achievement
+            gameData.awardedAchievements.Add(achievementName);
+
+            // Display achievement pop up 
+            achievementText.text = Achievements.achievementList[achievementName];
+            achievementPopUp.SetActive(!achievementPopUp.activeSelf);
+        }
+    }
+
+    /*
+     * Hide the achievement pop up
+     */
+    void hideAchivementPopup()
+    {
+        achievementPopUp.SetActive(false);
     }
 
 }
