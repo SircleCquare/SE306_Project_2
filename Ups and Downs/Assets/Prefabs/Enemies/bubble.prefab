@@ -12,9 +12,10 @@ GameObject:
   - 135: {fileID: 13549090}
   - 23: {fileID: 2315856}
   - 114: {fileID: 11497036}
+  - 114: {fileID: 11482364}
   m_Layer: 8
   m_Name: bubble
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +66,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157172}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11482364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4772670b870aa3048987da063b4da3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 95
 --- !u!114 &11497036
 MonoBehaviour:
   m_ObjectHideFlags: 1

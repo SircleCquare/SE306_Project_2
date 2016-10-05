@@ -117,6 +117,11 @@ public class GameController : MonoBehaviour {
         return gameData.health;
     }
 
+	public void resetHealth(){
+		gameData.health = MAX_HEALTH;
+		healthBar.value = MAX_HEALTH;
+	}
+
     public PlayerController getActivePlayer()
     {
         GameObject[] playerObjectList;
