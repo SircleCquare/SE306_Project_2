@@ -12,8 +12,6 @@ GameObject:
   - 135: {fileID: 13518866}
   - 23: {fileID: 2310600}
   - 114: {fileID: 11423658}
-  - 143: {fileID: 14392358}
-  - 114: {fileID: 11467626}
   m_Layer: 8
   m_Name: SphereEnemy
   m_TagString: Untagged
@@ -28,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.9, y: 4.6, z: -2.5}
+  m_LocalPosition: {x: 19.927, y: 11.026, z: -2.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -81,32 +79,11 @@ MonoBehaviour:
   rate: 20
   bubble: {fileID: 499178, guid: 20c3d1900e723024d98398bbe965c50d, type: 2}
   player: {fileID: 0}
-  minDist: 5
-  maxDist: 15
+  movementRadius: 5
+  triggerRadius: 5
   speed: 30
   inputControl: {fileID: 0}
---- !u!114 &11467626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107734}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1effe94dfa12384a8afee3fa7bd0777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerSide: 0
-  inputControl: {fileID: 0}
-  initialCheckpoint: {fileID: 0}
-  speed: 5
-  jumpSpeed: 0
-  gravity: 0
-  gravityForce: 0
-  airTime: 1
-  switchSearchRadius: 5
-  darkSideZ: -2.5
-  lightSideZ: 2.5
+  moveY: 1
 --- !u!135 &13518866
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -118,23 +95,6 @@ SphereCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &14392358
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107734}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
