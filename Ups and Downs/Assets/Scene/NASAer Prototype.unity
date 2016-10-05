@@ -586,10 +586,6 @@ Prefab:
       propertyPath: initialCheckpoint
       value: 
       objectReference: {fileID: 1749706929}
-    - target: {fileID: 5428774, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
   m_IsPrefabParent: 0
@@ -2020,10 +2016,6 @@ Prefab:
       propertyPath: initialCheckpoint
       value: 
       objectReference: {fileID: 421513015}
-    - target: {fileID: 5470874, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
   m_IsPrefabParent: 0
