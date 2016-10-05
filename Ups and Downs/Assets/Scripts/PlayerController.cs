@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour {
 
 			Vector3 currentPosition = transform.position;
 			currentPosition.z = (inputControl.getSide () == Side.Dark) ? darkSideZ : lightSideZ;
+			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
+			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
 			transform.position = currentPosition;
 		}
     }
