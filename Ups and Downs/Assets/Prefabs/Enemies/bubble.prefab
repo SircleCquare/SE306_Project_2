@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2315856}
   - 114: {fileID: 11497036}
   - 114: {fileID: 11482364}
+  - 136: {fileID: 13612564}
   m_Layer: 8
   m_Name: bubble
   m_TagString: enemy
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0336914, y: 6.0786133, z: -4.544922}
+  m_LocalPosition: {x: -6.646538, y: 9.044416, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -98,11 +99,24 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157172}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &13612564
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
   m_Radius: 0.5
+  m_Height: 1.4914703
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
