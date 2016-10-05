@@ -179,8 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   field: {fileID: 11478916}
-  buttonCompressionTime: 1
+  compressTime: 0.5
   standingOn: 0
+  compressMultiplier: 0.5
 --- !u!114 &11448436
 MonoBehaviour:
   m_ObjectHideFlags: 1
