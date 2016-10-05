@@ -7,11 +7,13 @@ public class PressurePlate : MonoBehaviour
     public PressureField field;
 
     /* How long the pressure pad takes to compress */
-	public float buttonCompressionTime = 1.0f;
+	public float compressTime = 0.5f;
     /* Public to be visible by GUI only, DO NOT CHANGE */
     public bool standingOn = false;
     /** Use this switch if you want the pressure pad to deactive targets when completely compressed */
     //public bool inverseSwitch = false;
+	
+	public float compressMultiplier = 0.5f;
 
     private Vector3 initialPos;
     private float compressionDistance;
@@ -44,7 +46,7 @@ public class PressurePlate : MonoBehaviour
                 raisePlate();
             }
             Vector3 currentPos = transform.position;
-            currentPos.y = Mathf.Clamp(currentPos.y, initialPos.y - compressionDistance, initialPos.y);
+            currentPos.y = Mathf.Clamp(currentPos.y, initialPos.y - compressionDistance * compressMultiplier, initialPos.y);
             transform.position = currentPos;
             checkMovementDone();
         }
@@ -64,7 +66,7 @@ public class PressurePlate : MonoBehaviour
 	
     private void checkMovementDone()
     {
-        if (transform.position.y <= (initialPos.y - compressionDistance))
+        if (transform.position.y <= (initialPos.y - compressionDistance * compressMultiplier))
         {
             stationary = true;
 			Debug.Log("Toggling B");
@@ -76,12 +78,12 @@ public class PressurePlate : MonoBehaviour
     }
 
     private void lowerPlate(){
-		transform.Translate(compressionDistance * Vector3.down * Time.deltaTime / buttonCompressionTime);
+		transform.Translate(compressionDistance * Vector3.down * Time.deltaTime / compressTime);
     }
 
     private void raisePlate()
     {
-		transform.Translate(compressionDistance * Vector3.up * Time.deltaTime / buttonCompressionTime);
+		transform.Translate(compressionDistance * Vector3.up * Time.deltaTime / compressTime);
     }
 
 }

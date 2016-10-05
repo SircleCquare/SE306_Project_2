@@ -25,7 +25,6 @@ public class SphereEnemy : MonoBehaviour {
 	}
 
 	void Update(){
-		Debug.Log("started");
 		runTime += Time.deltaTime;
 
 		while (runTime >= spawnTime) {
@@ -61,11 +60,9 @@ public class SphereEnemy : MonoBehaviour {
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(transform.position, rayDirection, out hit)) {
 			if (hit.transform == player) {
-				Debug.Log ("can see");
 				return true;
 			} 
 		}
-		Debug.Log ("cannot see");
 		return false;
 	}
 }
