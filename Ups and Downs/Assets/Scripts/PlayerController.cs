@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 	private bool locked = false;
 	public bool carryingObject { get; set; }
 	private Color32 normalColour;
+	public Color32 flashColour = Color.white;
 	
     void Start() {
         invertGrav = gravity + airTime;
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator DamageFlash(){
 		for (int i = 0; i < 10; i++) {
-			GetComponent<Renderer>().material.color = Color.white;
+			GetComponent<Renderer>().material.color = flashColour;
 			yield return new WaitForSeconds(.1f);
 			GetComponent<Renderer>().material.color = normalColour;
 			yield return new WaitForSeconds(.1f);
