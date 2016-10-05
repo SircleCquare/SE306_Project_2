@@ -228,7 +228,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430194, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 127190, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: m_Name
@@ -342,18 +342,6 @@ Prefab:
       propertyPath: inputControl
       value: 
       objectReference: {fileID: 2059334781}
-    - target: {fileID: 6523980, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11499178, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
-      propertyPath: initialCheckpoint.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11499178, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
-      propertyPath: initialCheckpoint.z
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 11499178, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
       propertyPath: initialCheckpoint
       value: 
@@ -486,7 +474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 416434, guid: 5f319488bf9d4264ea353ecc77c05a5a, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f319488bf9d4264ea353ecc77c05a5a, type: 2}
@@ -652,7 +640,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22435320, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 22435320, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -698,6 +686,14 @@ Prefab:
       propertyPath: cameraPinController
       value: 
       objectReference: {fileID: 1828797028}
+    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
   m_IsPrefabParent: 0
@@ -738,7 +734,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430194, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: initialState
@@ -790,7 +786,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430194, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 127190, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
       propertyPath: m_Name
@@ -918,10 +914,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11405128, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: targetList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 409712, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_LocalPosition.x
       value: 20
@@ -952,38 +944,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409712, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 11405128, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
+    - target: {fileID: 11478916, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: targetList.Array.data[0]
       value: 
       objectReference: {fileID: 1856865268}
-    - target: {fileID: 11405128, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: inverseSwitch
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1478079423 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 164208, guid: 3e8a78a55cb423745bb9bbc9f73d96d5, type: 2}
-  m_PrefabInternal: {fileID: 320878794}
---- !u!54 &1478079424
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1478079423}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!1 &1541546483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,30 +1058,6 @@ Prefab:
       propertyPath: inputControl
       value: 
       objectReference: {fileID: 2059334781}
-    - target: {fileID: 153912, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Name
-      value: GroundCheck
-      objectReference: {fileID: 0}
-    - target: {fileID: 6559364, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 153912, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141430, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: initialCheckpoint.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: initialCheckpoint.z
-      value: -2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
       propertyPath: initialCheckpoint
       value: 
@@ -1230,6 +1175,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11461674, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
+      propertyPath: targetList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 444218, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.12
@@ -1260,7 +1209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 444218, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 11461674, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
       propertyPath: targetList.Array.data[0]
@@ -1270,6 +1219,10 @@ Prefab:
       propertyPath: targetList.Array.data[1]
       value: 
       objectReference: {fileID: 369316318}
+    - target: {fileID: 11461674, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
+      propertyPath: targetList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1856865268}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
   m_IsPrefabParent: 0
