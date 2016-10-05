@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
     public Text characterName;
     public Image characterAvatar;
     public Text flipText;
+	public Text score;
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -81,6 +82,8 @@ public class GameController : MonoBehaviour {
                // Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
             }
         }
+
+		score.text = "Score: " + getScore();
 	}
 
     public void foundCoin()
@@ -102,6 +105,11 @@ public class GameController : MonoBehaviour {
     {
         return (int)gameData.time;
     }
+
+	public int getScore()
+	{
+		return gameData.coinsFound * 10;
+	}
 
     /*
      * Updates the player's current health and adjusts their health bar accordingly
