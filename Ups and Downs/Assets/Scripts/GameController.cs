@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -415,9 +416,16 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (finishedLevelDark && finishedLevelLight) {
-			//TODO: finish the game
-			// send score and time to next scene
+			finishTheGame ();
 		}
+	}
+
+	void finishTheGame(){
+		//send score and time to ApplicationModel
+		ApplicationModel.score = gameData.coinsFound * 10;
+		ApplicationModel.time = gameData.time;
+		//TODO: switch to next scene
+		//SceneManager.LoadScene(whatever the next scene is)
 	}
 
 }
