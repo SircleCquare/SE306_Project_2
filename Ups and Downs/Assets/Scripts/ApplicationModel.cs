@@ -8,5 +8,6 @@ public static class ApplicationModel {
 
 	public static int score;
 	public static float time;
+    public static string levelName;
 
 }

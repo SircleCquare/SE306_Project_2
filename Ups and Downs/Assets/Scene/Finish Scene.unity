@@ -588,6 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 468730170}
   timeText: {fileID: 2142669246}
+  levelNameText: {fileID: 2117293278}
 --- !u!1 &1793161979
 GameObject:
   m_ObjectHideFlags: 0

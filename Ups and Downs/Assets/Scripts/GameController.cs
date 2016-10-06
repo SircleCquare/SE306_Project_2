@@ -424,6 +424,7 @@ public class GameController : MonoBehaviour {
 		//send score and time to ApplicationModel
 		ApplicationModel.score = gameData.coinsFound * 10;
 		ApplicationModel.time = gameData.time;
+	    ApplicationModel.levelName = "Tutorial"; // TODO
 
 	    // Trigger finish scene
 	    SceneManager.LoadScene("Finish Scene");
