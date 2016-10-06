@@ -18,7 +18,7 @@ To build this as a standalone application for yourself...
 
 ## Running 
 Either: 
-- Download the binary supplied with the PROTOTYPE release and click to open the EXE; or,
+- Download the binary supplied with the PROTOTYPE release, unzip the file, and run prototype.exe from within it; or,
 - Navigate to the build output you generate and run that application
 
 ## Controls
