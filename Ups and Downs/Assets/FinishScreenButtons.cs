@@ -16,6 +16,6 @@ public class FinishScreenButtons : MonoBehaviour {
 	public void NextLevelButtonPredictive()
 	{
 		int levelNumber = ApplicationModel.levelNumber;
-		Application.LoadLevel (levelNumber + 1);
+		Application.LoadLevel (levelNumber + 3);
 	}
 }
