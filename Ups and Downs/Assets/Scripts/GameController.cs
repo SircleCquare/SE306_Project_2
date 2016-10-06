@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -25,6 +26,9 @@ public class GameController : MonoBehaviour {
     private bool disableInput = false;
     private float coolDownCount;
     private bool coolDownActive; 
+
+	private bool finishedLevelDark;
+	private bool finishedLevelLight;
 
     /* UI components */
     public Slider healthBar;
@@ -367,7 +371,7 @@ public class GameController : MonoBehaviour {
 
             // Display achievement pop up 
             achievementText.text = Achievements.achievementList[achievementName];
-            achievementPopUp.SetActive(!achievementPopUp.activeSelf);
+            achievementPopUp.SetActive(true);
         }
     }
 
@@ -401,5 +405,29 @@ public class GameController : MonoBehaviour {
             disableInput = false; 
         }
     }
+
+	public void setFinishedLevel(bool finished){
+		// check side
+		if (getSide () == Side.Dark) {
+			finishedLevelDark = finished;
+		}
+		if (getSide () == Side.Light) {
+			finishedLevelLight = finished;
+		}
+
+		if (finishedLevelDark && finishedLevelLight) {
+			finishTheGame ();
+		}
+	}
+
+	void finishTheGame(){
+		//send score and time to ApplicationModel
+		ApplicationModel.score = gameData.coinsFound * 10;
+		ApplicationModel.time = gameData.time;
+	    ApplicationModel.levelName = "Tutorial"; // TODO
+
+	    // Trigger finish scene
+	    SceneManager.LoadScene("Finish Scene");
+	}
 
 }
