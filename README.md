@@ -17,8 +17,10 @@ To build this as a standalone application for yourself...
 - Press 'Build' and choose where to store the output. 
 
 ## Running 
-Either: 
-- Download the binary supplied with the PROTOTYPE release, unzip the file, and run prototype.exe from within it; or,
+Either
+- Download the binary supplied with the PROTOTYPE release, unzip the file, and run prototype.exe from within it
+
+Or
 - Navigate to the build output you generate and run that application
 
 ## Controls
@@ -27,3 +29,15 @@ Either:
 - Use 'F' to flip worlds
 - Use 'E' to interact with some objects in the world
 - Press 'Esc' to pause/unpause the game
+
+## Goal & Score
+- Complete evvery level to finish the game
+- Try to achieve higher scores in levels
+- Collect coins to increase your score
+- Dying will also impact your score in future versions
+- Finishing the stage with full health or in shorter times will also impact your score in later versions
+
+## Enemies
+- Currently there is one enemy in the game.
+- The enemy will chase you in a short radius.
+- Making contact with the enemy will reduce your health, and may push you off platforms and into hazards.
