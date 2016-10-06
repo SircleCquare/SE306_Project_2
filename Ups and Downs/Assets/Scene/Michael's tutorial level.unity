@@ -2427,7 +2427,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.56
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2453,6 +2453,10 @@ Prefab:
       propertyPath: controller
       value: 
       objectReference: {fileID: 902508141}
+    - target: {fileID: 121966, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Name
+      value: Finish Block Light
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
   m_IsPrefabParent: 0
@@ -2568,55 +2572,18 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
   m_PrefabInternal: {fileID: 49316913}
---- !u!114 &1749706929
+--- !u!114 &1749706929 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11488346, guid: 5f319488bf9d4264ea353ecc77c05a5a,
     type: 2}
   m_PrefabInternal: {fileID: 1191452385}
-  m_GameObject: {fileID: 2091254613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1566e7f8869d1f4abeec3ebc21277c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkpointSide: 0
-  active: 0
 --- !u!114 &1798767869 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d,
     type: 2}
   m_PrefabInternal: {fileID: 1474441048}
   m_Script: {fileID: 11500000, guid: 64fe7bd0b9064aa4189fae14eef36b01, type: 3}
---- !u!1 &1806182897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1191452385}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1806182898}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1806182898
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1191452385}
-  m_GameObject: {fileID: 1806182897}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 2091254614}
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
 --- !u!1001 &1824825226
 Prefab:
   m_ObjectHideFlags: 0
@@ -3010,35 +2977,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 463692, guid: ef126a761b313854aaf4b01b16737551, type: 2}
   m_PrefabInternal: {fileID: 493594576}
---- !u!1 &2091254613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1191452385}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2091254614}
-  - 114: {fileID: 1749706929}
-  m_Layer: 0
-  m_Name: Missing Prefab (Dummy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2091254614
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1191452385}
-  m_GameObject: {fileID: 2091254613}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1806182898}
-  m_RootOrder: 0
 --- !u!4 &2100155907 stripped
 Transform:
   m_PrefabParentObject: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
@@ -3056,7 +2994,7 @@ GameObject:
   - 23: {fileID: 2100630078}
   - 114: {fileID: 2100630077}
   m_Layer: 0
-  m_Name: Finish Block
+  m_Name: Finish Block Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3126,7 +3064,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2100630076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.85, y: 14.46, z: -3.36}
+  m_LocalPosition: {x: 97.85, y: 14.46, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
