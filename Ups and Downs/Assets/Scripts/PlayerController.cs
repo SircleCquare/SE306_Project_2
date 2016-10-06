@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerController : MonoBehaviour {
     /** Player State */
-    
-    
-    
+	private List<LeechEnemy> leeches;
+
 
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
@@ -18,7 +20,9 @@ public class PlayerController : MonoBehaviour {
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
     public float airTime = 1f;
-	
+    public float leechSpeedMultiplier = 3;
+    public float leechJumpMultiplier = 1.5;
+
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
 	public float darkSideZ = -2.5f;
@@ -35,14 +39,15 @@ public class PlayerController : MonoBehaviour {
 	private Color32 normalColour;
 	public Color32 flashColour = Color.white;
 	public float invulnerabilityTime = 2.0f;
-	
+
     void Start() {
         invertGrav = gravity + airTime;
         controller = GetComponent<CharacterController>();
         mostRecentCheckpoint = initialCheckpoint.getPosition();
 		normalColour = GetComponent<Renderer>().material.color;
 		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
-    }
+        leeches = new List<LeechEnemy>();
+     }
 
     void Update()
     {
@@ -63,8 +68,29 @@ public class PlayerController : MonoBehaviour {
     public void addToInventory(SpecialCollectible specialItem)
     {
         Debug.Log("Added");
+	}
+
+	public void addLeech(LeechEnemy newLeech)
+	{
+		Debug.Log("Added Leech");
+        leeches.Add(newLeech);
+	}
+
+	public void deLeech()
+	{
+        foreach(LeechEnemy leech in leeches)
+        {
+            leech.Destroy();
+        }
+        leeches = new List<LeechEnemy>();
+	}
+
+    private float leechMultiplier(float value, float multiplier)
+    {
+        return (leeches.Count > 0) ? value / (multiplier * Mathf.Log(leeches.Count + 1)) : value;
     }
-  
+
+
 
     /** Updates the users horizontal and vertical movement based on input */
     private void updateMovement() {
@@ -77,16 +103,16 @@ public class PlayerController : MonoBehaviour {
 			horizontalMag = inputControl.getHorizontalMagnitude();
 			jump = inputControl.isJump();
 		}
-		
+
         moveDirection = new Vector3(horizontalMag, 0, 0);
         moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= speed;
+        moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
         if (controller.isGrounded) {
             forceY = 0;
             invertGrav = gravity * airTime;
             if (jump)
             {
-                forceY = jumpSpeed;
+                forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
             }
         }
 
@@ -97,9 +123,9 @@ public class PlayerController : MonoBehaviour {
 
         forceY -= gravity * Time.deltaTime * gravityForce;
         moveDirection.y = forceY;
-        controller.Move(moveDirection * Time.deltaTime);		
+        controller.Move(moveDirection * Time.deltaTime);
 	}
-	
+
     /**
         Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
     */
@@ -108,9 +134,9 @@ public class PlayerController : MonoBehaviour {
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
-		
+
 	}
-	
+
 	/**
         A helper method which searchs for switchs that are nearby to the player.
     */
