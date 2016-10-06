@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour {
     private float coolDownCount;
     private bool coolDownActive; 
 
+	private bool finishedLevelDark;
+	private bool finishedLevelLight;
+
     /* UI components */
     public Slider healthBar;
     public Text timeText;
@@ -401,5 +404,20 @@ public class GameController : MonoBehaviour {
             disableInput = false; 
         }
     }
+
+	public void setFinishedLevel(bool finished){
+		// check side
+		if (getSide () == Side.Dark) {
+			finishedLevelDark = finished;
+		}
+		if (getSide () == Side.Light) {
+			finishedLevelLight = finished;
+		}
+
+		if (finishedLevelDark && finishedLevelLight) {
+			//TODO: finish the game
+			// send score and time to next scene
+		}
+	}
 
 }
