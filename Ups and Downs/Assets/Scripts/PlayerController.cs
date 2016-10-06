@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
     public float airTime = 1f;
-    public float leechSpeedMultiplier = 3f;
+    public float leechSpeedMultiplier = 3.5f;
     public float leechJumpMultiplier = 1.5f;
 
     /** How far away switchs can be activated from */

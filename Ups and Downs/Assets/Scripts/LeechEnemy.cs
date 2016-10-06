@@ -6,13 +6,8 @@ public class LeechEnemy : MonoBehaviour
 {
 	public float rate = 5.0f;
 	public Transform player;
-	public float hitRadius = 0.5f;
+	public float hitRadius = 1.5f;
 	private bool attached = false;
-
-	// Use this for initialization
-	// void Start() {
-	//
-	// }
 
     protected GameController getGameController()
     {
@@ -43,10 +38,38 @@ public class LeechEnemy : MonoBehaviour
 			return;
 		}
 
-        Debug.Log("Hit Leech");
 		attached = true;
 		getGameController().getActivePlayer().addLeech(this);
-		this.transform.parent = player.transform;
+		transform.position = getNewPosition();
+		transform.parent = player.transform;
+	}
+
+	Vector3 getNewPosition()
+	{
+		transform.Rotate(0, 0, 90);
+		Debug.Log(transform.rotation);
+		transform.position = GeneratedPosition();
+		RaycastHit ray = new RaycastHit();
+		Physics.Raycast(transform.position, getDirection(), out ray);
+		return ray.point;
+	}
+
+	Vector3 getDirection()
+	{
+		// Slightly randomised y value to vary the height of the leeches
+		Vector3 newPos = player.position;
+		newPos.y = Random.Range(newPos.y - 0.8f, newPos.y + 0.8f);
+		return newPos - transform.position;
+	}
+
+	Vector3 GeneratedPosition()
+	{
+		Vector3 sphere = Random.onUnitSphere;
+        Vector3 pos;
+        pos.x = player.position.x + sphere.x;
+        pos.y = player.position.y + Mathf.Abs(sphere.y);
+        pos.z = player.position.z + sphere.z;
+        return pos;
 	}
 
 	public void Destroy()
