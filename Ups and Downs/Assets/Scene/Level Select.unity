@@ -161,7 +161,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1047263543}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.42857143
+  m_Size: 0.580412
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -254,7 +254,6 @@ MonoBehaviour:
   - {fileID: 1997139357}
   - {fileID: 1443410959}
   - {fileID: 1675675219}
-  - {fileID: 0}
   SlidesNamePrefix: 427574746f6e2030
   Element_Width: 300
   Element_Height: 200
