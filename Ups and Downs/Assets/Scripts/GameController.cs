@@ -371,7 +371,7 @@ public class GameController : MonoBehaviour {
 
             // Display achievement pop up 
             achievementText.text = Achievements.achievementList[achievementName];
-            achievementPopUp.SetActive(!achievementPopUp.activeSelf);
+            achievementPopUp.SetActive(true);
         }
     }
 
