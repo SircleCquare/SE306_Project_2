@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 182042}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
   m_LocalPosition: {x: 4.1426234, y: 2, z: 0.5352773}
-  m_LocalScale: {x: 0.2, y: 0.35, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   rate: 5
   player: {fileID: 0}
   hitRadius: 1.5
+  attachTime: 1
 --- !u!136 &13663208
 CapsuleCollider:
   m_ObjectHideFlags: 1
