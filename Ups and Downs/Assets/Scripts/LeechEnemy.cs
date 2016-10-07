@@ -7,7 +7,12 @@ public class LeechEnemy : MonoBehaviour
 	public float rate = 5.0f;
 	public Transform player;
 	public float hitRadius = 1.5f;
+	public float attachTime = 1f;
+
+	private float currentTime;
 	private bool attached = false;
+	private bool moving = false;
+	private Vector3 randomPosition;
 
     protected GameController getGameController()
     {
@@ -32,44 +37,54 @@ public class LeechEnemy : MonoBehaviour
 			return;
 		}
 
-		bool hit = Vector3.Distance (transform.position, player.position) <= hitRadius;
-		if (!hit)
+		if (moving)
 		{
+			currentTime += Time.deltaTime;
+			transform.position = Vector3.Lerp(transform.position, getNewPosition(), currentTime / attachTime);
+
+			if (currentTime >= attachTime) {
+				attached = true;
+				transform.parent = player.transform;
+			}
 			return;
 		}
 
-		attached = true;
+		bool hit = Vector3.Distance (transform.position, player.position) <= hitRadius;
+		if (hit)
+		{
+			attachToPlayer();
+			return;
+		}
+	}
+
+	void attachToPlayer()
+	{
 		getGameController().getActivePlayer().addLeech(this);
-		transform.position = getNewPosition();
-		transform.parent = player.transform;
+		transform.Rotate(0, 0, 90);
+
+		moving = true;
+		currentTime = 0f;
+		randomPosition = Random.onUnitSphere * 1.5f;
 	}
 
 	Vector3 getNewPosition()
 	{
-		transform.Rotate(0, 0, 90);
-		Debug.Log(transform.rotation);
-		transform.position = GeneratedPosition();
+		var interimPos = getInterimPosition();
 		RaycastHit ray = new RaycastHit();
-		Physics.Raycast(transform.position, getDirection(), out ray);
+		// Slightly randomised y value to vary the height of the leeches (Doesn't work at the moment)
+		Vector3 updatedY = player.position;
+		// updatedY.y = Random.Range(updatedY.y - 0.8f, updatedY.y + 0.8f);
+		Physics.Raycast(interimPos, updatedY - interimPos, out ray);
 		return ray.point;
 	}
 
-	Vector3 getDirection()
+	Vector3 getInterimPosition()
 	{
-		// Slightly randomised y value to vary the height of the leeches
-		Vector3 newPos = player.position;
-		newPos.y = Random.Range(newPos.y - 0.8f, newPos.y + 0.8f);
-		return newPos - transform.position;
-	}
-
-	Vector3 GeneratedPosition()
-	{
-		Vector3 sphere = Random.onUnitSphere;
-        Vector3 pos;
-        pos.x = player.position.x + sphere.x;
-        pos.y = player.position.y + Mathf.Abs(sphere.y);
-        pos.z = player.position.z + sphere.z;
-        return pos;
+		var result = new Vector3();
+		result.x = player.position.x + randomPosition.x;
+		result.y = player.position.y + Mathf.Abs(randomPosition.y);
+		result.z = player.position.z + randomPosition.z;
+		return result;
 	}
 
 	public void Destroy()
