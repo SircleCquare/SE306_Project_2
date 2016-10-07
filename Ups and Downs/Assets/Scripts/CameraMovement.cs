@@ -21,8 +21,12 @@ public class CameraMovement : MonoBehaviour {
 		keepOnScreen(player2);
 
         // Flash bounds on screen if edge reached
-        CameraBoundImage.color = flash ? Color.white : Color.Lerp(CameraBoundImage.color, Color.clear, 5 * Time.deltaTime);
-        Debug.Log(flash + " " + CameraBoundImage.color);
+        // TODO ensure that this image is set for all scenes 
+	    if (CameraBoundImage != null)
+	    {
+            CameraBoundImage.color = flash ? Color.white : Color.Lerp(CameraBoundImage.color, Color.clear, 5 * Time.deltaTime);
+            Debug.Log(flash + " " + CameraBoundImage.color);
+        }
         flash = false;
     }
 	

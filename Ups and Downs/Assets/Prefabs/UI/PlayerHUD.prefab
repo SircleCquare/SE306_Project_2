@@ -309,7 +309,7 @@ GameObject:
   - 224: {fileID: 22451838}
   - 222: {fileID: 22231266}
   - 114: {fileID: 11462298}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Camera Bound Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
