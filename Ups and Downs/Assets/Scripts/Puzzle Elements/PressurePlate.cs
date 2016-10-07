@@ -18,9 +18,9 @@ public class PressurePlate : MonoBehaviour
     private Vector3 initialPos;
     private float compressionDistance;
 	
-	private bool isActive = false;
+//	private bool isActive = false;
 	
-	private bool isInactive = false;
+//	private bool isInactive = false;
 
     private bool stationary = true;
 

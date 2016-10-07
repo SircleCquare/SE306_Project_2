@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class FinishScreenButtons : MonoBehaviour {
 
 	public void NextLevelButton(int index)
 	{
-		Application.LoadLevel(index);
+	    SceneManager.LoadScene(index);
 	}
 
 	public void NextLevelButton(string levelName)
 	{
-		Application.LoadLevel(levelName);
+	    SceneManager.LoadScene(levelName);
 	}
 
 	public void NextLevelButtonPredictive()
 	{
 		int levelNumber = ApplicationModel.levelNumber;
-		Application.LoadLevel (levelNumber + 3);
+	    SceneManager.LoadScene(levelNumber + 3);
 	}
 }

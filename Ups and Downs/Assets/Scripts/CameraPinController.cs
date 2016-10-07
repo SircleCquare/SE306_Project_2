@@ -7,7 +7,7 @@ public class CameraPinController : MonoBehaviour {
 	public Transform player1;
 	public Transform player2;
 	
-	public Camera camera;
+//	public Camera camera;
 	
 	private Vector3 middle;
 	

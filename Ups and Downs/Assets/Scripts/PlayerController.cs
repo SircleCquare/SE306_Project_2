@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator DamageFlash(){
-		int numLoops = (int)(invulnerabilityTime / 0.2f);
+//		int numLoops = (int)(invulnerabilityTime / 0.2f);
 		for (int i = 0; i < invulnerabilityTime; i++) {
 			GetComponent<Renderer>().material.color = flashColour;
 			yield return new WaitForSeconds(.1f);
