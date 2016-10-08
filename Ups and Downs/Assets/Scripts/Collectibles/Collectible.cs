@@ -14,17 +14,6 @@ public class Collectible : MonoBehaviour {
 
     protected GameController getGameController()
     {
-        GameObject[] gameControllerList;
-        gameControllerList = GameObject.FindGameObjectsWithTag("GameController");
-        GameController controller = null;
-        foreach (GameObject obj in gameControllerList)
-        {
-            controller = obj.GetComponent<GameController>();
-            if (controller != null)
-            {
-                break;
-            }
-        }
-        return controller;
+        return GameController.Singleton;
     }
 }

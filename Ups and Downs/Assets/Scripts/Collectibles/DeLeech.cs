@@ -15,7 +15,7 @@ public class DeLeech : Collectible {
 
 	public override void onPickup() {
 		base.onPickup();
-		var players = GameController.Singleton.getAllPlayers();
+		var players = getGameController().getAllPlayers();
 		foreach(PlayerController player in players)
 		{
 			player.deLeech();

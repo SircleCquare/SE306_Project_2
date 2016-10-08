@@ -18,11 +18,6 @@ public class LeechEnemy : MonoBehaviour
 	public float heightMultiple = 3f;
 	public AnimationCurve jumpSizePulse;
 
-    protected GameController getGameController()
-    {
-		return GameController.Singleton;
-    }
-
 	private IEnumerator AttachToPlayer() {
 		state = LeechState.MOVING;
 		Vector3 attachPosition = GetAttachPosition();
