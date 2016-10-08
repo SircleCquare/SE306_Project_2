@@ -4,10 +4,10 @@ using System.Collections;
 
 public class LeechEnemy : MonoBehaviour
 {
-	public float rate = 5.0f;
 	public Transform player;
 	public float hitRadius = 1.5f;
 	public float attachTime = 1f;
+	public float forwardDistance = 0.2f;
 
 	private float currentTime;
 	private Vector3 randomPosition;
@@ -21,7 +21,7 @@ public class LeechEnemy : MonoBehaviour
 	private IEnumerator AttachToPlayer() {
 		state = LeechState.MOVING;
 		Vector3 attachPosition = GetAttachPosition();
-		//attachPosition.z -= 1f;
+		attachPosition.z -= forwardDistance;
 		Vector3 origPosition = transform.position;
 		Vector3 initialScale = transform.localScale;
 		float time = 0f;
