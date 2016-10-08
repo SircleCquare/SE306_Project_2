@@ -44,7 +44,7 @@ public class GameController : SingletonObject<GameController> {
     public Text dialogBoxCharacterName;
     public Text dialogBoxMessage; 
 
-	private PlayerController privilidgedPlayer, opressedPlayer;
+	private PlayerController lightPlayer, darkPlayer;
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -116,9 +116,9 @@ public class GameController : SingletonObject<GameController> {
 
 	public void RegisterPlayer(PlayerController controller) {
 		if (controller.PlayerSide == Side.Light) {
-			privilidgedPlayer = controller;
+			lightPlayer = controller;
 		} else {
-			opressedPlayer = controller;
+			darkPlayer = controller;
 		}
 	}
 
@@ -218,15 +218,15 @@ public class GameController : SingletonObject<GameController> {
     public PlayerController getActivePlayer()
     {
 		if (getSide () == Side.Light) {
-			return privilidgedPlayer;
+			return lightPlayer;
 		} else {
-			return opressedPlayer;
+			return darkPlayer;
 		}
 	}
 
 	public List<PlayerController> getAllPlayers()
 	{
-		return new List<PlayerController> { privilidgedPlayer, opressedPlayer };
+		return new List<PlayerController> { lightPlayer, darkPlayer };
 	}
 	
 	/*
