@@ -3,9 +3,10 @@ using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : SingletonObject<GameController> {
 
     public bool renderSwitchPaths = false;
 
@@ -42,6 +43,8 @@ public class GameController : MonoBehaviour {
     public GameObject dialogBox;
     public Text dialogBoxCharacterName;
     public Text dialogBoxMessage; 
+
+	private PlayerController privilidgedPlayer, opressedPlayer;
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -109,6 +112,14 @@ public class GameController : MonoBehaviour {
         }
 
 		score.text = "Score: " + getScore();
+	}
+
+	public void RegisterPlayer(PlayerController controller) {
+		if (controller.PlayerSide == Side.Light) {
+			privilidgedPlayer = controller;
+		} else {
+			opressedPlayer = controller;
+		}
 	}
 
     /** 
@@ -206,21 +217,17 @@ public class GameController : MonoBehaviour {
 
     public PlayerController getActivePlayer()
     {
-        GameObject[] playerObjectList;
-        playerObjectList = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject obj in playerObjectList)
-        {
-            PlayerController player = obj.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                if (player.PlayerSide == getSide())
-                {
-                    return player;
-                }
-            }
-        }
-        return null;
-    }
+		if (getSide () == Side.Light) {
+			return privilidgedPlayer;
+		} else {
+			return opressedPlayer;
+		}
+	}
+
+	public List<PlayerController> getAllPlayers()
+	{
+		return new List<PlayerController> { privilidgedPlayer, opressedPlayer };
+	}
 	
 	/*
 		Called by the Game Controller to flip the world.

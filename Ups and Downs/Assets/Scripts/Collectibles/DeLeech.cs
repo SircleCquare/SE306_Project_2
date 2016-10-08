@@ -15,8 +15,11 @@ public class DeLeech : Collectible {
 
 	public override void onPickup() {
 		base.onPickup();
-        getGameController().getActivePlayer().deLeech();
-		Debug.Log("De-Leech care package picked up");
+		var players = GameController.Singleton.getAllPlayers();
+		foreach(PlayerController player in players)
+		{
+			player.deLeech();
+		}
 		//Play a coin-specific sound?
 	}
 }

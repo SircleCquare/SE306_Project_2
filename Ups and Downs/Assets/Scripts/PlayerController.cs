@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour {
 	public Color32 flashColour = Color.white;
 	public float invulnerabilityTime = 2.0f;
 
+	void Awake() {
+		GameController.Singleton.RegisterPlayer (this);
+	}
+
     void Start() {
         invertGrav = gravity + airTime;
         controller = GetComponent<CharacterController>();
