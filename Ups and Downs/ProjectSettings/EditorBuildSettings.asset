@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/Start.unity
+    path: Assets/_Scene/_Game Scenes/Start.unity
   - enabled: 1
-    path: Assets/Scene/Level Select.unity
+    path: Assets/_Scene/_Game Scenes/Level Select.unity
   - enabled: 1
-    path: Assets/Scene/Michael's tutorial level.unity
+    path: Assets/_Scene/_Game Scenes/Michael's tutorial level.unity
   - enabled: 1
-    path: Assets/Scene/level.unity
+    path: Assets/_Scene/_Game Scenes/level.unity
   - enabled: 1
-    path: Assets/Scene/Finish Scene.unity
+    path: Assets/_Scene/_Game Scenes/Finish Scene.unity
