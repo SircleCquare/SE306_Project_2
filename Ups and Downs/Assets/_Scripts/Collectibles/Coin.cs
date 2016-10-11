@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/**
-    The coin collectible provides a direct score benefit when picked up.
-*/
+/// <summary>
+/// The coin collectible provides a direct score benefit when picked up.
+/// </summary>
 public class Coin : Collectible {
     public int score;
 

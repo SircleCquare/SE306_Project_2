@@ -16,9 +16,9 @@ public class GameData
 
     public float time { get; set; }
 
-    public int health { get; set; }
+    public int heart { get; set; }
 
-    public int MAX_HEALTH = 100;
+    public int MAX_HEALTH = 5;
 
     public List<string> awardedAchievements; 
 
@@ -37,7 +37,7 @@ public class GameData
     public void clearLevelState()
     {
         coinsFound = 0;
-        health = MAX_HEALTH;
+        heart = MAX_HEALTH;
         time = 0.0f;
     }
 }

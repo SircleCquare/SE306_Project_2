@@ -21,7 +21,7 @@ public class GameController : SingletonObject<GameController> {
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 
-    private const int MAX_HEALTH = 100;
+    private const int MAX_HEALTH = 5;
 
     public CameraPinController cameraPinController;
     private bool disableInput = false;
@@ -171,6 +171,17 @@ public class GameController : SingletonObject<GameController> {
         }
     }
 
+    /// <summary>
+    /// 
+    /// This method should be called when the player reached a lose state.
+    /// 
+    /// </summary>
+    public void gameOver()
+    {
+        Debug.Log("GAMEOVER");
+    }
+
+
     public void foundCoin()
     {
         gameData.coinsFound++;
@@ -196,22 +207,44 @@ public class GameController : SingletonObject<GameController> {
 		return gameData.coinsFound * 10;
 	}
 
-    /*
-     * Updates the player's current health and adjusts their health bar accordingly
-     */
-    public void setHealth(int newHealth)
+    /// <summary>
+    /// Updates the player's current health and adjusts their health bar accordingly
+    /// </summary>
+    public void addHeart()
     {
-        gameData.health = newHealth;
-        healthBar.value = newHealth; 
+        if (getTotalHearts() >= MAX_HEALTH)
+        {
+            gameData.heart = MAX_HEALTH;
+            healthBar.value = MAX_HEALTH;
+        }  
     }
 
-    public int getHealth()
+    /// <summary>
+    /// Removes one of the brothers shared hearts.
+    /// </summary>
+    public void removeHeart()
     {
-        return gameData.health;
+        if (gameData.heart > 1)
+        {
+            gameData.heart--;
+            healthBar.value--;
+           
+        } else
+        {
+            gameData.heart--;
+            healthBar.value--;
+            gameOver();
+        }
+        
+    }
+
+    public int getTotalHearts()
+    {
+        return gameData.heart;
     }
 
 	public void resetHealth(){
-		gameData.health = MAX_HEALTH;
+		gameData.heart = MAX_HEALTH;
 		healthBar.value = MAX_HEALTH;
 	}
 

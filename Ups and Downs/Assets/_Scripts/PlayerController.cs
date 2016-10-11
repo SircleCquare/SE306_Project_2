@@ -72,6 +72,14 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
+    public void addHeart()
+    {
+        Debug.Log("Add Heart");
+        inputControl.addHeart();
+    }
+
+  
+
     public void addToInventory(SpecialCollectible specialItem)
     {
         Debug.Log("Added");
@@ -112,7 +120,9 @@ public class PlayerController : MonoBehaviour {
         body.transform.localScale = localScale;
     }
 
-    /** Updates the users horizontal and vertical movement based on input */
+    /// <summary>
+    /// Updates the users horizontal and vertical movement based on input 
+    /// </summary>
     private void updateMovement() {
 		float horizontalMag;
 		bool jump;
@@ -188,37 +198,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    /**
-        Called to kill the player and return them to their last respawn point.
-    */
+   /// <summary>
+   /// Kills the player. The player returns to their last checkpoint and loses one heart.
+   /// </summary>
     public void kill()
     {
         Debug.Log("Killing");
         transform.position = mostRecentCheckpoint;
-		inputControl.resetHealth();
+        inputControl.removeHeart();
 		Invoke("Unlock", invulnerabilityTime);
 		StopCoroutine("DamageFlash");
 		StartCoroutine("DamageFlash");
     }
 
-	void OnControllerColliderHit(ControllerColliderHit hit){
-		if(hit.gameObject.tag == "enemy" && !locked){
-			DecreaseHealth(hit.gameObject.GetComponent<Damage>().damage);
-		}
-	}
-
-	void DecreaseHealth(int damage){
-		Lock();
-		int health = inputControl.getHealth();
-		if (health <= damage) {
-			kill();
-			return;
-		}
-		inputControl.setHealth((health - damage));
-		Debug.Log("health: " + (health - damage).ToString());
-		Invoke("Unlock", invulnerabilityTime);
-		StartCoroutine("DamageFlash");
-	}
 
 	void Unlock(){
 		locked = false;
