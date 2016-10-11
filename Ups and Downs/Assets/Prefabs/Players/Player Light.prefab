@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6578164}
   - 23: {fileID: 2373306}
   m_Layer: 9
-  m_Name: Model
+  m_Name: LightModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +31,7 @@ GameObject:
   - 143: {fileID: 14360270}
   - 114: {fileID: 11499178}
   - 54: {fileID: 5428774}
+  - 95: {fileID: 9546112}
   m_Layer: 9
   m_Name: Player Light
   m_TagString: Player
@@ -58,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.820593, y: -2.754253, z: -3.9642725}
+  m_LocalPosition: {x: 0, y: 1.5000408, z: 2.5}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -75,7 +76,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ca29aac44043154abe715578c8b3ef8, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -158,6 +159,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9546112
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164208}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11499178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +195,9 @@ MonoBehaviour:
   gravity: 20
   gravityForce: 3
   airTime: 1
+  leechSpeedMultiplier: 3.5
+  leechJumpMultiplier: 1.5
+  body: {fileID: 135852}
   switchSearchRadius: 2
   darkSideZ: -2.5
   lightSideZ: 2.5

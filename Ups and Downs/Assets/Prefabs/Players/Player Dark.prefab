@@ -11,8 +11,9 @@ GameObject:
   - 33: {fileID: 3382918}
   - 65: {fileID: 6559316}
   - 23: {fileID: 2342520}
-  m_Layer: 9
-  m_Name: Model
+  - 64: {fileID: 6495286}
+  m_Layer: 0
+  m_Name: DarkModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +33,7 @@ GameObject:
   - 114: {fileID: 11473816}
   - 54: {fileID: 5470874}
   - 122: {fileID: 12205384}
+  - 95: {fileID: 9530446}
   m_Layer: 9
   m_Name: Player Dark
   m_TagString: Player
@@ -88,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.820593, y: -2.754253, z: -8.9642725}
+  m_LocalPosition: {x: 0, y: 1.5000416, z: -2.5}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -132,7 +134,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: bf4a7df635878374c9d8492917ab4afd, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -177,6 +179,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!64 &6495286
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: b23e52e7b86c5dc40bc4dc0284f09033, type: 3}
 --- !u!65 &6559316
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -189,6 +203,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9530446
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141430}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &10857796
 Light:
   m_ObjectHideFlags: 1
@@ -241,6 +272,9 @@ MonoBehaviour:
   gravity: 20
   gravityForce: 3
   airTime: 1
+  leechSpeedMultiplier: 3.5
+  leechJumpMultiplier: 1.5
+  body: {fileID: 116984}
   switchSearchRadius: 2
   darkSideZ: -2.5
   lightSideZ: 2.5
