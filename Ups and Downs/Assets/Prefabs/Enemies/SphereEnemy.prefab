@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2389244}
   - 114: {fileID: 11429878}
   - 114: {fileID: 11436742}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: SphereEnemy
   m_TagString: enemy
   m_Icon: {fileID: 0}

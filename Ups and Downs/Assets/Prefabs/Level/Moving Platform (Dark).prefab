@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2321218}
   - 54: {fileID: 5420364}
   - 114: {fileID: 11426156}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Moving Platform (Dark)
   m_TagString: MovingGround
   m_Icon: {fileID: 0}

@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour {
 	public float invulnerabilityTime = 2.0f;
 	private Animator animator;
 
-	void Awake() {
+    // Whether the player is on a platform.
+    private bool groundContact;
+
+
+    void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
 	}
 
@@ -70,6 +74,65 @@ public class PlayerController : MonoBehaviour {
 			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
 			transform.position = currentPosition;
 		}
+    }
+
+    /// <summary>
+    /// Updates the users horizontal and vertical movement based on input 
+    /// </summary>
+    private void updateMovement()
+    {
+        float horizontalMag;
+        bool jump;
+        if (inputControl.getSide() != PlayerSide)
+        {
+            horizontalMag = 0f;
+            jump = false;
+        }
+        else
+        {
+            horizontalMag = inputControl.getHorizontalMagnitude();
+            jump = inputControl.isJump();
+        }
+
+        animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
+        AdjustFacing(horizontalMag);
+
+        moveDirection = new Vector3(horizontalMag, 0, 0);
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
+        if (controller.isGrounded)
+        {
+            forceY = 0;
+            invertGrav = gravity * airTime;
+            if (jump)
+            {
+                forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
+            }
+        }
+
+        if (jump && forceY != 0)
+        {
+            invertGrav -= Time.deltaTime;
+            forceY += invertGrav * Time.deltaTime;
+        }
+
+        forceY -= gravity * Time.deltaTime * gravityForce;
+        moveDirection.y = forceY;
+        controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    /*
+     * 
+     * Once a proper player model has been selected selective ground checking can be done.
+     * 
+     */
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Debug.Log("Ground");
+            groundContact = true;
+        }
     }
 
     public void addHeart()
@@ -154,49 +217,12 @@ public class PlayerController : MonoBehaviour {
         body.transform.localScale = localScale;
     }
 
-    /// <summary>
-    /// Updates the users horizontal and vertical movement based on input 
-    /// </summary>
-    private void updateMovement() {
-		float horizontalMag;
-		bool jump;
-		if (inputControl.getSide() != PlayerSide) {
-			horizontalMag = 0f;
-			jump = false;
-		} else {
-			horizontalMag = inputControl.getHorizontalMagnitude();
-			jump = inputControl.isJump();
-		}
-
-        animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
-        AdjustFacing(horizontalMag);
-
-        moveDirection = new Vector3(horizontalMag, 0, 0);
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (controller.isGrounded) {
-            forceY = 0;
-            invertGrav = gravity * airTime;
-            if (jump)
-            {
-                forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
-            }
-        }
-
-        if (jump && forceY != 0) {
-            invertGrav -= Time.deltaTime;
-            forceY += invertGrav * Time.deltaTime;
-        }
-
-        forceY -= gravity * Time.deltaTime * gravityForce;
-        moveDirection.y = forceY;
-        controller.Move(moveDirection * Time.deltaTime);
-	}
+    
 
     /**
         Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
     */
-	private void activateSwitchs() {
+    private void activateSwitchs() {
 		Switch closeSwitch = getNearbySwitch();
 		if (closeSwitch != null) {
 			closeSwitch.toggle();

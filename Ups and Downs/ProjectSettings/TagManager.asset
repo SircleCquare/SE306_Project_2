@@ -8,6 +8,7 @@ TagManager:
   - Health
   - PlayerGround
   - enemy
+  - MovingGround
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Enemy
+  - Ground
   - 
   - 
   - 

@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11437358}
   m_Layer: 2
   m_Name: LeechEnemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
