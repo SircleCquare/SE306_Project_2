@@ -11,7 +11,7 @@ public class PressureField : TriggerSphere
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Enter -  Child");
-            plate.setPlayerStandingOn(true);
+//            plate.setPlayerStandingOn(true);
         }
     }
 
@@ -20,7 +20,7 @@ public class PressureField : TriggerSphere
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Exit - Child");
-            plate.setPlayerStandingOn(false);
+//            plate.setPlayerStandingOn(false);
         }
     }
 }
