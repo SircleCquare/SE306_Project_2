@@ -88,8 +88,7 @@ public class PlayerController : MonoBehaviour {
     /// <returns></returns>
     public bool addToInventory(SpecialCollectible specialItem)
     {
-        
-        if (getInventoryItemType() != SpecialItem.None)
+        if (getInventoryItemType() == SpecialItem.None)
         {
             Debug.Log("Added");
             inputControl.setInventoryItem(specialItem);
