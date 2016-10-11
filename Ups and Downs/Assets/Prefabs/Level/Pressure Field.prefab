@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 409712}
   - 65: {fileID: 6511746}
-  - 114: {fileID: 11478916}
+  - 114: {fileID: 11445294}
   m_Layer: 0
   m_Name: Pressure Field
   m_TagString: Untagged
@@ -178,10 +178,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63cdc8dda0317d4bb068f47f6a02b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  field: {fileID: 11478916}
   compressTime: 0.5
-  standingOn: 0
   compressMultiplier: 0.5
+  detectionRadius: 2
+  targetList: []
+  state: 0
+--- !u!114 &11445294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63cdc8dda0317d4bb068f47f6a02b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compressTime: 0.5
+  compressMultiplier: 0.5
+  detectionRadius: 2
+  targetList: []
+  state: 0
 --- !u!114 &11448436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,21 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 0}
   destList: []
---- !u!114 &11478916
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a7688c4f5251b343bc1ae7bc79ada0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetList:
-  - {fileID: 0}
-  - {fileID: 0}
-  plate: {fileID: 11405128}
 --- !u!120 &12041508
 LineRenderer:
   m_ObjectHideFlags: 1

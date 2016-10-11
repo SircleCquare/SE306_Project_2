@@ -13,46 +13,33 @@ public  class Switch : MonoBehaviour {
 	public Switchable[] targetList;
 	
 	/** Default state of swtich */
-	public bool state = false;
+    public SwitchState defaultState = SwitchState.OFF;
+    public enum SwitchState { ON, OFF };
 	
 	/*
 		Fire switch when loading scene to ensure all game objects are in right state
 	*/
-	void Start() {
+    void Start() {
+        foreach (Switchable target in targetList)
+        {
+            switch (defaultState)
+            {
+                case (SwitchState.OFF):
+                    target.deactivate();
+                    break;
+                case (SwitchState.ON):
+                    target.activate();
+                    break;
+            }
+        }
 	}
 	/*
 		Toggles the state of this switch
 	*/
 	public void toggle() {
-		for (int i = 0; i < targetList.Length; i++) {
-			Switchable target = targetList[i];
-			target.toggle();
-		}
-		/*state = !state;
-		if (state)
+        foreach (Switchable target in targetList)
         {
-            setActive();
-        } else
-        {
-            setDeactive();
-        }*/
-	}
-
-    /*public virtual void setActive()
-    {
-        for (int i = 0; i < targetList.Length; i++)
-        {
-            Switchable target = targetList[i];
-            target.activate();
+            target.toggle();
         }
     }
-
-    public virtual void setDeactive()
-    {
-        for (int i = 0; i < targetList.Length; i++)
-        {
-            Switchable target = targetList[i];
-            target.deactivate();
-        }
-    }*/
 }
