@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 424126}
   - 114: {fileID: 11401512}
   - 135: {fileID: 13515968}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - 136: {fileID: 13663208}
   - 23: {fileID: 2393512}
   - 114: {fileID: 11437358}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LeechEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
