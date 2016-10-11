@@ -22,8 +22,6 @@ public abstract class Enemy : MonoBehaviour {
 	    {
             renderer.enabled = false;
 	    }
-
-        Debug.Log("Renderer is " + renderer.enabled);
 	}
 
     protected abstract void UpdateActive();
