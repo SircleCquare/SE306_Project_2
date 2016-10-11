@@ -74,7 +74,7 @@ GameObject:
   - 4: {fileID: 474218}
   - 212: {fileID: 21256178}
   m_Layer: 0
-  m_Name: Body
+  m_Name: LightBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34637487, y: 2, z: 1}
+  m_LocalPosition: {x: 3.4424605, y: 2.5989175, z: 0.005}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -174,7 +174,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 442688}
   - {fileID: 403606}
@@ -264,7 +264,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.5
+  m_Height: 1.3
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3

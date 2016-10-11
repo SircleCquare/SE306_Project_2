@@ -93,7 +93,7 @@ GameObject:
   - 4: {fileID: 425784}
   - 212: {fileID: 21260774}
   m_Layer: 0
-  m_Name: Body
+  m_Name: DarkBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
