@@ -207,6 +207,22 @@ public class GameController : SingletonObject<GameController> {
 		return gameData.coinsFound * 10;
 	}
 
+    public void setInventoryItem(SpecialCollectible specialItem)
+    {
+        gameData.setInventoryItem(specialItem);
+    }
+
+    public SpecialItem getInventoryItemType()
+    {
+        return gameData.getItemType();
+    }
+
+    public int getInventoryItemIndex()
+    {
+        return gameData.getItemIndex();
+    }
+  
+
     /// <summary>
     /// Updates the player's current health and adjusts their health bar accordingly
     /// </summary>

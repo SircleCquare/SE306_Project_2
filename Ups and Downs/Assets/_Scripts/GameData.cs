@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
 [Serializable]
 public class GameData
@@ -17,6 +17,9 @@ public class GameData
     public float time { get; set; }
 
     public int heart { get; set; }
+
+    private SpecialItem itemType = SpecialItem.None;
+    private int itemIndex = -1;
 
     public int MAX_HEALTH = 5;
 
@@ -40,4 +43,30 @@ public class GameData
         heart = MAX_HEALTH;
         time = 0.0f;
     }
+
+
+    public SpecialItem getItemType()
+    {
+        return itemType;
+    }
+
+    public int getItemIndex()
+    {
+        return itemIndex;
+    }
+
+    public void setInventoryItem(SpecialCollectible specialItem)
+    {
+        if (specialItem != null)
+        {
+            itemType = specialItem.itemType;
+            itemIndex = specialItem.index;
+        } else
+        {
+            itemType = SpecialItem.None;
+            itemIndex = -1;
+        }
+        
+    }
+
 }

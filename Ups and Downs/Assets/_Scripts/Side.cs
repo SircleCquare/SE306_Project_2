@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-/*
-	An enum for both sides of our world.
-*/
+/// <summary>
+/// An enum for both sides of our world.
+/// </summary>
 public enum Side { Dark, Light };

@@ -78,12 +78,47 @@ public class PlayerController : MonoBehaviour {
         inputControl.addHeart();
     }
 
-  
-
-    public void addToInventory(SpecialCollectible specialItem)
+    /// <summary>
+    /// Attempts to add an item to the players inventory. If the players inventory is empty
+    /// the item will be added and the result will be true.
+    /// 
+    /// Otherwise the item will not be added and false will be returned.
+    /// </summary>
+    /// <param name="specialItem"></param>
+    /// <returns></returns>
+    public bool addToInventory(SpecialCollectible specialItem)
     {
-        Debug.Log("Added");
+        
+        if (getInventoryItemType() != SpecialItem.None)
+        {
+            Debug.Log("Added");
+            inputControl.setInventoryItem(specialItem);
+            return true;
+        } else
+        {
+            Debug.Log("Inventory Full");
+            return false;
+        }
 	}
+
+
+    public SpecialItem getInventoryItemType()
+    {
+        return inputControl.getInventoryItemType();
+    }
+    
+    public int getInventoryItemIndex()
+    {
+        return inputControl.getInventoryItemIndex();
+    }
+
+    /// <summary>
+    /// Removes what ever item was stored in the players inventory.
+    /// </summary>
+    public void consumeInventoryItem()
+    {
+        inputControl.setInventoryItem(null);
+    }
 
 	public void addLeech(LeechEnemy newLeech)
 	{
