@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2309354}
   - 65: {fileID: 6529936}
   - 114: {fileID: 11429470}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 496172}
   - 114: {fileID: 11424584}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
