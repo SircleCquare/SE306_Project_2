@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     public float airTime = 1f;
     public float leechSpeedMultiplier = 3.5f;
     public float leechJumpMultiplier = 1.5f;
+    public GameObject body;
 
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	private Color32 normalColour;
 	public Color32 flashColour = Color.white;
 	public float invulnerabilityTime = 2.0f;
+	private Animator animator;
 
 	void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         invertGrav = gravity + airTime;
-        controller = GetComponent<CharacterController>();
+		controller = GetComponent<CharacterController>();
+		animator = GetComponent<Animator>();
         mostRecentCheckpoint = initialCheckpoint.getPosition();
 		normalColour = GetComponent<Renderer>().material.color;
 		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
@@ -94,7 +97,20 @@ public class PlayerController : MonoBehaviour {
         return (leeches.Count > 0) ? value / (multiplier * Mathf.Log(leeches.Count + 1)) : value;
     }
 
+    private void AdjustFacing(float horizontalDirection)
+    {
+        Vector3 localScale = body.transform.localScale;
+        if (horizontalDirection > 0)
+        {
+            localScale.x = Mathf.Abs(localScale.x);
+        }
+        if ( horizontalDirection < 0 )
+        {
+            localScale.x = Mathf.Abs(localScale.x) * -1;
+        }
 
+        body.transform.localScale = localScale;
+    }
 
     /** Updates the users horizontal and vertical movement based on input */
     private void updateMovement() {
@@ -108,10 +124,15 @@ public class PlayerController : MonoBehaviour {
 			jump = inputControl.isJump();
 		}
 
+        animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
+        AdjustFacing(horizontalMag);
+
         moveDirection = new Vector3(horizontalMag, 0, 0);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
+        Debug.Log(PlayerSide + "Grounded = " + controller.isGrounded);
         if (controller.isGrounded) {
+            print("Grounded.");
             forceY = 0;
             invertGrav = gravity * airTime;
             if (jump)
