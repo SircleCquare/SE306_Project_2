@@ -77,13 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7197847242248014da8cdedc04c5b4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 20
+  rate: 10
   bubble: {fileID: 499178, guid: 20c3d1900e723024d98398bbe965c50d, type: 2}
   player: {fileID: 0}
-  movementRadius: 5
-  triggerRadius: 5
-  speed: 30
-  inputControl: {fileID: 0}
+  visionDistance: 15
+  chaseDistance: 15
+  refrainRadius: 5
+  cloudSize: 1.5
+  speed: 20
   moveY: 1
 --- !u!114 &11436742
 MonoBehaviour:
@@ -105,9 +106,9 @@ SphereCollider:
   m_GameObject: {fileID: 131716}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

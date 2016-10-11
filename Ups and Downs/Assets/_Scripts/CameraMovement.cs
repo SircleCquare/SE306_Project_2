@@ -25,7 +25,7 @@ public class CameraMovement : MonoBehaviour {
 	    if (CameraBoundImage != null)
 	    {
             CameraBoundImage.color = flash ? Color.white : Color.Lerp(CameraBoundImage.color, Color.clear, 5 * Time.deltaTime);
-            Debug.Log(flash + " " + CameraBoundImage.color);
+            //Debug.Log(flash + " " + CameraBoundImage.color);
         }
         flash = false;
     }

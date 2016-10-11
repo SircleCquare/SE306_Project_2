@@ -10,11 +10,11 @@ GameObject:
   - 4: {fileID: 499178}
   - 33: {fileID: 3375518}
   - 135: {fileID: 13549090}
+  - 135: {fileID: 13500094}
   - 23: {fileID: 2315856}
-  - 114: {fileID: 11497036}
   - 114: {fileID: 11482364}
-  - 136: {fileID: 13612564}
-  m_Layer: 8
+  - 114: {fileID: 11486580}
+  m_Layer: 2
   m_Name: bubble
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
---- !u!114 &11497036
+--- !u!114 &11486580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,36 +87,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 157172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6756e5e933349c4faba82cc6d21b2bf, type: 3}
+  m_Script: {fileID: 11500000, guid: cf0472a5cd366a148a986a58c5309434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeMin: 0.3
-  lifeMax: 1.2
-  growth: 1.5
+  lifeMin: 1
+  lifeMax: 2
+  growth: 0.5
+--- !u!135 &13500094
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13549090
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157172}
-  m_Material: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13612564
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157172}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
   m_Radius: 0.5
-  m_Height: 1.4914703
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

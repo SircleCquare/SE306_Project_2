@@ -130,9 +130,7 @@ public class PlayerController : MonoBehaviour {
         moveDirection = new Vector3(horizontalMag, 0, 0);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        Debug.Log(PlayerSide + "Grounded = " + controller.isGrounded);
         if (controller.isGrounded) {
-            print("Grounded.");
             forceY = 0;
             invertGrav = gravity * airTime;
             if (jump)

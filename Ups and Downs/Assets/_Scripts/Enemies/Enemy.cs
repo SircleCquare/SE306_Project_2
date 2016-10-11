@@ -3,26 +3,28 @@ using System.Collections;
 
 public abstract class Enemy : MonoBehaviour {
 
+    private Renderer rend;
+
 	// Use this for initialization
-	protected virtual void Start () {
 	
-	}
-	
-	// Update is called once per frame
 	protected virtual void Update ()
 	{
-        Renderer renderer = gameObject.GetComponent<Renderer>();
-
 	    if (GameController.Singleton.getSide() == Side.Dark)
 	    {
 	        UpdateActive();
-            renderer.enabled = true;
+            GetComponent<Renderer>().enabled = true;
 	    }
 	    else
 	    {
-            renderer.enabled = false;
+            GetComponent<Renderer>().enabled = false;
 	    }
 	}
 
+    /// <summary>
+    /// An abstract Update method which is only processed when the Dark Side is active.
+    /// </summary>
     protected abstract void UpdateActive();
+
+
+
 }

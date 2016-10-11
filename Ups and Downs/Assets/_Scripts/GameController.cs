@@ -224,6 +224,11 @@ public class GameController : SingletonObject<GameController> {
 		}
 	}
 
+    public PlayerController getDarkPlayer()
+    {
+        return darkPlayer;
+    }
+
 	public List<PlayerController> getAllPlayers()
 	{
 		return new List<PlayerController> { lightPlayer, darkPlayer };
