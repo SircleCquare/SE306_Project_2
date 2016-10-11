@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SphereEnemy : MonoBehaviour {
+public class SphereEnemy : Enemy {
 	
 	public float rate = 5.0f;
 	public Transform bubble;
@@ -9,8 +9,8 @@ public class SphereEnemy : MonoBehaviour {
 	public float movementRadius = 15.0f;
 	public float triggerRadius = 15.0f;
 	public float speed = 10.0f;
-	public GameController inputControl;
 	public bool moveY;
+
 	private float runTime;
 	private float spawnTime;
 	private float forwardY;
@@ -24,8 +24,8 @@ public class SphereEnemy : MonoBehaviour {
 		forwardY = 0.0f;
 	}
 
-	void Update(){
-		runTime += Time.deltaTime;
+    protected override void UpdateActive() {
+        runTime += Time.deltaTime;
 
 		while (runTime >= spawnTime) {
 			runTime -= spawnTime;
@@ -37,21 +37,17 @@ public class SphereEnemy : MonoBehaviour {
 		bool triggered = Vector3.Distance (transform.position, player.position) <= triggerRadius;
 		bool returnHome = Vector3.Distance (transform.position, homePosition) >= movementRadius;
 
-		if (inputControl.getSide() == Side.Dark) {
-			if (moveY) {
-				forwardY = transform.forward.y;
-			}
-			if (triggered && !returnHome && CanSeePlayer(transform.forward)) {
-				transform.position += (new Vector3 (transform.forward.x, forwardY, 0) * speed * Time.deltaTime);
-			} else if (returnHome) {
-				transform.position = homePosition;
-			}
+        if (moveY) {
+            forwardY = transform.forward.y;
+        }
 
-			// TODO: update home position to current location when player is hit?
-		}
-	}
-	
-	// Update is called once per frame
+        if (triggered && !returnHome && CanSeePlayer(transform.forward)) {
+            transform.position += (new Vector3 (transform.forward.x, forwardY, 0) * speed * Time.deltaTime);
+        } else if (returnHome) {
+            transform.position = homePosition;
+        }
+    }
+
 	void SpawnSphere() {
 		Instantiate(bubble, Random.insideUnitSphere + transform.position, Quaternion.identity);
 	}

@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class LeechEnemy : MonoBehaviour
+public class LeechEnemy : Enemy
 {
 	public Transform player;
 	public float hitRadius = 1.5f;
@@ -75,7 +75,7 @@ public class LeechEnemy : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected override void UpdateActive()
 	{
 		switch (state) {
 			case LeechState.ATTACHED:
