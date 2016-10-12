@@ -21,6 +21,8 @@ public class SphereEnemy : Enemy {
     public float chaseDistance = 15.0f;
     // How far away from the player a sphere will stop
     public float refrainRadius = 5.0f;
+    // How far away from the play bubbles will spawn
+    public float spawnDistance = 1.5f;
     // The radius of the space around the sphere enemy in which bubbles will be spawned.
     public float cloudSize = 1.5f;
 
@@ -74,7 +76,7 @@ public class SphereEnemy : Enemy {
 
 	private void SpawnBubble() {
         // Ensures that a Bubble is not spawned overtop of a player.
-        float dist = Vector3.Distance(darkPlayer.transform.position, transform.position) - 0.5f;
+        float dist = Vector3.Distance(darkPlayer.transform.position, transform.position) - spawnDistance;
         dist = Mathf.Min(dist, cloudSize);
 		Instantiate(bubble, dist * Random.onUnitSphere + transform.position, Quaternion.identity);
 	}
