@@ -12,7 +12,6 @@ GameObject:
   - 135: {fileID: 13549090}
   - 135: {fileID: 13500094}
   - 23: {fileID: 2315856}
-  - 114: {fileID: 11482364}
   - 114: {fileID: 11486580}
   m_Layer: 2
   m_Name: bubble
@@ -67,18 +66,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157172}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11482364
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4772670b870aa3048987da063b4da3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!114 &11486580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +90,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13549090
 SphereCollider:

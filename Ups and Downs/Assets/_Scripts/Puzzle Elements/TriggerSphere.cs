@@ -10,7 +10,7 @@ public class TriggerSphere : MonoBehaviour {
     */
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == "Player")
+		if (col.gameObject.tag == GameController.PLAYER_TAG)
 			{
 				Debug.Log("ENTER");
 				setToggle();
@@ -23,7 +23,7 @@ public class TriggerSphere : MonoBehaviour {
     */
     void OnTriggerExit(Collider col)
     {
-		if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
 		{
 			Debug.Log("EXIT");
 			setToggle();

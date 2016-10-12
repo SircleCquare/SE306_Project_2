@@ -4,7 +4,7 @@ using System.Collections;
 public class Collectible : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == GameController.PLAYER_TAG)
         {
             Debug.Log("Collectible Pickup");
             onPickup();

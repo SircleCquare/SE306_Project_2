@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class GameController : SingletonObject<GameController> {
+    public const string PLAYER_TAG = "Player";
 
     public bool renderSwitchPaths = false;
 
@@ -45,6 +46,11 @@ public class GameController : SingletonObject<GameController> {
     public Text dialogBoxMessage; 
 
 	private PlayerController lightPlayer, darkPlayer;
+
+    // Checkpoint list
+
+    private List<Checkpoint> lightSideCheckpoints = new List<Checkpoint>();
+    private List<Checkpoint> darkSideCheckpoints = new List<Checkpoint>();
 
     // Used to color flip text to show flipping is disabled
     private readonly Color nearlyTransparentWhite = new Color(1, 1, 1, 0.1f);
@@ -122,6 +128,51 @@ public class GameController : SingletonObject<GameController> {
 		}
 	}
 
+   
+    /// <summary>
+    /// Should be called in the Start method of each Checkpoint.
+    /// 
+    /// Avoids the need for drag and drop references.
+    /// </summary>
+    /// <param name="checkpoint"></param>
+    public void RegisterCheckpoint(Checkpoint checkpoint)
+    {
+        if (checkpoint.checkpointSide == Side.Dark)
+        {
+            darkSideCheckpoints.Add(checkpoint);
+            Debug.Log("DARK: " + darkSideCheckpoints);
+            Debug.Log(">>" + darkSideCheckpoints.Count);
+        } else
+        {
+            lightSideCheckpoints.Add(checkpoint);
+            Debug.Log("LIGHT: " + darkSideCheckpoints);
+        }
+    }
+
+    /// <summary>
+    /// Retrieves a checkpoint of a specific order.
+    /// 
+    /// NOTE: Assumes the level designer has configured checkpoints in ascending 'order' from 1.
+    /// </summary>
+    /// <param name="playerSide"></param>
+    /// <param name="order"></param>
+    /// <returns></returns>
+    public Checkpoint getCheckpoint(Side playerSide, int order)
+    {
+        List<Checkpoint> checkpoints = (playerSide == Side.Light) ? lightSideCheckpoints : darkSideCheckpoints;
+ 
+        foreach (Checkpoint check in checkpoints)
+        {
+            if (check.order == order)
+            {
+                return check;
+            }
+            Debug.Log(">" + check);
+        }
+        Debug.Log("NO Checkpoint of order: " + order + " exists.");
+        return null;
+    }
+
     /** 
      * Save the game data to a save file
      */
@@ -182,9 +233,10 @@ public class GameController : SingletonObject<GameController> {
     }
 
 
-    public void foundCoin()
+    public void foundCoin(int score)
     {
         gameData.coinsFound++;
+        gameData.coinScore += score;
     }
 
     public int getCoinsFound()
@@ -204,7 +256,7 @@ public class GameController : SingletonObject<GameController> {
 
 	public int getScore()
 	{
-		return gameData.coinsFound * 10;
+		return gameData.coinScore;
 	}
 
     public void setInventoryItem(SpecialCollectible specialItem)
@@ -278,7 +330,12 @@ public class GameController : SingletonObject<GameController> {
         return darkPlayer;
     }
 
-	public List<PlayerController> getAllPlayers()
+    public PlayerController getLightPlayer()
+    {
+        return lightPlayer;
+    }
+
+    public List<PlayerController> getAllPlayers()
 	{
 		return new List<PlayerController> { lightPlayer, darkPlayer };
 	}

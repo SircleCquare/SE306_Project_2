@@ -4,8 +4,8 @@ using System.Collections;
 public class CameraPinController : MonoBehaviour {
 	
 	/** Both of these fields need to be configured within the Unity scene builder */
-	public Transform player1;
-	public Transform player2;
+	private Transform lightPlayer;
+    private Transform darkPlayer;
 	
 //	public Camera camera;
 	
@@ -15,9 +15,15 @@ public class CameraPinController : MonoBehaviour {
 	
 	private int flipStep = 0;
 
+    void Start()
+    {
+        lightPlayer = GameController.Singleton.getLightPlayer().gameObject.transform;
+        darkPlayer = GameController.Singleton.getDarkPlayer().gameObject.transform;
+    }
+
 	// Update is called once per frame
 	void Update () {
-		middle = (player1.position + player2.position) * 0.5f;
+		middle = (lightPlayer.position + darkPlayer.position) * 0.5f;
 		if (isFlipping) {
 			flip();
 		}

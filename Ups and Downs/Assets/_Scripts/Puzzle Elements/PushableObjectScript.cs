@@ -17,7 +17,7 @@ public class PushableObjectScript : Switch {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5.0f);
 		for (int i = 0; i < hitColliders.Length; i++) {
 			// check if object == player
-			if (hitColliders [i].gameObject.tag == "Player") {
+			if (hitColliders [i].gameObject.tag == GameController.PLAYER_TAG) {
 				// TODO: check if player is carrying anything
 				// if player, get the transform and make this parent to transform.
 				pushingPlayer = hitColliders [i].gameObject;

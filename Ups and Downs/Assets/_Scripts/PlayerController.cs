@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour {
 
     /** The side of the player assigned this Controller */
 	public Side PlayerSide;
-    /** Must be set to an active game controller object */
-    public GameController inputControl;
-    /** The checkpoint this player has initially. */
-    public Checkpoint initialCheckpoint;
+
+    //accessed via Singleton now.
+    private GameController inputControl;
+
+    // The check which the player will respawn back to if they die.
+    private Checkpoint currentCheckpoint;
+
 	public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
     public float gravity = 20.0F;
@@ -29,8 +32,6 @@ public class PlayerController : MonoBehaviour {
 	public float darkSideZ = -2.5f;
 	public float lightSideZ = 2.5f;
 
-    // The most recent check point this player has.
-    private Vector3 mostRecentCheckpoint;
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     private float forceY = 0;
@@ -48,17 +49,25 @@ public class PlayerController : MonoBehaviour {
 
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
-	}
+        
+    }
 
     void Start() {
         invertGrav = gravity + airTime;
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
-        mostRecentCheckpoint = initialCheckpoint.getPosition();
+
 		normalColour = GetComponent<Renderer>().material.color;
 		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
         leeches = new List<LeechEnemy>();
-     }
+        inputControl = GameController.Singleton;
+
+    
+
+        // Get the initial Checkpoint for the scene.
+        
+        
+    }
 
     void Update()
     {
@@ -100,13 +109,14 @@ public class PlayerController : MonoBehaviour {
         moveDirection = new Vector3(horizontalMag, 0, 0);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (controller.isGrounded)
+        if (groundContact)
         {
             forceY = 0;
             invertGrav = gravity * airTime;
             if (jump)
             {
                 forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
+                groundContact = false;
             }
         }
 
@@ -117,20 +127,19 @@ public class PlayerController : MonoBehaviour {
         }
 
         forceY -= gravity * Time.deltaTime * gravityForce;
+        forceY = Mathf.Clamp(forceY, -jumpSpeed, jumpSpeed);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
     }
 
-    /*
-     * 
-     * Once a proper player model has been selected selective ground checking can be done.
-     * 
-     */
-    void OnCollisionEnter(Collision other)
+    /// <summary>
+    /// Everytime the player lands on a ground object, its jump count is reset.
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Ground");
             groundContact = true;
         }
     }
@@ -250,9 +259,9 @@ public class PlayerController : MonoBehaviour {
     {
         if (checkPoint.checkpointSide == PlayerSide)
         {
-            if (checkPoint.isActive())
+            if (checkPoint.isActive() && checkPoint.order >= currentCheckpoint.order)
             {
-                mostRecentCheckpoint = checkPoint.getPosition();
+                currentCheckpoint = checkPoint;
                 checkPoint.activate();
             }
         }
@@ -264,11 +273,19 @@ public class PlayerController : MonoBehaviour {
     public void kill()
     {
         Debug.Log("Killing");
-        transform.position = mostRecentCheckpoint;
+        if (currentCheckpoint == null)
+        {
+            currentCheckpoint = inputControl.getCheckpoint(PlayerSide, 0);
+        }
+        transform.position = currentCheckpoint.getPosition();
         inputControl.removeHeart();
 		Invoke("Unlock", invulnerabilityTime);
 		StopCoroutine("DamageFlash");
 		StartCoroutine("DamageFlash");
+
+        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+            e.ResetBehaviour();
+        }
     }
 
 

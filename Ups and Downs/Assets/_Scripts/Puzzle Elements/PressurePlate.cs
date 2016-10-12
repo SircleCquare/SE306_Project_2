@@ -66,7 +66,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player" && state == PlateState.IDLE)
+        if (col.gameObject.tag == GameController.PLAYER_TAG && state == PlateState.IDLE)
         {
             StartCoroutine(CompressPlate());
         }
@@ -74,7 +74,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player" && state == PlateState.COMPRESSED)
+        if (col.gameObject.tag == GameController.PLAYER_TAG && state == PlateState.COMPRESSED)
         {
             StartCoroutine(RaisePlate());
         }

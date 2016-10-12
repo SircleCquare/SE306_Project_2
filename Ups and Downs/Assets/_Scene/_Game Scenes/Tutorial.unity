@@ -2759,7 +2759,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475342, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.53
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 125552, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Name
@@ -2768,6 +2768,35 @@ Prefab:
     - target: {fileID: 197250, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Name
       value: Movement Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 04a842e316b6f44bf8da702de26a8ed6, type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 04a842e316b6f44bf8da702de26a8ed6,
+        type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4288651167
+      objectReference: {fileID: 0}
+    - target: {fileID: 475342, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
