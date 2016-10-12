@@ -9,17 +9,14 @@ public class Heart : Collectible
 
     public override void onPickup()
     {
-        if (getGameController().getTotalHearts() >= 5)
+        if (getGameController().addHeart())
         {
-            Debug.Log("Full Hearts");
-            return;
-        } else
-        {
-            getGameController().addHeart();
             base.onPickup();
             Debug.Log("Heart Added");
         }
+        else
+        {
+            Debug.Log("Full Hearts");
+        }
     }
-       
-
 }

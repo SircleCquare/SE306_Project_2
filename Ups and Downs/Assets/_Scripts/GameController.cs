@@ -278,13 +278,18 @@ public class GameController : SingletonObject<GameController> {
     /// <summary>
     /// Updates the player's current health and adjusts their health bar accordingly
     /// </summary>
-    public void addHeart()
+    public bool addHeart()
     {
-        if (getTotalHearts() >= MAX_HEALTH)
+        if (getCurrentHealth() < MAX_HEALTH)
         {
             gameData.heart = MAX_HEALTH;
             healthBar.value = MAX_HEALTH;
-        }  
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -306,7 +311,7 @@ public class GameController : SingletonObject<GameController> {
         
     }
 
-    public int getTotalHearts()
+    public int getCurrentHealth()
     {
         return gameData.heart;
     }
