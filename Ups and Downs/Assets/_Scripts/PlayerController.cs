@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
 
-
 	public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
     public float gravity = 20.0F;
@@ -110,13 +109,14 @@ public class PlayerController : MonoBehaviour {
         moveDirection = new Vector3(horizontalMag, 0, 0);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (controller.isGrounded)
+        if (groundContact)
         {
             forceY = 0;
             invertGrav = gravity * airTime;
             if (jump)
             {
                 forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
+                groundContact = false;
             }
         }
 
@@ -127,20 +127,19 @@ public class PlayerController : MonoBehaviour {
         }
 
         forceY -= gravity * Time.deltaTime * gravityForce;
+        forceY = Mathf.Clamp(forceY, -jumpSpeed, jumpSpeed);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
     }
 
-    /*
-     * 
-     * Once a proper player model has been selected selective ground checking can be done.
-     * 
-     */
-    void OnCollisionEnter(Collision other)
+    /// <summary>
+    /// Everytime the player lands on a ground object, its jump count is reset.
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Ground");
             groundContact = true;
         }
     }
