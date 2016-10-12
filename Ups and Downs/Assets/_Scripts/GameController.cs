@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class GameController : SingletonObject<GameController> {
+    public const string PLAYER_TAG = "Player";
 
     public bool renderSwitchPaths = false;
 

@@ -8,7 +8,7 @@ public class PressureField : TriggerSphere
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             Debug.Log("Enter -  Child");
 //            plate.setPlayerStandingOn(true);
@@ -17,7 +17,7 @@ public class PressureField : TriggerSphere
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             Debug.Log("Exit - Child");
 //            plate.setPlayerStandingOn(false);

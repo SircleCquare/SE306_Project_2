@@ -36,7 +36,7 @@ public class Checkpoint : MonoBehaviour {
     /** Activates the checkpoint when the player enters its collision sphere. */
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             PlayerController controller = col.gameObject.GetComponent<PlayerController>();
             if (controller != null)

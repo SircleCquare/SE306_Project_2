@@ -21,12 +21,10 @@ public class SpawnedBubble : Enemy
     void Start()
     {
         life = Random.Range(lifeMin, lifeMax);
-
     }
 
     protected override void UpdateActive()
     {
-
         life -= Time.deltaTime;
         if (life < 0)
         {
@@ -47,14 +45,13 @@ public class SpawnedBubble : Enemy
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == GameController.PLAYER_TAG)
         {
             if (growth > 0)
             {
                 growth = -growth;
                 transform.position += Vector3.Normalize(Vector3.MoveTowards(transform.position, other.gameObject.transform.position, 1f)) * growth;
             }
-            
         }
         
     }
