@@ -11,7 +11,9 @@ public class SphereEnemy : Enemy {
 	// How many bubbles per second are spawned. Influences the density of the cloud.
 	public float rate = 5.0f;
 	public Transform bubble;
-	public Transform player;
+
+
+	private Transform darkPlayer;
 
     // How far a Sphere can see a player from
     public float visionDistance = 15.0f;
@@ -35,6 +37,7 @@ public class SphereEnemy : Enemy {
 		spawnTime = 1.0f / rate;
 		homePosition = transform.position;
 		forwardY = 0.0f;
+        darkPlayer = GameController.Singleton.getDarkPlayer().gameObject.transform;
 	}
 
     protected override void UpdateActive()
@@ -46,10 +49,10 @@ public class SphereEnemy : Enemy {
 			SpawnBubble();
 		}
         // Point at player so we can apply forward velocities and not worry about angle.
-        transform.LookAt(player);
+        transform.LookAt(darkPlayer);
 
 
-        float distToPlayer = Vector3.Distance(transform.position, player.position);
+        float distToPlayer = Vector3.Distance(transform.position, darkPlayer.position);
 
         bool triggered = distToPlayer <= visionDistance;
 		bool returnHome = Vector3.Distance(transform.position, homePosition) >= chaseDistance;
@@ -71,7 +74,7 @@ public class SphereEnemy : Enemy {
 
 	private void SpawnBubble() {
         // Ensures that a Bubble is not spawned overtop of a player.
-        float dist = Vector3.Distance(player.transform.position, transform.position) - 0.5f;
+        float dist = Vector3.Distance(darkPlayer.transform.position, transform.position) - 0.5f;
         dist = Mathf.Min(dist, cloudSize);
 		Instantiate(bubble, dist * Random.onUnitSphere + transform.position, Quaternion.identity);
 	}
@@ -79,7 +82,7 @@ public class SphereEnemy : Enemy {
 	bool CanSeePlayer(Vector3 rayDirection) {
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(transform.position, rayDirection, out hit)) {
-			if (hit.transform == player) {
+			if (hit.transform == darkPlayer) {
 				return true;
 			} 
 		}

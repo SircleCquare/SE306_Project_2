@@ -6,8 +6,16 @@ public class Checkpoint : MonoBehaviour {
     /** Indictates which player can activate and use this checkpoint */
     public Side checkpointSide;
 
+    public int order = 0;
+
     /** purely visible for Debug purposes, DO NOT CHANGE */
     public bool active = false;
+
+    void Awake()
+    {
+        GameController.Singleton.RegisterCheckpoint(this);
+        Debug.Log(GameController.Singleton.getCheckpoint(checkpointSide, 0));
+    }
 
     public Vector3 getPosition()
     {
