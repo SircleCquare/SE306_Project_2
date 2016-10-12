@@ -4,6 +4,12 @@ using System.Collections;
 public abstract class Enemy : MonoBehaviour {
 
     private Renderer rend;
+    private Vector3 originPosition;
+
+    protected virtual void Start()
+    {
+        originPosition = transform.position;
+    }
 
 	// Use this for initialization
 	
@@ -25,6 +31,9 @@ public abstract class Enemy : MonoBehaviour {
     /// </summary>
     protected abstract void UpdateActive();
 
-
-
+    public virtual void ResetBehaviour()
+    {
+        Debug.Log("resetting behaviour");
+        transform.position = originPosition;
+    }
 }

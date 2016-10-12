@@ -282,6 +282,10 @@ public class PlayerController : MonoBehaviour {
 		Invoke("Unlock", invulnerabilityTime);
 		StopCoroutine("DamageFlash");
 		StartCoroutine("DamageFlash");
+
+        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+            e.ResetBehaviour();
+        }
     }
 
 

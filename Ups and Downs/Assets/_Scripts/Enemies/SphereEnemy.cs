@@ -34,7 +34,9 @@ public class SphereEnemy : Enemy {
 	private float forwardY;
 	private Vector3 homePosition;
 
-	void Start() {
+	protected override void Start() {
+        base.Start();
+
 		runTime = 0.0f;
 		spawnTime = 1.0f / rate;
 		homePosition = transform.position;
