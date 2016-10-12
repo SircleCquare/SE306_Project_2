@@ -836,7 +836,7 @@ GameObject:
   - 4: {fileID: 479916}
   - 111: {fileID: 11175320}
   m_Layer: 0
-  m_Name: NewDarkPlayer
+  m_Name: NewLightPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1671,7 +1671,7 @@ Transform:
   m_GameObject: {fileID: 184568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.1895485, y: 9.7, z: -1.2998371}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 402454}
@@ -1876,7 +1876,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: d0c26bcd43bb9a648984b6d38fe6d641, type: 2}
   - {fileID: 2100000, guid: 07f461ba9c9731043baef5c8d0fac0c1, type: 2}
   - {fileID: 2100000, guid: 25fc4e6c95a835f4d9a3addc9e6b61a0, type: 2}
-  - {fileID: 2100000, guid: cf8e5d13e2a28284a80dab497aae0032, type: 2}
+  - {fileID: 2100000, guid: eac783c2430d94d45bca0c133c2a1fcb, type: 2}
   - {fileID: 2100000, guid: b4d560309ff507d4aa03cf23713c4e5f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
