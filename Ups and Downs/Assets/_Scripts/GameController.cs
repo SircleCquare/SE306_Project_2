@@ -232,9 +232,10 @@ public class GameController : SingletonObject<GameController> {
     }
 
 
-    public void foundCoin()
+    public void foundCoin(int score)
     {
         gameData.coinsFound++;
+        gameData.coinScore += score;
     }
 
     public int getCoinsFound()
@@ -254,7 +255,7 @@ public class GameController : SingletonObject<GameController> {
 
 	public int getScore()
 	{
-		return gameData.coinsFound * 10;
+		return gameData.coinScore;
 	}
 
     public void setInventoryItem(SpecialCollectible specialItem)

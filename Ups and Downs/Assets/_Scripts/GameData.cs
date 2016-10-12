@@ -11,6 +11,8 @@ public class GameData
 
     /** The number of Coins the player has found in this play through */
     public int coinsFound { get; set; }
+    /** The score from coins (each coin can have it's own point setting) */
+    public int coinScore { get; set; }
 
     public int totalNumberOfCoins { get; set; }
 
@@ -40,6 +42,7 @@ public class GameData
     public void clearLevelState()
     {
         coinsFound = 0;
+        coinScore = 0;
         heart = MAX_HEALTH;
         time = 0.0f;
     }
