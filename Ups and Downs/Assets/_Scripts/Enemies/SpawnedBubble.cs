@@ -20,6 +20,7 @@ public class SpawnedBubble : Enemy
 
     void Start()
     {
+        base.Start();
         life = Random.Range(lifeMin, lifeMax);
     }
 

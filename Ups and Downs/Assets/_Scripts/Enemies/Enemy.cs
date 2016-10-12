@@ -11,8 +11,6 @@ public abstract class Enemy : MonoBehaviour {
         originPosition = transform.position;
     }
 
-	// Use this for initialization
-	
 	protected virtual void Update ()
 	{
 	    if (GameController.Singleton.getSide() == Side.Dark)
@@ -33,7 +31,6 @@ public abstract class Enemy : MonoBehaviour {
 
     public virtual void ResetBehaviour()
     {
-        Debug.Log("resetting behaviour");
         transform.position = originPosition;
     }
 }
