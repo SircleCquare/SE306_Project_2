@@ -50,7 +50,7 @@ public class PressurePlate : MonoBehaviour
         Vector3 initialPosition = transform.position;
         float time = 0f;
         while (time < compressTime) {
-            transform.position = Vector3.Lerp(initialPosition, uncompressedPosition, time);;
+            transform.position = Vector3.Lerp(initialPosition, uncompressedPosition, time);
             time += Time.deltaTime / compressTime;
             yield return 0;   
         }
