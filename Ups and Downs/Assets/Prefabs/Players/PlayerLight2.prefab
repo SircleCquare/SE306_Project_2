@@ -2404,7 +2404,6 @@ MonoBehaviour:
   airTime: 1
   leechSpeedMultiplier: 3.5
   leechJumpMultiplier: 1.5
-  body: {fileID: 128536}
   switchSearchRadius: 5
   darkSideZ: -2.5
   lightSideZ: 2.5
@@ -2412,6 +2411,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   invulnerabilityTime: 2
+  flashTime: 0.2
+  damageFlash: 1
 --- !u!137 &13784812
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
