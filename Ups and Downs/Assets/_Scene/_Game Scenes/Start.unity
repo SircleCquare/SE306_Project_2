@@ -171,7 +171,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1413790775}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1001 &1168980305
 Prefab:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1413790775}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 22439792, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
       propertyPath: m_LocalPosition.x
@@ -376,11 +376,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &1388007733 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 22439792, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 1235739132}
 --- !u!1 &1413790773
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +416,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1388007733}
   - {fileID: 492598924}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
