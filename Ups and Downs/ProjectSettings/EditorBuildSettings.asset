@@ -12,8 +12,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scene/_Game Scenes/Tutorial.unity
   - enabled: 1
-    path: Assets/_Scene/_Game Scenes/level 1.unity
+    path: Assets/_Scene/_Game Scenes/Level 1.unity
   - enabled: 1
     path: Assets/_Scene/_Game Scenes/Finish Scene.unity
   - enabled: 0
     path: Assets/_Scene/_Game Scenes/Michael's tutorial level.unity
+  - enabled: 1
+    path: Assets/_Scene/_Game Scenes/Level 2.unity
+  - enabled: 1
+    path: Assets/_Scene/_Game Scenes/Level 3.unity

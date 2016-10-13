@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine.SceneManagement;
 
 public class GameController : SingletonObject<GameController> {
@@ -174,9 +176,9 @@ public class GameController : SingletonObject<GameController> {
         return null;
     }
 
-    /** 
-     * Save the game data to a save file
-     */
+    /// <summary>
+    ///  Save the game data to a save file. 
+    /// </summary>
     public void SaveGame()
     {
         // Make sure save folder exists
@@ -192,35 +194,59 @@ public class GameController : SingletonObject<GameController> {
         {
             BinaryFormatter serializer = new BinaryFormatter();
             serializer.Serialize(saveFile, gameData);
-
             saveFile.Close();  
         }
         Debug.Log("Game saved");
     }
 
-    /** 
-     * Load the game data from a save file
-     */
+    /// <summary>
+    /// Load the game data from a save file
+    /// </summary>
     public void LoadGame()
     {
         if (!File.Exists(SAVE_FILE_PATH))
         {
             // If no save exists, create new game data and save
-            gameData = new GameData();
             Debug.Log("No save file found");
-            SaveGame();
+            CreateFreshSave();
         }
         else
         {
             // Load file
             using (FileStream saveFile = File.Open(SAVE_FILE_PATH, FileMode.Open))
             {
-                BinaryFormatter serializer = new BinaryFormatter();
-                gameData = serializer.Deserialize(saveFile) as GameData;
-                saveFile.Close();
-                Debug.Log("Save data loaded");
+                try
+                {
+                    BinaryFormatter serializer = new BinaryFormatter();
+                    gameData = serializer.Deserialize(saveFile) as GameData;
+                    saveFile.Close();
+                    Debug.Log("Save data loaded");
+                }
+                catch (SerializationException)
+                {
+                    // If the load is not possible because the save file is corrupt, create a new one
+                    // TODO either remove this when no more changes will occur to game data or show message to user to inform them it happened
+                    Debug.Log("Save data corrupted, creating new one");
+                    // Need to close save file first to allow it to be overwritten in another method
+                    saveFile.Close();
+                    CreateFreshSave();
+                }
+                
             }
+
+
         }
+    }
+
+
+    /// <summary>
+    /// Create a new save 
+    /// </summary>
+    private void CreateFreshSave(bool deleteOriginal = false)
+    {
+        gameData = new GameData();
+        Debug.Log("New save file created");
+        SaveGame();
     }
 
     /// <summary>
