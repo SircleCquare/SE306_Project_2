@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	public Color32 flashColour = Color.white;
 	public float invulnerabilityTime = 2.0f;
 	private Animator animator;
+    public float terminalVelocity = 200.0f;
 
     // Whether the player is on a platform.
     private bool groundContact;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         forceY -= gravity * Time.deltaTime * gravityForce;
-        forceY = Mathf.Clamp(forceY, -jumpSpeed, jumpSpeed);
+        forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
     }
