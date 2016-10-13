@@ -47,7 +47,10 @@ public class GameController : SingletonObject<GameController> {
     public Text dialogBoxCharacterName;
     public Text dialogBoxMessage; 
 
-	private PlayerController lightPlayer, darkPlayer;
+    private bool achievementDisplayed = false;
+    private float achievementPopUpCountdown = 2.0f;
+
+    private PlayerController lightPlayer, darkPlayer;
 
     // Checkpoint list
 
@@ -91,6 +94,12 @@ public class GameController : SingletonObject<GameController> {
 
         gameData.time += Time.deltaTime;
         updateTimeDisplay();
+
+        // Handle hiding an achievement if it is visible
+        if (achievementDisplayed)
+        {
+            tryHideAchivementPopup();
+        }
 
         if (coolDownCount < 0)
         {
@@ -513,24 +522,26 @@ public class GameController : SingletonObject<GameController> {
      */
     void unlockAchievement(string achievementName)
     {
-        // Only pop achievement description when achievement first awarded
-        if (!gameData.awardedAchievements.Contains(achievementName))
-        {
-            // Record achievement
-            gameData.awardedAchievements.Add(achievementName);
-
-            // Display achievement pop up 
-            achievementText.text = Achievements.achievementList[achievementName];
-            achievementPopUp.SetActive(true);
-        }
+        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, gameData);
+        achievementPopUpCountdown = 2.0f;
+        achievementDisplayed = true; 
     }
 
     /*
-     * Hide the achievement pop up
+     * Hides the achievement popup when the achievement countdown ends. 
      */
-    void hideAchivementPopup()
+    void tryHideAchivementPopup()
     {
-        achievementPopUp.SetActive(false);
+        achievementPopUpCountdown -= Time.deltaTime;
+
+        // Don't hide popup if countdown time still remains
+        if (achievementPopUpCountdown > 0)
+        {
+            return;
+        }
+
+        Achievements.HideAchivementPopup(achievementPopUp);
+        achievementDisplayed = false; 
     }
 
     /*
@@ -578,6 +589,11 @@ public class GameController : SingletonObject<GameController> {
 
 	    // Trigger finish scene
 	    SceneManager.LoadScene("Finish Scene");
-	}
+    }
+
+    public GameData GetGameData()
+    {
+        return gameData; 
+    }
 
 }
