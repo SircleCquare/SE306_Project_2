@@ -19,4 +19,15 @@ public class FinishScreenButtons : MonoBehaviour {
 		int levelNumber = ApplicationModel.levelNumber;
 	    SceneManager.LoadScene(levelNumber + 3);
 	}
+
+	public void RetryLevel()
+	{
+		int levelNumber = ApplicationModel.levelNumber;
+		SceneManager.LoadScene (levelNumber + 2);	//someone get rid of these magic numbers ;_;
+	}
+
+	public void QuitToMainMenu()
+	{
+		SceneManager.LoadScene (0);
+	}
 }

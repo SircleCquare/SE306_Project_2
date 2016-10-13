@@ -10,5 +10,7 @@ public static class ApplicationModel {
 	public static float time;
     public static string levelName;
 	public static int levelNumber;
+	public static int coinsFound;
+	public static int totalCoins;
 
 }
