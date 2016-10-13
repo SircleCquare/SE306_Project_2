@@ -18,7 +18,7 @@ public class SpawnedBubble : Enemy
 
     private float life;
 
-    void Start()
+    protected override void Start()
     {
         base.Start();
         life = Random.Range(lifeMin, lifeMax);
