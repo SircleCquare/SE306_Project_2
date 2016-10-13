@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour {
     public bool damageFlash = false;
     public float terminalVelocity = 200.0f;
 
-    // Whether the player is on a platform.
-    private bool groundContact;
     private Material shirt;
     Renderer playerRenderer;
 
@@ -122,7 +120,6 @@ public class PlayerController : MonoBehaviour {
             if (jump)
             {
                 forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
-                groundContact = false;
             }
         }
 		animator.SetBool("isJumping", jump && !controller.isGrounded);
@@ -136,18 +133,6 @@ public class PlayerController : MonoBehaviour {
         forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
-    }
-
-    /// <summary>
-    /// Everytime the player lands on a ground object, its jump count is reset.
-    /// </summary>
-    /// <param name="other"></param>
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            groundContact = true;
-        }
     }
 
     public void addHeart()

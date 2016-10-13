@@ -63,16 +63,13 @@ public class PressurePlate : MonoBehaviour
         state = PlateState.IDLE;
     }
 
-    private Coroutine raiseRoutine, compressRoutine;
-
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
-
-            compressRoutine = StartCoroutine(CompressPlate());
+            StartCoroutine(CompressPlate());
         }
     }
 
@@ -82,8 +79,7 @@ public class PressurePlate : MonoBehaviour
         {
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
-
-            raiseRoutine = StartCoroutine(RaisePlate());
+            StartCoroutine(RaisePlate());
         }
     }
 }
