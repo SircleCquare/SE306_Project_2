@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
     public float flashTime = 0.2f;
 	private Animator animator;
     public bool damageFlash = false;
+    public float terminalVelocity = 200.0f;
 
     // Whether the player is on a platform.
     private bool groundContact;
@@ -113,7 +114,6 @@ public class PlayerController : MonoBehaviour {
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
-//        moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
         if (controller.isGrounded)
         {
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         forceY -= gravity * Time.deltaTime * gravityForce;
-        forceY = Mathf.Clamp(forceY, -jumpSpeed, jumpSpeed*2);
+        forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
     }
