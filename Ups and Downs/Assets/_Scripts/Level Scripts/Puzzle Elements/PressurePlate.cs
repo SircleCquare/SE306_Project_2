@@ -10,7 +10,7 @@ public class PressurePlate : MonoBehaviour
     public float detectionRadius = 2f;
     public Switchable[] targetList;
     
-    private Vector3 initialPos, finalPos;
+    private Vector3 uncompressedPosition, compressedPosition;
     private float compressionDistance;
     public PlateState state = PlateState.IDLE;
 
@@ -19,20 +19,21 @@ public class PressurePlate : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        initialPos = transform.position;
+        uncompressedPosition = transform.position;
         compressionDistance = transform.localScale.y;
+
+        compressedPosition = uncompressedPosition;
+        compressedPosition.y -= compressionDistance;
     }
 
 
 
     private IEnumerator CompressPlate() {
         state = PlateState.MOVING;
-        initialPos = transform.position;
-        finalPos = initialPos;
-        finalPos.y = initialPos.y - 0.5f;
+        Vector3 initialPosition = transform.position;
         float time = 0f;
         while (time < compressTime) {
-            transform.position = Vector3.Lerp(initialPos, finalPos, time);;
+            transform.position = Vector3.Lerp(initialPosition, compressedPosition, time);
             time += Time.deltaTime / compressTime;
             yield return 0;   
         }
@@ -46,12 +47,10 @@ public class PressurePlate : MonoBehaviour
 
     private IEnumerator RaisePlate() {
         state = PlateState.MOVING;
-        initialPos = transform.position;
-        finalPos = initialPos;
-        finalPos.y = initialPos.y + 0.5f;
+        Vector3 initialPosition = transform.position;
         float time = 0f;
         while (time < compressTime) {
-            transform.position = Vector3.Lerp(initialPos, finalPos, time);;
+            transform.position = Vector3.Lerp(initialPosition, uncompressedPosition, time);;
             time += Time.deltaTime / compressTime;
             yield return 0;   
         }
@@ -64,19 +63,27 @@ public class PressurePlate : MonoBehaviour
         state = PlateState.IDLE;
     }
 
+    private Coroutine raiseRoutine, compressRoutine;
+
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == GameController.PLAYER_TAG && state == PlateState.IDLE)
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
-            StartCoroutine(CompressPlate());
+            StopCoroutine(CompressPlate());
+            StopCoroutine(RaisePlate());
+
+            compressRoutine = StartCoroutine(CompressPlate());
         }
     }
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == GameController.PLAYER_TAG && state == PlateState.COMPRESSED)
+        if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
-            StartCoroutine(RaisePlate());
+            StopCoroutine(CompressPlate());
+            StopCoroutine(RaisePlate());
+
+            raiseRoutine = StartCoroutine(RaisePlate());
         }
     }
 }
