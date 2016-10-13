@@ -729,7 +729,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448458, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.26
+      value: 5.22
       objectReference: {fileID: 0}
     - target: {fileID: 448458, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -795,7 +795,28 @@ Prefab:
     - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608,
+        type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4280163870
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1320,7 +1341,24 @@ Prefab:
     - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608,
+        type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4288651167
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1386,7 +1424,24 @@ Prefab:
     - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4288651167
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608,
+        type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1836,7 +1891,24 @@ Prefab:
     - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608,
+        type: 3}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4288651167
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -2806,11 +2878,11 @@ Prefab:
     - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 04a842e316b6f44bf8da702de26a8ed6,
+      objectReference: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608,
         type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Color.rgba
