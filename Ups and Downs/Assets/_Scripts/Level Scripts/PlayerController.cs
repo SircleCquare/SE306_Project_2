@@ -218,14 +218,12 @@ public class PlayerController : MonoBehaviour {
         Vector3 localScale = body.transform.localScale;
         if (horizontalDirection > 0)
         {
-            localScale.x = Mathf.Abs(localScale.x);
+            transform.eulerAngles = new Vector3(0, 90, 0);
         }
         if ( horizontalDirection < 0 )
         {
-            localScale.x = Mathf.Abs(localScale.x) * -1;
+            transform.eulerAngles = new Vector3(0, 270, 0);
         }
-
-        body.transform.localScale = localScale;
     }
 
     
