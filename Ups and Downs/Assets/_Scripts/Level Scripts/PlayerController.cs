@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
 
-		normalColour = GetComponent<Renderer>().material.color;
+		//normalColour = GetComponent<Renderer>().material.color;
 		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
         leeches = new List<LeechEnemy>();
         inputControl = GameController.Singleton;
@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+		if (inputControl == null) {
+			Debug.Log ("NULL");
+		}
 		updateMovement();
 		if (inputControl.getSide() == PlayerSide) {
 			if (inputControl.isActivate()) {
@@ -103,7 +106,7 @@ public class PlayerController : MonoBehaviour {
             jump = inputControl.isJump();
         }
 
-        animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
+        //animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
