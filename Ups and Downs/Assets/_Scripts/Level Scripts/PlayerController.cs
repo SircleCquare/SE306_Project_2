@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour {
                 groundContact = false;
             }
         }
-		animator.SetBool("isJumping", jump|| !controller.isGrounded);
+		animator.SetBool("isJumping", jump && !controller.isGrounded);
         if (jump && forceY != 0)
         {
             invertGrav -= Time.deltaTime;
