@@ -792,10 +792,6 @@ Prefab:
       propertyPath: m_Name
       value: Pressure Plate
       objectReference: {fileID: 0}
-    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_RichText
       value: 1
@@ -817,6 +813,10 @@ Prefab:
       propertyPath: m_Color.rgba
       value: 4280163870
       objectReference: {fileID: 0}
+    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47eabb2e9da74434ea2758abe6302260, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1338,10 +1338,6 @@ Prefab:
       propertyPath: m_Name
       value: Coin Pickup
       objectReference: {fileID: 0}
-    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Font
       value: 
@@ -1421,10 +1417,6 @@ Prefab:
       propertyPath: m_Name
       value: Flip
       objectReference: {fileID: 0}
-    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Color.rgba
       value: 4288651167
@@ -1442,6 +1434,10 @@ Prefab:
       propertyPath: m_CharacterSize
       value: 0.16
       objectReference: {fileID: 0}
+    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47eabb2e9da74434ea2758abe6302260, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1765,7 +1761,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 2.38}
+  m_Size: {x: 1, y: 1, z: 2.38}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &986648335
 Prefab:
@@ -1888,10 +1884,6 @@ Prefab:
       propertyPath: m_Size.y
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Font
       value: 
@@ -1909,6 +1901,10 @@ Prefab:
       propertyPath: m_Color.rgba
       value: 4288651167
       objectReference: {fileID: 0}
+    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47eabb2e9da74434ea2758abe6302260, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
   m_IsPrefabParent: 0
@@ -2875,10 +2871,6 @@ Prefab:
       propertyPath: m_RichText
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2305784, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Font
       value: 
@@ -3243,7 +3235,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+  - {fileID: 2100000, guid: 47eabb2e9da74434ea2758abe6302260, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
