@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private float forceY = 0;
     private float invertGrav;
-	private bool locked = false;
 	public bool carryingObject { get; set; }
 	private Color32 normalColour;
 	public Color32 flashColour = Color.white;
@@ -110,9 +109,9 @@ public class PlayerController : MonoBehaviour {
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
-        moveDirection = transform.TransformDirection(moveDirection);
+//        moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (groundContact)
+        if (controller.isGrounded)
         {
             forceY = 0;
             invertGrav = gravity * airTime;
@@ -291,14 +290,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
-	void Unlock(){
-		locked = false;
-	}
-
-	void Lock(){
-		locked = true;
-	}
 
 	IEnumerator DamageFlash(){
 //		int numLoops = (int)(invulnerabilityTime / 0.2f);
