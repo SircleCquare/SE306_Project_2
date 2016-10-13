@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 	public float invulnerabilityTime = 1.0f;
     public float flashTime = 0.2f;
 	private Animator animator;
+    public bool damageFlash = false;
     public float terminalVelocity = 200.0f;
 
     // Whether the player is on a platform.
@@ -61,9 +62,12 @@ public class PlayerController : MonoBehaviour {
 
         leeches = new List<LeechEnemy>();
         inputControl = GameController.Singleton;
-        playerRenderer = GetComponentsInChildren<Renderer>()[0];
-        shirt = Array.Find(playerRenderer.materials, mat => mat.name.Contains("Shirt"));
-        normalColour = shirt.color;
+        if (damageFlash)
+        {
+            playerRenderer = GetComponentsInChildren<Renderer>()[0];
+            shirt = Array.Find(playerRenderer.materials, mat => mat.name.Contains("Shirt"));
+            normalColour = shirt.color;
+        }
         // Get the initial Checkpoint for the scene.
         
         
@@ -110,7 +114,6 @@ public class PlayerController : MonoBehaviour {
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
-//        moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
         if (controller.isGrounded)
         {
@@ -279,9 +282,11 @@ public class PlayerController : MonoBehaviour {
         }
         transform.position = currentCheckpoint.getPosition();
         inputControl.removeHeart();
-		Invoke("Unlock", invulnerabilityTime);
-        StopCoroutine(DamageFlash());
-        StartCoroutine(DamageFlash());
+        if (damageFlash)
+        {
+            StopCoroutine(DamageFlash());
+            StartCoroutine(DamageFlash());
+        }
 
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
