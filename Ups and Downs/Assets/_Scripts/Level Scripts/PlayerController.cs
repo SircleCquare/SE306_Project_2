@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     public float airTime = 1f;
     public float leechSpeedMultiplier = 3.5f;
     public float leechJumpMultiplier = 1.5f;
-    public GameObject body;
 
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
@@ -215,7 +214,6 @@ public class PlayerController : MonoBehaviour {
 
     private void AdjustFacing(float horizontalDirection)
     {
-        Vector3 localScale = body.transform.localScale;
         if (horizontalDirection > 0)
         {
             transform.eulerAngles = new Vector3(0, 90, 0);

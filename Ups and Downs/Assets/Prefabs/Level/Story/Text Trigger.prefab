@@ -128,11 +128,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 125552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7651f380a1b8144f9c72581dda375f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 32eebe6316a167f418ed50676f8e44b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyText:
-  - {fileID: 197250}
+  storyText: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
