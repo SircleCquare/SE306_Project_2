@@ -121,6 +121,7 @@ public class GameController : SingletonObject<GameController> {
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
+		Debug.Log ("REGISTER");
 		if (controller.PlayerSide == Side.Light) {
 			lightPlayer = controller;
 		} else {

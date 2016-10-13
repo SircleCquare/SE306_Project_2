@@ -31,7 +31,7 @@ Or
 - Press 'Esc' to pause/unpause the game
 
 ## Goal & Score
-- Complete evvery level to finish the game
+- Complete every level to finish the game
 - Try to achieve higher scores in levels
 - Collect coins to increase your score
 - Dying will also impact your score in future versions

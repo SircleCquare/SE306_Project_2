@@ -3,12 +3,15 @@ using System.Collections;
 
 public class StoryTextTrigger : MonoBehaviour {
 
-	public GameObject[] storyText;
+	private GameObject[] storyText;
 
 	void Start () {
-		foreach (GameObject text in storyText) {
-			text.SetActive (false);
-		}
+        storyText = new GameObject[transform.childCount];
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            storyText[i] = (GameObject)transform.GetChild(i).gameObject;
+            storyText[i].SetActive (false);
+        }
 	}
 	
 	void OnTriggerEnter(Collider other){

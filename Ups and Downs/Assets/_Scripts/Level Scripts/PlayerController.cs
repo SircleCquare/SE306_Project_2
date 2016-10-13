@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     public float airTime = 1f;
     public float leechSpeedMultiplier = 3.5f;
     public float leechJumpMultiplier = 1.5f;
-    public GameObject body;
 
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 5.0f;
@@ -36,20 +35,24 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private float forceY = 0;
     private float invertGrav;
-	private bool locked = false;
 	public bool carryingObject { get; set; }
 	private Color32 normalColour;
 	public Color32 flashColour = Color.white;
-	public float invulnerabilityTime = 2.0f;
+	public float invulnerabilityTime = 1.0f;
+    public float flashTime = 0.2f;
 	private Animator animator;
+    public bool damageFlash = false;
+    public float terminalVelocity = 200.0f;
 
     // Whether the player is on a platform.
     private bool groundContact;
+    private Material shirt;
+    Renderer playerRenderer;
 
 
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
-        
+
     }
 
     void Start() {
@@ -57,13 +60,14 @@ public class PlayerController : MonoBehaviour {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
 
-		normalColour = GetComponent<Renderer>().material.color;
-		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
         leeches = new List<LeechEnemy>();
         inputControl = GameController.Singleton;
-
-    
-
+        if (damageFlash)
+        {
+            playerRenderer = GetComponentsInChildren<Renderer>()[0];
+            shirt = Array.Find(playerRenderer.materials, mat => mat.name.Contains("Shirt"));
+            normalColour = shirt.color;
+        }
         // Get the initial Checkpoint for the scene.
         
         
@@ -71,6 +75,9 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+		if (inputControl == null) {
+			Debug.Log ("NULL");
+		}
 		updateMovement();
 		if (inputControl.getSide() == PlayerSide) {
 			if (inputControl.isActivate()) {
@@ -103,13 +110,12 @@ public class PlayerController : MonoBehaviour {
             jump = inputControl.isJump();
         }
 
-        animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
+        animator.SetBool("RunningFwd", ((horizontalMag == 0) ? false : true));
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
-        moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (groundContact)
+        if (controller.isGrounded)
         {
             forceY = 0;
             invertGrav = gravity * airTime;
@@ -119,7 +125,7 @@ public class PlayerController : MonoBehaviour {
                 groundContact = false;
             }
         }
-
+		animator.SetBool("isJumping", jump && !controller.isGrounded);
         if (jump && forceY != 0)
         {
             invertGrav -= Time.deltaTime;
@@ -127,7 +133,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         forceY -= gravity * Time.deltaTime * gravityForce;
-        forceY = Mathf.Clamp(forceY, -jumpSpeed, jumpSpeed);
+        forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
         moveDirection.y = forceY;
         controller.Move(moveDirection * Time.deltaTime);
     }
@@ -213,17 +219,14 @@ public class PlayerController : MonoBehaviour {
 
     private void AdjustFacing(float horizontalDirection)
     {
-        Vector3 localScale = body.transform.localScale;
         if (horizontalDirection > 0)
         {
-            localScale.x = Mathf.Abs(localScale.x);
+            transform.eulerAngles = new Vector3(0, 90, 0);
         }
         if ( horizontalDirection < 0 )
         {
-            localScale.x = Mathf.Abs(localScale.x) * -1;
+            transform.eulerAngles = new Vector3(0, 270, 0);
         }
-
-        body.transform.localScale = localScale;
     }
 
     
@@ -279,9 +282,11 @@ public class PlayerController : MonoBehaviour {
         }
         transform.position = currentCheckpoint.getPosition();
         inputControl.removeHeart();
-		Invoke("Unlock", invulnerabilityTime);
-		StopCoroutine("DamageFlash");
-		StartCoroutine("DamageFlash");
+        if (damageFlash)
+        {
+            StopCoroutine(DamageFlash());
+            StartCoroutine(DamageFlash());
+        }
 
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
@@ -289,21 +294,17 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-	void Unlock(){
-		locked = false;
-	}
+    IEnumerator DamageFlash(){
+        float time = 0f;
+        bool flash = true;
 
-	void Lock(){
-		locked = true;
-	}
+        while (time < invulnerabilityTime) {
+            shirt.color = flash ? flashColour : normalColour;
+            flash = !flash;
+            time += flashTime;
+            yield return new WaitForSeconds(flashTime);
+        }
 
-	IEnumerator DamageFlash(){
-//		int numLoops = (int)(invulnerabilityTime / 0.2f);
-		for (int i = 0; i < invulnerabilityTime; i++) {
-			GetComponent<Renderer>().material.color = flashColour;
-			yield return new WaitForSeconds(.1f);
-			GetComponent<Renderer>().material.color = normalColour;
-			yield return new WaitForSeconds(.1f);
-		}
+        shirt.color = normalColour;
 	}
 }
