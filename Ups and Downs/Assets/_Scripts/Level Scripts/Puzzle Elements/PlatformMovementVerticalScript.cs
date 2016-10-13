@@ -11,6 +11,12 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 	/* userSpeed is a float value that can be altered to give the final speed of the platform. */
 	public float userSpeed;
 
+	/* The amount of time that should pass before this platform begins to move.*/
+	public float startTimeOffset;
+
+	/* The amount of time platforms should pause at the zenith and nadir of the movement*/
+	public float pauseTime;
+
 	private float systemSpeed;
 	private float finalSpeed;
 
@@ -18,6 +24,7 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 	private Vector3 startHeight;
 	private float currentHeight;
 	private bool isAscending;
+	private bool canMove;
 
 
 	// Use this for initialization
@@ -26,6 +33,13 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 		currentHeight = 0.0f;
 		systemSpeed = 0.001f;
 		finalSpeed = userSpeed * systemSpeed;
+		canMove = false;
+		Invoke ("setMoveFlag", startTimeOffset);
+	}
+
+	// needed for Invoke
+	void setMoveFlag(){
+		canMove = true;
 	}
 	
 	// Update is called once per frame
@@ -35,6 +49,14 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 
 	void Update()
 	{
+		if (canMove) {
+			MovePlatform ();
+		} else {
+			return;
+		}
+	}
+
+	void MovePlatform(){
 		// set the y transform
 		transform.position = startHeight + (Vector3.up * currentHeight);
 		// lerp the currentHeight
@@ -48,9 +70,13 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 		// check if lerpValue at max/min
 		if (lerpValue >= 1.0f) {
 			isAscending = false;
+			canMove = false;
+			Invoke ("setMoveFlag", pauseTime);
 		}
 		if (lerpValue <= 0.0f) {
 			isAscending = true;
+			canMove = false;
+			Invoke ("setMoveFlag", pauseTime);
 		}
 	}
 }
