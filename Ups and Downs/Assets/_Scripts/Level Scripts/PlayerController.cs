@@ -38,16 +38,19 @@ public class PlayerController : MonoBehaviour {
 	public bool carryingObject { get; set; }
 	private Color32 normalColour;
 	public Color32 flashColour = Color.white;
-	public float invulnerabilityTime = 2.0f;
+	public float invulnerabilityTime = 1.0f;
+    public float flashTime = 0.2f;
 	private Animator animator;
 
     // Whether the player is on a platform.
     private bool groundContact;
+    private Material shirt;
+    Renderer playerRenderer;
 
 
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
-        
+
     }
 
     void Start() {
@@ -55,13 +58,11 @@ public class PlayerController : MonoBehaviour {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
 
-		//normalColour = GetComponent<Renderer>().material.color;
-		invulnerabilityTime = Mathf.Round(invulnerabilityTime / 0.2f) * 0.2f;
         leeches = new List<LeechEnemy>();
         inputControl = GameController.Singleton;
-
-    
-
+        playerRenderer = GetComponentsInChildren<Renderer>()[0];
+        shirt = Array.Find(playerRenderer.materials, mat => mat.name.Contains("Shirt"));
+        normalColour = shirt.color;
         // Get the initial Checkpoint for the scene.
         
         
@@ -278,8 +279,8 @@ public class PlayerController : MonoBehaviour {
         transform.position = currentCheckpoint.getPosition();
         inputControl.removeHeart();
 		Invoke("Unlock", invulnerabilityTime);
-		StopCoroutine("DamageFlash");
-		StartCoroutine("DamageFlash");
+        StopCoroutine(DamageFlash());
+        StartCoroutine(DamageFlash());
 
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
@@ -287,13 +288,17 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-	IEnumerator DamageFlash(){
-//		int numLoops = (int)(invulnerabilityTime / 0.2f);
-		for (int i = 0; i < invulnerabilityTime; i++) {
-			GetComponent<Renderer>().material.color = flashColour;
-			yield return new WaitForSeconds(.1f);
-			GetComponent<Renderer>().material.color = normalColour;
-			yield return new WaitForSeconds(.1f);
-		}
+    IEnumerator DamageFlash(){
+        float time = 0f;
+        bool flash = true;
+
+        while (time < invulnerabilityTime) {
+            shirt.color = flash ? flashColour : normalColour;
+            flash = !flash;
+            time += flashTime;
+            yield return new WaitForSeconds(flashTime);
+        }
+
+        shirt.color = normalColour;
 	}
 }
