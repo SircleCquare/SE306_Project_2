@@ -546,7 +546,7 @@ public class GameController : SingletonObject<GameController> {
 
 	void finishTheGame(){
 		//send score and time to ApplicationModel
-		ApplicationModel.score = gameData.coinsFound * 10;
+		ApplicationModel.score = gameData.coinScore; // TODO
 		ApplicationModel.time = gameData.time;
 	    ApplicationModel.levelName = "Tutorial"; // TODO
 
