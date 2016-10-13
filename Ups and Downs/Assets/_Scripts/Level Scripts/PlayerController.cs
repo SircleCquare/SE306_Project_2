@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
             jump = inputControl.isJump();
         }
 
-        //animator.SetBool("Moving", ((horizontalMag == 0) ? false : true));
+        animator.SetBool("RunningFwd", ((horizontalMag == 0) ? false : true));
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
                 groundContact = false;
             }
         }
-
+		animator.SetBool("isJumping", jump|| !controller.isGrounded);
         if (jump && forceY != 0)
         {
             invertGrav -= Time.deltaTime;
