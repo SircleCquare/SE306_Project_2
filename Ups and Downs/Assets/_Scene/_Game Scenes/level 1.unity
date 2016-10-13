@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff37492ee8f5b64ab91c7f2161f0c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 500
+  xSpeed: 800
   ySpeed: 0
   zSpeed: 0
   manual: 0
