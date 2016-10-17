@@ -34,6 +34,7 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 		systemSpeed = 0.001f;
 		finalSpeed = userSpeed * systemSpeed;
 		canMove = false;
+
 		Invoke ("setMoveFlag", startTimeOffset);
 	}
 
@@ -70,13 +71,17 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 		// check if lerpValue at max/min
 		if (lerpValue >= 1.0f) {
 			isAscending = false;
-			canMove = false;
-			Invoke ("setMoveFlag", pauseTime);
+			if (pauseTime > 0f) {
+				canMove = false;
+				Invoke ("setMoveFlag", pauseTime);
+			}
 		}
 		if (lerpValue <= 0.0f) {
 			isAscending = true;
-			canMove = false;
-			Invoke ("setMoveFlag", pauseTime);
+			if (pauseTime > 0f) {
+				canMove = false;
+				Invoke ("setMoveFlag", pauseTime);
+			}
 		}
 	}
 }
