@@ -14,6 +14,7 @@ public class GameController : SingletonObject<GameController> {
     public bool renderSwitchPaths = false;
 
     private GameData gameData;
+	private const int TUTORIAL_SCENE_INDEX = 2;
 
     private const string SAVE_FOLDER_PATH = "save_data";
     private const string SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/save.ser";
@@ -81,6 +82,9 @@ public class GameController : SingletonObject<GameController> {
         // Update whether flip is active
         coolDownActive = (coolDownCount > 0) ? true : false;
         updateFlipText();
+
+		//updates level number based on scene number.
+		gameData.LevelNumber = SceneManager.GetActiveScene().buildIndex - TUTORIAL_SCENE_INDEX;
     }
 
     void Update() {
@@ -585,8 +589,11 @@ public class GameController : SingletonObject<GameController> {
 		//send score and time to ApplicationModel
 		ApplicationModel.score = gameData.coinScore; // TODO
 		ApplicationModel.time = gameData.time;
-	    ApplicationModel.levelName = "Tutorial"; // TODO
-
+		if (gameData.LevelNumber == 0) {
+			ApplicationModel.levelName = "Tutorial";
+		} else {
+			ApplicationModel.levelName = "Level "+ gameData.LevelNumber;
+		}
 	    // Trigger finish scene
 	    SceneManager.LoadScene("Finish Scene");
     }
