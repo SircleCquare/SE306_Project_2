@@ -3,7 +3,7 @@
 --- !u!29 &1
 SceneSettings:
   m_ObjectHideFlags: 0
-  m_PVSData:
+  m_PVSData: 
   m_PVSObjectsArray: []
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62e54f063bd3a5f4584b17f74634b7aa, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &260533141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ MeshRenderer:
   m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices:
+  m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
   m_ReflectionProbeUsage: 1
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb393f5db466509409d8c0e152dd79ec, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   lightPlayer: {fileID: 0}
   darkPlayer: {fileID: 0}
   boundsPadding: 0.05
@@ -403,8 +403,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
   m_IsPrefabParent: 0
@@ -437,7 +437,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices:
+  m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
   m_ReflectionProbeUsage: 1
@@ -521,7 +521,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 126350, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_Name
@@ -567,12 +567,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (7)
@@ -580,6 +580,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &720433209 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 168110, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+  m_PrefabInternal: {fileID: 1286866130}
+--- !u!65 &720433211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720433209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.004, y: 0.005, z: 0.002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &758830254
 Prefab:
   m_ObjectHideFlags: 0
@@ -625,11 +641,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 13663208, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
+      propertyPath: forwardDistance
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
@@ -663,7 +683,7 @@ MeshRenderer:
   m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: af087a5491b3b04489c37abb5488b675, type: 2}
-  m_SubsetIndices:
+  m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
   m_ReflectionProbeUsage: 1
@@ -710,92 +730,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
---- !u!114 &775387478 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1793281197}
-  m_Script: {fileID: 11500000, guid: 8036dfa4c89093a4491f7b5f7fb073e6, type: 3}
---- !u!1001 &819952922
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: inputControl
-      value:
-      objectReference: {fileID: 775387478}
-    - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: initialCheckpoint
-      value:
-      objectReference: {fileID: 1062291691}
-    - target: {fileID: 11473816, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: leechJumpMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 141430, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2342520, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 116984, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9530446, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-      propertyPath: m_Controller
-      value:
-      objectReference: {fileID: 9100000, guid: 7ed3fa028fa98de46bbe6a7d6cee5148, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &976021432 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 473538, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-  m_PrefabInternal: {fileID: 819952922}
---- !u!114 &1062291691 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11401512, guid: b4fb28dc8b256e94db4690df4024d073,
-    type: 2}
-  m_PrefabInternal: {fileID: 2072118497}
-  m_Script: {fileID: 11500000, guid: b1566e7f8869d1f4abeec3ebc21277c4, type: 3}
 --- !u!1001 &1197714044
 Prefab:
   m_ObjectHideFlags: 0
@@ -833,7 +767,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411504, guid: de08eb36bf1ac904596d5e513e6e6112, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de08eb36bf1ac904596d5e513e6e6112, type: 2}
@@ -875,12 +809,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (9)
@@ -925,7 +859,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 169912, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_Name
@@ -933,6 +867,48 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1286866130
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.8190804
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.588921
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 499878, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1299861965
 Prefab:
@@ -971,12 +947,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (5)
@@ -984,22 +960,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1300463620 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 116984, guid: 09e6a5c880584e044869f6865a6de88d, type: 2}
-  m_PrefabInternal: {fileID: 819952922}
---- !u!64 &1300463625
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1300463620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: b23e52e7b86c5dc40bc4dc0284f09033, type: 3}
 --- !u!1001 &1563799429
 Prefab:
   m_ObjectHideFlags: 0
@@ -1037,12 +997,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (3)
@@ -1087,12 +1047,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (6)
@@ -1141,12 +1101,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (1)
@@ -1191,12 +1151,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (4)
@@ -1283,7 +1243,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22435320, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22435320, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1327,7 +1287,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: cameraPinController
-      value:
+      value: 
       objectReference: {fileID: 260533140}
     - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_AnchorMax.x
@@ -1377,12 +1337,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (8)
@@ -1489,12 +1449,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489526, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11437358, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: player
-      value:
-      objectReference: {fileID: 976021432}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 182042, guid: 3b056cda8be9642719d10af0f45d3898, type: 2}
       propertyPath: m_Name
       value: LeechEnemy (2)
