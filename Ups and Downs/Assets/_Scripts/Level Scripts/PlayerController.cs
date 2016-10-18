@@ -224,7 +224,14 @@ public class PlayerController : MonoBehaviour {
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
-
+		PushableObject pushblock = getNearbyPushable ();
+		if (pushblock != null){
+			if (pushblock.attached) {
+				pushblock.detach ();
+			} else {
+				pushblock.attach (gameObject);
+			}
+		}
 	}
 
 	/**
@@ -237,6 +244,21 @@ public class PlayerController : MonoBehaviour {
 			if (switchObj != null) {
 				Debug.Log("Switch found and returning");
 				return switchObj;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *  (RIP DRY) Helper method to search for nearby pushable blocks.
+	 */
+	private PushableObject getNearbyPushable() {
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
+		for (int i = 0; i < hitColliders.Length; i++) {
+			PushableObject pushblock = hitColliders[i].gameObject.GetComponent<PushableObject>();
+			if (pushblock != null) {
+				Debug.Log("Pushblock found and returning");
+				return pushblock;
 			}
 		}
 		return null;
