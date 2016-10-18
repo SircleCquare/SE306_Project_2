@@ -5,7 +5,7 @@ using System.Collections;
  * Attach this script to an object that you want to be pushed by a character.
  * Press 'E' (default) to push the block.
  * */
-public class PushableObjectScript : Switch {
+public class PushableObjectScript : ToggleSwitch {
 		
 	public bool heavyObject;
 	private GameObject pushingPlayer;

@@ -13,7 +13,7 @@ public class SphereEnemy : Enemy {
 	public Transform bubble;
 
 
-	private Transform darkPlayer;
+	private PlayerController darkPlayer;
 
     // How far a Sphere can see a player from
     public float visionDistance = 15.0f;
@@ -41,7 +41,7 @@ public class SphereEnemy : Enemy {
 		spawnTime = 1.0f / rate;
 		homePosition = transform.position;
 		forwardY = 0.0f;
-        darkPlayer = GameController.Singleton.getDarkPlayer().gameObject.transform;
+        darkPlayer = GameController.Singleton.getDarkPlayer();
 	}
 
     protected override void UpdateActive()
@@ -53,10 +53,10 @@ public class SphereEnemy : Enemy {
 			SpawnBubble();
 		}
         // Point at player so we can apply forward velocities and not worry about angle.
-        transform.LookAt(darkPlayer);
+        transform.LookAt(darkPlayer.transform);
 
 
-        float distToPlayer = Vector3.Distance(transform.position, darkPlayer.position);
+        float distToPlayer = Vector3.Distance(transform.position, darkPlayer.transform.position);
 
         bool triggered = distToPlayer <= visionDistance;
 		bool returnHome = Vector3.Distance(transform.position, homePosition) >= chaseDistance;
@@ -84,11 +84,14 @@ public class SphereEnemy : Enemy {
 	}
 
 	bool CanSeePlayer(Vector3 rayDirection) {
+        if (darkPlayer.IsInvisible())
+        {
+            return false;
+        }
+
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(transform.position, rayDirection, out hit)) {
-			if (hit.transform == darkPlayer) {
-				return true;
-			} 
+            return hit.transform == darkPlayer.transform;
 		}
 		return false;
 	}
