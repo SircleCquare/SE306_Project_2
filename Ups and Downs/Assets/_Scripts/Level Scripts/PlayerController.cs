@@ -220,23 +220,45 @@ public class PlayerController : MonoBehaviour {
         Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
     */
     private void activateSwitchs() {
-		Switch closeSwitch = getNearbySwitch();
+		ToggleSwitch closeSwitch = getNearbySwitch();
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
-
+		PushableObject pushblock = getNearbyPushable ();
+		if (pushblock != null){
+			if (pushblock.attached) {
+				pushblock.detach ();
+			} else {
+				pushblock.attach (gameObject);
+			}
+		}
 	}
 
 	/**
         A helper method which searchs for switchs that are nearby to the player.
     */
-	private Switch getNearbySwitch() {
+	private ToggleSwitch getNearbySwitch() {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
 		for (int i = 0; i < hitColliders.Length; i++) {
-			Switch switchObj = hitColliders[i].gameObject.GetComponent<Switch>();
+			ToggleSwitch switchObj = hitColliders[i].gameObject.GetComponent<ToggleSwitch>();
 			if (switchObj != null) {
 				Debug.Log("Switch found and returning");
 				return switchObj;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *  (RIP DRY) Helper method to search for nearby pushable blocks.
+	 */
+	private PushableObject getNearbyPushable() {
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
+		for (int i = 0; i < hitColliders.Length; i++) {
+			PushableObject pushblock = hitColliders[i].gameObject.GetComponent<PushableObject>();
+			if (pushblock != null) {
+				Debug.Log("Pushblock found and returning");
+				return pushblock;
 			}
 		}
 		return null;
