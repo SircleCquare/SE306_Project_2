@@ -18,7 +18,6 @@ public class PushableObject : MonoBehaviour  {
 		// TODO: check if player is carrying anything
 		// if player, get the transform and make this parent to transform.
 		this.transform.SetParent (pushingPlayer.transform);
-		this.gameObject.GetComponent<Rigidbody>().useGravity = false;
 		attached = true;
 		// TODO: set character's carrying object boolean value
 		// TODO: reduce character speed and jump height if object is heavy
@@ -27,7 +26,6 @@ public class PushableObject : MonoBehaviour  {
 
 	public void detach(){
 		this.transform.SetParent (null);
-		this.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		attached = false;
 	}
 	
