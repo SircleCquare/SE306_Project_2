@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -13,7 +14,24 @@ public class GameData
 
     [NonSerialized] private static string saveFile;
 
-    public List<string> awardedAchievements;
+    public List<string> awardedAchievements { get; set; }
+
+    /// <summary>
+    /// A dictionary of highscores for levels. 
+    /// 
+    /// The key is the string name of the level. 
+    /// 
+    /// The value is a sorted dictionary of the highscores. 
+    /// For this dictionary, the key is the score and the value is the player's name. 
+    /// This dictionary will have at most 5 highscores in it. Only the highest five scores are kept
+    /// (as specified by MAX_HIGH_SCORES)
+    /// </summary>
+    private Dictionary<string, SortedDictionary<int, string>> HighScores { get; set; }
+
+    /// <summary>
+    /// Maximum number of high scores stored per level 
+    /// </summary>
+    private const int MAX_HIGH_SCORES = 5; 
 
     public int HighestLevelUnlockedNumber { get; set; }
 
@@ -51,6 +69,16 @@ public class GameData
 
         // List to store names of achievements
         awardedAchievements = new List<String>();  
+        HighScores = new Dictionary<string, SortedDictionary<int, string>>(5);
+    }
+
+    /// <summary>
+    /// Obtain an instance of the game data. 
+    /// </summary>
+    /// <returns></returns>
+    public static GameData GetInstance()
+    {
+        return instance ?? (instance = new GameData());
     }
 
     /*
@@ -64,7 +92,7 @@ public class GameData
         Time = 0.0f;
     }
 
-
+    #region Inventory
     public SpecialItem getItemType()
     {
         return itemType;
@@ -88,15 +116,67 @@ public class GameData
         }
     }
 
+    #endregion
+
+
+    #region HighScores
+
     /// <summary>
-    /// Obtain an instance of the game data. 
+    /// Test if the current score is in the top five high scores. 
     /// </summary>
-    /// <returns></returns>
-    public static GameData GetInstance()
+    /// <returns>True if this is score is higher than the lowest score on the leaderboard, 
+    ///          or there is space to add highscores to the leaderboard</returns>
+    public bool IsHighScore(string levelName, int score)
     {
-        return instance ?? (instance = new GameData());
+        var highScores = GetOrderedHighScoresForLevel(levelName).Keys;
+
+        return highScores.Count < 5 || score > highScores.Min();
     }
 
+    /// <summary>
+    /// Add a high score for a level. 
+    /// 
+    /// Will not add the score if the player didn't actually get a highscore. 
+    /// </summary>
+    /// <param name="levelName">The name of the level</param>
+    /// <param name="playerName">The name of the player the score is for</param>
+    /// <param name="score">The score the player achieved</param>
+    public void AddHighScore(string levelName, string playerName, int score)
+    {
+        if (IsHighScore(levelName, score))
+        {
+            var highScores = GetOrderedHighScoresForLevel(levelName);
+
+            // Remove lowest high score if needed
+            if (!(highScores.Count < 5))
+            {
+                highScores.Remove(highScores.Keys.Min());
+            }
+
+            // Add highscore
+            highScores[score] = playerName;
+        }
+    }
+
+    /// <summary>
+    /// Get an ordered dictionary of high scores for a level
+    /// </summary>
+    /// <param name="levelName"></param>
+    /// <returns></returns>
+    public SortedDictionary<int, string> GetOrderedHighScoresForLevel(string levelName)
+    {
+        // Create a dictionary to store high scores if none exists
+        if (!HighScores.ContainsKey(levelName))
+        {
+            HighScores[levelName] = new SortedDictionary<int, string>();
+        }
+
+        return HighScores[levelName];
+    }
+
+    #endregion
+
+    #region Persistence
     /// <summary>
     /// Load the game data from a save file
     /// </summary>
@@ -173,6 +253,6 @@ public class GameData
         instance.Save();
     }
 
-
+    #endregion
 
 }
