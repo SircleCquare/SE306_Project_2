@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     /** Death Flash */
     // Switch to turn off death flash for deprecated models (Stops models breaking)
     public bool damageFlash = false;
+    public float damageFlashTime = 2f;
     /* Publically configurable */
     public Color32 flashColor = Color.white;
     public float flashTime = 0.2f;
@@ -201,9 +202,10 @@ public class PlayerController : MonoBehaviour {
         invisible = true;
         float time = 0f;
 
-        while (time < invisiblityTime)
-        {
-        }
+//        while (time < invisiblityTime)
+//        {
+//        }
+        yield return 0;
         invisible = false;
     }
 
@@ -325,7 +327,7 @@ public class PlayerController : MonoBehaviour {
         float time = 0f;
         bool flash = true;
 
-        while (time < invulnerabilityTime) {
+        while (time < damageFlashTime) {
             shirt.color = flash ? flashColor : baseColor;
             flash = !flash;
             time += flashTime;

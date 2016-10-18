@@ -4,7 +4,7 @@ using System.Collections;
 /**
  * A script to attach to a platform for regular vertical movement.
  * */
-public class PlatformMovementVerticalScript : Switchable {
+public class PlatformMovementScript : Switchable {
 
 	/* liftHeight is what the final height of the vertically moving platform will be.*/
 	public float liftHeight;

@@ -10,7 +10,7 @@ public class PushableObject : MonoBehaviour  {
 
 	public bool attached;
 
-	new void Start() {
+	void Start() {
 		attached = false;
 	}
 
