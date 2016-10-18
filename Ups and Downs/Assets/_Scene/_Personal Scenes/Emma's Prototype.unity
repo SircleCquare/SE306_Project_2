@@ -115,11 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e54f063bd3a5f4584b17f74634b7aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightPlayer: {fileID: 0}
-  darkPlayer: {fileID: 0}
-  middle: {x: 0, y: 0, z: 0}
-  isFlipping: 0
-  flipStep: 0
 --- !u!23 &260533141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -249,7 +244,6 @@ MonoBehaviour:
   darkPlayer: {fileID: 0}
   boundsPadding: 0.05
   CameraBoundImage: {fileID: 0}
-  flash: 0
 --- !u!81 &266450587
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1493,7 +1487,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464596, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 464596, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1530,6 +1524,14 @@ Prefab:
     - target: {fileID: 11426156, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
       propertyPath: pauseTime
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426156, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
+      propertyPath: movementDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426156, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
+      propertyPath: movementDirection
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45458b82e9d9178408d5bb811c98685e, type: 2}
