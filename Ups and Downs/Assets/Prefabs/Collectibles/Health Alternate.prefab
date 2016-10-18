@@ -29,7 +29,7 @@ GameObject:
   - 4: {fileID: 496172}
   - 114: {fileID: 11424584}
   m_Layer: 2
-  m_Name: Health
+  m_Name: Health Alternate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
