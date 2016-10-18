@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6577932}
   - 23: {fileID: 2300422}
   - 114: {fileID: 11493336}
-  - 114: {fileID: 11459014}
+  - 114: {fileID: 11425972}
   m_Layer: 0
   m_Name: Finish Block
   m_TagString: Untagged
@@ -30,7 +30,7 @@ GameObject:
   - 4: {fileID: 475410}
   - 108: {fileID: 10841046}
   m_Layer: 0
-  m_Name: Finish Light (1)
+  m_Name: Finish Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95.05, y: 12.19, z: 2.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 97.94, y: 12.292, z: 2.5}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 475410}
@@ -56,10 +56,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147320}
-  m_LocalRotation: {x: 0.6183051, y: 0.20807771, z: 0.6802605, w: 0.33413815}
-  m_LocalPosition: {x: 0.11, y: 0.07, z: -0.1}
-  m_LocalScale: {x: 1.5068202, y: 1.4762536, z: 0.50846374}
-  m_LocalEulerAnglesHint: {x: 7.4756, y: 81.3684, z: 134.1091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.497, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 447414}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6a05913d921805c4481978aa27606244, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -95,7 +95,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121966}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 6b6696cce671505479700ed6b4c3d105, type: 3}
 --- !u!65 &6577932
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -141,7 +141,7 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11459014
+--- !u!114 &11425972
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -149,9 +149,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 121966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d80913f3024fb45bbf5e07ac002092, type: 3}
+  m_Script: {fileID: 11500000, guid: 764b60f3d4c3710448927f6e62b204ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doFloat: 1
+  spinFactor: 1
 --- !u!114 &11493336
 MonoBehaviour:
   m_ObjectHideFlags: 1

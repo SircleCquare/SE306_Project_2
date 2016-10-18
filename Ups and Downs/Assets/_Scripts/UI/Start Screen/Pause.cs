@@ -40,7 +40,7 @@ public class Pause : MonoBehaviour {
 	{
 		//Set isPaused to true
 		isPaused = true;
-		//Set time.timescale to 0, this will cause animations and physics to stop updating
+		//Set Time.timescale to 0, this will cause animations and physics to stop updating
 		Time.timeScale = 0;
 		//call the ShowPausePanel function of the ShowPanels script
 		showPanels.ShowPausePanel ();
@@ -51,7 +51,7 @@ public class Pause : MonoBehaviour {
 	{
 		//Set isPaused to false
 		isPaused = false;
-		//Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
+		//Set Time.timescale to 1, this will cause animations and physics to continue updating at regular speed
 		Time.timeScale = 1;
 		//call the HidePausePanel function of the ShowPanels script
 		showPanels.HidePausePanel ();
