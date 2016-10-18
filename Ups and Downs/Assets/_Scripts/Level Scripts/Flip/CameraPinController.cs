@@ -2,12 +2,10 @@
 using System.Collections;
 
 public class CameraPinController : MonoBehaviour {
-	
-	/** Both of these fields need to be configured within the Unity scene builder */
-	private Transform lightPlayer;
+
+    /** Both of these fields need to be configured within the Unity scene builder */
+    private Transform lightPlayer;
     private Transform darkPlayer;
-	
-//	public Camera camera;
 	
 	private Vector3 middle;
 	
@@ -15,10 +13,22 @@ public class CameraPinController : MonoBehaviour {
 	
 	private int flipStep = 0;
 
+    public float fovRange, defaultFOVSpeed, fovSpeedRange;
+
+    private float defaultFOV, toFOV, fromFOV, fovSpeed;
+    private new Camera camera;
+
+    public bool enableLSDCam { get; set; }
+
     void Start()
     {
         lightPlayer = GameController.Singleton.getLightPlayer().gameObject.transform;
         darkPlayer = GameController.Singleton.getDarkPlayer().gameObject.transform;
+        enableLSDCam = false;
+
+        camera = GetComponentInChildren<Camera>();
+        defaultFOV = camera.fieldOfView;
+        toFOV = defaultFOV;
     }
 
 	// Update is called once per frame
@@ -27,7 +37,9 @@ public class CameraPinController : MonoBehaviour {
 		if (isFlipping) {
 			flip();
 		}
-		setPosition();
+
+        setPosition();
+        applyLSDCam();
 	}
 	
 	public void doFlip() {
@@ -51,4 +63,27 @@ public class CameraPinController : MonoBehaviour {
 			transform.position.z
 		);
 	}
+
+
+    private float thing = 0f;
+
+    void applyLSDCam()
+    {
+        if (GameController.Singleton.getSide() == Side.Light || isFlipping || !enableLSDCam)
+        {
+            camera.fieldOfView = defaultFOV;
+            return;
+        }
+
+        if (camera.fieldOfView == toFOV)
+        {
+            thing = 0f;
+            fromFOV = camera.fieldOfView;
+            toFOV = (Random.value * 2 - 1) * fovRange + defaultFOV;
+            fovSpeed = (Random.value * 2 - 1) * fovSpeedRange + defaultFOVSpeed;
+        }
+
+        thing += Time.deltaTime * fovSpeed/30;
+        camera.fieldOfView = Mathf.Lerp(fromFOV, toFOV, thing);
+    }
 }

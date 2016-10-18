@@ -60,6 +60,7 @@ public class LeechEnemy : Enemy
 		transform.localPosition = attachPosition;
 		state = LeechState.ATTACHED;
 		player.addLeech(this);
+        GameController.Singleton.enableLSDCam();
 
 		float randomTimeScale = UnityEngine.Random.Range(0.3f, 1f);
         float randomAngle = UnityEngine.Random.Range(0,360);
@@ -113,8 +114,17 @@ public class LeechEnemy : Enemy
 		}
 	}
 
-	public void Destroy()
+    // Reset leech state on player death
+    public override void ResetBehaviour()
+    {
+        base.ResetBehaviour();
+        GameController.Singleton.disableLSDCam();
+    }
+
+    // Destroy leech object on de-leech collectible pickup
+    public void Destroy()
 	{
-		Destroy(this.gameObject);
+        GameController.Singleton.disableLSDCam();
+        Destroy(this.gameObject);
 	}
 }
