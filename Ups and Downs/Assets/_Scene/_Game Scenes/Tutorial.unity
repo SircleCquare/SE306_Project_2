@@ -170,7 +170,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.3
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.z
@@ -210,7 +210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalScale.y
-      value: 26.024256
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
@@ -659,13 +659,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 352768415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23c4462625304c4ea8b2145aa97d009, type: 3}
+  m_Script: {fileID: 11500000, guid: b422855b3a3384899a9b62730404fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftHeight: 6
+  movementDirection: 1
+  movementDistance: 1.5
   userSpeed: 10
   startTimeOffset: 0
   pauseTime: 0
+  defaultState: 0
 --- !u!1001 &355864740
 Prefab:
   m_ObjectHideFlags: 0
@@ -679,7 +681,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.77
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2151,7 +2153,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -12.28
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2191,7 +2193,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_LocalScale.y
-      value: 25.687428
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
@@ -2490,13 +2492,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236087741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23c4462625304c4ea8b2145aa97d009, type: 3}
+  m_Script: {fileID: 11500000, guid: b422855b3a3384899a9b62730404fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftHeight: -6
+  movementDirection: 1
+  movementDistance: -5
   userSpeed: 10
   startTimeOffset: 0
   pauseTime: 0.5
+  defaultState: 0
 --- !u!4 &1291127613 stripped
 Transform:
   m_PrefabParentObject: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
@@ -2517,13 +2521,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1315130522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23c4462625304c4ea8b2145aa97d009, type: 3}
+  m_Script: {fileID: 11500000, guid: b422855b3a3384899a9b62730404fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftHeight: -6
+  movementDirection: 1
+  movementDistance: -5
   userSpeed: 10
-  startTimeOffset: 1
+  startTimeOffset: 0.5
   pauseTime: 0.5
+  defaultState: 0
 --- !u!4 &1375779634
 Transform:
   m_ObjectHideFlags: 0
@@ -3591,7 +3597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.7700005
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.z
