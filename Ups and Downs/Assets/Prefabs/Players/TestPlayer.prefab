@@ -265,8 +265,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 499878}
   - 95: {fileID: 9534076}
-  - 114: {fileID: 11427390}
-  - 143: {fileID: 14351332}
+  - 54: {fileID: 5409010}
+  - 65: {fileID: 6594460}
+  - 114: {fileID: 11489228}
   m_Layer: 9
   m_Name: TestPlayer
   m_TagString: Player
@@ -2361,7 +2362,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -1.8190804, y: 0.5, z: -2.588921}
+  m_LocalPosition: {x: 5.3, y: 2, z: -2.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
@@ -2399,6 +2400,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!54 &5409010
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128536}
+  serializedVersion: 2
+  m_Mass: 0.75
+  m_Drag: 1.4
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 1
 --- !u!65 &6571514
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2411,6 +2427,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.004, y: 0.005, z: 0.002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6594460
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128536}
+  m_Material: {fileID: 13400000, guid: 93a75cf328cf1c74ab4707cb7d6df10f, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.1, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!95 &9534076
 Animator:
   serializedVersion: 3
@@ -2418,7 +2446,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 158ef147c4d11cf4ebc99573c719fb0f, type: 3}
   m_Controller: {fileID: 9100000, guid: 952873d19cda0704bac748fac43bbdbb, type: 2}
   m_CullingMode: 1
@@ -2461,7 +2489,7 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11427390
+--- !u!114 &11489228
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2469,27 +2497,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 128536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1effe94dfa12384a8afee3fa7bd0777, type: 3}
+  m_Script: {fileID: 11500000, guid: 52ac5f18cad7b1441a96a1a61458dbad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSide: 0
-  speed: 10
-  jumpSpeed: 20
+  maxSpeed: 7
+  speed: 20
+  jumpForce: 20
   gravity: 20
-  gravityForce: 3
-  airTime: 1
-  leechSpeedMultiplier: 3.5
-  leechJumpMultiplier: 1.5
-  switchSearchRadius: 5
-  darkSideZ: -2.5
-  lightSideZ: 2.5
-  terminalVelocity: 200
-  damageFlash: 1
-  damageFlashTime: 2
-  flashColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  flashTime: 0.2
+  airtime: 0.4
 --- !u!137 &13784812
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2596,23 +2611,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000055870507, y: 0.0037833338, z: 0.0005456256}
     m_Extent: {x: 0.005181622, y: 0.010255694, z: 0.0039918427}
   m_DirtyAABB: 0
---- !u!143 &14351332
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128536}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2.7
-  m_Radius: 0.4
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
