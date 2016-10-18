@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90da7c31b6aa664baec0edcb38da20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boardLabel: {fileID: 11470896}
   scoreObjects:
   - {fileID: 127216}
   - {fileID: 179680}

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class HighScore : MonoBehaviour
 {
 
+    public Text boardLabel;
+
     public List<GameObject> scoreObjects;
 
     // Use this for initialization
@@ -20,6 +22,9 @@ public class HighScore : MonoBehaviour
      */
     void DisplayHighScores(string levelName)
     {
+
+        boardLabel.text = levelName + " High Score";
+
         var gameData = GameData.GetInstance();
         int i = 0;
 
