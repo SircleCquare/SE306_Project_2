@@ -4,7 +4,7 @@ using System.Collections;
 /**
  * A script to attach to a platform for regular vertical movement.
  * */
-public class PlatformMovementVerticalScript : MonoBehaviour {
+public class PlatformMovementVerticalScript : Switchable {
 
 	/* liftHeight is what the final height of the vertically moving platform will be.*/
 	public float liftHeight;
@@ -26,6 +26,12 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 	private bool isAscending;
 	private bool canMove;
 
+    /* Code to convert to Switchable */
+    private bool isMoving;
+    public MovingState defaultState = MovingState.MOVING;
+    private MovingState currentState;
+    public enum MovingState { MOVING, STATIONARY };
+
 
 	// Use this for initialization
 	void Start () {
@@ -33,9 +39,13 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 		currentHeight = 0.0f;
 		systemSpeed = 0.001f;
 		finalSpeed = userSpeed * systemSpeed;
-		canMove = false;
 
-		Invoke ("setMoveFlag", startTimeOffset);
+        currentState = defaultState;
+		canMove = false;
+        if (defaultState = MovingState.MOVING)
+        {
+            Invoke("setMoveFlag", startTimeOffset);
+        }
 	}
 
 	// needed for Invoke
@@ -45,43 +55,86 @@ public class PlatformMovementVerticalScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	// needs to go from current height to liftHeight
-	// the lerp value needs to increase slightly
-	// but also be clamped between 0 and 1.
-
+	// the lerp value needs to increase slightly but be clamped between 0 and 1.
 	void Update()
 	{
 		if (canMove) {
 			MovePlatform ();
-		} else {
-			return;
 		}
 	}
 
-	void MovePlatform(){
+	private void MovePlatform(){
 		// set the y transform
 		transform.position = startHeight + (Vector3.up * currentHeight);
 		// lerp the currentHeight
 		currentHeight = Mathf.Lerp (0.0f, liftHeight, lerpValue);
-		// change the lerpValue
-		if (isAscending) {
-			lerpValue = Mathf.Clamp ((lerpValue + finalSpeed), 0.0f, 1.0f);
-		} else {
-			lerpValue = Mathf.Clamp ((lerpValue - finalSpeed), 0.0f, 1.0f);
-		}
+
+        // change the lerpValue (increase if ascending, decrease otherwise)
+        var lerpChange = (isAscending) ? (lerpValue + finalSpeed) : (lerpValue - finalSpeed);
+        lerpValue = Mathf.Clamp (lerpChange, 0.0f, 1.0f);
+
 		// check if lerpValue at max/min
 		if (lerpValue >= 1.0f) {
 			isAscending = false;
-			if (pauseTime > 0f) {
-				canMove = false;
-				Invoke ("setMoveFlag", pauseTime);
-			}
+            Pause();
 		}
 		if (lerpValue <= 0.0f) {
 			isAscending = true;
-			if (pauseTime > 0f) {
-				canMove = false;
-				Invoke ("setMoveFlag", pauseTime);
-			}
+            Pause();
 		}
 	}
+
+    private void Pause()
+    {
+        if (pauseTime > 0f) {
+            canMove = false;
+            Invoke ("setMoveFlag", pauseTime);
+        }
+    }
+
+
+    public override void toggle()
+    {
+        // Toggle the current state -> No attention paid to default State
+        if (currentState == MovingState.MOVING)
+        {
+            currentState = MovingState.STATIONARY;
+            canMove = false;
+        }
+        else
+        {
+            currentState = MovingState.MOVING;
+            setMoveFlag();
+        }
+    }
+    public override void activate()
+    {
+        // Set currentState to opposite of defaultState
+        if (defaultState == MovingState.MOVING)
+        {
+            currentState = MovingState.STATIONARY;
+            canMove = false;
+        }
+        else
+        {
+            currentState = MovingState.MOVING;
+            setMoveFlag();
+        }
+    }
+    public override void deactivate()
+    {
+        // Set currentState to equal defaultState
+        if (defaultState == MovingState.MOVING)
+        {
+            currentState = MovingState.MOVING;
+            setMoveFlag();
+        }
+        else
+        {
+            currentState = MovingState.STATIONARY;
+            canMove = false;
+        }
+    }
+
+
 }
