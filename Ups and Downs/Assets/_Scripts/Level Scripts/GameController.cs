@@ -531,4 +531,13 @@ public class GameController : SingletonObject<GameController> {
         return gameData; 
     }
 
+    public void enableLSDCam()
+    {
+        cameraPinController.enableLSDCam = true;
+    }
+
+    public void disableLSDCam()
+    {
+        cameraPinController.enableLSDCam = false;
+    }
 }

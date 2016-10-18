@@ -6,8 +6,11 @@ using System.Collections;
  * */
 public class PlatformMovementScript : Switchable {
 
-	/* liftHeight is what the final height of the vertically moving platform will be.*/
-	public float liftHeight;
+    public enum Direction { HORIZONTAL, VERTICAL};
+    public Direction movementDirection = Direction.VERTICAL;
+
+	/* final vertical/horizontal distance travelled */
+	public float movementDistance;
 	/* userSpeed is a float value that can be altered to give the final speed of the platform. */
 	public float userSpeed;
 
@@ -63,25 +66,26 @@ public class PlatformMovementScript : Switchable {
 		}
 	}
 
-	private void MovePlatform(){
-		// set the y transform
-		transform.position = startHeight + (Vector3.up * currentHeight);
-		// lerp the currentHeight
-		currentHeight = Mathf.Lerp (0.0f, liftHeight, lerpValue);
-
+    private void MovePlatform(){
         // change the lerpValue (increase if ascending, decrease otherwise)
         var lerpChange = (isAscending) ? (lerpValue + finalSpeed) : (lerpValue - finalSpeed);
         lerpValue = Mathf.Clamp (lerpChange, 0.0f, 1.0f);
 
-		// check if lerpValue at max/min
-		if (lerpValue >= 1.0f) {
-			isAscending = false;
+        // check if lerpValue at max/min
+        if (lerpValue >= 1.0f) {
+            isAscending = false;
             Pause();
-		}
-		if (lerpValue <= 0.0f) {
-			isAscending = true;
+        }
+        if (lerpValue <= 0.0f) {
+            isAscending = true;
             Pause();
-		}
+        }
+
+		// lerp the currentHeight
+		currentHeight = Mathf.Lerp (0.0f, movementDistance, lerpValue);
+        // set the transform
+        Vector3 movementVector = (movementDirection == Direction.HORIZONTAL) ? Vector3.right : Vector3.up;
+        transform.position = startHeight + (movementVector * currentHeight);
 	}
 
     private void Pause()

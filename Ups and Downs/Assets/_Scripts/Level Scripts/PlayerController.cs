@@ -317,6 +317,7 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(DamageFlash());
         }
 
+        deLeech();
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
         }
