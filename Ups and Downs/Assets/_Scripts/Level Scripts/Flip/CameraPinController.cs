@@ -57,11 +57,12 @@ public class CameraPinController : MonoBehaviour {
 	
 	void flip() {
 		if (flipStep < 30) {
+            // Reset Z rotation, in case changed by shaky cam
             Quaternion currentRotation = transform.rotation;
             currentRotation.z = 0;
 
             transform.rotation = currentRotation;
-			transform.Rotate(0, 6, 0);
+			transform.Rotate(0, 6, 0); // Flip 6 degrees per frame
 
 			flipStep++;
 		} else {
@@ -82,30 +83,35 @@ public class CameraPinController : MonoBehaviour {
     {
         if (GameController.Singleton.getSide() == Side.Light || isFlipping || !enableShakyCam)
         {
+            // Reset FOV if shaky cam not active
             camera.fieldOfView = defaultFOV;
             return;
         }
 
         if (camera.fieldOfView == toFOV)
         {
+            // Generate new FOV parameters when FOV movement complete
             fovLerpProgress = 0f;
             fromFOV = camera.fieldOfView;
-            toFOV = (Random.value * 2 - 1) * fovRange + defaultFOV;
+            toFOV = (Random.value * 2 - 1) * fovRange + defaultFOV; // Value in range (defaultFOV +- fovRange)
             fovSpeed = (Random.value * 2 - 1) * fovSpeedRange + defaultFOVSpeed;
         }
 
         if (transform.rotation == toRotation)
         {
+            // Generate new rotation parameters when rotation movement complete
             rotationLerpProgress = 0f;
             fromRotation = transform.rotation;
-            float toRotationZ = (Random.value * 2 - 1) * rotationRange + defaultRotation.z;
+            float toRotationZ = (Random.value * 2 - 1) * rotationRange + defaultRotation.z; // Value in range (defaultRotation.z +- rotationRange)
             toRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, toRotationZ);
             rotationSpeed = (Random.value * 2 - 1) * rotationSpeedRange + defaultRotationSpeed;
         }
 
+        // Interpolate FOV
         fovLerpProgress += Time.deltaTime * fovSpeed/30;
         camera.fieldOfView = Mathf.Lerp(fromFOV, toFOV, fovLerpProgress);
 
+        // Interpolate camera shake
         rotationLerpProgress += Time.deltaTime * rotationSpeed / 30;
         transform.rotation = Quaternion.Slerp(fromRotation, toRotation, rotationLerpProgress);
     }
