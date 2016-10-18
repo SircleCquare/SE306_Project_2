@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// The controller for the finish scene.
+/// </summary>
 public class FinishController : MonoBehaviour
 {
 	public Text levelNameText;

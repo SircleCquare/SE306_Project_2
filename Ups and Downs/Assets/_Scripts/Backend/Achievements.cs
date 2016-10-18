@@ -31,7 +31,10 @@ public class Achievements {
             achievementPopUp.SetActive(true);
 
             Debug.Log("Unlocked achievement: " + achievementName);
+
+            gameData.Save();
         }
+
     }
 
     /*

@@ -14,9 +14,7 @@ public class GameController : SingletonObject<GameController> {
     public bool renderSwitchPaths = false;
 
     private GameData gameData;
-
-    private const string SAVE_FOLDER_PATH = "save_data";
-    private const string SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/save.ser";
+	private const int TUTORIAL_SCENE_INDEX = 2;
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
@@ -63,14 +61,14 @@ public class GameController : SingletonObject<GameController> {
     void Start()
     {
         Debug.Log("Loading save");
+        gameData = GameData.LoadInstance();
 
-        LoadGame();
         coolDownCount = flipCoolDown;
 
         //Calculates the number of coins in this level based on the number of objects tagged as Coin.
         GameObject[] coinObjectList;
         coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
-        gameData.totalNumberOfCoins = coinObjectList.Length;
+        gameData.TotalNumberOfCoins = coinObjectList.Length;
 
         // Set limit for healthbar to allow proper proportion highlighted
         healthBar.maxValue = MAX_HEALTH;
@@ -81,6 +79,9 @@ public class GameController : SingletonObject<GameController> {
         // Update whether flip is active
         coolDownActive = (coolDownCount > 0) ? true : false;
         updateFlipText();
+
+		//updates level number based on scene number.
+		gameData.LevelNumber = SceneManager.GetActiveScene().buildIndex - TUTORIAL_SCENE_INDEX;
     }
 
     void Update() {
@@ -92,7 +93,7 @@ public class GameController : SingletonObject<GameController> {
             tryHideDialogBox(); 
         }
 
-        gameData.time += Time.deltaTime;
+        gameData.Time += Time.deltaTime;
         updateTimeDisplay();
 
         // Handle hiding an achievement if it is visible
@@ -186,79 +187,6 @@ public class GameController : SingletonObject<GameController> {
     }
 
     /// <summary>
-    ///  Save the game data to a save file. 
-    /// </summary>
-    public void SaveGame()
-    {
-        // Make sure save folder exists
-        if (!Directory.Exists(SAVE_FOLDER_PATH))
-        {
-            Debug.Log("Save folder does not exist, creating");
-
-            Directory.CreateDirectory(SAVE_FOLDER_PATH);
-        }
-
-        // Serialise data and save to save file
-        using (FileStream saveFile = File.Create(SAVE_FILE_PATH))
-        {
-            BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(saveFile, gameData);
-            saveFile.Close();  
-        }
-        Debug.Log("Game saved");
-    }
-
-    /// <summary>
-    /// Load the game data from a save file
-    /// </summary>
-    public void LoadGame()
-    {
-        if (!File.Exists(SAVE_FILE_PATH))
-        {
-            // If no save exists, create new game data and save
-            Debug.Log("No save file found");
-            CreateFreshSave();
-        }
-        else
-        {
-            // Load file
-            using (FileStream saveFile = File.Open(SAVE_FILE_PATH, FileMode.Open))
-            {
-                try
-                {
-                    BinaryFormatter serializer = new BinaryFormatter();
-                    gameData = serializer.Deserialize(saveFile) as GameData;
-                    saveFile.Close();
-                    Debug.Log("Save data loaded");
-                }
-                catch (SerializationException)
-                {
-                    // If the load is not possible because the save file is corrupt, create a new one
-                    // TODO either remove this when no more changes will occur to game data or show message to user to inform them it happened
-                    Debug.Log("Save data corrupted, creating new one");
-                    // Need to close save file first to allow it to be overwritten in another method
-                    saveFile.Close();
-                    CreateFreshSave();
-                }
-                
-            }
-
-
-        }
-    }
-
-
-    /// <summary>
-    /// Create a new save 
-    /// </summary>
-    private void CreateFreshSave(bool deleteOriginal = false)
-    {
-        gameData = new GameData();
-        Debug.Log("New save file created");
-        SaveGame();
-    }
-
-    /// <summary>
     /// 
     /// This method should be called when the player reached a lose state.
     /// 
@@ -271,28 +199,28 @@ public class GameController : SingletonObject<GameController> {
 
     public void foundCoin(int score)
     {
-        gameData.coinsFound++;
-        gameData.coinScore += score;
+        gameData.CoinsFound++;
+        gameData.CoinScore += score;
     }
 
     public int getCoinsFound()
     {
-        return gameData.coinsFound;
+        return gameData.CoinsFound;
     }
 
     public int getTotalCoins()
     {
-        return gameData.totalNumberOfCoins;
+        return gameData.TotalNumberOfCoins;
     }
 
     public int getTime()
     {
-        return (int)gameData.time;
+        return (int)gameData.Time;
     }
 
 	public int getScore()
 	{
-		return gameData.coinScore;
+		return gameData.CoinScore;
 	}
 
     public void setInventoryItem(SpecialCollectible specialItem)
@@ -318,7 +246,7 @@ public class GameController : SingletonObject<GameController> {
     {
         if (getCurrentHealth() < MAX_HEALTH)
         {
-            gameData.heart = MAX_HEALTH;
+            gameData.Heart = MAX_HEALTH;
             healthBar.value = MAX_HEALTH;
             return true;
         }
@@ -333,14 +261,14 @@ public class GameController : SingletonObject<GameController> {
     /// </summary>
     public void removeHeart()
     {
-        if (gameData.heart > 1)
+        if (gameData.Heart > 1)
         {
-            gameData.heart--;
+            gameData.Heart--;
             healthBar.value--;
            
         } else
         {
-            gameData.heart--;
+            gameData.Heart--;
             healthBar.value--;
             gameOver();
         }
@@ -349,11 +277,11 @@ public class GameController : SingletonObject<GameController> {
 
     public int getCurrentHealth()
     {
-        return gameData.heart;
+        return gameData.Heart;
     }
 
 	public void resetHealth(){
-		gameData.heart = MAX_HEALTH;
+		gameData.Heart = MAX_HEALTH;
 		healthBar.value = MAX_HEALTH;
 	}
 
@@ -490,7 +418,7 @@ public class GameController : SingletonObject<GameController> {
      */
     void updateTimeDisplay()
     {
-        timeText.text = string.Format("Time: {0:#0.00} seconds", gameData.time); 
+        timeText.text = string.Format("Time: {0:#0.00} seconds", gameData.Time); 
     }
 
     /*
@@ -583,9 +511,13 @@ public class GameController : SingletonObject<GameController> {
 
 	void finishTheGame(){
 		//send score and time to ApplicationModel
-		ApplicationModel.score = gameData.coinScore; // TODO
-		ApplicationModel.time = gameData.time;
-	    ApplicationModel.levelName = "Tutorial"; // TODO
+		ApplicationModel.score = gameData.CoinScore; // TODO
+		ApplicationModel.time = gameData.Time;
+		if (gameData.LevelNumber == 0) {
+			ApplicationModel.levelName = "Tutorial";
+		} else {
+			ApplicationModel.levelName = "Level "+ gameData.LevelNumber;
+		}
 
 	    // Trigger finish scene
 	    SceneManager.LoadScene("Finish Scene");

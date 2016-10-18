@@ -3,6 +3,7 @@ using System.Collections;
 
 /**
  * A persistent class that persists through scene changes.
+ * TODO: rework into GameData
  * */
 public static class ApplicationModel {
 
