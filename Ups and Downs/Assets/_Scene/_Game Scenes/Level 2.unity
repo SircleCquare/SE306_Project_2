@@ -593,6 +593,13 @@ MonoBehaviour:
   userSpeed: 10
   startTimeOffset: 0
   pauseTime: 0
+  systemSpeed: 0
+  finalSpeed: 0
+  lerpValue: 0
+  startHeight: {x: 0, y: 0, z: 0}
+  currentHeight: 0
+  isAscending: 0
+  canMove: 0
 --- !u!1001 &354375002
 Prefab:
   m_ObjectHideFlags: 0
@@ -1998,11 +2005,11 @@ Prefab:
       objectReference: {fileID: 1828797028}
     - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: score
@@ -2283,6 +2290,10 @@ Prefab:
     - target: {fileID: 444218, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 11461674, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08e8f4fa4548144f82751e4b33185ee, type: 2}
