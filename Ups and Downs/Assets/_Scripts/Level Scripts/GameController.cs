@@ -54,6 +54,10 @@ public class GameController : SingletonObject<GameController> {
 
     private PlayerController lightPlayer, darkPlayer;
 
+    public Sprite darkCharacter;
+    public Sprite lightCharacter;
+
+
     // Checkpoint list
 
     private List<Checkpoint> lightSideCheckpoints = new List<Checkpoint>();
@@ -78,7 +82,7 @@ public class GameController : SingletonObject<GameController> {
         healthBar.maxValue = MAX_HEALTH;
 
         // Update current character selected
-        updateCurrentCharacterDisplay();
+        UpdateCurrentCharacterDisplay();
 
         // Update whether flip is active
         coolDownActive = (coolDownCount > 0) ? true : false;
@@ -328,7 +332,7 @@ public class GameController : SingletonObject<GameController> {
 		} else {
 			currentSide = Side.Dark;
         }
-        updateCurrentCharacterDisplay();
+        UpdateCurrentCharacterDisplay();
         updateFlipText();
     }
 
@@ -428,16 +432,17 @@ public class GameController : SingletonObject<GameController> {
     /*
      * Updates the character name and avatar displayed in the UI, based on the current world side
      */ 
-    void updateCurrentCharacterDisplay()
+    void UpdateCurrentCharacterDisplay()
     {
-        //TODO character avatar once a suitable image available
         //TODO need to update character names
         if(currentSide == Side.Dark)
         {
             characterName.text = "Older brother";
+            characterAvatar.sprite = darkCharacter; 
         }else
         {
             characterName.text = "Younger brother";
+            characterAvatar.sprite = lightCharacter; 
         }
     }
 
@@ -532,13 +537,13 @@ public class GameController : SingletonObject<GameController> {
         return gameData; 
     }
 
-    public void enableLSDCam()
+    public void enableShakyCam()
     {
-        cameraPinController.enableLSDCam = true;
+        cameraPinController.enableShakyCam = true;
     }
 
-    public void disableLSDCam()
+    public void disableShakyCam()
     {
-        cameraPinController.enableLSDCam = false;
+        cameraPinController.enableShakyCam = false;
     }
 }

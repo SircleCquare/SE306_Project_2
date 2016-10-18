@@ -28,7 +28,6 @@ GameObject:
   - 33: {fileID: 3309344}
   - 65: {fileID: 6561164}
   - 23: {fileID: 2301358}
-  - 114: {fileID: 11405128}
   - 54: {fileID: 5422242}
   m_Layer: 0
   m_Name: Plate
@@ -167,22 +166,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11405128
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63cdc8dda0317d4bb068f47f6a02b69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  compressTime: 0.5
-  compressMultiplier: 0.5
-  detectionRadius: 2
-  targetList: []
-  state: 0
 --- !u!114 &11445294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,10 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63cdc8dda0317d4bb068f47f6a02b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  externalTargets: []
   compressTime: 0.5
   compressMultiplier: 0.5
   detectionRadius: 2
-  targetList: []
   state: 0
 --- !u!114 &11448436
 MonoBehaviour:
