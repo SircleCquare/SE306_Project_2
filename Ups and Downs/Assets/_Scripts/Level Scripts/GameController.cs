@@ -537,13 +537,13 @@ public class GameController : SingletonObject<GameController> {
         return gameData; 
     }
 
-    public void enableLSDCam()
+    public void enableShakyCam()
     {
-        cameraPinController.enableLSDCam = true;
+        cameraPinController.enableShakyCam = true;
     }
 
-    public void disableLSDCam()
+    public void disableShakyCam()
     {
-        cameraPinController.enableLSDCam = false;
+        cameraPinController.enableShakyCam = false;
     }
 }
