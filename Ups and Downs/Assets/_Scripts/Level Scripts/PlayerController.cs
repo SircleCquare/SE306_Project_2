@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     /** Configurable Player Variables */
     public Side PlayerSide;
     /* How far away switchs can be activated from */
-    public float switchSearchRadius = 5.0f;
+    public float switchSearchRadius = 1.0f;
     /* Movement Variables */
     public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
