@@ -130,7 +130,7 @@ public class GameData
     {
         var highScores = GetOrderedHighScoresForLevel(levelName).Keys;
 
-        return highScores.Count < 5 || score > highScores.Min();
+        return highScores.Count < MAX_HIGH_SCORES || score > highScores.Min();
     }
 
     /// <summary>
