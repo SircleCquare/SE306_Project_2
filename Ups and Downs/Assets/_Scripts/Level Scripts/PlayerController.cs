@@ -41,10 +41,9 @@ public class PlayerController : MonoBehaviour {
 
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
-    private bool invunerable = false;
+    private bool invisible = false;
 
     /** Enemy stuff to be refactored out */
-    public float invulnerabilityTime = 1.0f;
     public float leechSpeedMultiplier = 3.5f;
     public float leechJumpMultiplier = 1.5f;
 
@@ -197,22 +196,25 @@ public class PlayerController : MonoBehaviour {
         leeches = new List<LeechEnemy>();
     }
 
-    public IEnumerator HandleInvunerability()
+    public IEnumerator HandleInvisiblity(float invisiblityTime)
     {
-        invunerable = true;
-        yield return 0;
-        invunerable = false;
+        invisible = true;
+        float time = 0f;
+
+        while (time < invisiblityTime)
+        {
+        }
+        invisible = false;
     }
 
-    public void makeInvunerable()
+    public void MakeInvisible(float invisiblityTime)
     {
-        StopCoroutine(HandleInvunerability());
-        StartCoroutine(HandleInvunerability());
+        StartCoroutine(HandleInvisiblity(invisiblityTime));
     }
 
-    public bool IsInvunerable()
+    public bool IsInvisible()
     {
-        return invunerable;
+        return invisible;
     }
 
     private float leechMultiplier(float value, float multiplier)

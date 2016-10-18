@@ -84,7 +84,7 @@ public class SphereEnemy : Enemy {
 	}
 
 	bool CanSeePlayer(Vector3 rayDirection) {
-        if (darkPlayer.IsInvunerable())
+        if (darkPlayer.IsInvisible())
         {
             return false;
         }
