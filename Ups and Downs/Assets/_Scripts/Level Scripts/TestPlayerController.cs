@@ -13,6 +13,7 @@ public class TestPlayerController : MonoBehaviour {
     public float airtime = 1f;
 
     private Rigidbody rb;
+    private Animator animator;
     private GameController controller;
     private float distToGround;
 
@@ -22,6 +23,7 @@ public class TestPlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         controller = GameController.Singleton;
         distToGround = GetComponent<Collider>().bounds.extents.y;
+        animator = GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -50,7 +52,6 @@ public class TestPlayerController : MonoBehaviour {
             if (controller.isJump() && airTimeCount > 0)
             {
                 airTimeCount -= Time.deltaTime;
-                rb.AddForce(Vector3.up * jumpForce * Time.deltaTime, ForceMode.VelocityChange);
             } else
             {
                 rb.AddForce(Vector3.down * gravity * Time.deltaTime, ForceMode.VelocityChange);
@@ -62,11 +63,6 @@ public class TestPlayerController : MonoBehaviour {
     private bool IsGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
      }
-
-    private void jump()
-    {
-        
-    }
 
   
 
