@@ -14,6 +14,8 @@ public class PressurePlate : Switch
     public PlateState state = PlateState.IDLE;
 
     public enum PlateState { IDLE, MOVING, COMPRESSED };
+	private bool playerContact;
+	private bool blockContact;
 
 
 	// Use this for initialization
@@ -25,6 +27,9 @@ public class PressurePlate : Switch
 
         compressedPosition = uncompressedPosition;
         compressedPosition.y -= compressionDistance;
+
+		playerContact = false;
+		blockContact = false;
     }
 
 
@@ -66,7 +71,13 @@ public class PressurePlate : Switch
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == GameController.PLAYER_TAG)
+		if (col.gameObject.tag == GameController.PLAYER_TAG) {
+			playerContact = true;
+		}
+		if (col.gameObject.tag == GameController.WEIGHTED_TAG) {
+			blockContact = true;
+		}
+		if (playerContact || blockContact)
         {
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
@@ -76,11 +87,17 @@ public class PressurePlate : Switch
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == GameController.PLAYER_TAG)
+		if (col.gameObject.tag == GameController.PLAYER_TAG) {
+			playerContact = false;
+		}
+		if (col.gameObject.tag == GameController.WEIGHTED_TAG) {
+			blockContact = false;
+		}
+		if (!playerContact && !blockContact)
         {
-            StopCoroutine(CompressPlate());
-            StopCoroutine(RaisePlate());
-            StartCoroutine(RaisePlate());
+			StopCoroutine(CompressPlate());
+			StopCoroutine(RaisePlate());
+			StartCoroutine (RaisePlate ());
         }
     }
 }

@@ -14,14 +14,19 @@ public class PlayerController : MonoBehaviour {
 
     /** Configurable Player Variables */
     public Side PlayerSide;
-    /* How far away switchs can be activated from */
-    public float switchSearchRadius = 1.0f;
     /* Movement Variables */
     public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
     public float airTime = 1f;
+    public float leechSpeedMultiplier = 3.5f;
+    public float leechJumpMultiplier = 1.5f;
+
+    /** How far away switchs can be activated from */
+	public float switchSearchRadius = 1.0f;
+	public float darkSideZ = -2.5f;
+	public float lightSideZ = 2.5f;
     public float terminalVelocity = 200.0f;
 
     /** private, persistent, movement variables */
@@ -43,10 +48,6 @@ public class PlayerController : MonoBehaviour {
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
     private bool invisible = false;
-
-    /** Enemy stuff to be refactored out */
-    public float leechSpeedMultiplier = 3.5f;
-    public float leechJumpMultiplier = 1.5f;
 
 
     void Awake() {

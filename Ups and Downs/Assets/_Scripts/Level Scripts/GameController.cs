@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : SingletonObject<GameController> {
     public const string PLAYER_TAG = "Player";
+	public const string WEIGHTED_TAG = "Weighted";
 
     public bool renderSwitchPaths = false;
 
