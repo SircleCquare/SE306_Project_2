@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,6 +18,8 @@ public class FinishController : MonoBehaviour
     public GameObject achievementPopUp;
     public Text achievementText;
 
+    public List<GameObject> scoreObjects;
+
     // Countdown for when to hide achievement popup
     private float achievementPopUpCountdown = 2.0f;
 
@@ -30,6 +34,8 @@ public class FinishController : MonoBehaviour
 	    scoreText.text = ApplicationModel.score.ToString();
 	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
         UnlockAchievement(ApplicationModel.levelName);
+
+        DisplayHighScores(ApplicationModel.levelName);
 	}
 	
 	// Update is called once per frame
@@ -66,5 +72,32 @@ public class FinishController : MonoBehaviour
 
         Achievements.HideAchivementPopup(achievementPopUp);
         achievementDisplayed = false; 
+    }
+
+    /*
+     * Show high scores in the list of high scores
+     * TODO (low priority) - move to a better approach than hard coded score fields (table?) if time allows
+     */
+    void DisplayHighScores(string levelName)
+    {
+        var gameData = GameData.GetInstance();
+        int i = 0;
+
+        foreach (var highScore in gameData.GetOrderedHighScoresForLevel(levelName).Reverse())
+        {
+            if (i >= scoreObjects.Count)
+            {
+                throw new System.IndexOutOfRangeException("More high scores than available score object entries");
+            }
+
+            var currentScoreObj = scoreObjects[i]; i++;
+            Text[] fields = currentScoreObj.GetComponentsInChildren<Text>();
+
+            Text nameField = fields[0],
+                scoreField = fields[1];
+
+            nameField.text = highScore.Value;
+            scoreField.text = highScore.Key.ToString("#,##0");
+        }
     }
 }
