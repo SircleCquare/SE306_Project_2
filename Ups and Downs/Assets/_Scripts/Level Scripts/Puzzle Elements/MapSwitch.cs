@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/** 
+ * 
+ * LOGIC IS COMMENTED OUT DUE TO SWITCH BEHAVIOUR CHANGING
+ * REFACTOR IS NEEDED BEFORE CODE CAN BE USED
+ * 
+ */
+
 public class MapSwitch : MonoBehaviour {
 
     private LineRenderer line;
@@ -15,18 +22,18 @@ public class MapSwitch : MonoBehaviour {
         GameObject parentObj = gameObject.transform.parent.gameObject;
         origin = parentObj.transform;
 
-        Switch switchObj = parentObj.GetComponent<Switch>();
+        ToggleSwitch switchObj = parentObj.GetComponent<ToggleSwitch>();
 //        PressureField field = parentObj.GetComponent<PressureField>();
 //        TriggerSphere sphere = parentObj.GetComponent<TriggerSphere>();
         if (switchObj != null)
         {
-            destList = new Transform[switchObj.targetList.Length];
-            Debug.Log("switch confirmed");
-            for (int i = 0; i < switchObj.targetList.Length; i++)
-            {
-                Switchable switchableObj = switchObj.targetList[i];
-                destList[i] = switchableObj.gameObject.transform;
-            }
+//            destList = new Transform[switchObj.targetList.Length];
+//            Debug.Log("switch confirmed");
+//            for (int i = 0; i < switchObj.targetList.Length; i++)
+//            {
+//                Switchable switchableObj = switchObj.targetList[i];
+//                destList[i] = switchableObj.gameObject.transform;
+//            }
         }
 //        else if (field != null)
 //        {

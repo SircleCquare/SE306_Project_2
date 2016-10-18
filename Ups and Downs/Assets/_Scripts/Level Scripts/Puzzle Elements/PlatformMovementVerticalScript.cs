@@ -42,7 +42,7 @@ public class PlatformMovementVerticalScript : Switchable {
 
         currentState = defaultState;
 		canMove = false;
-        if (defaultState = MovingState.MOVING)
+        if (defaultState == MovingState.MOVING)
         {
             Invoke("setMoveFlag", startTimeOffset);
         }
