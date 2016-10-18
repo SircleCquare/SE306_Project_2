@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     public float leechJumpMultiplier = 1.5f;
 
     /** How far away switchs can be activated from */
-	public float switchSearchRadius = 5.0f;
+	public float switchSearchRadius = 1.0f;
 	public float darkSideZ = -2.5f;
 	public float lightSideZ = 2.5f;
 
