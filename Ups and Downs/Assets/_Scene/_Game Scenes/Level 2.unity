@@ -2792,6 +2792,22 @@ ReflectionProbe:
   m_RenderDynamicObjects: 0
   m_UseOcclusionCulling: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1 &1258648974 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 128536, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+  m_PrefabInternal: {fileID: 617908682}
+--- !u!64 &1258648975
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1258648974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 0}
 --- !u!1001 &1260011522
 Prefab:
   m_ObjectHideFlags: 0
