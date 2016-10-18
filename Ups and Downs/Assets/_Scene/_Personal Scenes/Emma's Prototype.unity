@@ -118,6 +118,9 @@ MonoBehaviour:
   fovRange: 0
   defaultFOVSpeed: 0
   fovSpeedRange: 0
+  rotationRange: 0
+  defaultRotationSpeed: 0
+  rotationSpeedRange: 0
 --- !u!23 &260533141
 MeshRenderer:
   m_ObjectHideFlags: 0
