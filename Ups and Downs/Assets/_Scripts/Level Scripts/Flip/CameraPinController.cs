@@ -16,6 +16,7 @@ public class CameraPinController : MonoBehaviour {
     public float fovRange, defaultFOVSpeed, fovSpeedRange;
 
     private float defaultFOV, toFOV, fromFOV, fovSpeed;
+    private float fovLerpProgress = 0f;
     private new Camera camera;
 
     public bool enableLSDCam { get; set; }
@@ -64,9 +65,6 @@ public class CameraPinController : MonoBehaviour {
 		);
 	}
 
-
-    private float thing = 0f;
-
     void applyLSDCam()
     {
         if (GameController.Singleton.getSide() == Side.Light || isFlipping || !enableLSDCam)
@@ -77,13 +75,13 @@ public class CameraPinController : MonoBehaviour {
 
         if (camera.fieldOfView == toFOV)
         {
-            thing = 0f;
+            fovLerpProgress = 0f;
             fromFOV = camera.fieldOfView;
             toFOV = (Random.value * 2 - 1) * fovRange + defaultFOV;
             fovSpeed = (Random.value * 2 - 1) * fovSpeedRange + defaultFOVSpeed;
         }
 
-        thing += Time.deltaTime * fovSpeed/30;
-        camera.fieldOfView = Mathf.Lerp(fromFOV, toFOV, thing);
+        fovLerpProgress += Time.deltaTime * fovSpeed/30;
+        camera.fieldOfView = Mathf.Lerp(fromFOV, toFOV, fovLerpProgress);
     }
 }
