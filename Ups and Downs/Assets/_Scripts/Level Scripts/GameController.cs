@@ -45,6 +45,9 @@ public class GameController : SingletonObject<GameController> {
     public Text dialogBoxCharacterName;
     public Text dialogBoxMessage; 
 
+    public float darkSideZ = -2.5f;
+    public float lightSideZ = 2.5f;
+
     private bool achievementDisplayed = false;
     private float achievementPopUpCountdown = 2.0f;
 
