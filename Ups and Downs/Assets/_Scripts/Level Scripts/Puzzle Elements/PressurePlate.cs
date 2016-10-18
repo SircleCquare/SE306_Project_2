@@ -40,7 +40,7 @@ public class PressurePlate : Switch
         float time = 0f;
         while (time < compressTime) {
             transform.position = Vector3.Lerp(initialPosition, compressedPosition, time);
-            time += Time.deltaTime / compressTime;
+            time += Time.deltaTime;
             yield return 0;   
         }
 
@@ -57,7 +57,7 @@ public class PressurePlate : Switch
         float time = 0f;
         while (time < compressTime) {
             transform.position = Vector3.Lerp(initialPosition, uncompressedPosition, time);
-            time += Time.deltaTime / compressTime;
+            time += Time.deltaTime;
             yield return 0;   
         }
 
