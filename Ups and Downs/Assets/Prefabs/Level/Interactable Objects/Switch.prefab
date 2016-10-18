@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3392630}
   - 65: {fileID: 6576204}
   - 23: {fileID: 2397238}
-  - 114: {fileID: 11461674}
+  - 114: {fileID: 11483440}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 0}
   destList: []
---- !u!114 &11461674
+--- !u!114 &11483440
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,13 +129,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 101006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0379859f052b044ca5143efd3b0a3c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e195d649379a2433ebc77ea3aa8a2600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetList:
-  - {fileID: 0}
-  - {fileID: 0}
-  state: 1
+  externalTargets: []
 --- !u!120 &12064126
 LineRenderer:
   m_ObjectHideFlags: 1

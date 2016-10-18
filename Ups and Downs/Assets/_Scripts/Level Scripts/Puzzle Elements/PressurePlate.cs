@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : Switch
 {
 
     /* How long the pressure pad takes to compress */
 	public float compressTime = 0.5f;
 	public float compressMultiplier = 0.5f;
     public float detectionRadius = 2f;
-    public Switchable[] targetList;
     
     private Vector3 uncompressedPosition, compressedPosition;
     private float compressionDistance;
@@ -18,7 +17,9 @@ public class PressurePlate : MonoBehaviour
 
 
 	// Use this for initialization
-	void Start () {
+    protected override void Start () {
+        base.Start();
+
         uncompressedPosition = transform.position;
         compressionDistance = transform.localScale.y;
 
