@@ -9,6 +9,7 @@ TagManager:
   - PlayerGround
   - enemy
   - MovingGround
+  - Weighted
   layers:
   - Default
   - TransparentFX

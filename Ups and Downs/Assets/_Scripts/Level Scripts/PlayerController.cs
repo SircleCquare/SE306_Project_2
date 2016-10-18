@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour {
         Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
     */
     private void activateSwitchs() {
-		Switch closeSwitch = getNearbySwitch();
+		ToggleSwitch closeSwitch = getNearbySwitch();
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
@@ -237,10 +237,10 @@ public class PlayerController : MonoBehaviour {
 	/**
         A helper method which searchs for switchs that are nearby to the player.
     */
-	private Switch getNearbySwitch() {
+	private ToggleSwitch getNearbySwitch() {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, switchSearchRadius);
 		for (int i = 0; i < hitColliders.Length; i++) {
-			Switch switchObj = hitColliders[i].gameObject.GetComponent<Switch>();
+			ToggleSwitch switchObj = hitColliders[i].gameObject.GetComponent<ToggleSwitch>();
 			if (switchObj != null) {
 				Debug.Log("Switch found and returning");
 				return switchObj;
