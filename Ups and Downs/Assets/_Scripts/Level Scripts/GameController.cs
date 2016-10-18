@@ -70,6 +70,7 @@ public class GameController : SingletonObject<GameController> {
     {
         Debug.Log("Loading save");
         gameData = GameData.LoadInstance();
+		gameData.clearLevelState ();
 
         coolDownCount = flipCoolDown;
 
