@@ -2,13 +2,9 @@
 using System.Collections;
 
 /**
-	All implementations of Switchable must implement an activate
-	and deactivate procedure.
-	
-	These are trigged by the player when they press the Activate Key (default E).
-	
 	Switchables are intended to have two states, active and deactive.
 
+    Switch objects can interact with Switchables and change their state and/or behaviour
 */
 public abstract class Switchable : MonoBehaviour {
 	abstract public void toggle();

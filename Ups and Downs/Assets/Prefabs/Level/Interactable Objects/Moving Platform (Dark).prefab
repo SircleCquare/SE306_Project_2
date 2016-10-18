@@ -101,11 +101,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 143086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23c4462625304c4ea8b2145aa97d009, type: 3}
+  m_Script: {fileID: 11500000, guid: b422855b3a3384899a9b62730404fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   liftHeight: 14.1
   userSpeed: 10
+  startTimeOffset: 0
+  pauseTime: 0
+  systemSpeed: 0
+  finalSpeed: 0
+  lerpValue: 0
+  startHeight: {x: 0, y: 0, z: 0}
+  currentHeight: 0
+  isAscending: 0
+  canMove: 0
+  isMoving: 0
+  defaultState: 0
+  currentState: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

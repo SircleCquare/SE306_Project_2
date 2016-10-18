@@ -5,20 +5,19 @@ using System.Collections.Generic;
 
 
 public class PlayerController : MonoBehaviour {
-    /** Player State */
-	private List<LeechEnemy> leeches;
-
-
-    /** The side of the player assigned this Controller */
-	public Side PlayerSide;
-
-    //accessed via Singleton now.
-    private GameController inputControl;
-
+    /* Interactable Components */
+    private GameController gameController;
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
+    private CharacterController controller;
+    private Animator animator;
 
-	public float speed = 10.0F;
+    /** Configurable Player Variables */
+    public Side PlayerSide;
+    /* How far away switchs can be activated from */
+    public float switchSearchRadius = 1.0f;
+    /* Movement Variables */
+    public float speed = 10.0F;
     public float jumpSpeed = 20.0F;
     public float gravity = 20.0F;
     public float gravityForce = 3.0f;
@@ -30,22 +29,31 @@ public class PlayerController : MonoBehaviour {
 	public float switchSearchRadius = 1.0f;
 	public float darkSideZ = -2.5f;
 	public float lightSideZ = 2.5f;
-
-    private Vector3 moveDirection = Vector3.zero;
-    private CharacterController controller;
-    private float forceY = 0;
-    private float invertGrav;
-	public bool carryingObject { get; set; }
-	private Color32 normalColour;
-	public Color32 flashColour = Color.white;
-	public float invulnerabilityTime = 1.0f;
-    public float flashTime = 0.2f;
-	private Animator animator;
-    public bool damageFlash = false;
     public float terminalVelocity = 200.0f;
 
+    /** private, persistent, movement variables */
+    private Vector3 moveDirection = Vector3.zero;
+    private float forceY = 0;
+    private float invertGrav;
+
+    /** Death Flash */
+    // Switch to turn off death flash for deprecated models (Stops models breaking)
+    public bool damageFlash = false;
+    public float damageFlashTime = 2f;
+    /* Publically configurable */
+    public Color32 flashColor = Color.white;
+    public float flashTime = 0.2f;
+    /* Privately initialised */
+    private Color32 baseColor;
     private Material shirt;
-    Renderer playerRenderer;
+
+    /** Enemy Effects */
+    private List<LeechEnemy> leeches;
+    private bool invisible = false;
+
+    /** Enemy stuff to be refactored out */
+    public float leechSpeedMultiplier = 3.5f;
+    public float leechJumpMultiplier = 1.5f;
 
 
     void Awake() {
@@ -59,12 +67,11 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponent<Animator>();
 
         leeches = new List<LeechEnemy>();
-        inputControl = GameController.Singleton;
+        gameController = GameController.Singleton;
         if (damageFlash)
         {
-            playerRenderer = GetComponentsInChildren<Renderer>()[0];
-            shirt = Array.Find(playerRenderer.materials, mat => mat.name.Contains("Shirt"));
-            normalColour = shirt.color;
+            shirt = Array.Find(GetComponentsInChildren<Renderer>()[0].materials, mat => mat.name.Contains("Shirt"));
+            baseColor = shirt.color;
         }
         // Get the initial Checkpoint for the scene.
         
@@ -73,17 +80,17 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-		if (inputControl == null) {
+		if (gameController == null) {
 			Debug.Log ("NULL");
 		}
 		updateMovement();
-		if (inputControl.getSide() == PlayerSide) {
-			if (inputControl.isActivate()) {
+		if (gameController.getSide() == PlayerSide) {
+			if (gameController.isActivate()) {
 				activateSwitchs();
 			}
 
 			Vector3 currentPosition = transform.position;
-			currentPosition.z = (inputControl.getSide () == Side.Dark) ? darkSideZ : lightSideZ;
+            currentPosition.z = (gameController.getSide () == Side.Dark) ? gameController.darkSideZ : gameController.lightSideZ;
 			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
 			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
 			transform.position = currentPosition;
@@ -97,15 +104,15 @@ public class PlayerController : MonoBehaviour {
     {
         float horizontalMag;
         bool jump;
-        if (inputControl.getSide() != PlayerSide)
+        if (gameController.getSide() != PlayerSide)
         {
             horizontalMag = 0f;
             jump = false;
         }
         else
         {
-            horizontalMag = inputControl.getHorizontalMagnitude();
-            jump = inputControl.isJump();
+            horizontalMag = gameController.getHorizontalMagnitude();
+            jump = gameController.isJump();
         }
 
         animator.SetBool("RunningFwd", ((horizontalMag == 0) ? false : true));
@@ -138,7 +145,7 @@ public class PlayerController : MonoBehaviour {
     public void addHeart()
     {
         Debug.Log("Add Heart");
-        inputControl.addHeart();
+        gameController.addHeart();
     }
 
     /// <summary>
@@ -154,7 +161,7 @@ public class PlayerController : MonoBehaviour {
         if (getInventoryItemType() == SpecialItem.None)
         {
             Debug.Log("Added");
-            inputControl.setInventoryItem(specialItem);
+            gameController.setInventoryItem(specialItem);
             return true;
         } else
         {
@@ -166,12 +173,12 @@ public class PlayerController : MonoBehaviour {
 
     public SpecialItem getInventoryItemType()
     {
-        return inputControl.getInventoryItemType();
+        return gameController.getInventoryItemType();
     }
     
     public int getInventoryItemIndex()
     {
-        return inputControl.getInventoryItemIndex();
+        return gameController.getInventoryItemIndex();
     }
 
     /// <summary>
@@ -179,7 +186,7 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     public void consumeInventoryItem()
     {
-        inputControl.setInventoryItem(null);
+        gameController.setInventoryItem(null);
     }
 
 	public void addLeech(LeechEnemy newLeech)
@@ -195,7 +202,29 @@ public class PlayerController : MonoBehaviour {
             leech.Destroy();
         }
         leeches = new List<LeechEnemy>();
-	}
+    }
+
+    public IEnumerator HandleInvisiblity(float invisiblityTime)
+    {
+        invisible = true;
+        float time = 0f;
+
+//        while (time < invisiblityTime)
+//        {
+//        }
+        yield return 0;
+        invisible = false;
+    }
+
+    public void MakeInvisible(float invisiblityTime)
+    {
+        StartCoroutine(HandleInvisiblity(invisiblityTime));
+    }
+
+    public bool IsInvisible()
+    {
+        return invisible;
+    }
 
     private float leechMultiplier(float value, float multiplier)
     {
@@ -285,16 +314,17 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Killing");
         if (currentCheckpoint == null)
         {
-            currentCheckpoint = inputControl.getCheckpoint(PlayerSide, 0);
+            currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
         }
         transform.position = currentCheckpoint.getPosition();
-        inputControl.removeHeart();
+        gameController.removeHeart();
         if (damageFlash)
         {
             StopCoroutine(DamageFlash());
             StartCoroutine(DamageFlash());
         }
 
+        deLeech();
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
         }
@@ -305,13 +335,13 @@ public class PlayerController : MonoBehaviour {
         float time = 0f;
         bool flash = true;
 
-        while (time < invulnerabilityTime) {
-            shirt.color = flash ? flashColour : normalColour;
+        while (time < damageFlashTime) {
+            shirt.color = flash ? flashColor : baseColor;
             flash = !flash;
             time += flashTime;
             yield return new WaitForSeconds(flashTime);
         }
 
-        shirt.color = normalColour;
+        shirt.color = baseColor;
 	}
 }

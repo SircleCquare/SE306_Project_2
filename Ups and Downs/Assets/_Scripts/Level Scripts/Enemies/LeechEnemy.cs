@@ -5,7 +5,7 @@ using System;
 
 public class LeechEnemy : Enemy
 {
-private PlayerController player;
+    private PlayerController player;
 	public float hitRadius = 1.5f;
 	public float attachTime = 1f;
 	public float forwardDistance = 0.2f;
@@ -26,12 +26,12 @@ private PlayerController player;
         if (initPosition.z > 0)
         {
             player = gameController.getLightPlayer();
-            initPosition.z = player.lightSideZ;
+            initPosition.z = gameController.lightSideZ;
         }
         else
         {
             player = gameController.getDarkPlayer();
-            initPosition.z = player.darkSideZ;
+            initPosition.z = gameController.darkSideZ;
         }
         transform.position = initPosition;
         base.Start();
@@ -60,6 +60,7 @@ private PlayerController player;
 		transform.localPosition = attachPosition;
 		state = LeechState.ATTACHED;
 		player.addLeech(this);
+        GameController.Singleton.enableLSDCam();
 
 		float randomTimeScale = UnityEngine.Random.Range(0.3f, 1f);
         float randomAngle = UnityEngine.Random.Range(0,360);
@@ -82,8 +83,7 @@ private PlayerController player;
         Vector3 endPoint = chest.position;
 
         Collider collider = chest.GetComponent<BoxCollider> ();
-        RaycastHit hit = new RaycastHit();
-        var result = collider.Raycast(new Ray(startPoint, (endPoint - startPoint).normalized), out hit, 6f);
+        RaycastHit hit;
         if (collider.Raycast(new Ray(startPoint, (endPoint - startPoint).normalized), out hit, 6f)) {
 			return player.transform.InverseTransformPoint (hit.point);
 		} else {
@@ -114,8 +114,17 @@ private PlayerController player;
 		}
 	}
 
-	public void Destroy()
+    // Reset leech state on player death
+    public override void ResetBehaviour()
+    {
+        base.ResetBehaviour();
+        GameController.Singleton.disableLSDCam();
+    }
+
+    // Destroy leech object on de-leech collectible pickup
+    public void Destroy()
 	{
-		Destroy(this.gameObject);
+        GameController.Singleton.disableLSDCam();
+        Destroy(this.gameObject);
 	}
 }
