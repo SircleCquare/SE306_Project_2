@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// This script controlls the movement control of the Sphere Enemy as well as the spawning of
@@ -16,19 +15,24 @@ public class SphereEnemy : Enemy {
     private Transform darkPlayer;
 
     // How far a Sphere can see a player from
-    public float visionDistance = 15.0f;
+    public float visionDistance;
     // How far the Sphere will chase a player before returning home.
-    public float chaseDistance = 15.0f;
+    public float chaseDistanceX;
+    public float chaseDistanceY;
     // How far away from the player a sphere will stop
-    public float refrainRadius = 5.0f;
+    public float refrainRadius;
     // How far away from the play bubbles will spawn
-    public float spawnDistance = 1.5f;
+    public float spawnDistance;
     // The radius of the space around the sphere enemy in which bubbles will be spawned.
-    public float cloudSize = 1.5f;
+    public float cloudSize;
 
-    public float speed = 10.0f;
+    // How long the sphere enemy will wait away from it's home position after it can't see you
+    public float resetTime;
+
+    public float speed;
     public bool moveY;
 
+    private float playerLastSeenTime;
     private float runTime;
     private float spawnTime;
     private float forwardY;
@@ -52,44 +56,51 @@ public class SphereEnemy : Enemy {
             runTime -= spawnTime;
             SpawnBubble();
         }
+        
+        Vector3 position = darkPlayer.position;
+        position.y += 1.5f; // Aim at player's torso - without this, it aims at feet
+
         // Point at player so we can apply forward velocities and not worry about angle.
-        transform.LookAt(darkPlayer);
+        transform.LookAt(position);
 
 
         float distToPlayer = Vector3.Distance(transform.position, darkPlayer.position);
 
         bool triggered = distToPlayer <= visionDistance;
-        bool returnHome = Vector3.Distance(transform.position, homePosition) >= chaseDistance;
+
+        Vector3 positionFromHome = transform.position - homePosition;
+        bool returnHome = Mathf.Abs(positionFromHome.y) > chaseDistanceY || // Limit how far it'll chase in the X direction
+                          Mathf.Abs(positionFromHome.x) > chaseDistanceX || // Limit how far it'll chase in the Y direction
+                          (Time.time - playerLastSeenTime) > resetTime; // Limit how long it'll wait after you leave its sight
 
         if (moveY) {
             forwardY = transform.forward.y;
         }
 
-        if (triggered && !returnHome && CanSeePlayer(transform.forward)) {
+        if (triggered && !returnHome && CanSeePlayer(transform.forward))
+        {
+            playerLastSeenTime = Time.time;
+
             if (distToPlayer >= refrainRadius)
             {
                 transform.position += (new Vector3(transform.forward.x, forwardY, 0) * speed * Time.deltaTime);
             }
 
-        } else if (returnHome) {
+        } else if (returnHome)
+        {
+            playerLastSeenTime = Time.time;
             transform.position = homePosition;
         }
     }
 
     private void SpawnBubble() {
-        // Ensures that a Bubble is not spawned overtop of a player.
-        float dist = Vector3.Distance(darkPlayer.transform.position, transform.position) - spawnDistance;
-        dist = Mathf.Min(dist, cloudSize);
-        Instantiate(bubble, dist * Random.onUnitSphere + transform.position, Quaternion.identity);
+        Instantiate(bubble, cloudSize * Random.onUnitSphere + transform.position, Quaternion.identity);
     }
 
     bool CanSeePlayer(Vector3 rayDirection) {
-        RaycastHit hit = new RaycastHit();
-        if (Physics.Raycast(transform.position, rayDirection, out hit)) {
-            if (hit.transform == darkPlayer) {
-                return true;
-            } 
-        }
-        return false;
+        RaycastHit hit;
+
+        if (!Physics.Raycast(transform.position, rayDirection, out hit)) return false;
+        return (hit.transform == darkPlayer) ;
     }
 }

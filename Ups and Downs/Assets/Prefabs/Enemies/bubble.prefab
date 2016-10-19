@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 499178}
   - 33: {fileID: 3375518}
-  - 135: {fileID: 13549090}
   - 135: {fileID: 13500094}
   - 23: {fileID: 2315856}
   - 114: {fileID: 11486580}
@@ -77,9 +76,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0472a5cd366a148a986a58c5309434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeMin: 1
-  lifeMax: 2
-  growth: 0.5
+  lifeMin: 0.5
+  lifeMax: 1
+  growth: 1
+  forceMode: 1
+  pushForce: 50
 --- !u!135 &13500094
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -91,18 +92,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13549090
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157172}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
