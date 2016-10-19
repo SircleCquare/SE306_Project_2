@@ -11,6 +11,8 @@ public class PushableObject : MonoBehaviour  {
     private Rigidbody rb;
     public bool attached;
 
+    public float attachDistance = 3f;
+
 	void Start() {
 		attached = false;
         rb = GetComponent<Rigidbody>();
@@ -22,6 +24,13 @@ public class PushableObject : MonoBehaviour  {
 		this.transform.SetParent (pushingPlayer.transform);
 		attached = true;
         rb.isKinematic = true;
+
+        Vector3 directionToObject = rb.position - pushingPlayer.transform.position;
+        directionToObject = Vector3.Normalize(directionToObject) * attachDistance;
+
+        rb.position = pushingPlayer.transform.position + directionToObject;
+
+
         // TODO: set character's carrying object boolean value
         // TODO: reduce character speed and jump height if object is heavy
 
