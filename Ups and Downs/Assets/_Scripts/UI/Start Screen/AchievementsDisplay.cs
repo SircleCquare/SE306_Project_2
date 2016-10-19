@@ -32,7 +32,10 @@ public class AchievementsDisplay : MonoBehaviour
             }
 
             achievementObject.transform.SetParent(ScrollPaneContent.transform);
-            achievementObject.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+            var achivevementTransform = achievementObject.GetComponent<RectTransform>();
+            achivevementTransform.localScale = new Vector3(1f, 1f, 1f);
+            achivevementTransform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            achivevementTransform.localPosition = new Vector3(achivevementTransform.position.x, 0f, 0f);
 
         }
 
