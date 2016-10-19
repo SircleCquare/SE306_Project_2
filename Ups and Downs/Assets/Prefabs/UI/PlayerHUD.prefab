@@ -650,7 +650,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 'Coins: 0/0'
 --- !u!114 &11434154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -711,7 +711,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderSwitchPaths: 0
   flipCoolDown: 2
-  currentSide: 0
   flipAction: 102
   activateAction: 101
   cameraPinController: {fileID: 0}

@@ -145,7 +145,7 @@ public class GameController : SingletonObject<GameController> {
             }
         }
 
-		score.text = "Score: " + getScore();
+		score.text = "Coins: " + getCoinsFound() + "/" + getTotalCoins();
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
@@ -576,7 +576,7 @@ public class GameController : SingletonObject<GameController> {
 
 	public int calculateScore(int CoinScore, float time, int deaths) {
 		float result = CoinScore / Mathf.Log10 (time + 5f);
-		return (int)(result / (deaths + 1f));
+		return (int)(result * 1000f / (deaths + 1f));
 	}
 
     public GameData GetGameData()

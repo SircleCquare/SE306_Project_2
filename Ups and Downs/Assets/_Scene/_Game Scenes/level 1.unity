@@ -2243,18 +2243,18 @@ Prefab:
       propertyPath: m_Name
       value: PlayerHUD (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
       propertyPath: cameraPinController
       value: 
       objectReference: {fileID: 1977339207}
+    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22476400, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
   m_IsPrefabParent: 0
