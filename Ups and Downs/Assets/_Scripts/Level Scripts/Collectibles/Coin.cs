@@ -16,12 +16,12 @@ public class Coin : Collectible {
             Debug.LogError("Could not find active Game Controller Object");
             return;
         }
-		AudioSource.PlayClipAtPoint (pickupSound, Camera.main.transform.position);
+
+		Vector3 pos = Camera.main.transform.position;
+		pos.z = Mathf.Round(pos.z);
+		AudioSource.PlayClipAtPoint (pickupSound, pos, 1f);
         controller.foundCoin(score);
         base.onPickup();
 		Debug.Log("Coin picked up");
-		//Play a coin-specific sound?
-		//WISH GRANTED
-
 	}
 }

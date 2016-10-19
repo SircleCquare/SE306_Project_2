@@ -28,7 +28,7 @@ GameObject:
   - 23: {fileID: 2305784}
   - 102: {fileID: 10272938}
   m_Layer: 0
-  m_Name: Text (1)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.35, y: 1.84, z: -2.65}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.05, y: -1.36, z: -2.86}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -97,7 +97,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2.38}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!102 &10272938
 TextMesh:
@@ -108,15 +108,15 @@ TextMesh:
   m_GameObject: {fileID: 197250}
   m_Text: Hello World
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: 0.16
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 60
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 01adaeeb0b0a2b542929d9d2d091775f, type: 2}
+  m_Font: {fileID: 12800000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32eebe6316a167f418ed50676f8e44b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyText: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

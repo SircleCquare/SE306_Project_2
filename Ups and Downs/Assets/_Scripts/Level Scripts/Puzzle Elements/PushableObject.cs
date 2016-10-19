@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /**
  * Attach this script to an object that you want to be pushed by a character.

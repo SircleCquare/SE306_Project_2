@@ -17,7 +17,7 @@ public abstract class Enemy : MonoBehaviour {
 
 	protected virtual void Update ()
 	{
-	    if (GameController.Singleton.getSide() == Side.Dark)
+	    if (GameController.Singleton.getSide() == Side.DARK)
 	    {
 	        UpdateActive();
             GetComponent<Renderer>().enabled = true;
