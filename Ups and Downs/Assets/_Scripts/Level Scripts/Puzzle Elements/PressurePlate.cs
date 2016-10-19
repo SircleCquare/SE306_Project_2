@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class PressurePlate : Switch
@@ -11,6 +12,7 @@ public class PressurePlate : Switch
     
     private Vector3 uncompressedPosition, compressedPosition;
     private float compressionDistance;
+    private Transform plate;
     public PlateState state = PlateState.IDLE;
 
     public enum PlateState { IDLE, MOVING, COMPRESSED };
@@ -20,21 +22,27 @@ public class PressurePlate : Switch
     protected override void Start () {
         base.Start();
 
-        uncompressedPosition = transform.position;
-        compressionDistance = transform.localScale.y;
+        // Get actual plate object that moves up and down
+        plate = Array.Find(GetComponentsInChildren<Transform>(), child => child.name.Equals("Plate"));
+
+        uncompressedPosition = plate.position;
+        compressionDistance = plate.localScale.y;
 
         compressedPosition = uncompressedPosition;
         compressedPosition.y -= compressionDistance;
     }
 
 
-
+    /**
+     * Coroutine to compress the plate, moves it between
+     * the initial and compressed position over the compress time
+     **/
     private IEnumerator CompressPlate() {
         state = PlateState.MOVING;
-        Vector3 initialPosition = transform.position;
+        Vector3 initialPosition = plate.position;
         float time = 0f;
         while (time <= compressTime) {
-            transform.position = Vector3.Lerp(initialPosition, compressedPosition, time/compressTime);
+            plate.position = Vector3.Lerp(initialPosition, compressedPosition, time/compressTime);
             time += Time.deltaTime;
             yield return 0;   
         }
@@ -46,12 +54,17 @@ public class PressurePlate : Switch
         state = PlateState.COMPRESSED;
     }
 
+
+    /**
+     * Coroutine to compress the plate, moves it between
+     * the initial and uncompressed position over the compress time
+     **/
     private IEnumerator RaisePlate() {
         state = PlateState.MOVING;
-        Vector3 initialPosition = transform.position;
+        Vector3 initialPosition = plate.position;
         float time = 0f;
         while (time < compressTime) {
-            transform.position = Vector3.Lerp(initialPosition, uncompressedPosition, time/compressTime);
+            plate.position = Vector3.Lerp(initialPosition, uncompressedPosition, time/compressTime);
             time += Time.deltaTime;
             yield return 0;   
         }
@@ -67,6 +80,7 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            // Stop any current co-routines before starting a new one
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
             StartCoroutine(CompressPlate());
@@ -77,6 +91,7 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            // Stop any current co-routines before starting a new one
 			StopCoroutine(CompressPlate());
 			StopCoroutine(RaisePlate());
 			StartCoroutine (RaisePlate ());
