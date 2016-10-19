@@ -9,21 +9,30 @@ public class FinishScreenButtons : MonoBehaviour {
 	    SceneManager.LoadScene(index);
 	}
 
-	public void NextLevelButton(string levelName)
+	public void NextLevelButton()
 	{
-	    SceneManager.LoadScene(levelName);
+		int levelNum = GameData.GetInstance ().LevelNumber;
+		if (levelNum < SceneManager.sceneCountInBuildSettings) {
+			SceneManager.LoadScene ("Level " + ++levelNum);
+		} else {
+			SceneManager.LoadScene ("Start");
+		}
 	}
 
 	public void NextLevelButtonPredictive()
 	{
-		int levelNumber = ApplicationModel.levelNumber;
-	    SceneManager.LoadScene(levelNumber + 3);
+		//int levelNumber = ApplicationModel.levelNumber;
+	    //SceneManager.LoadScene(levelNumber + 3);
 	}
 
 	public void RetryLevel()
 	{
-		int levelNumber = ApplicationModel.levelNumber;
-		SceneManager.LoadScene (levelNumber + 2);	//someone get rid of these magic numbers ;_;
+		int levelNum = GameData.GetInstance ().LevelNumber;
+		if (levelNum <= 0) {
+			SceneManager.LoadScene ("Tutorial");
+		} else {
+			SceneManager.LoadScene ("Level " + levelNum);
+		}
 	}
 
 	//Don't use this. The functionality can be achieved using LevelSelect#loadLevel("Start")
