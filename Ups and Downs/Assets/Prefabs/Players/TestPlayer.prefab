@@ -2362,7 +2362,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 5.3, y: 2, z: -2.59}
+  m_LocalPosition: {x: 0.0745554, y: 0.5, z: -2.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
@@ -2500,11 +2500,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ac5f18cad7b1441a96a1a61458dbad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  speed: 20
-  jumpForce: 20
-  gravity: 20
+  maxSpeed: 10
+  speed: 13
+  jumpForce: 25
+  gravity: 40
   airtime: 0.4
+  deadzone: 0.2
 --- !u!137 &13784812
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
