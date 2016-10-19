@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
@@ -33,7 +32,7 @@ public class FinishController : MonoBehaviour
 	{
 		levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
 		coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
-		//deathsText.text = ApplicationModel.
+	    deathsText.text = ApplicationModel.deathCount.ToString();
 	    scoreText.text = ApplicationModel.score.ToString();
 	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
         UnlockAchievement(ApplicationModel.levelName);
