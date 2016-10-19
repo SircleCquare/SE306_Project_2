@@ -28,7 +28,7 @@ public class HighScore : MonoBehaviour
         var gameData = GameData.GetInstance();
         int i = 0;
 
-        foreach (var highScore in gameData.GetOrderedHighScoresForLevel(levelName).Reverse())
+        foreach (var highScore in gameData.GetOrderedHighScoresForLevel(levelName))
         {
             if (i >= scoreObjects.Count)
             {
@@ -41,8 +41,8 @@ public class HighScore : MonoBehaviour
             Text nameField = fields[0],
                 scoreField = fields[1];
 
-            nameField.text = highScore.Value;
-            scoreField.text = highScore.Key.ToString("#,##0");
+            nameField.text = highScore.PlayerName;
+            scoreField.text = highScore.Score.ToString("#,##0");
         }
     }
 

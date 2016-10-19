@@ -28,7 +28,7 @@ public class GameData
     /// 
     /// This cannot be serialized, so it is converted to a set of arrays for storage at save time. 
     /// </summary>
-    [NonSerialized] Dictionary<string, SortedDictionary<int, string>> HighScores;
+    [NonSerialized] Dictionary<string, List<HighScoreValue>> HighScores;
 
     /// <summary>
     /// An array for storing high score strings for serialization. 
@@ -87,7 +87,7 @@ public class GameData
 
         // List to store names of achievements
         awardedAchievements = new List<String>();  
-        HighScores = new Dictionary<string, SortedDictionary<int, string>>(5);
+        HighScores = new Dictionary<string, List<HighScoreValue>>(5);
     }
 
     /// <summary>
@@ -161,9 +161,9 @@ public class GameData
             foreach (var score in HighScores[level])
             {
                 highScoreLevelAndPlayerName[i, 0] = level;
-                highScoreLevelAndPlayerName[i, 1] = score.Value;
+                highScoreLevelAndPlayerName[i, 1] = score.PlayerName;
 
-                highScoreValues[i] = score.Key;
+                highScoreValues[i] = score.Score;
 
                 i++; 
             }
@@ -185,10 +185,10 @@ public class GameData
 
             if (!HighScores.ContainsKey(levelName))
             {
-                HighScores[levelName] = new SortedDictionary<int, string>(); 
+                HighScores[levelName] = new List<HighScoreValue>(); 
             }
 
-            HighScores[levelName].Add(score, playerName);
+            HighScores[levelName].Add(new HighScoreValue(score, playerName));
         }
     }
 
@@ -199,9 +199,9 @@ public class GameData
     ///          or there is space to add highscores to the leaderboard</returns>
     public bool IsHighScore(string levelName, int score)
     {
-        var highScores = GetOrderedHighScoresForLevel(levelName).Keys;
+        var highScores = GetOrderedHighScoresForLevel(levelName);
 
-        return highScores.Count < MAX_HIGH_SCORES || score > highScores.Min();
+        return highScores.Count < MAX_HIGH_SCORES || score > highScores[highScores.Count - 1].Score;
     }
 
     /// <summary>
@@ -219,13 +219,15 @@ public class GameData
             var highScores = GetOrderedHighScoresForLevel(levelName);
 
             // Remove lowest high score if needed
-            if (!(highScores.Count < 5))
+            if (highScores.Count >= 5)
             {
-                highScores.Remove(highScores.Keys.Min());
+                highScores.RemoveRange(4, highScores.Count - 4);
             }
 
             // Add highscore
-            highScores[score] = playerName;
+            highScores.Add(new HighScoreValue(score, playerName));
+
+            highScores.Sort();
         }
     }
 
@@ -234,13 +236,15 @@ public class GameData
     /// </summary>
     /// <param name="levelName"></param>
     /// <returns></returns>
-    public SortedDictionary<int, string> GetOrderedHighScoresForLevel(string levelName)
+    public List<HighScoreValue> GetOrderedHighScoresForLevel(string levelName)
     {
         // Create a dictionary to store high scores if none exists
         if (!HighScores.ContainsKey(levelName))
         {
-            HighScores[levelName] = new SortedDictionary<int, string>();
+            HighScores[levelName] = new List<HighScoreValue>(5);
         }
+
+        HighScores[levelName].Sort();
 
         return HighScores[levelName];
     }
@@ -289,7 +293,7 @@ public class GameData
 
         if (instance.HighScores == null)
         {
-            instance.HighScores = new Dictionary<string, SortedDictionary<int, string>>(5);
+            instance.HighScores = new Dictionary<string, List<HighScoreValue>>();
         }
 
         // Convert high scores for usage
