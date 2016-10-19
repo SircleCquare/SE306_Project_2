@@ -7,10 +7,11 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
+    public GameObject achievementsPanel;                    //Store a reference to the Game Object AchievementPanel 
 
 
-	//Call this function to activate and display the Options panel during the main menu
-	public void ShowOptionsPanel()
+    //Call this function to activate and display the Options panel during the main menu
+    public void ShowOptionsPanel()
 	{
 		optionsPanel.SetActive(true);
 		optionsTint.SetActive(true);
@@ -23,8 +24,20 @@ public class ShowPanels : MonoBehaviour {
 		optionsTint.SetActive(false);
 	}
 
-	//Call this function to activate and display the main menu panel during the main menu
-	public void ShowMenu()
+    //Call this function to activate and display the achievements panel during the main menu
+    public void ShowAchievementsPanel()
+    {
+        achievementsPanel.SetActive(true);
+    }
+
+    //Call this function to deactivate and hide the achievements panel during the main menu
+    public void HideAchievementsPanel()
+    {
+        achievementsPanel.SetActive(false);
+    }
+
+    //Call this function to activate and display the main menu panel during the main menu
+    public void ShowMenu()
 	{
 		menuPanel.SetActive (true);
 	}
