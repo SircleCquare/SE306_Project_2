@@ -909,35 +909,10 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 430194, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
   m_PrefabInternal: {fileID: 869455080}
---- !u!114 &364308232 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d,
-    type: 2}
-  m_PrefabInternal: {fileID: 869455080}
-  m_Script: {fileID: 11500000, guid: 64fe7bd0b9064aa4189fae14eef36b01, type: 3}
 --- !u!4 &365343120 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496172, guid: 1e6086c2243d3004fb42a46853f69100, type: 2}
   m_PrefabInternal: {fileID: 979590394}
---- !u!1 &395597636 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 128536, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-  m_PrefabInternal: {fileID: 865573809}
---- !u!54 &395597637
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 395597636}
-  serializedVersion: 2
-  m_Mass: 0.75
-  m_Drag: 1.4
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!114 &421831098 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d,
@@ -1597,20 +1572,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11427390, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
-      propertyPath: switchSearchRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484666, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
-      propertyPath: m_Constraints
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 11427390, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
-      propertyPath: jumpForce
-      value: 15
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 14351332, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &634398226 stripped
@@ -1797,14 +1759,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1581570993}
     m_Modifications:
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: targetList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: externalTargets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 409712, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_LocalPosition.x
       value: 57.5
@@ -1837,18 +1791,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: targetList.Array.data[0]
-      value: 
-      objectReference: {fileID: 1357622003}
     - target: {fileID: 114010, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_Name
       value: Pressure Field Ground 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: externalTargets.Array.data[0]
-      value: 
-      objectReference: {fileID: 1357622003}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
   m_IsPrefabParent: 0
@@ -1949,28 +1895,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: switchSearchRadius
-      value: 2
+    - target: {fileID: 13621378, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6,
+        type: 2}
+    - target: {fileID: 5442820, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: m_Interpolate
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: speed
-      value: 13
+    - target: {fileID: 5442820, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: jumpForce
-      value: 15
+    - target: {fileID: 13621378, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: m_Radius
+      value: 0.7
       objectReference: {fileID: 0}
-    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: gravity
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: airtime
-      value: 0.4
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 14317418, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &869455080
@@ -2620,6 +2562,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6593382, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
   m_IsPrefabParent: 0
@@ -2801,22 +2748,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1258648974 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 128536, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
-  m_PrefabInternal: {fileID: 617908682}
---- !u!64 &1258648975
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1258648974}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
 --- !u!1001 &1260011522
 Prefab:
   m_ObjectHideFlags: 0
@@ -2824,14 +2755,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1581570993}
     m_Modifications:
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: targetList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: externalTargets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 409712, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_LocalPosition.x
       value: 41.5
@@ -2864,18 +2787,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: targetList.Array.data[0]
-      value: 
-      objectReference: {fileID: 364308232}
     - target: {fileID: 114010, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_Name
       value: Pressure Field Ground 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
-      propertyPath: externalTargets.Array.data[0]
-      value: 
-      objectReference: {fileID: 364308232}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
   m_IsPrefabParent: 0
@@ -2971,12 +2886,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 430194, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
   m_PrefabInternal: {fileID: 1196749601}
---- !u!114 &1357622003 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1196749601}
-  m_Script: {fileID: 11500000, guid: 64fe7bd0b9064aa4189fae14eef36b01, type: 3}
 --- !u!1 &1378447514
 GameObject:
   m_ObjectHideFlags: 0
