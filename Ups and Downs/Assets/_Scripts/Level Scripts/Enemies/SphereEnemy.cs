@@ -18,7 +18,8 @@ public class SphereEnemy : Enemy {
     // How far a Sphere can see a player from
     public float visionDistance = 15.0f;
     // How far the Sphere will chase a player before returning home.
-    public float chaseDistance = 15.0f;
+    public float chaseDistanceX = 15.0f;
+    public float chaseDistanceY = 7.0f;
     // How far away from the player a sphere will stop
     public float refrainRadius = 5.0f;
     // How far away from the play bubbles will spawn
@@ -26,9 +27,13 @@ public class SphereEnemy : Enemy {
     // The radius of the space around the sphere enemy in which bubbles will be spawned.
     public float cloudSize = 1.5f;
 
+    // How long the sphere enemy will wait away from it's home position after it can't see you
+    public float resetTime = 1.0f;
+
     public float speed = 10.0f;
     public bool moveY;
 
+    private float playerLastSeenTime;
     private float runTime;
     private float spawnTime;
     private float forwardY;
@@ -59,13 +64,20 @@ public class SphereEnemy : Enemy {
         float distToPlayer = Vector3.Distance(transform.position, darkPlayer.position);
 
         bool triggered = distToPlayer <= visionDistance;
-        bool returnHome = Vector3.Distance(transform.position, homePosition) >= chaseDistance;
+
+        Vector3 positionFromHome = transform.position - homePosition;
+        bool returnHome = Mathf.Abs(positionFromHome.y) > chaseDistanceY || // Limit how far it'll chase in the X direction
+                          Mathf.Abs(positionFromHome.x) > chaseDistanceX || // Limit how far it'll chase in the Y direction
+                          (Time.time - playerLastSeenTime) > resetTime; // Limit how long it'll wait after you leave its sight
 
         if (moveY) {
             forwardY = transform.forward.y;
         }
 
-        if (triggered && !returnHome && CanSeePlayer(transform.forward)) {
+        if (triggered && !returnHome && CanSeePlayer(transform.forward))
+        {
+            playerLastSeenTime = Time.time;
+
             if (distToPlayer >= refrainRadius)
             {
                 transform.position += (new Vector3(transform.forward.x, forwardY, 0) * speed * Time.deltaTime);

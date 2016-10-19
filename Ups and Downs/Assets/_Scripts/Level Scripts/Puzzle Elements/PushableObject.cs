@@ -7,15 +7,35 @@ using System.Collections;
  * */
 
 public class PushableObject : MonoBehaviour  {
+    private const float paddingFactor = 0.1f;
 
     private Rigidbody rb;
     public bool attached;
+    private Vector3 startPosition;
+    private float distToGround;
 
     public float attachDistance = 3f;
 
 	void Start() {
 		attached = false;
         rb = GetComponent<Rigidbody>();
+	    startPosition = transform.position;
+        distToGround = GetComponent<Collider>().bounds.extents.y;
+	}
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+    }
+    
+    void Update()
+    {
+        float yPosition = Camera.main.WorldToViewportPoint(transform.position).y;
+
+        if (yPosition < (0 - paddingFactor) || yPosition > (1 + paddingFactor))
+        {
+            transform.position = startPosition;
+        }
     }
 
 	public void attach(GameObject pushingPlayer) {
