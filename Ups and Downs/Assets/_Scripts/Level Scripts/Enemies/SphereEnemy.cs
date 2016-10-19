@@ -83,7 +83,9 @@ public class SphereEnemy : Enemy {
                 transform.position += (new Vector3(transform.forward.x, forwardY, 0) * speed * Time.deltaTime);
             }
 
-        } else if (returnHome) {
+        } else if (returnHome)
+        {
+            playerLastSeenTime = Time.time;
             transform.position = homePosition;
         }
     }
