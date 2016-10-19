@@ -55,6 +55,9 @@ public class GameData
     /** The score from coins (each coin can have it's own point setting) */
     public int CoinScore { get; set; }
 
+    /** The number of times the player has died in this play through */
+    public int Deaths { get; set; }
+
     public float Time { get; set; }
 
     public int Heart { get; set; }
@@ -100,6 +103,7 @@ public class GameData
         CoinScore = 0;
         Heart = MAX_HEALTH;
         Time = 0.0f;
+        Deaths = 0;
     }
 
     #region Inventory

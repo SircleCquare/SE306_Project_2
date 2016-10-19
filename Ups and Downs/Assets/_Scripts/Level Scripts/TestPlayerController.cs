@@ -12,6 +12,8 @@ public class TestPlayerController : MonoBehaviour {
     public float gravity = 5f;
     public float airtime = 1f;
 
+    public float deadzone = 0.2f;
+
     private Rigidbody rb;
     private Animator animator;
     private GameController controller;
@@ -28,8 +30,16 @@ public class TestPlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
+        if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
+        {
+            moveHorizontal = 0f;
+        } else
+        {
+            moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
+        }
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * speed;
+
         movement.y = rb.velocity.y;
         rb.velocity = movement;
    
@@ -44,17 +54,17 @@ public class TestPlayerController : MonoBehaviour {
         {
             if (controller.isJump())
             {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 airTimeCount = airtime;
             }
         } else
         {
             if (controller.isJump() && airTimeCount > 0)
             {
-                airTimeCount -= Time.deltaTime;
+                airTimeCount -= Time.fixedDeltaTime;
             } else
             {
-                rb.AddForce(Vector3.down * gravity * Time.deltaTime, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
                
         }
@@ -63,7 +73,5 @@ public class TestPlayerController : MonoBehaviour {
     private bool IsGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
      }
-
-  
 
 }

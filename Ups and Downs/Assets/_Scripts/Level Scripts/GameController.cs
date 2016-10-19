@@ -44,7 +44,7 @@ public class GameController : SingletonObject<GameController> {
     public Text achievementText;
     public GameObject dialogBox;
     public Text dialogBoxCharacterName;
-    public Text dialogBoxMessage; 
+    public Text dialogBoxMessage;
 
     public float darkSideZ = -2.5f;
     public float lightSideZ = 2.5f;
@@ -519,10 +519,19 @@ public class GameController : SingletonObject<GameController> {
 		}
 	}
 
+    public void incrementDeathCount()
+    {
+        gameData.Deaths++;
+    }
+
 	void finishTheGame(){
 		//send score and time to ApplicationModel
 		ApplicationModel.score = gameData.CoinScore; // TODO
 		ApplicationModel.time = gameData.Time;
+	    ApplicationModel.coinsFound = gameData.CoinsFound;
+	    ApplicationModel.totalCoins = getTotalCoins();
+	    ApplicationModel.deathCount = gameData.Deaths;
+
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {

@@ -322,6 +322,11 @@ Prefab:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6557362, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 93a75cf328cf1c74ab4707cb7d6df10f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
   m_IsPrefabParent: 0
@@ -521,6 +526,30 @@ Prefab:
     - target: {fileID: 499878, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489228, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: gravity
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489228, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: speed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489228, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: airtime
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489228, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: maxSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409010, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: m_Drag
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489228, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
+      propertyPath: deadzone
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2f2c6293cab01941b0c795e769da4db, type: 2}
