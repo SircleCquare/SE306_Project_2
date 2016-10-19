@@ -170,9 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb393f5db466509409d8c0e152dd79ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  lightPlayer: {fileID: 0}
+  darkPlayer: {fileID: 0}
   boundsPadding: 0.05
+  CameraBoundImage: {fileID: 0}
 --- !u!114 &11485550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,9 +185,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e54f063bd3a5f4584b17f74634b7aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  camera: {fileID: 2034028}
+  initialSide: 0
+  fovRange: 10
+  defaultFOVSpeed: 5
+  fovSpeedRange: 3
+  rotationRange: 20
+  defaultRotationSpeed: 10
+  rotationSpeedRange: 5
 --- !u!124 &12409420
 Behaviour:
   m_ObjectHideFlags: 1
