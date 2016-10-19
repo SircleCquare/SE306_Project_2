@@ -287,6 +287,11 @@ public class GameData
             }
         }
 
+        if (instance.HighScores == null)
+        {
+            instance.HighScores = new Dictionary<string, SortedDictionary<int, string>>(5);
+        }
+
         // Convert high scores for usage
         instance.HighScoresFromArrays();
 
