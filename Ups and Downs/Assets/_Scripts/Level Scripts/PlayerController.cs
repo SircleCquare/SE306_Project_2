@@ -7,31 +7,26 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
     /* Interactable Components */
     private GameController gameController;
+    private Animator animator;
+    private Rigidbody rb;
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
-    private Animator animator;
 
-    /** Configurable Player Variables */
+    /** Configurable Player Behaviour Variables */
     public Side PlayerSide;
-
-    /** How far away switchs can be activated from */
+    /* How far away switchs can be activated from */
 	public float switchSearchRadius = 1.0f;
-	public float darkSideZ = -2.5f;
-	public float lightSideZ = 2.5f;
-    public float terminalVelocity = 200.0f;
 
-    /** private, persistent, movement variables */
+    /** Configurable Player Movement Variables */
     public float maxSpeed = 10f;
     public float runningForce = 13f;
-
     public float jumpForce = 10f;
     public float gravity = 5f;
     public float airtime = 1f;
-
     public float deadzone = 0.01f;
-    private Rigidbody rb;
-    private float distToGround;
 
+    /** private, persistent, movement variables */
+    private float distToGround;
     private float airTimeCount;
 
     /** Enemy Effects */
@@ -260,7 +255,7 @@ public class PlayerController : MonoBehaviour {
             PushableObject nearbyBlock = getNearbyPushable();
             if (IsGrounded() && nearbyBlock != null)
             {
-                nearbyBlock.attach(gameObject);
+                nearbyBlock.attach(this);
             }
         }
 	}
