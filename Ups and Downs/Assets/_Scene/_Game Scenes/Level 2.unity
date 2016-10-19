@@ -4136,8 +4136,13 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5427604, guid: 1768861b896d9ab46b6b8d99c4fec661, type: 2}
+<<<<<<< HEAD
       propertyPath: m_Drag
       value: 1
+=======
+      propertyPath: m_Mass
+      value: 10
+>>>>>>> 48c0e22ab76daf85b938349b5acab6b93c26cc24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1768861b896d9ab46b6b8d99c4fec661, type: 2}
@@ -4353,6 +4358,30 @@ Prefab:
       propertyPath: CameraBoundImage
       value: 
       objectReference: {fileID: 17456981}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: fovRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: defaultFOVSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: fovSpeedRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: rotationRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: defaultRotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
+      propertyPath: rotationSpeedRange
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
   m_IsPrefabParent: 0

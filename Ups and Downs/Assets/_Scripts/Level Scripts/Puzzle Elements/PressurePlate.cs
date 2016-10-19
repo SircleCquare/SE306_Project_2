@@ -14,8 +14,6 @@ public class PressurePlate : Switch
     public PlateState state = PlateState.IDLE;
 
     public enum PlateState { IDLE, MOVING, COMPRESSED };
-	private bool playerContact;
-	private bool blockContact;
 
 
 	// Use this for initialization
@@ -27,9 +25,6 @@ public class PressurePlate : Switch
 
         compressedPosition = uncompressedPosition;
         compressedPosition.y -= compressionDistance;
-
-		playerContact = false;
-		blockContact = false;
     }
 
 
@@ -38,7 +33,7 @@ public class PressurePlate : Switch
         state = PlateState.MOVING;
         Vector3 initialPosition = transform.position;
         float time = 0f;
-        while (time < compressTime) {
+        while (time <= compressTime) {
             transform.position = Vector3.Lerp(initialPosition, compressedPosition, time/compressTime);
             time += Time.deltaTime;
             yield return 0;   
@@ -60,7 +55,6 @@ public class PressurePlate : Switch
             time += Time.deltaTime;
             yield return 0;   
         }
-
         foreach (Switchable target in targetList)
         {
             target.deactivate();
@@ -71,13 +65,7 @@ public class PressurePlate : Switch
 
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == GameController.PLAYER_TAG) {
-			playerContact = true;
-		}
-		if (col.gameObject.tag == GameController.WEIGHTED_TAG) {
-			blockContact = true;
-		}
-		if (playerContact || blockContact)
+        if (IsPlayerOrBlock(col.tag))
         {
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
@@ -87,17 +75,16 @@ public class PressurePlate : Switch
 
     void OnTriggerExit(Collider col)
     {
-		if (col.gameObject.tag == GameController.PLAYER_TAG) {
-			playerContact = false;
-		}
-		if (col.gameObject.tag == GameController.WEIGHTED_TAG) {
-			blockContact = false;
-		}
-		if (!playerContact && !blockContact)
+        if (IsPlayerOrBlock(col.tag))
         {
 			StopCoroutine(CompressPlate());
 			StopCoroutine(RaisePlate());
 			StartCoroutine (RaisePlate ());
         }
+    }
+
+    private bool IsPlayerOrBlock(string colliderTag)
+    {
+        return (colliderTag == GameController.PLAYER_TAG) || (colliderTag == GameController.WEIGHTED_TAG);
     }
 }

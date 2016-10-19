@@ -41,6 +41,14 @@ public class CameraPinController : MonoBehaviour {
         toRotation = defaultRotation;
     }
 
+    public void resetShakyCam()
+    {
+        camera.fieldOfView = defaultFOV;
+        Quaternion currentRotation = transform.rotation;
+        currentRotation.z = 0;
+        transform.rotation = currentRotation;
+    }
+
     // Update is called once per frame
     void Update() {
         middle = (lightPlayer.position + darkPlayer.position) * 0.5f;

@@ -8,11 +8,13 @@ using System.Collections;
 
 public class PushableObject : MonoBehaviour  {
 
-	public bool attached;
+    private Rigidbody rb;
+    public bool attached;
 
 	void Start() {
 		attached = false;
-	}
+        rb = GetComponent<Rigidbody>();
+    }
 
 	public void attach(GameObject pushingPlayer) {
 		// TODO: check if player is carrying anything
