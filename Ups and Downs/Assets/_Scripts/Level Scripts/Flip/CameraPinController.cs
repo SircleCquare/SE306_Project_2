@@ -66,6 +66,7 @@ public class CameraPinController : MonoBehaviour {
 
 			flipStep++;
 		} else {
+            RenderSettings.fog = (GameController.Singleton.getSide() == Side.Dark);
 			isFlipping = false;
 			flipStep = 0;
 		}
