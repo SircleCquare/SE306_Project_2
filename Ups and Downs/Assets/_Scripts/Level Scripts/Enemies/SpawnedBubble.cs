@@ -18,7 +18,7 @@ public class SpawnedBubble : Enemy
     // Forcemode to apply to player on collision
     public ForceMode forceMode = ForceMode.VelocityChange;
     // Force to apply to player on collision
-    public Vector3 force = new Vector3(10.0f,0.0f,0.0f);
+    public float pushForce = 20f;
 
     private float life;
 
@@ -51,11 +51,11 @@ public class SpawnedBubble : Enemy
     void OnTriggerEnter(Collider other)
     {
         GameObject collided = other.gameObject;
-        if (collided.tag == GameController.PLAYER_TAG)
-        {
-            Rigidbody playerRb = collided.GetComponent<Rigidbody>();
-            playerRb.AddForce(force, forceMode);
-        }
         
+        if (collided.tag != GameController.PLAYER_TAG) return;
+        
+        Rigidbody playerRb = collided.GetComponent<Rigidbody>();
+        Vector3 forceDirection = Vector3.Normalize(collided.transform.position - transform.position);
+        playerRb.AddForce(forceDirection * pushForce, forceMode);
     }
 }

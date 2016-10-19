@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 403962}
   - 33: {fileID: 3353416}
-  - 135: {fileID: 13501238}
   - 23: {fileID: 2389244}
   - 114: {fileID: 11429878}
   m_Layer: 2
@@ -76,26 +75,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7197847242248014da8cdedc04c5b4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 10
+  rate: 20
   bubble: {fileID: 499178, guid: 20c3d1900e723024d98398bbe965c50d, type: 2}
   visionDistance: 15
-  chaseDistance: 15
-  refrainRadius: 5
+  chaseDistanceX: 15
+  chaseDistanceY: 7
+  refrainRadius: 1.5
+  spawnDistance: 1.5
   cloudSize: 1.5
+  resetTime: 1
   speed: 20
   moveY: 1
---- !u!135 &13501238
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

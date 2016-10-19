@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// This script controlls the movement control of the Sphere Enemy as well as the spawning of
@@ -16,21 +15,21 @@ public class SphereEnemy : Enemy {
     private Transform darkPlayer;
 
     // How far a Sphere can see a player from
-    public float visionDistance = 15.0f;
+    public float visionDistance;
     // How far the Sphere will chase a player before returning home.
-    public float chaseDistanceX = 15.0f;
-    public float chaseDistanceY = 7.0f;
+    public float chaseDistanceX;
+    public float chaseDistanceY;
     // How far away from the player a sphere will stop
-    public float refrainRadius = 5.0f;
+    public float refrainRadius;
     // How far away from the play bubbles will spawn
-    public float spawnDistance = 1.5f;
+    public float spawnDistance;
     // The radius of the space around the sphere enemy in which bubbles will be spawned.
-    public float cloudSize = 1.5f;
+    public float cloudSize;
 
     // How long the sphere enemy will wait away from it's home position after it can't see you
-    public float resetTime = 1.0f;
+    public float resetTime;
 
-    public float speed = 10.0f;
+    public float speed;
     public bool moveY;
 
     private float playerLastSeenTime;
@@ -57,8 +56,12 @@ public class SphereEnemy : Enemy {
             runTime -= spawnTime;
             SpawnBubble();
         }
+        
+        Vector3 position = darkPlayer.position;
+        position.y += 1.5f; // Aim at player's torso - without this, it aims at feet
+
         // Point at player so we can apply forward velocities and not worry about angle.
-        transform.LookAt(darkPlayer);
+        transform.LookAt(position);
 
 
         float distToPlayer = Vector3.Distance(transform.position, darkPlayer.position);
@@ -91,19 +94,13 @@ public class SphereEnemy : Enemy {
     }
 
     private void SpawnBubble() {
-        // Ensures that a Bubble is not spawned overtop of a player.
-        float dist = Vector3.Distance(darkPlayer.transform.position, transform.position) - spawnDistance;
-        dist = Mathf.Min(dist, cloudSize);
-        Instantiate(bubble, dist * Random.onUnitSphere + transform.position, Quaternion.identity);
+        Instantiate(bubble, cloudSize * Random.onUnitSphere + transform.position, Quaternion.identity);
     }
 
     bool CanSeePlayer(Vector3 rayDirection) {
-        RaycastHit hit = new RaycastHit();
-        if (Physics.Raycast(transform.position, rayDirection, out hit)) {
-            if (hit.transform == darkPlayer) {
-                return true;
-            } 
-        }
-        return false;
+        RaycastHit hit;
+
+        if (!Physics.Raycast(transform.position, rayDirection, out hit)) return false;
+        return (hit.transform == darkPlayer) ;
     }
 }
