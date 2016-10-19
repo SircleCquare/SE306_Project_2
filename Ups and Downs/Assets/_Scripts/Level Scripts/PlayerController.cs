@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour {
         // If the player is on the inactive side, kill its horizontal velocity.
         if (gameController.getSide() != PlayerSide)
         {
+			animator.SetBool ("RunningFwd", false);
+			animator.SetBool ("isJumping", false);
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             return;
         }
