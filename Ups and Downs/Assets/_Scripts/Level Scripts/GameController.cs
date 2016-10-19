@@ -33,6 +33,8 @@ public class GameController : SingletonObject<GameController> {
 	private bool finishedLevelDark;
 	private bool finishedLevelLight;
 
+	private bool inMainMenu;
+
     /* UI components */
     public Slider healthBar;
     public Text timeText;
@@ -79,7 +81,10 @@ public class GameController : SingletonObject<GameController> {
         gameData.TotalNumberOfCoins = coinObjectList.Length;
 
         // Set limit for healthbar to allow proper proportion highlighted
-        healthBar.maxValue = MAX_HEALTH;
+		if (healthBar != null) {
+			
+			healthBar.maxValue = MAX_HEALTH;
+		}
 
         // Update current character selected
         UpdateCurrentCharacterDisplay();
@@ -93,6 +98,7 @@ public class GameController : SingletonObject<GameController> {
     }
 
     void Update() {
+		Debug.Log (inMainMenu);
 
         // Try to hide the dialog box if it is visible
         if (dialogBox.activeSelf)
@@ -568,4 +574,12 @@ public class GameController : SingletonObject<GameController> {
         lightPlayer.resetToCheckpoint(resetTo);
         darkPlayer.resetToCheckpoint(resetTo);
     }
+
+	public void setInMainMenu(bool state) {
+		inMainMenu = state;
+	}
+
+	public bool getInMainMenu() {
+		return inMainMenu;
+	}
 }
