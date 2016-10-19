@@ -19,11 +19,14 @@ public class FinishController : MonoBehaviour
     public Text achievementText;
 
     public List<GameObject> scoreObjects;
+    public GameObject highScoreEntryGroup;
+    public InputField highScoreNameInput;
 
     // Countdown for when to hide achievement popup
     private float achievementPopUpCountdown = 2.0f;
 
     private bool achievementDisplayed = false;
+    private bool savedHighScoreName = false;
 
     // Use this for initialization
     void Start ()
@@ -34,8 +37,6 @@ public class FinishController : MonoBehaviour
 	    scoreText.text = ApplicationModel.score.ToString();
 	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
         UnlockAchievement(ApplicationModel.levelName);
-
-        DisplayHighScores(ApplicationModel.levelName);
 	}
 	
 	// Update is called once per frame
@@ -44,6 +45,13 @@ public class FinishController : MonoBehaviour
         if (achievementDisplayed)
         {
             TryHideAchivementPopup();
+        }
+
+        DisplayHighScores(ApplicationModel.levelName);
+
+        if (!GameData.GetInstance().IsHighScore(ApplicationModel.levelName, ApplicationModel.score) || savedHighScoreName)
+        {
+            highScoreEntryGroup.SetActive(false);
         }
     }
 
@@ -99,5 +107,14 @@ public class FinishController : MonoBehaviour
             nameField.text = highScore.Value;
             scoreField.text = highScore.Key.ToString("#,##0");
         }
+    }
+
+    public void SaveHighScore()
+    {
+        var gameData = GameData.GetInstance();
+        gameData.AddHighScore(ApplicationModel.levelName, highScoreNameInput.text, ApplicationModel.score);
+        gameData.Save(); // persist new high score
+
+        savedHighScoreName = true; // hide high score entry form
     }
 }
