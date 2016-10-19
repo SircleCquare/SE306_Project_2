@@ -19,7 +19,7 @@ public class GameController : SingletonObject<GameController> {
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
-	public Side currentSide = Side.Dark;
+	public Side currentSide = Side.DARK;
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 
@@ -149,7 +149,7 @@ public class GameController : SingletonObject<GameController> {
 
 	public void RegisterPlayer(PlayerController controller) {
 		Debug.Log ("REGISTER");
-		if (controller.PlayerSide == Side.Light) {
+		if (controller.PlayerSide == Side.LIGHT) {
 			lightPlayer = controller;
 		} else {
 			darkPlayer = controller;
@@ -165,7 +165,7 @@ public class GameController : SingletonObject<GameController> {
     /// <param name="checkpoint"></param>
     public void RegisterCheckpoint(Checkpoint checkpoint)
     {
-        if (checkpoint.checkpointSide == Side.Dark)
+        if (checkpoint.checkpointSide == Side.DARK)
         {
             darkSideCheckpoints.Add(checkpoint);
             Debug.Log("DARK: " + darkSideCheckpoints);
@@ -187,7 +187,7 @@ public class GameController : SingletonObject<GameController> {
     /// <returns></returns>
     public Checkpoint getCheckpoint(Side playerSide, int order)
     {
-        List<Checkpoint> checkpoints = (playerSide == Side.Light) ? lightSideCheckpoints : darkSideCheckpoints;
+        List<Checkpoint> checkpoints = (playerSide == Side.LIGHT) ? lightSideCheckpoints : darkSideCheckpoints;
  
         foreach (Checkpoint check in checkpoints)
         {
@@ -318,7 +318,7 @@ public class GameController : SingletonObject<GameController> {
 
     public PlayerController getActivePlayer()
     {
-		if (getSide () == Side.Light) {
+		if (getSide () == Side.LIGHT) {
 			return lightPlayer;
 		} else {
 			return darkPlayer;
@@ -350,10 +350,10 @@ public class GameController : SingletonObject<GameController> {
         coolDownActive = true;
 
         cameraPinController.doFlip();
-		if (currentSide == Side.Dark) {
-			currentSide = Side.Light;
+		if (currentSide == Side.DARK) {
+			currentSide = Side.LIGHT;
 		} else {
-			currentSide = Side.Dark;
+			currentSide = Side.DARK;
         }
         UpdateCurrentCharacterDisplay();
         updateFlipText();
@@ -420,7 +420,7 @@ public class GameController : SingletonObject<GameController> {
 	*/
 	public float getHorizontalMagnitude() {
 		float adjust = 1f;
-		if (currentSide == Side.Light) {
+		if (currentSide == Side.LIGHT) {
 			adjust = -1f;
 		}
 		if (!disableInput) {
@@ -458,7 +458,7 @@ public class GameController : SingletonObject<GameController> {
     void UpdateCurrentCharacterDisplay()
     {
         //TODO need to update character names
-        if(currentSide == Side.Dark)
+        if(currentSide == Side.DARK)
         {
             characterName.text = "Older brother";
             characterAvatar.sprite = darkCharacter; 
@@ -529,10 +529,10 @@ public class GameController : SingletonObject<GameController> {
 
 	public void setFinishedLevel(bool finished){
 		// check side
-		if (getSide () == Side.Dark) {
+		if (getSide () == Side.DARK) {
 			finishedLevelDark = finished;
 		}
-		if (getSide () == Side.Light) {
+		if (getSide () == Side.LIGHT) {
 			finishedLevelLight = finished;
 		}
 

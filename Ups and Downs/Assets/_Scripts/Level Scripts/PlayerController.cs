@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			Vector3 currentPosition = transform.position;
-            currentPosition.z = (gameController.getSide () == Side.Dark) ? gameController.darkSideZ : gameController.lightSideZ;
+            currentPosition.z = (gameController.getSide () == Side.DARK) ? gameController.darkSideZ : gameController.lightSideZ;
 			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
 			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
 			transform.position = currentPosition;
@@ -229,10 +229,10 @@ public class PlayerController : MonoBehaviour {
 		}
 		PushableObject pushblock = getNearbyPushable ();
 		if (pushblock != null){
-			if (pushblock.attached) {
+            if (pushblock.isAttached()) {
 				pushblock.detach ();
 			} else {
-				pushblock.attach (gameObject);
+				pushblock.attach (this);
 			}
 		}
 	}
