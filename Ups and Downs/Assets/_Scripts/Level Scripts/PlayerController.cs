@@ -223,14 +223,22 @@ public class PlayerController : MonoBehaviour {
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
-		PushableObject pushblock = getNearbyPushable();
-		if (pushblock != null) {
-			if (pushblock.attached) {
-				pushblock.detach();
-			} else {
-				pushblock.attach(gameObject);
-			}
-		}
+        PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
+        if (attachedBlock != null)
+        {
+            if (attachedBlock.attached)
+            {
+                attachedBlock.detach();
+            }
+        }
+        else
+        {
+            PushableObject nearbyBlock = getNearbyPushable();
+            if (IsGrounded() && nearbyBlock != null)
+            {
+                nearbyBlock.attach(gameObject);
+            }
+        }
 	}
 
 	/**
