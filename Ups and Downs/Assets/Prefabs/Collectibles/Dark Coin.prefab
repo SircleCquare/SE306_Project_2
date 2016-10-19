@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isResetOnDeath: 0
   score: 10
-  pickupSound: {fileID: 8300000, guid: a25d50ce6cc79054bad82145b97dc795, type: 3}
+  pickupSound: {fileID: 8300000, guid: c1253977efcc6cc4789b503cc747dc6a, type: 3}
 --- !u!114 &11481990
 MonoBehaviour:
   m_ObjectHideFlags: 1
