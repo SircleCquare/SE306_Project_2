@@ -563,7 +563,7 @@ public class GameController : SingletonObject<GameController> {
 	    ApplicationModel.coinsFound = gameData.CoinsFound;
 	    ApplicationModel.totalCoins = getTotalCoins();
 	    ApplicationModel.deathCount = gameData.Deaths;
-
+		ApplicationModel.levelNumber = gameData.LevelNumber;
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
