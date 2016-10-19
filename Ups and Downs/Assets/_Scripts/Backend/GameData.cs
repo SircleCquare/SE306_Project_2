@@ -72,7 +72,7 @@ public class GameData
     /// </summary>
     static void SetSaveFile()
     {
-        saveFile = saveFile ?? Application.persistentDataPath + "save.ser";
+        saveFile = saveFile ?? Application.persistentDataPath + "/save.ser";
     }
 
     private GameData()
