@@ -6,6 +6,7 @@ public class CameraPinController : MonoBehaviour {
     /** Both of these fields need to be configured within the Unity scene builder */
     private Transform lightPlayer;
     private Transform darkPlayer;
+    public Side initialSide;
 	
 	private Vector3 middle;
 	
@@ -39,6 +40,13 @@ public class CameraPinController : MonoBehaviour {
         defaultRotation.y = 180;
 
         toRotation = defaultRotation;
+
+        // Defaults to dark side so need to change if initial side is light side
+        if (initialSide == Side.LIGHT)
+        {
+            transform.rotation = defaultRotation;
+        }
+        GameController.Singleton.setCurrentSide(initialSide);
     }
 
     public void resetShakyCam()
