@@ -34,17 +34,6 @@ public class PlayerController : MonoBehaviour {
     private float forceY = 0;
     private float invertGrav;
 
-    /** Death Flash */
-    // Switch to turn off death flash for deprecated models (Stops models breaking)
-    public bool damageFlash = false;
-    public float damageFlashTime = 2f;
-    /* Publically configurable */
-    public Color32 flashColor = Color.white;
-    public float flashTime = 0.2f;
-    /* Privately initialised */
-    private Color32 baseColor;
-    private Material shirt;
-
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
     private bool invisible = false;
@@ -52,7 +41,6 @@ public class PlayerController : MonoBehaviour {
 
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
-
     }
 
     void Start() {
@@ -62,14 +50,8 @@ public class PlayerController : MonoBehaviour {
 
         leeches = new List<LeechEnemy>();
         gameController = GameController.Singleton;
-        if (damageFlash)
-        {
-            shirt = Array.Find(GetComponentsInChildren<Renderer>()[0].materials, mat => mat.name.Contains("Shirt"));
-            baseColor = shirt.color;
-        }
+        
         // Get the initial Checkpoint for the scene.
-        
-        
     }
 
     void Update()
@@ -109,7 +91,7 @@ public class PlayerController : MonoBehaviour {
             jump = gameController.isJump();
         }
 
-        animator.SetBool("RunningFwd", ((horizontalMag == 0) ? false : true));
+        animator.SetBool("RunningFwd", (horizontalMag != 0));
         AdjustFacing(horizontalMag);
 
         moveDirection = new Vector3(horizontalMag, 0, 0);
@@ -237,8 +219,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    
-
     /**
         Called every frame by Update() to activate nearby Switchs. Only called if the Activate action key is pressed.
     */
@@ -312,11 +292,6 @@ public class PlayerController : MonoBehaviour {
         }
         transform.position = currentCheckpoint.getPosition();
         gameController.removeHeart();
-        if (damageFlash)
-        {
-            StopCoroutine(DamageFlash());
-            StartCoroutine(DamageFlash());
-        }
 
         gameController.incrementDeathCount();
         deLeech();
@@ -324,19 +299,4 @@ public class PlayerController : MonoBehaviour {
             e.ResetBehaviour();
         }
     }
-
-
-    IEnumerator DamageFlash(){
-        float time = 0f;
-        bool flash = true;
-
-        while (time < damageFlashTime) {
-            shirt.color = flash ? flashColor : baseColor;
-            flash = !flash;
-            time += flashTime;
-            yield return new WaitForSeconds(flashTime);
-        }
-
-        shirt.color = baseColor;
-	}
 }
