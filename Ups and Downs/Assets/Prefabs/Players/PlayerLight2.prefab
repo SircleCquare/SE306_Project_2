@@ -251,7 +251,7 @@ GameObject:
   - 95: {fileID: 9534076}
   - 114: {fileID: 11405112}
   - 54: {fileID: 5442820}
-  - 65: {fileID: 6550766}
+  - 136: {fileID: 13621378}
   m_Layer: 9
   m_Name: PlayerLight2
   m_TagString: Player
@@ -2384,18 +2384,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!65 &6550766
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128536}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3.1, z: 1}
-  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!95 &9534076
 Animator:
   serializedVersion: 3
@@ -2441,6 +2429,19 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   flashTime: 0.2
+--- !u!136 &13621378
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!137 &13784812
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
