@@ -19,7 +19,9 @@ public class GameController : SingletonObject<GameController> {
 
     /** The number of seconds a player has to wait between flips */
     public float flipCoolDown = 2.0f;
-	public Side currentSide = Side.DARK;
+
+    // If you want to change the initial side, update the camera pin controller.
+    private Side currentSide = Side.DARK;
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 
@@ -250,6 +252,11 @@ public class GameController : SingletonObject<GameController> {
     public int getInventoryItemIndex()
     {
         return gameData.getItemIndex();
+    }
+
+    public void setCurrentSide(Side newSide)
+    {
+        currentSide = newSide;
     }
   
 
@@ -556,7 +563,7 @@ public class GameController : SingletonObject<GameController> {
 	    ApplicationModel.coinsFound = gameData.CoinsFound;
 	    ApplicationModel.totalCoins = getTotalCoins();
 	    ApplicationModel.deathCount = gameData.Deaths;
-
+		ApplicationModel.levelNumber = gameData.LevelNumber;
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
