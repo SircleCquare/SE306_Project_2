@@ -12,13 +12,27 @@ public class PushableObject : MonoBehaviour  {
     public bool attached;
     private Vector3 startPosition;
     private float distToGround;
+    private Side gameSide;
 
     public float attachDistance = 3f;
 
 	void Start() {
 		attached = false;
         rb = GetComponent<Rigidbody>();
-	    startPosition = transform.position;
+        rb.isKinematic = false;
+
+        startPosition = transform.position;
+        if (transform.position.z > 0)
+        {
+            gameSide = Side.LIGHT;
+            startPosition.z = GameController.Singleton.lightSideZ;
+        }
+        else
+        {
+            gameSide = Side.DARK;
+            startPosition.z = GameController.Singleton.darkSideZ;
+        }
+        transform.position = startPosition;
         distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 
@@ -37,7 +51,12 @@ public class PushableObject : MonoBehaviour  {
         }
     }
 
-	public void attach(GameObject pushingPlayer) {
+    public void attach(PlayerController pushingPlayer) {
+        if (pushingPlayer.PlayerSide != gameSide)
+        {
+            return;
+        }
+
 		// TODO: check if player is carrying anything
 		// if player, get the transform and make this parent to transform.
 		this.transform.SetParent (pushingPlayer.transform);
@@ -64,5 +83,10 @@ public class PushableObject : MonoBehaviour  {
         attached = false;
         rb.isKinematic = false;
     }
-	
+
+
+    public bool isAttached()
+    {
+        return attached;
+    }
 }

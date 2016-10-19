@@ -102,7 +102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 442198, guid: 1768861b896d9ab46b6b8d99c4fec661, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.5
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 442198, guid: 1768861b896d9ab46b6b8d99c4fec661, type: 2}
       propertyPath: m_LocalRotation.x
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e54f063bd3a5f4584b17f74634b7aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSide: 0
   fovRange: 0
   defaultFOVSpeed: 0
   fovSpeedRange: 0
@@ -754,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1566e7f8869d1f4abeec3ebc21277c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointSide: 1
+  checkpointSide: 0
   order: 0
   active: 0
 --- !u!4 &1151072458
