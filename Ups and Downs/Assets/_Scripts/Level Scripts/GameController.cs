@@ -297,9 +297,12 @@ public class GameController : SingletonObject<GameController> {
         gameData.Deaths++;
         removeHeart();
 
-        // Reset all enemies in level.
+        // Reset all enemies and collectables in level.
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
+        }
+        foreach (Collectible c in FindObjectsOfType<Collectible>()) {
+            c.ResetBehaviour();
         }
     }
 
