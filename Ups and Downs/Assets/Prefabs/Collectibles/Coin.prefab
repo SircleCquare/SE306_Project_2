@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942fb712d2f00c941932c3ab67045282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isResetOnDeath: 0
   score: 10
   pickupSound: {fileID: 8300000, guid: c1253977efcc6cc4789b503cc747dc6a, type: 3}
 --- !u!1001 &100100000

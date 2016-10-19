@@ -2377,8 +2377,8 @@ MonoBehaviour:
   - {fileID: 881110877}
   - {fileID: 1845142570}
   - {fileID: 1686045451}
-  highScoreEntryGroup: {fileID: 0}
-  highScoreNameInput: {fileID: 0}
+  highScoreEntryGroup: {fileID: 620332870}
+  highScoreNameInput: {fileID: 1824914456}
 --- !u!114 &1596590868
 MonoBehaviour:
   m_ObjectHideFlags: 0
