@@ -278,6 +278,15 @@ public class GameData
     }
 
     /// <summary>
+    /// Return all high scores achieved. 
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<string, List<HighScoreValue>> GetHighScores()
+    {
+        return HighScores;
+    }
+
+    /// <summary>
     ///  Save the game data to a save file. 
     /// </summary>
     public void Save()

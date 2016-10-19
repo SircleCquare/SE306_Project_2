@@ -21,7 +21,7 @@ public class AchievementsDisplay : MonoBehaviour
     /// <summary>
     /// Method to compute unlocked achievements when achivement panel opened. 
     /// </summary>
-    public void OnEnable()
+    void OnEnable()
     {
         // Find all achievements and awarded achievements. 
         var gameData = GameData.LoadInstance();
