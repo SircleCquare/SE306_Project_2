@@ -551,12 +551,12 @@ public class GameController : SingletonObject<GameController> {
 
 	void finishTheGame(){
 		//send score and time to ApplicationModel
-		ApplicationModel.score = gameData.CoinScore; // TODO
 		ApplicationModel.time = gameData.Time;
 	    ApplicationModel.coinsFound = gameData.CoinsFound;
 	    ApplicationModel.totalCoins = getTotalCoins();
 	    ApplicationModel.deathCount = gameData.Deaths;
 		ApplicationModel.levelNumber = gameData.LevelNumber;
+		ApplicationModel.score = calculateScore (gameData.CoinScore, gameData.Time, gameData.Deaths);
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
@@ -566,6 +566,11 @@ public class GameController : SingletonObject<GameController> {
 	    // Trigger finish scene
 	    SceneManager.LoadScene("Finish Scene");
     }
+
+	public int calculateScore(int CoinScore, float time, int deaths) {
+		float result = CoinScore / Mathf.Log10 (time + 5f);
+		return (int)(result / (deaths + 1f));
+	}
 
     public GameData GetGameData()
     {

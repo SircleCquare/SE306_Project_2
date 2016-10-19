@@ -666,8 +666,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: 1
-  movementDistance: 3
-  userSpeed: 2
+  movementDistance: 2.068
+  userSpeed: 4
   startTimeOffset: 0
   pauseTime: 0
   defaultState: 0
@@ -2199,7 +2199,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 126.79
+      value: 126.85
       objectReference: {fileID: 0}
     - target: {fileID: 455558, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3432,7 +3432,7 @@ Prefab:
     - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: externalTargets.Array.data[0]
       value: 
-      objectReference: {fileID: 1798767869}
+      objectReference: {fileID: 189077600}
     - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: externalTargets.Array.data[1]
       value: 
