@@ -268,7 +268,7 @@ public class GameController : SingletonObject<GameController> {
     /// <summary>
     /// Removes one of the brothers shared hearts.
     /// </summary>
-    public void removeHeart()
+    private void removeHeart()
     {
         if (gameData.Heart > 1)
         {
@@ -282,6 +282,19 @@ public class GameController : SingletonObject<GameController> {
             gameOver();
         }
         
+    }
+
+
+    // Handle level behaviour on player death
+    public void playerDeath()
+    {
+        gameData.Deaths++;
+        removeHeart();
+
+        // Reset all enemies in level.
+        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+            e.ResetBehaviour();
+        }
     }
 
     public int getCurrentHealth()
@@ -518,11 +531,6 @@ public class GameController : SingletonObject<GameController> {
 			finishTheGame ();
 		}
 	}
-
-    public void incrementDeathCount()
-    {
-        gameData.Deaths++;
-    }
 
 	void finishTheGame(){
 		//send score and time to ApplicationModel

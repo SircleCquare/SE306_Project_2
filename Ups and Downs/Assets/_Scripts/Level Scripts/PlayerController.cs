@@ -198,21 +198,21 @@ public class PlayerController : MonoBehaviour {
         leeches = new List<LeechEnemy>();
     }
 
-    public IEnumerator HandleInvisiblity(float invisiblityTime)
-    {
-        invisible = true;
-        float time = 0f;
-
+//    public IEnumerator HandleInvisiblity(float invisiblityTime)
+//    {
+//        invisible = true;
+//        float time = 0f;
+//
 //        while (time < invisiblityTime)
 //        {
 //        }
-        yield return 0;
-        invisible = false;
-    }
+//        yield return 0;
+//        invisible = false;
+//    }
 
     public void MakeInvisible(float invisiblityTime)
     {
-        StartCoroutine(HandleInvisiblity(invisiblityTime));
+//        StartCoroutine(HandleInvisiblity(invisiblityTime));
     }
 
     public bool IsInvisible()
@@ -310,18 +310,16 @@ public class PlayerController : MonoBehaviour {
         {
             currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
         }
+
         transform.position = currentCheckpoint.getPosition();
-        gameController.removeHeart();
+        gameController.playerDeath();
+        // detatch all leeches from the player.
+        leeches = new List<LeechEnemy>();
+
         if (damageFlash)
         {
             StopCoroutine(DamageFlash());
             StartCoroutine(DamageFlash());
-        }
-
-        gameController.incrementDeathCount();
-        deLeech();
-        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
-            e.ResetBehaviour();
         }
     }
 
