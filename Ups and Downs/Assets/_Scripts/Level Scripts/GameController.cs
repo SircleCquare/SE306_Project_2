@@ -300,6 +300,8 @@ public class GameController : SingletonObject<GameController> {
             darkCheckpoint = darkPlayer.getCheckpointNumber();
         int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
 
+        cameraPinController.resetShakyCam();
+
         lightPlayer.resetToCheckpoint(resetTo);
         darkPlayer.resetToCheckpoint(resetTo);
 
