@@ -7,6 +7,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [Serializable]
+/// <summary>
+/// GameData is the main class for storing and retrieving the state of the game.
+/// It can be serialized to file and retrieved later to store the game state between sessions.
+/// Data stored includes achievements unlocked, high scores, the current level number, number of coins found,
+/// number of deaths and the current level's play time.
+/// </summary>
 public class GameData
 {
 
@@ -20,65 +26,92 @@ public class GameData
     public List<string> awardedAchievements { get; set; }
 
     /// <summary>
-    /// A dictionary of highscores for levels. 
-    /// 
-    /// The key is the string name of the level. 
-    /// 
-    /// The value is a sorted dictionary of the highscores. 
-    /// For this dictionary, the key is the score and the value is the player's name. 
+    /// A dictionary of highscores for levels.
+    ///
+    /// The key is the string name of the level.
+    ///
+    /// The value is a sorted dictionary of the highscores.
+    /// For this dictionary, the key is the score and the value is the player's name.
     /// This dictionary will have at most 5 highscores in it. Only the highest five scores are kept
     /// (as specified by MAX_HIGH_SCORES)
-    /// 
-    /// This cannot be serialized, so it is converted to a set of arrays for storage at save time. 
+    ///
+    /// This cannot be serialized, so it is converted to a set of arrays for storage at save time.
     /// </summary>
     [NonSerialized] Dictionary<string, List<HighScoreValue>> HighScores;
 
     /// <summary>
-    /// An unsorted list for storing HighScores so they can be serialized.  
+    /// An unsorted list for storing HighScores so they can be serialized.
     /// </summary>
     private List<HighScoreValue> highScoreList;
 
     /// <summary>
-    /// Maximum number of high scores stored per level 
+    /// Maximum number of high scores stored per level
     /// </summary>
-    private const int MAX_HIGH_SCORES = 5; 
+    private const int MAX_HIGH_SCORES = 5;
 
+    /// <summary>
+    /// The highest level unlocked by the player across sessions.
+    /// </summary>
     public int HighestLevelUnlockedNumber { get; set; }
 
+    /// <summary>
+    /// The total number of coins in the currently active level.
+    /// </summary>
     public int TotalNumberOfCoins { get; set; }
-    
+
+    /// <summary>
+    /// The number of the currently playing level, as specified in the build settings order.
+    /// </summary>
     public int LevelNumber { get; set; }
 
-    /** The number of Coins the player has found in this play through */
+    /// <summary>
+    /// The number of Coins the player has found in this play through
+    /// </summary>
     public int CoinsFound { get; set; }
 
-    /** The score from coins (each coin can have it's own point setting) */
+    /// <summary>
+    /// The score as contributed by coins (each coin can have a custom point setting)
+    /// </summary>
     public int CoinScore { get; set; }
 
-    /** The number of times the player has died in this play through */
+    /// <summary>
+    /// The number of times the player has died in this play through
+    /// </summary>
     public int Deaths { get; set; }
 
+    /// <summary>
+    /// The current level time (in milliseconds)
+    /// </summary>
     public float Time { get; set; }
 
+    /// <summary>
+    /// The number of hearts (lives) the player has remaining in this level.
+    /// </summary>
     public int Heart { get; set; }
 
+    /// <summary>
+    /// The currently held special inventory item (unused)
+    /// </summary>
     private SpecialItem itemType = SpecialItem.None;
     private int itemIndex = -1;
 
+    /// <summary>
+    /// The maximum number of lives.
+    /// </summary>
     public const int MAX_HEALTH = 5;
 
     private GameData()
     {
         // Initialise level state
-        clearLevelState(); 
+        clearLevelState();
 
         // List to store names of achievements
-        awardedAchievements = new List<String>();  
+        awardedAchievements = new List<String>();
         HighScores = new Dictionary<string, List<HighScoreValue>>(5);
     }
 
     /// <summary>
-    /// Obtain an instance of the game data. 
+    /// Obtain an instance of the game data.
     /// </summary>
     /// <returns></returns>
     public static GameData GetInstance()
@@ -98,6 +131,9 @@ public class GameData
         Deaths = 0;
     }
 
+    /*
+    * Accessor methods for the inventory item (currently unused)
+    */
     #region Inventory
     public SpecialItem getItemType()
     {
@@ -109,6 +145,9 @@ public class GameData
         return itemIndex;
     }
 
+    /// <summary>
+    /// Set the inventory to hold the specialItem.
+    /// </summary>
     public void setInventoryItem(SpecialCollectible specialItem)
     {
         if (specialItem != null)
@@ -156,13 +195,13 @@ public class GameData
             }
 
             HighScores[score.LevelName].Add(score);
-        }   
+        }
     }
 
     /// <summary>
-    /// Test if the current score is in the top five high scores. 
+    /// Test if the current score is in the top five high scores.
     /// </summary>
-    /// <returns>True if this is score is higher than the lowest score on the leaderboard, 
+    /// <returns>True if this is score is higher than the lowest score on the leaderboard,
     ///          or there is space to add highscores to the leaderboard</returns>
     public bool IsHighScore(string levelName, int score)
     {
@@ -172,9 +211,9 @@ public class GameData
     }
 
     /// <summary>
-    /// Add a high score for a level. 
-    /// 
-    /// Will not add the score if the player didn't actually get a highscore. 
+    /// Add a high score for a level.
+    ///
+    /// Will not add the score if the player didn't actually get a highscore.
     /// </summary>
     /// <param name="levelName">The name of the level</param>
     /// <param name="playerName">The name of the player the score is for</param>
@@ -199,7 +238,7 @@ public class GameData
     }
 
     /// <summary>
-    /// Get an ordered dictionary of high scores for a level
+    /// Get an ordered dictionary of high scores for a level.
     /// </summary>
     /// <param name="levelName"></param>
     /// <returns></returns>
@@ -218,6 +257,10 @@ public class GameData
 
     #endregion
 
+    /*
+     * The persistence region handles serializing and deserializing the game data from disk so that
+     * game state can persist between sessions.
+     */
     #region Persistence
     /// <summary>
     /// Load the game data from player prefs
@@ -268,7 +311,7 @@ public class GameData
     }
 
     /// <summary>
-    /// Return all high scores achieved. 
+    /// Return all high scores achieved.
     /// </summary>
     /// <returns></returns>
     public Dictionary<string, List<HighScoreValue>> GetHighScores()
@@ -277,7 +320,7 @@ public class GameData
     }
 
     /// <summary>
-    ///  Save the game data to a save file. 
+    ///  Save the game data to a save file.
     /// </summary>
     public void Save()
     {
@@ -300,7 +343,7 @@ public class GameData
     }
 
     /// <summary>
-    /// Create a new save 
+    /// Create a new save
     /// </summary>
     private static void CreateFreshSave()
     {
