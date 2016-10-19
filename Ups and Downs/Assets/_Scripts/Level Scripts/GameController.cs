@@ -599,4 +599,9 @@ public class GameController : SingletonObject<GameController> {
 	public bool getInMainMenu() {
 		return inMainMenu;
 	}
+
+    public float getZValueForSide(Side side)
+    {
+        return (side == Side.LIGHT) ? lightSideZ : darkSideZ;
+    }
 }

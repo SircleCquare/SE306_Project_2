@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour {
         PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
         if (attachedBlock != null)
         {
-            if (attachedBlock.attached)
+            if (attachedBlock.isAttached())
             {
                 attachedBlock.detach();
             }
