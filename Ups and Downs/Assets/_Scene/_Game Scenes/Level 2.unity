@@ -1033,6 +1033,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1065732df75a1c4797afea97593dddd, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &540398408 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11497036, guid: 43142e8b04f79a64db88702eef01b40d,
+    type: 2}
+  m_PrefabInternal: {fileID: 869455080}
+  m_Script: {fileID: 11500000, guid: 64fe7bd0b9064aa4189fae14eef36b01, type: 3}
 --- !u!1001 &543260537
 Prefab:
   m_ObjectHideFlags: 0
@@ -1745,6 +1751,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5406998, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
   m_IsPrefabParent: 0
@@ -1894,23 +1904,6 @@ Prefab:
     - target: {fileID: 499878, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 13621378, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6,
-        type: 2}
-    - target: {fileID: 5442820, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442820, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 13621378, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
-      propertyPath: m_Radius
-      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
@@ -2755,6 +2748,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1581570993}
     m_Modifications:
+    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
+      propertyPath: externalTargets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 409712, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: m_LocalPosition.x
       value: 41.5
@@ -2791,6 +2788,10 @@ Prefab:
       propertyPath: m_Name
       value: Pressure Field Ground 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
+      propertyPath: externalTargets.Array.data[0]
+      value: 
+      objectReference: {fileID: 540398408}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
   m_IsPrefabParent: 0

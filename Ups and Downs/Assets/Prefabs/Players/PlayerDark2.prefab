@@ -267,7 +267,6 @@ GameObject:
   - 95: {fileID: 9534076}
   - 114: {fileID: 11427390}
   - 54: {fileID: 5484666}
-  - 64: {fileID: 6454546}
   - 136: {fileID: 13601646}
   m_Layer: 9
   m_Name: PlayerDark2
@@ -2416,18 +2415,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!64 &6454546
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128536}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
 --- !u!65 &6571514
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2512,22 +2499,16 @@ MonoBehaviour:
   gravity: 40
   airtime: 0.4
   deadzone: 0.2
-  damageFlash: 1
-  damageFlashTime: 2
-  flashColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  flashTime: 0.2
 --- !u!136 &13601646
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5634197ffaa23740a6b09bd998b82e6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 0.7
   m_Height: 3.1
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
