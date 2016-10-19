@@ -25,6 +25,8 @@ public class PushableObject : MonoBehaviour  {
 		attached = true;
         rb.isKinematic = true;
 
+        // Ensures that the attach distance between the pushable block and the player
+        // is fixed.
         Vector3 directionToObject = rb.position - pushingPlayer.transform.position;
         directionToObject = Vector3.Normalize(directionToObject) * attachDistance;
 

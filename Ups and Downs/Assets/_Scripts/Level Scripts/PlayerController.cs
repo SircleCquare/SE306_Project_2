@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     private GameController gameController;
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
+    private Animator animator;
 
     /** Configurable Player Variables */
     public Side PlayerSide;
@@ -20,16 +21,14 @@ public class PlayerController : MonoBehaviour {
     public float terminalVelocity = 200.0f;
 
     /** private, persistent, movement variables */
-    private float forceY = 0;
-    private float invertGrav;
     public float maxSpeed = 10f;
-    public float speed;
+    public float runningForce = 13f;
 
     public float jumpForce = 10f;
     public float gravity = 5f;
     public float airtime = 1f;
 
-    public float deadzone = 0.2f;
+    public float deadzone = 0.01f;
     private Rigidbody rb;
     private float distToGround;
 
@@ -43,44 +42,51 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
     }
-
+    
     void Start() {
        rb = GetComponent<Rigidbody>();
        distToGround = GetComponent<Collider>().bounds.extents.y;
-
+       animator = GetComponent<Animator>();
        leeches = new List<LeechEnemy>();
        gameController = GameController.Singleton;
     }
 
     void FixedUpdate()
     {
+        float moveHorizontal;
+        // If the player is on the inactive side, kill its horizontal velocity.
         if (gameController.getSide() != PlayerSide)
         {
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             return;
         }
 
+        // If the player is holding down the interact (E) button.
         if (gameController.isActivate())
         {
             activateSwitchs();
         }
 
-        float moveHorizontal = gameController.getHorizontalMagnitude();
+        moveHorizontal = gameController.getHorizontalMagnitude();
         AdjustFacing(moveHorizontal);
-
+        
+        // Apply deadzone to minor variations around the midpoint.
         if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
         {
             moveHorizontal = 0f;
         }
         else
         {
+            // Normalize values outside of this dead zone to be either 1 or -1
             moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
         }
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * runningForce;
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * speed;
-
+        // Preserve vertical velocity and assign to rigidbody
         movement.y = rb.velocity.y;
         rb.velocity = movement;
 
+        // Enforce terminal velocity.
         Vector3 clampedVelocity = rb.velocity;
         clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeed, maxSpeed);
         clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -jumpForce, jumpForce);
@@ -89,6 +95,7 @@ public class PlayerController : MonoBehaviour {
 
         if (IsGrounded())
         {
+            // If the player is on the ground and jumping, apply jump force.
             if (gameController.isJump())
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -99,6 +106,8 @@ public class PlayerController : MonoBehaviour {
         {
             if (gameController.isJump() && airTimeCount > 0)
             {
+                // If the player holds down the jump key, gravity is not applied
+                // This gives the appearance of a longer jump.
                 airTimeCount -= Time.fixedDeltaTime;
             }
             else
@@ -109,6 +118,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // Determines whether the player is on the ground.
+    // Dist to ground is determined by the height of the capsule collider, 1.5 is applied due to the offset.
+    // an extra 0.2 is added to give some margin.
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
@@ -202,7 +214,10 @@ public class PlayerController : MonoBehaviour {
     {
         return (leeches.Count > 0) ? value / (multiplier * Mathf.Log(leeches.Count + 1)) : value;
     }
-
+    
+     /*
+      * Turns the player to face the way they are moving
+      */
     private void AdjustFacing(float horizontalDirection)
     {
         if (horizontalDirection > 0)
@@ -223,6 +238,7 @@ public class PlayerController : MonoBehaviour {
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
+        //First check if the player has a pushable block attached.
         PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
         if (attachedBlock != null)
         {
@@ -233,6 +249,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            // Check for a nearby block to pick up.
             PushableObject nearbyBlock = getNearbyPushable();
             if (IsGrounded() && nearbyBlock != null)
             {
