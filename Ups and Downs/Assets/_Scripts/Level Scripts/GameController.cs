@@ -208,6 +208,21 @@ public class GameController : SingletonObject<GameController> {
     public void gameOver()
     {
         Debug.Log("GAMEOVER");
+
+		ApplicationModel.time = gameData.Time;
+		ApplicationModel.coinsFound = gameData.CoinsFound;
+		ApplicationModel.totalCoins = getTotalCoins();
+		ApplicationModel.deathCount = gameData.Deaths;
+		ApplicationModel.levelNumber = gameData.LevelNumber;
+		ApplicationModel.score = calculateScore (gameData.CoinScore, gameData.Time, gameData.Deaths);
+		if (gameData.LevelNumber == 0) {
+			ApplicationModel.levelName = "Tutorial";
+		} else {
+			ApplicationModel.levelName = "Level "+ gameData.LevelNumber;
+		}
+
+		SceneManager.LoadScene (GameOverController.GAME_OVER_SCENE_NAME);
+
     }
 
 
