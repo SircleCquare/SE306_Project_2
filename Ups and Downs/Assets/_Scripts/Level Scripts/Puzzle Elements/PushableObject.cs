@@ -48,7 +48,7 @@ public class PushableObject : MonoBehaviour  {
         Vector3 directionToObject = rb.position - pushingPlayer.transform.position;
         directionToObject = Vector3.Normalize(directionToObject) * attachDistance;
 
-        rb.position = pushingPlayer.transform.position + directionToObject;
+        transform.position = pushingPlayer.transform.position + directionToObject;
 
 
         // TODO: set character's carrying object boolean value
