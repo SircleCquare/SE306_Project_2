@@ -73,10 +73,12 @@ public class PlayerController : MonoBehaviour {
         // Apply deadzone to minor variations around the midpoint.
         if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
         {
+			animator.SetBool ("RunningFwd", false);
             moveHorizontal = 0f;
         }
         else
         {
+			animator.SetBool ("RunningFwd", true);
             // Normalize values outside of this dead zone to be either 1 or -1
             moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
         }
@@ -96,16 +98,19 @@ public class PlayerController : MonoBehaviour {
         if (IsGrounded())
         {
             // If the player is on the ground and jumping, apply jump force.
-            if (gameController.isJump())
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                airTimeCount = airtime;
-            }
+			if (gameController.isJump ()) {
+				animator.SetBool ("isJumping", true);
+				rb.AddForce (Vector3.up * jumpForce, ForceMode.Impulse);
+				airTimeCount = airtime;
+			} else {
+				animator.SetBool ("isJumping", false);
+			}
         }
         else
         {
             if (gameController.isJump() && airTimeCount > 0)
             {
+				animator.SetBool ("isJumping", true);
                 // If the player holds down the jump key, gravity is not applied
                 // This gives the appearance of a longer jump.
                 airTimeCount -= Time.fixedDeltaTime;
