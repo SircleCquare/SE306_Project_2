@@ -221,7 +221,7 @@ public class GameController : SingletonObject<GameController> {
 			ApplicationModel.levelName = "Level "+ gameData.LevelNumber;
 		}
 
-		SceneManager.LoadScene (FinishController.GAME_OVER_SCENE_NAME);
+		SceneManager.LoadScene (GameOverController.GAME_OVER_SCENE_NAME);
 
     }
 
