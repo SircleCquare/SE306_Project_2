@@ -9,19 +9,11 @@ public class PlayerController : MonoBehaviour {
     private GameController gameController;
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
-    private CharacterController controller;
     private Animator animator;
 
     /** Configurable Player Variables */
     public Side PlayerSide;
-    /* Movement Variables */
-    public float speed = 10.0F;
-    public float jumpSpeed = 20.0F;
-    public float gravity = 20.0F;
-    public float gravityForce = 3.0f;
-    public float airTime = 1f;
-    public float leechSpeedMultiplier = 3.5f;
-    public float leechJumpMultiplier = 1.5f;
+
 
     /** How far away switchs can be activated from */
 	public float switchSearchRadius = 1.0f;
@@ -33,7 +25,18 @@ public class PlayerController : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private float forceY = 0;
     private float invertGrav;
+    public float maxSpeed = 10f;
+    public float speed;
 
+    public float jumpForce = 10f;
+    public float gravity = 5f;
+    public float airtime = 1f;
+
+    public float deadzone = 0.2f;
+    private Rigidbody rb;
+    private float distToGround;
+
+    private float airTimeCount;
     /** Death Flash */
     // Switch to turn off death flash for deprecated models (Stops models breaking)
     public bool damageFlash = false;
@@ -56,9 +59,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        invertGrav = gravity + airTime;
-		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
+
+        rb = GetComponent<Rigidbody>();
+        distToGround = GetComponent<Collider>().bounds.extents.y;
 
         leeches = new List<LeechEnemy>();
         gameController = GameController.Singleton;
@@ -67,73 +71,68 @@ public class PlayerController : MonoBehaviour {
             shirt = Array.Find(GetComponentsInChildren<Renderer>()[0].materials, mat => mat.name.Contains("Shirt"));
             baseColor = shirt.color;
         }
-        // Get the initial Checkpoint for the scene.
-        
-        
+
     }
 
-    void Update()
+    void FixedUpdate()
     {
-		if (gameController == null) {
-			Debug.Log ("NULL");
-		}
-		updateMovement();
-		if (gameController.getSide() == PlayerSide) {
-			if (gameController.isActivate()) {
-				activateSwitchs();
-			}
-
-			Vector3 currentPosition = transform.position;
-            currentPosition.z = (gameController.getSide () == Side.Dark) ? gameController.darkSideZ : gameController.lightSideZ;
-			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
-			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
-			transform.position = currentPosition;
-		}
-    }
-
-    /// <summary>
-    /// Updates the users horizontal and vertical movement based on input 
-    /// </summary>
-    private void updateMovement()
-    {
-        float horizontalMag;
-        bool jump;
+       
         if (gameController.getSide() != PlayerSide)
         {
-            horizontalMag = 0f;
-            jump = false;
+            return;
+        }
+        if (gameController.isActivate())
+        {
+            activateSwitchs();
+        }
+        float moveHorizontal = gameController.getHorizontalMagnitude();
+        AdjustFacing(moveHorizontal);
+
+        if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
+        {
+            moveHorizontal = 0f;
         }
         else
         {
-            horizontalMag = gameController.getHorizontalMagnitude();
-            jump = gameController.isJump();
+            moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
         }
 
-        animator.SetBool("RunningFwd", ((horizontalMag == 0) ? false : true));
-        AdjustFacing(horizontalMag);
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * speed;
 
-        moveDirection = new Vector3(horizontalMag, 0, 0);
-        moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (controller.isGrounded)
+        movement.y = rb.velocity.y;
+        rb.velocity = movement;
+
+        Vector3 clampedVelocity = rb.velocity;
+        clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeed, maxSpeed);
+        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -jumpForce, jumpForce);
+        clampedVelocity.z = 0;
+        rb.velocity = clampedVelocity;
+
+        if (IsGrounded())
         {
-            forceY = 0;
-            invertGrav = gravity * airTime;
-            if (jump)
+            if (gameController.isJump())
             {
-                forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                airTimeCount = airtime;
             }
         }
-		animator.SetBool("isJumping", jump && !controller.isGrounded);
-        if (jump && forceY != 0)
+        else
         {
-            invertGrav -= Time.deltaTime;
-            forceY += invertGrav * Time.deltaTime;
-        }
+            if (gameController.isJump() && airTimeCount > 0)
+            {
+                airTimeCount -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
 
-        forceY -= gravity * Time.deltaTime * gravityForce;
-        forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
-        moveDirection.y = forceY;
-        controller.Move(moveDirection * Time.deltaTime);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
     }
 
     public void addHeart()
