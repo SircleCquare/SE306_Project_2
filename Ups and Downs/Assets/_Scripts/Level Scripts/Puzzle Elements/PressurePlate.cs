@@ -22,7 +22,7 @@ public class PressurePlate : Switch
     protected override void Start () {
         base.Start();
 
-        // Get actual plate object that needs to move
+        // Get actual plate object that moves up and down
         plate = Array.Find(GetComponentsInChildren<Transform>(), child => child.name.Equals("Plate"));
 
         uncompressedPosition = plate.position;
@@ -33,7 +33,10 @@ public class PressurePlate : Switch
     }
 
 
-
+    /**
+     * Coroutine to compress the plate, moves it between
+     * the initial and compressed position over the compress time
+     **/
     private IEnumerator CompressPlate() {
         state = PlateState.MOVING;
         Vector3 initialPosition = plate.position;
@@ -51,6 +54,11 @@ public class PressurePlate : Switch
         state = PlateState.COMPRESSED;
     }
 
+
+    /**
+     * Coroutine to compress the plate, moves it between
+     * the initial and uncompressed position over the compress time
+     **/
     private IEnumerator RaisePlate() {
         state = PlateState.MOVING;
         Vector3 initialPosition = plate.position;
@@ -72,6 +80,7 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            // Stop any current co-routines before starting a new one
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
             StartCoroutine(CompressPlate());
@@ -82,6 +91,7 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            // Stop any current co-routines before starting a new one
 			StopCoroutine(CompressPlate());
 			StopCoroutine(RaisePlate());
 			StartCoroutine (RaisePlate ());
