@@ -67,14 +67,6 @@ public class GameData
 
     public const int MAX_HEALTH = 5;
 
-    /// <summary>
-    /// Set the location of the save file
-    /// </summary>
-    static void SetSaveFile()
-    {
-        saveFile = saveFile ?? Application.persistentDataPath + "/save.ser";
-    }
-
     private GameData()
     {
         // Initialise level state
@@ -228,38 +220,36 @@ public class GameData
 
     #region Persistence
     /// <summary>
-    /// Load the game data from a save file
+    /// Load the game data from player prefs
     /// </summary>
     /// <returns>The loaded game data instance</returns>
     public static GameData LoadInstance()
     {
-        SetSaveFile(); 
-
-        if (!File.Exists(saveFile))
+        if (!PlayerPrefs.HasKey("data"))
         {
             // If no save exists, create new game data and save
-            Debug.Log("No save file found");
+            Debug.Log("No save found");
             CreateFreshSave();
         }
         else
         {
+            // Get serialized data as binary array to deserialize
+            var binaryData = Convert.FromBase64String(PlayerPrefs.GetString("data"));
+
             // Load file
-            using (var saveFileStream = File.Open(saveFile, FileMode.Open))
+            using (var binaryStream = new MemoryStream(binaryData))
             {
                 try
                 {
                     var serializer = new BinaryFormatter();
-                    instance = serializer.Deserialize(saveFileStream) as GameData;
-                    saveFileStream.Close();
+                    instance = serializer.Deserialize(binaryStream) as GameData;
                     Debug.Log("Save data loaded");
                 }
                 catch (SerializationException)
                 {
-                    // If the load is not possible because the save file is corrupt, create a new one
+                    // If the load is not possible because the save is corrupt, create a new one
                     // TODO either remove this when no more changes will occur to game data or show message to user to inform them it happened
                     Debug.Log("Save data corrupted, creating new one");
-                    // Need to close save file first to allow it to be overwritten in another method
-                    saveFileStream.Close();
                     CreateFreshSave();
                 }
 
@@ -294,25 +284,19 @@ public class GameData
         // Convert high scores for serialization
         HighScoresToList();
 
-        // Remove existing save data
-        if (!File.Exists(saveFile))
-        {
-            Debug.Log("Remove existing save file to be replaced");
-
-            File.Delete(saveFile);
-        }
-
-        // Serialise data and save to save file
-        using (var saveFileStream = File.Create(saveFile))
+        // Serialise data and save to save player prefs
+        using (var binaryStream = new MemoryStream())
         {
             var serializer = new BinaryFormatter();
-            serializer.Serialize(saveFileStream, this);
-            saveFileStream.Close();
+            serializer.Serialize(binaryStream, this);
+
+            // Stored as a string in player prefs
+            PlayerPrefs.SetString("data", Convert.ToBase64String(binaryStream.ToArray()));
         }
 
+        PlayerPrefs.Save();
+
         Debug.Log("Game saved");
-
-
     }
 
     /// <summary>
