@@ -25,8 +25,26 @@ public class GameData
     /// For this dictionary, the key is the score and the value is the player's name. 
     /// This dictionary will have at most 5 highscores in it. Only the highest five scores are kept
     /// (as specified by MAX_HIGH_SCORES)
+    /// 
+    /// This cannot be serialized, so it is converted to a set of arrays for storage at save time. 
     /// </summary>
-    private Dictionary<string, SortedDictionary<int, string>> HighScores { get; set; }
+    [NonSerialized] Dictionary<string, SortedDictionary<int, string>> HighScores;
+
+    /// <summary>
+    /// An array for storing high score strings for serialization. 
+    /// 
+    /// The first element is the level name. The second element is the player's name. 
+    /// The indexes correleate with the indexes in the high score values array which 
+    /// contain the score that matches that player name and value. 
+    /// </summary>
+    private string[,] highScoreLevelAndPlayerName;
+
+    /// <summary>
+    /// An array that stores high score values. 
+    /// Each row corresponds to a the same row in the highScoreLevelAndPlayerName array. 
+    /// </summary>
+    private int[] highScoreValues; 
+     
 
     /// <summary>
     /// Maximum number of high scores stored per level 
@@ -120,6 +138,59 @@ public class GameData
 
 
     #region HighScores
+
+    /// <summary>
+    /// Store the dictionary of high scores as arrays for serialization.
+    /// </summary>
+    private void HighScoresToArrays()
+    {
+        var numScores = 0;
+
+        foreach (var key in HighScores.Keys)
+        {
+            numScores += HighScores[key].Count; 
+        } 
+
+        highScoreLevelAndPlayerName = new string[numScores, 2];
+        highScoreValues = new int[numScores];
+
+        var i = 0; 
+
+        foreach (var level in HighScores.Keys)
+        {
+            foreach (var score in HighScores[level])
+            {
+                highScoreLevelAndPlayerName[i, 0] = level;
+                highScoreLevelAndPlayerName[i, 1] = score.Value;
+
+                highScoreValues[i] = score.Key;
+
+                i++; 
+            }
+        }
+    }
+
+    /// <summary>
+    /// Read the 2 arrays storing high score values and build the dictionary of highscores. 
+    /// </summary>
+    private void HighScoresFromArrays()
+    {
+        var numScores = highScoreValues.Length;
+
+        for (var i = 0; i < numScores; i++)
+        {
+            var levelName = highScoreLevelAndPlayerName[i, 0];
+            var playerName = highScoreLevelAndPlayerName[i, 1];
+            var score = highScoreValues[i];
+
+            if (!HighScores.ContainsKey(levelName))
+            {
+                HighScores[levelName] = new SortedDictionary<int, string>(); 
+            }
+
+            HighScores[levelName].Add(score, playerName);
+        }
+    }
 
     /// <summary>
     /// Test if the current score is in the top five high scores. 
@@ -216,6 +287,9 @@ public class GameData
             }
         }
 
+        // Convert high scores for usage
+        instance.HighScoresFromArrays();
+
         return instance;
     }
 
@@ -224,6 +298,9 @@ public class GameData
     /// </summary>
     public void Save()
     {
+        // Convert high scores for serialization
+        HighScoresToArrays();
+
         // Remove existing save data
         if (!File.Exists(saveFile))
         {
@@ -241,6 +318,8 @@ public class GameData
         }
 
         Debug.Log("Game saved");
+
+
     }
 
     /// <summary>
