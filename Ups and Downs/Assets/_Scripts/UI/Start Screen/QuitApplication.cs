@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class QuitApplication : MonoBehaviour {
+	//This script will not be used in the final web build of the game.
 
 	public void Quit()
 	{

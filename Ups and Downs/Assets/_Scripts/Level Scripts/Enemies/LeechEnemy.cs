@@ -19,6 +19,8 @@ public class LeechEnemy : Enemy
 	public float heightMultiple = 3f;
     public AnimationCurve jumpSizePulse;
 
+    private Coroutine animationRoutine;
+
     protected override void Start()
     {
         var gameController = GameController.Singleton;
@@ -34,6 +36,7 @@ public class LeechEnemy : Enemy
             initPosition.z = gameController.darkSideZ;
         }
         transform.position = initPosition;
+
         base.Start();
     }
 
@@ -41,8 +44,8 @@ public class LeechEnemy : Enemy
 		state = LeechState.MOVING;
 		Vector3 attachPosition = GetAttachPosition();
 		attachPosition.z -= forwardDistance;
-		Vector3 origPosition = transform.position;
-		Vector3 initialScale = transform.localScale;
+        Vector3 origPosition = transform.position;
+        Vector3 initialScale = transform.localScale;
 		float time = 0f;
 
 		while (time < 1f) {
@@ -107,7 +110,7 @@ public class LeechEnemy : Enemy
 				bool hit = Vector3.Distance (transform.position, player.transform.position) <= hitRadius;
 				if (hit)
 				{
-					StartCoroutine(AttachToPlayer());
+                    animationRoutine = StartCoroutine(AttachToPlayer());
 				}
 				break;
 
@@ -117,8 +120,13 @@ public class LeechEnemy : Enemy
     // Reset leech state on player death
     public override void ResetBehaviour()
     {
-        base.ResetBehaviour();
-        GameController.Singleton.disableShakyCam();
+        if (animationRoutine != null)
+        {
+            GameController.Singleton.disableShakyCam();
+            StopCoroutine(animationRoutine);
+            transform.parent = null;
+            base.ResetBehaviour();
+        }
     }
 
     // Destroy leech object on de-leech collectible pickup

@@ -33,6 +33,8 @@ public class GameController : SingletonObject<GameController> {
 	private bool finishedLevelDark;
 	private bool finishedLevelLight;
 
+	private bool inMainMenu;
+
     /* UI components */
     public Slider healthBar;
     public Text timeText;
@@ -44,7 +46,7 @@ public class GameController : SingletonObject<GameController> {
     public Text achievementText;
     public GameObject dialogBox;
     public Text dialogBoxCharacterName;
-    public Text dialogBoxMessage; 
+    public Text dialogBoxMessage;
 
     public float darkSideZ = -2.5f;
     public float lightSideZ = 2.5f;
@@ -59,7 +61,6 @@ public class GameController : SingletonObject<GameController> {
 
 
     // Checkpoint list
-
     private List<Checkpoint> lightSideCheckpoints = new List<Checkpoint>();
     private List<Checkpoint> darkSideCheckpoints = new List<Checkpoint>();
 
@@ -80,7 +81,10 @@ public class GameController : SingletonObject<GameController> {
         gameData.TotalNumberOfCoins = coinObjectList.Length;
 
         // Set limit for healthbar to allow proper proportion highlighted
-        healthBar.maxValue = MAX_HEALTH;
+		if (healthBar != null) {
+			
+			healthBar.maxValue = MAX_HEALTH;
+		}
 
         // Update current character selected
         UpdateCurrentCharacterDisplay();
@@ -94,6 +98,7 @@ public class GameController : SingletonObject<GameController> {
     }
 
     void Update() {
+		Debug.Log (inMainMenu);
 
         // Try to hide the dialog box if it is visible
         if (dialogBox.activeSelf)
@@ -268,7 +273,7 @@ public class GameController : SingletonObject<GameController> {
     /// <summary>
     /// Removes one of the brothers shared hearts.
     /// </summary>
-    public void removeHeart()
+    private void removeHeart()
     {
         if (gameData.Heart > 1)
         {
@@ -282,6 +287,28 @@ public class GameController : SingletonObject<GameController> {
             gameOver();
         }
         
+    }
+
+
+    // Handle level behaviour on player death
+    public void playerDeath()
+    {
+        gameData.Deaths++;
+        removeHeart();
+
+        int lightCheckpoint = lightPlayer.getCheckpointNumber(),
+            darkCheckpoint = darkPlayer.getCheckpointNumber();
+        int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
+
+        cameraPinController.resetShakyCam();
+
+        lightPlayer.resetToCheckpoint(resetTo);
+        darkPlayer.resetToCheckpoint(resetTo);
+
+        // Reset all enemies in level.
+        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+            e.ResetBehaviour();
+        }
     }
 
     public int getCurrentHealth()
@@ -523,6 +550,10 @@ public class GameController : SingletonObject<GameController> {
 		//send score and time to ApplicationModel
 		ApplicationModel.score = gameData.CoinScore; // TODO
 		ApplicationModel.time = gameData.Time;
+	    ApplicationModel.coinsFound = gameData.CoinsFound;
+	    ApplicationModel.totalCoins = getTotalCoins();
+	    ApplicationModel.deathCount = gameData.Deaths;
+
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
@@ -547,4 +578,12 @@ public class GameController : SingletonObject<GameController> {
     {
         cameraPinController.enableShakyCam = false;
     }
+
+	public void setInMainMenu(bool state) {
+		inMainMenu = state;
+	}
+
+	public bool getInMainMenu() {
+		return inMainMenu;
+	}
 }
