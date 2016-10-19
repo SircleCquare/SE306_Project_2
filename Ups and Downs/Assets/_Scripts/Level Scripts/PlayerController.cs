@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(DamageFlash());
         }
 
-        ApplicationModel.deathCount++;
+        gameController.incrementDeathCount();
         deLeech();
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
