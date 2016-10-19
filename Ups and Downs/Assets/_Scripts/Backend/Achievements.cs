@@ -3,15 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Used to store the list of achievements in the game
+/// Class that stores and manages achievements in the game.
 /// </summary>
 public class Achievements {
 
+	/*
+	* The Dictionary of all achievements in the game. Each Achievement has a name and a description
+	* which explains the criteria for earning it.
+	*/
     public static Dictionary<string, string> achievementList = new Dictionary<string, string>()
     {
         {"Tutorial", "Completed the Tutorial"},
         {"Level 1", "Completed Level One"},
-		{"I'm rich", "Collected your first coin"},
+		    {"I'm rich", "Collected your first coin"},
         {"100 coins", "Collected 100 coins total"}
     };
 
@@ -20,13 +24,13 @@ public class Achievements {
     */
     public static void UnlockAchievement(string achievementName, GameObject achievementPopUp, Text achievementText, GameData gameData)
     {
-        // Only pop achievement description when achievement first awarded
+        // If this achievement has not already been awarde, then display it and update the game state.
         if (!gameData.awardedAchievements.Contains(achievementName))
         {
             // Record achievement
             gameData.awardedAchievements.Add(achievementName);
 
-            // Display achievement pop up 
+            // Display achievement pop up
             achievementText.text = Achievements.achievementList[achievementName];
             achievementPopUp.SetActive(true);
 

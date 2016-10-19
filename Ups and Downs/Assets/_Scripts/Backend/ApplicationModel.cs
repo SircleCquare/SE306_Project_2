@@ -3,7 +3,7 @@ using System.Collections;
 
 /**
  * A persistent class that persists through scene changes.
- * TODO: rework into GameData
+ * ApplicationModel stores game state in conjunction with GameData.
  * */
 public static class ApplicationModel {
 

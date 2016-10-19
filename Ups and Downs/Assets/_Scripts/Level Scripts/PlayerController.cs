@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour {
     private List<LeechEnemy> leeches;
     private bool invisible = false;
 
+	/** direction in terms of x axis*/
+	private const int FORWARD = 1;
+
 
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
@@ -307,7 +310,7 @@ public class PlayerController : MonoBehaviour {
     {
         currentCheckpoint = gameController.getCheckpoint(PlayerSide, checkpoint);
         transform.position = currentCheckpoint.getPosition();
-
+		AdjustFacing(FORWARD); 
     }
 
     public int getCheckpointNumber()

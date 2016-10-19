@@ -38,7 +38,7 @@ public class GameController : SingletonObject<GameController> {
 	private bool inMainMenu;
 
     /* UI components */
-    public Slider healthBar;
+    public HealthController healthBar;
     public Text timeText;
     public Text characterName;
     public Image characterAvatar;
@@ -85,7 +85,7 @@ public class GameController : SingletonObject<GameController> {
         // Set limit for healthbar to allow proper proportion highlighted
 		if (healthBar != null) {
 			
-			healthBar.maxValue = MAX_HEALTH;
+			//healthBar.maxValue = MAX_HEALTH;
 		}
 
         // Update current character selected
@@ -208,6 +208,21 @@ public class GameController : SingletonObject<GameController> {
     public void gameOver()
     {
         Debug.Log("GAMEOVER");
+
+		ApplicationModel.time = gameData.Time;
+		ApplicationModel.coinsFound = gameData.CoinsFound;
+		ApplicationModel.totalCoins = getTotalCoins();
+		ApplicationModel.deathCount = gameData.Deaths;
+		ApplicationModel.levelNumber = gameData.LevelNumber;
+		ApplicationModel.score = calculateScore (gameData.CoinScore, gameData.Time, gameData.Deaths);
+		if (gameData.LevelNumber == 0) {
+			ApplicationModel.levelName = "Tutorial";
+		} else {
+			ApplicationModel.levelName = "Level "+ gameData.LevelNumber;
+		}
+
+		SceneManager.LoadScene (GameOverController.GAME_OVER_SCENE_NAME);
+
     }
 
 
@@ -266,7 +281,8 @@ public class GameController : SingletonObject<GameController> {
         if (getCurrentHealth() < MAX_HEALTH)
         {
             gameData.Heart = MAX_HEALTH;
-            healthBar.value = MAX_HEALTH;
+			healthBar.showLastHeart ();
+            //healthBar.value = MAX_HEALTH;
             return true;
         }
         else
@@ -283,12 +299,12 @@ public class GameController : SingletonObject<GameController> {
         if (gameData.Heart > 1)
         {
             gameData.Heart--;
-            healthBar.value--;
+			healthBar.hideLastHeart();
            
         } else
         {
             gameData.Heart--;
-            healthBar.value--;
+			healthBar.hideLastHeart();
             gameOver();
         }
         
@@ -326,7 +342,8 @@ public class GameController : SingletonObject<GameController> {
 
 	public void resetHealth(){
 		gameData.Heart = MAX_HEALTH;
-		healthBar.value = MAX_HEALTH;
+		healthBar.showAllHearts ();
+		//healthBar.value = MAX_HEALTH;
 	}
 
     public PlayerController getActivePlayer()

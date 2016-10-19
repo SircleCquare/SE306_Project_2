@@ -8,7 +8,7 @@ public class StartOptions : MonoBehaviour {
 
 
 
-	public string sceneToStart;		            						//Index number in build settings of scene to load if changeScenes is true
+	public string sceneToStart;		            						//Name of scene to load if changeScenes is true
 	public bool changeScenes;											//If true, load a new scene when Start is pressed, if false, fade out UI and continue in single scene
 	public bool changeMusicOnStart;										//Choose whether to continue playing menu music or start a new music clip
 
