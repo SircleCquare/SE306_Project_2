@@ -42,7 +42,7 @@ public class HighScore : MonoBehaviour
                 scoreField = fields[1];
 
             nameField.text = highScore.PlayerName;
-            scoreField.text = highScore.Score.ToString("#,##0");
+            scoreField.text = highScore.PointsValue.ToString("#,##0");
         }
     }
 

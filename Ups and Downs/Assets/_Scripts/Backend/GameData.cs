@@ -14,6 +14,9 @@ public class GameData
 
     [NonSerialized] private static string saveFile;
 
+    /// <summary>
+    /// A list of achievements the player has unlocked
+    /// </summary>
     public List<string> awardedAchievements { get; set; }
 
     /// <summary>
@@ -31,20 +34,9 @@ public class GameData
     [NonSerialized] Dictionary<string, List<HighScoreValue>> HighScores;
 
     /// <summary>
-    /// An array for storing high score strings for serialization. 
-    /// 
-    /// The first element is the level name. The second element is the player's name. 
-    /// The indexes correleate with the indexes in the high score values array which 
-    /// contain the score that matches that player name and value. 
+    /// An unsorted list for storing HighScores so they can be serialized.  
     /// </summary>
-    private string[,] highScoreLevelAndPlayerName;
-
-    /// <summary>
-    /// An array that stores high score values. 
-    /// Each row corresponds to a the same row in the highScoreLevelAndPlayerName array. 
-    /// </summary>
-    private int[] highScoreValues; 
-     
+    private List<HighScoreValue> highScoreList;
 
     /// <summary>
     /// Maximum number of high scores stored per level 
@@ -140,56 +132,35 @@ public class GameData
     #region HighScores
 
     /// <summary>
-    /// Store the dictionary of high scores as arrays for serialization.
+    /// Store the dictionary of high scores as a list for serialization.
     /// </summary>
-    private void HighScoresToArrays()
+    private void HighScoresToList()
     {
-        var numScores = 0;
+        highScoreList = new List<HighScoreValue>();
 
-        foreach (var key in HighScores.Keys)
-        {
-            numScores += HighScores[key].Count; 
-        } 
-
-        highScoreLevelAndPlayerName = new string[numScores, 2];
-        highScoreValues = new int[numScores];
-
-        var i = 0; 
-
+        // Add the scores for each level to a list
         foreach (var level in HighScores.Keys)
         {
-            foreach (var score in HighScores[level])
-            {
-                highScoreLevelAndPlayerName[i, 0] = level;
-                highScoreLevelAndPlayerName[i, 1] = score.PlayerName;
-
-                highScoreValues[i] = score.Score;
-
-                i++; 
-            }
+            highScoreList.AddRange(HighScores[level]);
         }
     }
 
     /// <summary>
-    /// Read the 2 arrays storing high score values and build the dictionary of highscores. 
+    /// Converts highscores from list to dictionary for quick retreival
     /// </summary>
-    private void HighScoresFromArrays()
+    private void HighScoresFromList()
     {
-        var numScores = highScoreValues.Length;
-
-        for (var i = 0; i < numScores; i++)
+        // Add each score to the dictionary
+        foreach (var score in highScoreList)
         {
-            var levelName = highScoreLevelAndPlayerName[i, 0];
-            var playerName = highScoreLevelAndPlayerName[i, 1];
-            var score = highScoreValues[i];
-
-            if (!HighScores.ContainsKey(levelName))
+            // Create a list to hold scores for a level if none exists
+            if (!HighScores.ContainsKey(score.LevelName))
             {
-                HighScores[levelName] = new List<HighScoreValue>(); 
+                HighScores.Add(score.LevelName, new List<HighScoreValue>());
             }
 
-            HighScores[levelName].Add(new HighScoreValue(score, playerName));
-        }
+            HighScores[score.LevelName].Add(score);
+        }   
     }
 
     /// <summary>
@@ -201,7 +172,7 @@ public class GameData
     {
         var highScores = GetOrderedHighScoresForLevel(levelName);
 
-        return highScores.Count < MAX_HIGH_SCORES || score > highScores[highScores.Count - 1].Score;
+        return highScores.Count < MAX_HIGH_SCORES || score >= highScores[highScores.Count - 1].PointsValue;
     }
 
     /// <summary>
@@ -225,7 +196,7 @@ public class GameData
             }
 
             // Add highscore
-            highScores.Add(new HighScoreValue(score, playerName));
+            highScores.Add(new HighScoreValue(levelName, score, playerName));
 
             highScores.Sort();
         }
@@ -297,7 +268,7 @@ public class GameData
         }
 
         // Convert high scores for usage
-        instance.HighScoresFromArrays();
+        instance.HighScoresFromList();
 
         return instance;
     }
@@ -308,7 +279,7 @@ public class GameData
     public void Save()
     {
         // Convert high scores for serialization
-        HighScoresToArrays();
+        HighScoresToList();
 
         // Remove existing save data
         if (!File.Exists(saveFile))
