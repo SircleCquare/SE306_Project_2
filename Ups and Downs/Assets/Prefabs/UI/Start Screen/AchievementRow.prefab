@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11411508}
   - 114: {fileID: 11481094}
   m_Layer: 5
-  m_Name: Achievement
+  m_Name: AchievementRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

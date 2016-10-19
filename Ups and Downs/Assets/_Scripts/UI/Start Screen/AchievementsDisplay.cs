@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// Logic to display achievements in panel on start screen. 
@@ -26,6 +27,14 @@ public class AchievementsDisplay : MonoBehaviour
         var gameData = GameData.LoadInstance();
         var awardedAchievements = gameData.awardedAchievements;
         var allAchievements = Achievements.achievementList;
+
+        // Clear what is currently shown in panel
+        var oldAchievementCount = ScrollPaneContent.transform.childCount;
+        for (var i = oldAchievementCount - 1 ; i >= 0 ; i--)
+        {
+            var child = ScrollPaneContent.transform.GetChild(i);
+            Destroy(child.gameObject);
+        }
 
         // Show each achievement
         foreach (var achievement in allAchievements.Keys)

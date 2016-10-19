@@ -8,6 +8,8 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
     public GameObject achievementsPanel;                    //Store a reference to the Game Object AchievementPanel 
+    public GameObject highScoresPanel;                    //Store a reference to the Game Object HighScoresPanel 
+
 
 
     //Call this function to activate and display the Options panel during the main menu
@@ -34,6 +36,18 @@ public class ShowPanels : MonoBehaviour {
     public void HideAchievementsPanel()
     {
         achievementsPanel.SetActive(false);
+    }
+
+    //Call this function to activate and display the achievements panel during the main menu
+    public void ShowHighScoresPanel()
+    {
+        highScoresPanel.SetActive(true);
+    }
+
+    //Call this function to deactivate and hide the achievements panel during the main menu
+    public void HideHighScoresPanel()
+    {
+        highScoresPanel.SetActive(false);
     }
 
     //Call this function to activate and display the main menu panel during the main menu
