@@ -3470,7 +3470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a5fa76fe0a547ee842d7fecb84c442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToStart: 4c6576656c2053656c656374
+  sceneToStart: Level Select
   changeScenes: 1
   changeMusicOnStart: 0
   animColorFade: {fileID: 187046040}
