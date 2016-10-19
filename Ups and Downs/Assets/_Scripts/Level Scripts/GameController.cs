@@ -59,7 +59,6 @@ public class GameController : SingletonObject<GameController> {
 
 
     // Checkpoint list
-
     private List<Checkpoint> lightSideCheckpoints = new List<Checkpoint>();
     private List<Checkpoint> darkSideCheckpoints = new List<Checkpoint>();
 
@@ -555,5 +554,18 @@ public class GameController : SingletonObject<GameController> {
     public void disableShakyCam()
     {
         cameraPinController.enableShakyCam = false;
+    }
+
+    public void kill()
+    {
+        removeHeart();
+        incrementDeathCount();
+
+        int lightCheckpoint = lightPlayer.getCheckpointNumber(),
+            darkCheckpoint = darkPlayer.getCheckpointNumber();
+        int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
+
+        lightPlayer.resetToCheckpoint(resetTo);
+        darkPlayer.resetToCheckpoint(resetTo);
     }
 }

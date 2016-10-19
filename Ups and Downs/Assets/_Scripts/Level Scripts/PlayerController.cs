@@ -280,23 +280,35 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void resetToCheckpoint(int checkpoint)
+    {
+        currentCheckpoint = gameController.getCheckpoint(PlayerSide, checkpoint);
+        transform.position = currentCheckpoint.getPosition();
+
+    }
+
+    public int getCheckpointNumber()
+    {
+        if (currentCheckpoint == null)
+        {
+            currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
+        }
+
+        return currentCheckpoint.order;
+    }
+
    /// <summary>
    /// Kills the player. The player returns to their last checkpoint and loses one heart.
    /// </summary>
     public void kill()
     {
         Debug.Log("Killing");
-        if (currentCheckpoint == null)
-        {
-            currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
-        }
-        transform.position = currentCheckpoint.getPosition();
-        gameController.removeHeart();
 
-        gameController.incrementDeathCount();
         deLeech();
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
         }
+
+        gameController.kill();
     }
 }
