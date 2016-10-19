@@ -1590,6 +1590,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11427390, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: terminalVelocity
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
   m_IsPrefabParent: 0
