@@ -26,6 +26,7 @@ public class FinishScreenButtons : MonoBehaviour {
 		SceneManager.LoadScene (levelNumber + 2);	//someone get rid of these magic numbers ;_;
 	}
 
+	//Don't use this. The functionality can be achieved using LevelSelect#loadLevel("Start")
 	public void QuitToMainMenu()
 	{
 		SceneManager.LoadScene (0);
