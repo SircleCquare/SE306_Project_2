@@ -100,8 +100,6 @@ public class GameController : SingletonObject<GameController> {
     }
 
     void Update() {
-		Debug.Log (inMainMenu);
-
         // Try to hide the dialog box if it is visible
         if (dialogBox.activeSelf)
         {

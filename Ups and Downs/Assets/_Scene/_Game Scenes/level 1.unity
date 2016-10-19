@@ -1109,7 +1109,7 @@ Prefab:
       propertyPath: m_Text
       value: 'Our struggles can
 
-        slow us down'
+        be disorienting'
       objectReference: {fileID: 0}
     - target: {fileID: 125552, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Name

@@ -15,6 +15,10 @@ public class SpawnedBubble : Enemy
     public float lifeMax;
     // An artibitary growth rate of a bubble.
     public float growth = 0.5f;
+    // Forcemode to apply to player on collision
+    public ForceMode forceMode = ForceMode.VelocityChange;
+    // Force to apply to player on collision
+    public float pushForce = 20f;
 
     private float life;
 
@@ -46,14 +50,12 @@ public class SpawnedBubble : Enemy
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == GameController.PLAYER_TAG)
-        {
-            if (growth > 0)
-            {
-                growth = -growth;
-                transform.position += Vector3.Normalize(Vector3.MoveTowards(transform.position, other.gameObject.transform.position, 1f)) * growth;
-            }
-        }
+        GameObject collided = other.gameObject;
         
+        if (collided.tag != GameController.PLAYER_TAG) return;
+        
+        Rigidbody playerRb = collided.GetComponent<Rigidbody>();
+        Vector3 forceDirection = Vector3.Normalize(collided.transform.position - transform.position);
+        playerRb.AddForce(forceDirection * pushForce, forceMode);
     }
 }

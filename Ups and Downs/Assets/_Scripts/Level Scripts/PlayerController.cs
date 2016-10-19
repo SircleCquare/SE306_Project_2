@@ -7,32 +7,27 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
     /* Interactable Components */
     private GameController gameController;
+    private Animator animator;
+    private Rigidbody rb;
     // The check which the player will respawn back to if they die.
     private Checkpoint currentCheckpoint;
-    private CharacterController controller;
-    private Animator animator;
 
-    /** Configurable Player Variables */
+    /** Configurable Player Behaviour Variables */
     public Side PlayerSide;
-    /* Movement Variables */
-    public float speed = 10.0F;
-    public float jumpSpeed = 20.0F;
-    public float gravity = 20.0F;
-    public float gravityForce = 3.0f;
-    public float airTime = 1f;
-    public float leechSpeedMultiplier = 3.5f;
-    public float leechJumpMultiplier = 1.5f;
-
-    /** How far away switchs can be activated from */
+    /* How far away switchs can be activated from */
 	public float switchSearchRadius = 1.0f;
-	public float darkSideZ = -2.5f;
-	public float lightSideZ = 2.5f;
-    public float terminalVelocity = 200.0f;
+
+    /** Configurable Player Movement Variables */
+    public float maxSpeed = 10f;
+    public float runningForce = 13f;
+    public float jumpForce = 10f;
+    public float gravity = 5f;
+    public float airtime = 1f;
+    public float deadzone = 0.01f;
 
     /** private, persistent, movement variables */
-    private Vector3 moveDirection = Vector3.zero;
-    private float forceY = 0;
-    private float invertGrav;
+    private float distToGround;
+    private float airTimeCount;
 
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
@@ -42,80 +37,95 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
 		GameController.Singleton.RegisterPlayer (this);
     }
-
+    
     void Start() {
-        invertGrav = gravity + airTime;
-		controller = GetComponent<CharacterController>();
-		animator = GetComponent<Animator>();
-
-        leeches = new List<LeechEnemy>();
-        gameController = GameController.Singleton;
-        
-        // Get the initial Checkpoint for the scene.
+       rb = GetComponent<Rigidbody>();
+       distToGround = GetComponent<Collider>().bounds.extents.y;
+       animator = GetComponent<Animator>();
+       leeches = new List<LeechEnemy>();
+       gameController = GameController.Singleton;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-		if (gameController == null) {
-			Debug.Log ("NULL");
-		}
-		updateMovement();
-		if (gameController.getSide() == PlayerSide) {
-			if (gameController.isActivate()) {
-				activateSwitchs();
-			}
-
-			Vector3 currentPosition = transform.position;
-            currentPosition.z = (gameController.getSide () == Side.DARK) ? gameController.darkSideZ : gameController.lightSideZ;
-			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
-			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
-			transform.position = currentPosition;
-		}
-    }
-
-    /// <summary>
-    /// Updates the users horizontal and vertical movement based on input 
-    /// </summary>
-    private void updateMovement()
-    {
-        float horizontalMag;
-        bool jump;
+        float moveHorizontal;
+        // If the player is on the inactive side, kill its horizontal velocity.
         if (gameController.getSide() != PlayerSide)
         {
-            horizontalMag = 0f;
-            jump = false;
+			animator.SetBool ("RunningFwd", false);
+			animator.SetBool ("isJumping", false);
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
+            return;
+        }
+
+        // If the player is holding down the interact (E) button.
+        if (gameController.isActivate())
+        {
+            activateSwitchs();
+        }
+
+        moveHorizontal = gameController.getHorizontalMagnitude();
+        AdjustFacing(moveHorizontal);
+        
+        // Apply deadzone to minor variations around the midpoint.
+        if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
+        {
+			animator.SetBool ("RunningFwd", false);
+            moveHorizontal = 0f;
         }
         else
         {
-            horizontalMag = gameController.getHorizontalMagnitude();
-            jump = gameController.isJump();
+			animator.SetBool ("RunningFwd", true);
+            // Normalize values outside of this dead zone to be either 1 or -1
+            moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
         }
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * runningForce;
 
-        animator.SetBool("RunningFwd", (horizontalMag != 0));
-        AdjustFacing(horizontalMag);
+        // Preserve vertical velocity and assign to rigidbody
+        movement.y = rb.velocity.y;
+        rb.velocity = movement;
 
-        moveDirection = new Vector3(horizontalMag, 0, 0);
-        moveDirection *= leechMultiplier(speed, leechSpeedMultiplier);
-        if (controller.isGrounded)
+        // Enforce terminal velocity.
+        Vector3 clampedVelocity = rb.velocity;
+        clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeed, maxSpeed);
+        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -jumpForce, jumpForce);
+        clampedVelocity.z = 0;
+        rb.velocity = clampedVelocity;
+
+        if (IsGrounded())
         {
-            forceY = 0;
-            invertGrav = gravity * airTime;
-            if (jump)
+            // If the player is on the ground and jumping, apply jump force.
+			if (gameController.isJump ()) {
+				animator.SetBool ("isJumping", true);
+				rb.AddForce (Vector3.up * jumpForce, ForceMode.Impulse);
+				airTimeCount = airtime;
+			} else {
+				animator.SetBool ("isJumping", false);
+			}
+        }
+        else
+        {
+            if (gameController.isJump() && airTimeCount > 0)
             {
-                forceY = leechMultiplier(jumpSpeed, leechJumpMultiplier);
+				animator.SetBool ("isJumping", true);
+                // If the player holds down the jump key, gravity is not applied
+                // This gives the appearance of a longer jump.
+                airTimeCount -= Time.fixedDeltaTime;
             }
-        }
-		animator.SetBool("isJumping", jump && !controller.isGrounded);
-        if (jump && forceY != 0)
-        {
-            invertGrav -= Time.deltaTime;
-            forceY += invertGrav * Time.deltaTime;
-        }
+            else
+            {
+                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
 
-        forceY -= gravity * Time.deltaTime * gravityForce;
-        forceY = Mathf.Clamp(forceY, -terminalVelocity, terminalVelocity);
-        moveDirection.y = forceY;
-        controller.Move(moveDirection * Time.deltaTime);
+        }
+    }
+
+    // Determines whether the player is on the ground.
+    // Dist to ground is determined by the height of the capsule collider, 1.5 is applied due to the offset.
+    // an extra 0.2 is added to give some margin.
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
     }
 
     public void addHeart()
@@ -206,7 +216,10 @@ public class PlayerController : MonoBehaviour {
     {
         return (leeches.Count > 0) ? value / (multiplier * Mathf.Log(leeches.Count + 1)) : value;
     }
-
+    
+     /*
+      * Turns the player to face the way they are moving
+      */
     private void AdjustFacing(float horizontalDirection)
     {
         if (horizontalDirection > 0)
@@ -227,14 +240,24 @@ public class PlayerController : MonoBehaviour {
 		if (closeSwitch != null) {
 			closeSwitch.toggle();
 		}
-		PushableObject pushblock = getNearbyPushable ();
-		if (pushblock != null){
-            if (pushblock.isAttached()) {
-				pushblock.detach ();
-			} else {
-				pushblock.attach (this);
-			}
-		}
+        //First check if the player has a pushable block attached.
+        PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
+        if (attachedBlock != null)
+        {
+            if (attachedBlock.attached)
+            {
+                attachedBlock.detach();
+            }
+        }
+        else
+        {
+            // Check for a nearby block to pick up.
+            PushableObject nearbyBlock = getNearbyPushable();
+            if (IsGrounded() && nearbyBlock != null)
+            {
+                nearbyBlock.attach(this);
+            }
+        }
 	}
 
 	/**
