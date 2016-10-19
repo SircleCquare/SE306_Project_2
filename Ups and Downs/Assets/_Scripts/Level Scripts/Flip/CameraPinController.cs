@@ -41,6 +41,14 @@ public class CameraPinController : MonoBehaviour {
         toRotation = defaultRotation;
     }
 
+    public void resetShakyCam()
+    {
+        camera.fieldOfView = defaultFOV;
+        Quaternion currentRotation = transform.rotation;
+        currentRotation.z = 0;
+        transform.rotation = currentRotation;
+    }
+
     // Update is called once per frame
     void Update() {
         middle = (lightPlayer.position + darkPlayer.position) * 0.5f;
@@ -66,7 +74,7 @@ public class CameraPinController : MonoBehaviour {
 
 			flipStep++;
 		} else {
-            RenderSettings.fog = (GameController.Singleton.getSide() == Side.Dark);
+            RenderSettings.fog = (GameController.Singleton.getSide() == Side.DARK);
 			isFlipping = false;
 			flipStep = 0;
 		}
@@ -82,7 +90,7 @@ public class CameraPinController : MonoBehaviour {
 
     void applyShakyCam()
     {
-        if (GameController.Singleton.getSide() == Side.Light || isFlipping || !enableShakyCam)
+        if (GameController.Singleton.getSide() == Side.LIGHT || isFlipping || !enableShakyCam)
         {
             // Reset FOV if shaky cam not active
             camera.fieldOfView = defaultFOV;

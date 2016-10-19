@@ -5,15 +5,19 @@ public abstract class Enemy : MonoBehaviour {
 
     private Renderer rend;
     private Vector3 originPosition;
+    private Vector3 originRotation;
+    private Vector3 originScale;
 
     protected virtual void Start()
     {
         originPosition = transform.position;
+        originRotation = transform.eulerAngles;
+        originScale = transform.localScale;
     }
 
 	protected virtual void Update ()
 	{
-	    if (GameController.Singleton.getSide() == Side.Dark)
+	    if (GameController.Singleton.getSide() == Side.DARK)
 	    {
 	        UpdateActive();
             GetComponent<Renderer>().enabled = true;
@@ -32,5 +36,7 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void ResetBehaviour()
     {
         transform.position = originPosition;
+        transform.eulerAngles = originRotation;
+        transform.localScale = originScale;
     }
 }

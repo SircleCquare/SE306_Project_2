@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			Vector3 currentPosition = transform.position;
-            currentPosition.z = (gameController.getSide () == Side.Dark) ? gameController.darkSideZ : gameController.lightSideZ;
+            currentPosition.z = (gameController.getSide () == Side.DARK) ? gameController.darkSideZ : gameController.lightSideZ;
 			currentPosition.x = Mathf.Round(transform.position.x * 1000f)/1000f;
 			currentPosition.y = Mathf.Round(transform.position.y * 1000f)/1000f;
 			transform.position = currentPosition;
@@ -180,21 +180,21 @@ public class PlayerController : MonoBehaviour {
         leeches = new List<LeechEnemy>();
     }
 
-    public IEnumerator HandleInvisiblity(float invisiblityTime)
-    {
-        invisible = true;
-        float time = 0f;
-
+//    public IEnumerator HandleInvisiblity(float invisiblityTime)
+//    {
+//        invisible = true;
+//        float time = 0f;
+//
 //        while (time < invisiblityTime)
 //        {
 //        }
-        yield return 0;
-        invisible = false;
-    }
+//        yield return 0;
+//        invisible = false;
+//    }
 
     public void MakeInvisible(float invisiblityTime)
     {
-        StartCoroutine(HandleInvisiblity(invisiblityTime));
+//        StartCoroutine(HandleInvisiblity(invisiblityTime));
     }
 
     public bool IsInvisible()
@@ -229,10 +229,10 @@ public class PlayerController : MonoBehaviour {
 		}
 		PushableObject pushblock = getNearbyPushable ();
 		if (pushblock != null){
-			if (pushblock.attached) {
+            if (pushblock.isAttached()) {
 				pushblock.detach ();
 			} else {
-				pushblock.attach (gameObject);
+				pushblock.attach (this);
 			}
 		}
 	}
@@ -280,23 +280,37 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void resetToCheckpoint(int checkpoint)
+    {
+        currentCheckpoint = gameController.getCheckpoint(PlayerSide, checkpoint);
+        transform.position = currentCheckpoint.getPosition();
+
+    }
+
+    public int getCheckpointNumber()
+    {
+        if (currentCheckpoint == null)
+        {
+            currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
+        }
+
+        return currentCheckpoint.order;
+    }
+
    /// <summary>
    /// Kills the player. The player returns to their last checkpoint and loses one heart.
    /// </summary>
     public void kill()
     {
         Debug.Log("Killing");
-        if (currentCheckpoint == null)
-        {
-            currentCheckpoint = gameController.getCheckpoint(PlayerSide, 0);
-        }
-        transform.position = currentCheckpoint.getPosition();
-        gameController.removeHeart();
 
-        gameController.incrementDeathCount();
         deLeech();
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
             e.ResetBehaviour();
         }
+
+        gameController.playerDeath();
+        // detatch all leeches from the player.
+        leeches = new List<LeechEnemy>();
     }
 }
