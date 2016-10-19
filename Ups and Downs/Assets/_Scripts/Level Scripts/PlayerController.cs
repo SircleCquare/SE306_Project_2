@@ -304,11 +304,6 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Killing");
 
-        deLeech();
-        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
-            e.ResetBehaviour();
-        }
-
         gameController.playerDeath();
         // detatch all leeches from the player.
         leeches = new List<LeechEnemy>();

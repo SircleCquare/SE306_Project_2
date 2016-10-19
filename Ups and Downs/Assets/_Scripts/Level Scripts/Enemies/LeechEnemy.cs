@@ -125,6 +125,7 @@ public class LeechEnemy : Enemy
             GameController.Singleton.disableShakyCam();
             StopCoroutine(animationRoutine);
             transform.parent = null;
+            state = LeechState.IDLE;
             base.ResetBehaviour();
         }
     }
