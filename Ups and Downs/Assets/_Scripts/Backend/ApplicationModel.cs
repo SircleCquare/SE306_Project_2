@@ -13,5 +13,6 @@ public static class ApplicationModel {
 	public static int levelNumber;
 	public static int coinsFound;
 	public static int totalCoins;
+    public static int deathCount;
 
 }
