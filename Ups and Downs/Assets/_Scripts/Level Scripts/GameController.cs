@@ -273,7 +273,7 @@ public class GameController : SingletonObject<GameController> {
     /// <summary>
     /// Removes one of the brothers shared hearts.
     /// </summary>
-    public void removeHeart()
+    private void removeHeart()
     {
         if (gameData.Heart > 1)
         {
@@ -287,6 +287,26 @@ public class GameController : SingletonObject<GameController> {
             gameOver();
         }
         
+    }
+
+
+    // Handle level behaviour on player death
+    public void playerDeath()
+    {
+        gameData.Deaths++;
+        removeHeart();
+
+        int lightCheckpoint = lightPlayer.getCheckpointNumber(),
+            darkCheckpoint = darkPlayer.getCheckpointNumber();
+        int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
+
+        lightPlayer.resetToCheckpoint(resetTo);
+        darkPlayer.resetToCheckpoint(resetTo);
+
+        // Reset all enemies in level.
+        foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+            e.ResetBehaviour();
+        }
     }
 
     public int getCurrentHealth()
@@ -524,11 +544,6 @@ public class GameController : SingletonObject<GameController> {
 		}
 	}
 
-    public void incrementDeathCount()
-    {
-        gameData.Deaths++;
-    }
-
 	void finishTheGame(){
 		//send score and time to ApplicationModel
 		ApplicationModel.score = gameData.CoinScore; // TODO
@@ -560,19 +575,6 @@ public class GameController : SingletonObject<GameController> {
     public void disableShakyCam()
     {
         cameraPinController.enableShakyCam = false;
-    }
-
-    public void kill()
-    {
-        removeHeart();
-        incrementDeathCount();
-
-        int lightCheckpoint = lightPlayer.getCheckpointNumber(),
-            darkCheckpoint = darkPlayer.getCheckpointNumber();
-        int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
-
-        lightPlayer.resetToCheckpoint(resetTo);
-        darkPlayer.resetToCheckpoint(resetTo);
     }
 
 	public void setInMainMenu(bool state) {
