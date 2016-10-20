@@ -8792,7 +8792,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8825,6 +8825,30 @@ Prefab:
     - target: {fileID: 121966, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_Name
       value: Finish Block Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.y
+      value: 3.4331417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.y
+      value: -1.2165707
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.z
+      value: 2.3253677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.z
+      value: -0.009891647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.x
+      value: 1.6686443
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.x
+      value: 0.022277832
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
@@ -9781,7 +9805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -9
+      value: -4.87
       objectReference: {fileID: 0}
     - target: {fileID: 447414, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9814,6 +9838,30 @@ Prefab:
     - target: {fileID: 121966, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
       propertyPath: m_Name
       value: Finish Block Dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.y
+      value: 3.984183
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.y
+      value: -1.4920917
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.z
+      value: 2.6612966
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.z
+      value: -0.030765023
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Size.x
+      value: 1.7577997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577932, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
+      propertyPath: m_Center.x
+      value: -0.08915493
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55f4baa0993154d4ea0be83d7e28ca19, type: 2}
