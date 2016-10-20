@@ -74,6 +74,15 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    void Update()
+    {
+        // If the player is holding down the interact (E) button.
+        if (gameController.isActivate())
+        {
+            activateSwitchs();
+        }
+    }
+
     void FixedUpdate()
     {
         float moveHorizontal;
@@ -84,12 +93,6 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool ("isJumping", false);
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             return;
-        }
-
-        // If the player is holding down the interact (E) button.
-        if (gameController.isActivate())
-        {
-            activateSwitchs();
         }
 
         moveHorizontal = gameController.getHorizontalMagnitude();
