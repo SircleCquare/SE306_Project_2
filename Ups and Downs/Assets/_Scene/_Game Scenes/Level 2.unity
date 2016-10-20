@@ -955,12 +955,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43142e8b04f79a64db88702eef01b40d, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &348905524 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11426156, guid: 45458b82e9d9178408d5bb811c98685e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1017539022}
-  m_Script: {fileID: 11500000, guid: b422855b3a3384899a9b62730404fcb4, type: 3}
 --- !u!1 &352768415 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 126350, guid: e1ba40dc391f8764f81a0e21dd010359, type: 2}
@@ -2588,7 +2582,7 @@ Prefab:
     - target: {fileID: 11445294, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
       propertyPath: externalTargets.Array.data[1]
       value: 
-      objectReference: {fileID: 348905524}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de817a09fe4b5d48bbae49f83025a98, type: 2}
   m_IsPrefabParent: 0
@@ -4942,7 +4936,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 423072, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_LocalPosition.z
