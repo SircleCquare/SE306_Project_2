@@ -33,9 +33,10 @@ public class PlayerController : MonoBehaviour {
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
     private bool invisible = false;
+    public float leechPullFactor = 10f;
 
-	/** direction in terms of x axis*/
-	private const int FORWARD = 1;
+    /** direction in terms of x axis*/
+    private const int FORWARD = 1;
 
 
     void Awake() {
@@ -48,6 +49,29 @@ public class PlayerController : MonoBehaviour {
        animator = GetComponent<Animator>();
        leeches = new List<LeechEnemy>();
        gameController = GameController.Singleton;
+    }
+
+    /// <summary>
+    /// Takes the users input and transforms it into a vector which is affected by gravity.
+    /// 
+    /// This is primarily used to apply the effects of leechs to movement.
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 getModifiedRunningForce()
+    {
+        float rawInput = gameController.getHorizontalMagnitude();
+        if (rawInput < deadzone && -deadzone < rawInput)
+        {
+            animator.SetBool("RunningFwd", false);
+            rawInput = 0f;
+        }
+        else
+        {
+            animator.SetBool("RunningFwd", true);
+            rawInput = (rawInput > 0) ? 1f : -1f;
+        }
+        return new Vector3(rawInput * runningForce - getGravityHorizontalComponent(), 0f, 0f);
+
     }
 
     void FixedUpdate()
@@ -70,20 +94,8 @@ public class PlayerController : MonoBehaviour {
 
         moveHorizontal = gameController.getHorizontalMagnitude();
         AdjustFacing(moveHorizontal);
-        
-        // Apply deadzone to minor variations around the midpoint.
-        if (moveHorizontal < deadzone && -deadzone < moveHorizontal)
-        {
-			animator.SetBool ("RunningFwd", false);
-            moveHorizontal = 0f;
-        }
-        else
-        {
-			animator.SetBool ("RunningFwd", true);
-            // Normalize values outside of this dead zone to be either 1 or -1
-            moveHorizontal = (moveHorizontal > 0) ? 1 : -1;
-        }
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * runningForce;
+
+        Vector3 movement = getModifiedRunningForce();
 
         // Preserve vertical velocity and assign to rigidbody
         movement.y = rb.velocity.y;
@@ -118,27 +130,23 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                Debug.Log(getGravityDirection());
-                rb.AddForce(getGravityDirection() * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
-
         }
     }
-
-    private Vector3 getGravityDirection()
+    
+    private float getGravityHorizontalComponent()
     {
-        Vector3 gravity = Vector3.down;
-
-        if (PlayerSide != Side.DARK) return gravity;
+        Vector3 gravityDirection = Vector3.down;
+        if (PlayerSide != Side.DARK) return 0f;
         
         CameraPinController cameraPin = GameObject.FindObjectOfType<CameraPinController>();
         if (cameraPin == null)
         {
             Debug.LogError("Could not locate Camera Pin Object");
-            return gravity;
+            return gravityDirection.x;
         }
-        
-        return cameraPin.transform.rotation * gravity;
+        return (cameraPin.getGravityDirection() * leechFactor).x;
     }
 
     // Determines whether the player is on the ground.
