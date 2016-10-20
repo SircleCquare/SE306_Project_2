@@ -80,7 +80,7 @@ MonoBehaviour:
   lifeMax: 1
   growth: 1
   forceMode: 1
-  pushForce: 50
+  pushForce: 10
 --- !u!135 &13500094
 SphereCollider:
   m_ObjectHideFlags: 1

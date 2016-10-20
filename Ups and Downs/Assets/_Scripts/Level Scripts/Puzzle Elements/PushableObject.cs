@@ -9,10 +9,11 @@ public class PushableObject : MonoBehaviour  {
     private const float paddingFactor = 0.1f;
 
     private Rigidbody rb;
-    public bool attached;
+    private bool attached;
     private Vector3 startPosition;
     private float distToGround;
     private Side gameSide;
+    private float zValue;
 
     public float attachDistance = 3f;
 
@@ -21,18 +22,13 @@ public class PushableObject : MonoBehaviour  {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
 
+        gameSide = (transform.position.z > 0) ? Side.LIGHT : Side.DARK;
         startPosition = transform.position;
-        if (transform.position.z > 0)
-        {
-            gameSide = Side.LIGHT;
-            startPosition.z = GameController.Singleton.lightSideZ;
-        }
-        else
-        {
-            gameSide = Side.DARK;
-            startPosition.z = GameController.Singleton.darkSideZ;
-        }
+
+        /* Ensure box is aligned with the player */
+        startPosition.z = GameController.Singleton.getZValueForSide(gameSide);
         transform.position = startPosition;
+
         distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 
@@ -82,6 +78,11 @@ public class PushableObject : MonoBehaviour  {
         this.transform.SetParent(null);
         attached = false;
         rb.isKinematic = false;
+
+        /* Ensure box is re-aligned with player */
+        var alignedPosition = transform.position;
+        alignedPosition.z = GameController.Singleton.getZValueForSide(gameSide);
+        transform.position = alignedPosition;
     }
 
 
