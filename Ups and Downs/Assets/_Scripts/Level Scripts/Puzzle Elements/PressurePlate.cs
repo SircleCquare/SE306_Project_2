@@ -4,18 +4,19 @@ using System.Collections;
 
 public class PressurePlate : Switch
 {
-
     /* How long the pressure pad takes to compress */
 	public float compressTime = 0.5f;
-	public float compressMultiplier = 0.5f;
-    public float detectionRadius = 2f;
+
     
     private Vector3 uncompressedPosition, compressedPosition;
-    private float compressionDistance;
+    public float compressionDistance = 0.5f;
     private Transform plate;
     public PlateState state = PlateState.IDLE;
 
     public enum PlateState { IDLE, MOVING, COMPRESSED };
+
+    // Fixes issue where plate will raise if player leaves trigger even if block is still there
+    private int numObjectsOnPlate = 0;
 
 
 	// Use this for initialization
@@ -26,7 +27,7 @@ public class PressurePlate : Switch
         plate = Array.Find(GetComponentsInChildren<Transform>(), child => child.name.Equals("Plate"));
 
         uncompressedPosition = plate.position;
-        compressionDistance = plate.localScale.y;
+        compressionDistance = plate.localScale.y - 0.6f;
 
         compressedPosition = uncompressedPosition;
         compressedPosition.y -= compressionDistance;
@@ -80,6 +81,7 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            numObjectsOnPlate++;
             // Stop any current co-routines before starting a new one
             StopCoroutine(CompressPlate());
             StopCoroutine(RaisePlate());
@@ -91,6 +93,11 @@ public class PressurePlate : Switch
     {
         if (IsPlayerOrBlock(col.tag))
         {
+            numObjectsOnPlate--;
+            if (numObjectsOnPlate != 0)
+            {
+                return;
+            }
             // Stop any current co-routines before starting a new one
 			StopCoroutine(CompressPlate());
 			StopCoroutine(RaisePlate());

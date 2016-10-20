@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     /** Configurable Player Movement Variables */
     public float maxSpeed = 10f;
+    public float maxFallSpeed = 30f;
     public float runningForce = 13f;
     public float jumpForce = 10f;
     public float gravity = 5f;
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour {
         // Enforce terminal velocity.
         Vector3 clampedVelocity = rb.velocity;
         clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeed, maxSpeed);
-        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -jumpForce, jumpForce);
+        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -maxFallSpeed, maxFallSpeed);
         clampedVelocity.z = 0;
         rb.velocity = clampedVelocity;
 
@@ -117,10 +118,27 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                //Debug.Log(getGravityDirection());
+                rb.AddForce(getGravityDirection() * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
 
         }
+    }
+
+    private Vector3 getGravityDirection()
+    {
+        Vector3 gravity = Vector3.down;
+
+        if (PlayerSide != Side.DARK) return gravity;
+        
+        CameraPinController cameraPin = GameObject.FindObjectOfType<CameraPinController>();
+        if (cameraPin == null)
+        {
+            Debug.LogError("Could not locate Camera Pin Object");
+            return gravity;
+        }
+        
+        return cameraPin.transform.rotation * gravity;
     }
 
     // Determines whether the player is on the ground.
@@ -128,12 +146,14 @@ public class PlayerController : MonoBehaviour {
     // an extra 0.2 is added to give some margin.
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
+        RaycastHit hit = new RaycastHit();
+        var result = Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.2f - 1.5f);
+        return (result) ? (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground")) : false;
     }
 
     public void addHeart()
     {
-        Debug.Log("Add Heart");
+        //Debug.Log("Add Heart");
         gameController.addHeart();
     }
 
@@ -149,12 +169,12 @@ public class PlayerController : MonoBehaviour {
     {
         if (getInventoryItemType() == SpecialItem.None)
         {
-            Debug.Log("Added");
+           //Debug.Log("Added");
             gameController.setInventoryItem(specialItem);
             return true;
         } else
         {
-            Debug.Log("Inventory Full");
+            //Debug.Log("Inventory Full");
             return false;
         }
 	}
@@ -180,7 +200,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void addLeech(LeechEnemy newLeech)
 	{
-		Debug.Log("Added Leech");
+		//Debug.Log("Added Leech");
         leeches.Add(newLeech);
 	}
 
@@ -271,7 +291,7 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < hitColliders.Length; i++) {
 			ToggleSwitch switchObj = hitColliders[i].gameObject.GetComponent<ToggleSwitch>();
 			if (switchObj != null) {
-				Debug.Log("Switch found and returning");
+				//Debug.Log("Switch found and returning");
 				return switchObj;
 			}
 		}
@@ -286,12 +306,35 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < hitColliders.Length; i++) {
 			PushableObject pushblock = hitColliders[i].gameObject.GetComponent<PushableObject>();
 			if (pushblock != null) {
-				Debug.Log("Pushblock found and returning");
-				return pushblock;
+                Debug.Log("Pushblock found and returning");
+                if (playerFacingObject(pushblock.transform.position))
+                {
+                    return pushblock;
+                }
 			}
 		}
 		return null;
 	}
+
+    private bool playerFacingObject(Vector3 objPosition)
+    {
+        // relative point is the position of the object relative to the player 
+        var relativePoint = transform.InverseTransformPoint(objPosition);
+
+        // if object is right of player and player is facing right
+        if (relativePoint.x > 0.000 && transform.eulerAngles.y > 180)
+        {
+            return true;
+        }
+
+        // if object is left of player and player is facing left
+        if (relativePoint.x < 0.000 && transform.eulerAngles.y < 180)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     /** Updates the players checkpoint */
     public void addCheckPoint(Checkpoint checkPoint)
@@ -331,7 +374,7 @@ public class PlayerController : MonoBehaviour {
    /// </summary>
     public void kill()
     {
-        Debug.Log("Killing");
+        //Debug.Log("Killing");
 
         gameController.playerDeath();
         // detatch all leeches from the player.

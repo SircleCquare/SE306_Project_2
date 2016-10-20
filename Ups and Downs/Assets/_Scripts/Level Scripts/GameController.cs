@@ -71,7 +71,7 @@ public class GameController : SingletonObject<GameController> {
 
     void Start()
     {
-        Debug.Log("Loading save");
+        //Debug.Log("Loading save");
         gameData = GameData.LoadInstance();
 		gameData.clearLevelState ();
 
@@ -127,7 +127,7 @@ public class GameController : SingletonObject<GameController> {
 
             if (isFlipDown())
             {
-                Debug.Log("Flipping");
+                //Debug.Log("Flipping");
                 flipWorld();
                 coolDownCount = flipCoolDown;
                 return;
@@ -147,7 +147,7 @@ public class GameController : SingletonObject<GameController> {
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
-		Debug.Log ("REGISTER");
+		//Debug.Log ("REGISTER");
 		if (controller.PlayerSide == Side.LIGHT) {
 			lightPlayer = controller;
 		} else {
@@ -167,12 +167,12 @@ public class GameController : SingletonObject<GameController> {
         if (checkpoint.checkpointSide == Side.DARK)
         {
             darkSideCheckpoints.Add(checkpoint);
-            Debug.Log("DARK: " + darkSideCheckpoints);
-            Debug.Log(">>" + darkSideCheckpoints.Count);
+            //Debug.Log("DARK: " + darkSideCheckpoints);
+            //Debug.Log(">>" + darkSideCheckpoints.Count);
         } else
         {
             lightSideCheckpoints.Add(checkpoint);
-            Debug.Log("LIGHT: " + darkSideCheckpoints);
+            //Debug.Log("LIGHT: " + darkSideCheckpoints);
         }
     }
 
@@ -194,9 +194,9 @@ public class GameController : SingletonObject<GameController> {
             {
                 return check;
             }
-            Debug.Log(">" + check);
+            //Debug.Log(">" + check);
         }
-        Debug.Log("NO Checkpoint of order: " + order + " exists.");
+        //Debug.Log("NO Checkpoint of order: " + order + " exists.");
         return null;
     }
 
@@ -207,7 +207,7 @@ public class GameController : SingletonObject<GameController> {
     /// </summary>
     public void gameOver()
     {
-        Debug.Log("GAMEOVER");
+        //Debug.Log("GAMEOVER");
 
 		ApplicationModel.time = gameData.Time;
 		ApplicationModel.coinsFound = gameData.CoinsFound;
@@ -374,7 +374,7 @@ public class GameController : SingletonObject<GameController> {
 		Called by the Game Controller to flip the world.
 	*/
 	private void flipWorld() {
-		Debug.Log("Side: " + currentSide);
+		//Debug.Log("Side: " + currentSide);
 
         // Since a flip has occurred, set cool down as active
         coolDownActive = true;

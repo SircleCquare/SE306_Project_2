@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 3D Text Material
-  m_Shader: {fileID: 4800000, guid: fa8ffbf09a8281c42a838a523525c8a6, type: 3}
+  m_Name: Light Bush 1
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: a5a1d25b3ab96764ab76b6597e185608, type: 3}
+          m_Texture: {fileID: 2800000, guid: e672ab8c169c4f54494331e0ba18245f, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -135,4 +135,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.38235295, g: 0.38235295, b: 0.38235295, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
