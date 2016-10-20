@@ -128,7 +128,9 @@ public class PlayerController : MonoBehaviour {
     // an extra 0.2 is added to give some margin.
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f - 1.5f);
+        RaycastHit hit = new RaycastHit();
+        var result = Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.2f - 1.5f);
+        return (result) ? (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground")) : false;
     }
 
     public void addHeart()
@@ -287,11 +289,34 @@ public class PlayerController : MonoBehaviour {
 			PushableObject pushblock = hitColliders[i].gameObject.GetComponent<PushableObject>();
 			if (pushblock != null) {
 				Debug.Log("Pushblock found and returning");
-				return pushblock;
+                if (playerFacingObject(pushblock.transform.position))
+                {
+				    return pushblock;
+                }
 			}
 		}
 		return null;
 	}
+
+    private bool playerFacingObject(Vector3 objPosition)
+    {
+        // relative point is the position of the object relative to the player 
+        var relativePoint = transform.InverseTransformPoint(objPosition);
+
+        // if object is right of player and player is facing right
+        if (relativePoint.x > 0.000 && transform.eulerAngles.y > 180)
+        {
+            return true;
+        }
+
+        // if object is left of player and player is facing left
+        if (relativePoint.x < 0.000 && transform.eulerAngles.y < 180)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     /** Updates the players checkpoint */
     public void addCheckPoint(Checkpoint checkPoint)
