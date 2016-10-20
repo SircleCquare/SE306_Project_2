@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Black 3D Text Material
-  m_Shader: {fileID: 4800000, guid: fa8ffbf09a8281c42a838a523525c8a6, type: 3}
+  m_Shader: {fileID: 4800000, guid: e9208aed1ff06cc41a023df0af2a2005, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
