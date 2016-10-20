@@ -3713,6 +3713,14 @@ Prefab:
       propertyPath: terminalVelocity
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 11427390, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: deadzone
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427390, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
+      propertyPath: jumpForce
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d1d821a550f0e749bb1ac0ecc0865bd, type: 2}
   m_IsPrefabParent: 0
@@ -4836,6 +4844,14 @@ Prefab:
     - target: {fileID: 499878, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: deadzone
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405112, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
+      propertyPath: jumpForce
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f4c8e2a2419c3d4ea3eac703a7973ef, type: 2}
