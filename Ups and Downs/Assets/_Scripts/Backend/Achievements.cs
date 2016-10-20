@@ -18,7 +18,7 @@ public class Achievements {
         {"Level 2", "Completed Level Two"},
         {"10,000 Club", "Get a score of over 10,000 on any level" },
         {"50,000 Club", "Get a score of over 50,000 on any level" },
-        {"75,000 Club", "Get a score of over 50,000 on any level" },
+        {"75,000 Club", "Get a score of over 75,000 on any level" },
         {"100,000 Club", "Get a score of over 100,000 on any level" }
     };
 

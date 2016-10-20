@@ -69,7 +69,7 @@ public class FinishController : MonoBehaviour
     {
         // Show raw information
         levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
-        coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
+        coinsText.text = ApplicationModel.coinsFound.ToString();
         deathsText.text = ApplicationModel.deathCount.ToString();
         timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
 
