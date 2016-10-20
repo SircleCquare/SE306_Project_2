@@ -68,6 +68,7 @@ public class CameraPinController : MonoBehaviour {
     GameController.Singleton.setCurrentSide(initialSide);
   }
 
+
   public void resetShakyCam()
   {
     camera.fieldOfView = defaultFOV;

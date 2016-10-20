@@ -338,13 +338,12 @@ public class PlayerController : MonoBehaviour {
         return currentCheckpoint.order;
     }
 
+    public bool markedAsDead = false;
    /// <summary>
    /// Kills the player. The player returns to their last checkpoint and loses one heart.
    /// </summary>
     public void kill()
     {
-        //Debug.Log("Killing");
-
         gameController.playerDeath();
         // detatch all leeches from the player.
         leeches = new List<LeechEnemy>();
