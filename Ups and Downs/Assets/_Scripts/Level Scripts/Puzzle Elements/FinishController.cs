@@ -55,12 +55,16 @@ public class FinishController : MonoBehaviour
     public List<GameObject> scoreObjects;
     public GameObject highScoreEntryGroup;
     public InputField highScoreNameInput;
+    public GameObject nextLevelButton;
 
     // Time remaining to display the achievement popup.
     private float achievementPopUpCountdown = 2.0f;
 
     private bool achievementDisplayed = false;
     private bool savedHighScoreName = false;
+
+    // Name of the last level, to hide "next level" button
+    private const string lastLevelName = "Level 2";
 
     private Queue<string> achievementQueue = new Queue<string>(); 
 
@@ -107,6 +111,12 @@ public class FinishController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Hide next level button if final level
+        if (ApplicationModel.levelName == lastLevelName)
+        {
+            nextLevelButton.SetActive(false);
+        }
+
         if (achievementDisplayed)
         {
             // Handle hiding an achievement if it is visible

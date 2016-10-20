@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 
@@ -32,7 +30,6 @@ public class PlayerController : MonoBehaviour {
 
     /** Enemy Effects */
     private List<LeechEnemy> leeches;
-    private bool invisible = false;
     public float leechPullFactor = 10f;
 
     /** direction in terms of x axis*/
@@ -225,28 +222,6 @@ public class PlayerController : MonoBehaviour {
         leeches = new List<LeechEnemy>();
     }
 
-//    public IEnumerator HandleInvisiblity(float invisiblityTime)
-//    {
-//        invisible = true;
-//        float time = 0f;
-//
-//        while (time < invisiblityTime)
-//        {
-//        }
-//        yield return 0;
-//        invisible = false;
-//    }
-
-    public void MakeInvisible(float invisiblityTime)
-    {
-//        StartCoroutine(HandleInvisiblity(invisiblityTime));
-    }
-
-    public bool IsInvisible()
-    {
-        return invisible;
-    }
-
     private float leechMultiplier(float value, float multiplier)
     {
         return (leeches.Count > 0) ? value / (multiplier * Mathf.Log(leeches.Count + 1)) : value;
@@ -335,7 +310,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (checkPoint.checkpointSide == PlayerSide)
         {
-            if (checkPoint.isActive() && checkPoint.order >= currentCheckpoint.order)
+            if ((currentCheckpoint == null) || checkPoint.isActive() && checkPoint.order >= currentCheckpoint.order)
             {
                 currentCheckpoint = checkPoint;
                 checkPoint.activate();

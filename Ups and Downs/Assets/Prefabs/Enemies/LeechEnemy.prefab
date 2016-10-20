@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e4607cb59d448219a29101e1fa4821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitRadius: 2
+  hitRadius: 3
   attachTime: 0.7
   forwardDistance: 0.2
   state: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  heightMultiple: 1.4
   jumpSizePulse:
     serializedVersion: 2
     m_Curve:
@@ -123,6 +122,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 0
+  heightMultiple: 1.4
 --- !u!136 &13663208
 CapsuleCollider:
   m_ObjectHideFlags: 1

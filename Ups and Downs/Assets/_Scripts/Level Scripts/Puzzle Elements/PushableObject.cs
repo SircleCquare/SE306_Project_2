@@ -11,7 +11,7 @@ public class PushableObject : MonoBehaviour  {
     private Rigidbody rb;
     private bool attached;
     private Vector3 startPosition;
-    private float distToGround;
+    public float attachedHeight = 0.5f;
     private Side gameSide;
     private float zValue;
 
@@ -28,14 +28,7 @@ public class PushableObject : MonoBehaviour  {
         /* Ensure box is aligned with the player */
         startPosition.z = GameController.Singleton.getZValueForSide(gameSide);
         transform.position = startPosition;
-
-        distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
-    }
     
     void Update()
     {
@@ -64,7 +57,9 @@ public class PushableObject : MonoBehaviour  {
         Vector3 directionToObject = rb.position - pushingPlayer.transform.position;
         directionToObject = Vector3.Normalize(directionToObject) * attachDistance;
 
-        transform.position = pushingPlayer.transform.position + directionToObject;
+        Vector3 newPosition =  pushingPlayer.transform.position + directionToObject;
+        newPosition.y = attachedHeight;
+        transform.position = newPosition;
 
 
         // TODO: set character's carrying object boolean value

@@ -20,6 +20,7 @@ public class CameraMovement : MonoBehaviour {
     /** Used to flash a box around the screen to indicate that the players can't go further*/
     public Image CameraBoundImage;
     private bool flash = false;
+    private bool allowedOff = false;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class CameraMovement : MonoBehaviour {
             keepOnScreen(lightPlayer);
             keepOnScreen(darkPlayer);
 
+
             // Flash bounds on screen if edge reached
             // TODO ensure that this image is set for all scenes
             if (CameraBoundImage != null)
@@ -45,6 +47,11 @@ public class CameraMovement : MonoBehaviour {
             flash = false;
         }
 		
+    }
+
+    public void allowOffScreen(bool allowedOff)
+    {
+        this.allowedOff = allowedOff;
     }
 
 	/*
