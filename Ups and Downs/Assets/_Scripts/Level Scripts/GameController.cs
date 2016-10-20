@@ -589,9 +589,14 @@ public class GameController : SingletonObject<GameController> {
 	    SceneManager.LoadScene("Finish Scene");
     }
 
-	public int calculateScore(int CoinScore, float time, int deaths) {
-		float result = CoinScore / Mathf.Log10 (time + 5f);
-		return (int)(result * 1000f / (deaths + 1f));
+	public int calculateScore(int CoinScore, float time, int deaths)
+	{
+        // Work our multipliers
+	    ApplicationModel.timeMultiplier =Math.Round(10/Mathf.Log10(time + 5f), 2);
+        ApplicationModel.deathMultiplier = Math.Round(1/(deaths + 1f), 2);
+        
+        // Work out final score
+		return (int)(CoinScore * 100 * ApplicationModel.timeMultiplier * ApplicationModel.deathMultiplier);
 	}
 
     public GameData GetGameData()

@@ -14,6 +14,10 @@ public class FinishController : MonoBehaviour
 	public Text deathsText;
 	public Text scoreText;
 
+    public Text timeMultiplier;
+    public Text deathMultiplier;
+    public Text coinScore; 
+
     public GameObject achievementPopUp;
     public Text achievementText;
 
@@ -30,12 +34,24 @@ public class FinishController : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        // Show raw information
 		levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
 		coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
 	    deathsText.text = ApplicationModel.deathCount.ToString();
-	    scoreText.text = ApplicationModel.score.ToString();
 	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
+
+	    var gameData = GameData.GetInstance();
+
+        // Show scores and multipliers to explain how score is used calculated
+	    coinScore.text = (gameData.CoinScore * 100).ToString("#,##0");
+	    timeMultiplier.text = "x" + (ApplicationModel.timeMultiplier).ToString("0.00");
+	    deathMultiplier.text = "x" + (1 / (ApplicationModel.deathMultiplier)).ToString("0.00");
+        scoreText.text = ApplicationModel.score.ToString("#,##0");
+
+
         UnlockAchievement(ApplicationModel.levelName);
+
+
 	}
 	
 	// Update is called once per frame
