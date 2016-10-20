@@ -104,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a3770396057ea4ba53d28373da7b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachDistance: 3
+  attachedHeight: 0.2
+  attachDistance: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
