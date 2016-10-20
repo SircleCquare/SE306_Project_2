@@ -7178,6 +7178,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11429878, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
+      propertyPath: chaseDistanceX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11429878, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
+      propertyPath: visionDistance
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82b0e3870fb7b0b4f9104ce726e1ea99, type: 2}
   m_IsPrefabParent: 0
@@ -7669,7 +7677,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485550, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
       propertyPath: initialSide
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3887aedc1abbfa54abef23e959a9fd8b, type: 2}
