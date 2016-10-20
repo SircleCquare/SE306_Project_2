@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 /// <summary>
@@ -36,7 +37,10 @@ public class AchievementsDisplay : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // Show each achievement
+        // Queue to hold locked achievements so they can be disaplyed below unlocked ones
+        var lockedAchievementQueue = new Queue<GameObject>();
+
+        // Show unlocked achievements
         foreach (var achievement in allAchievements.Keys)
         {
             // Create object to show achievenment
@@ -47,26 +51,40 @@ public class AchievementsDisplay : MonoBehaviour
             {
                 // Show an unlocked achievement
                 achievementScript.SetDetails(achievement, allAchievements[achievement], false);
+                DisplayAchievement(achievementObject);
             }
             else
             {
                 // Show an achivement that's still locked
                 achievementScript.SetDetails("<LOCKED> " + achievement, "Locked: Keep playing to unlock", true);
+                lockedAchievementQueue.Enqueue(achievementObject);
             }
-
-            // Add to the scroll pane of achievements
-            achievementObject.transform.SetParent(ScrollPaneContent.transform);
-
-            /* Set the display settings of each achievement so that it is not transformed at an 
-             * angle to the parent because of the screen rotation
-             */ 
-            var achivevementTransform = achievementObject.GetComponent<RectTransform>();
-            achivevementTransform.localScale = new Vector3(1f, 1f, 1f);
-            achivevementTransform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-            achivevementTransform.localPosition = new Vector3(achivevementTransform.position.x, 0f, 0f);
-
         }
 
+        // Show locked achievements below unlocked ones (for better logical/visual grouping for user) 
+        while (lockedAchievementQueue.Count > 0)
+        {
+            DisplayAchievement(lockedAchievementQueue.Dequeue());
+        }
+
+    }
+
+    /// <summary>
+    /// Add an acheivement to be displayed in the scroll pane
+    /// </summary>
+    /// <param name="achievementObject"></param>
+    private void DisplayAchievement(GameObject achievementObject)
+    {
+        // Add to the scroll pane of achievements
+        achievementObject.transform.SetParent(ScrollPaneContent.transform);
+
+        /* Set the display settings of each achievement so that it is not transformed at an 
+         * angle to the parent because of the screen rotation
+         */
+        var achivevementTransform = achievementObject.GetComponent<RectTransform>();
+        achivevementTransform.localScale = new Vector3(1f, 1f, 1f);
+        achivevementTransform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        achivevementTransform.localPosition = new Vector3(achivevementTransform.position.x, 0f, 0f);
     }
 
 

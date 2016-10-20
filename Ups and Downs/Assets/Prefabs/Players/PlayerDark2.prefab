@@ -2493,7 +2493,7 @@ MonoBehaviour:
   maxSpeed: 10
   maxFallSpeed: 30
   runningForce: 13
-  jumpForce: 20
+  jumpForce: 16
   gravity: 40
   airtime: 0.4
   deadzone: 0.2
