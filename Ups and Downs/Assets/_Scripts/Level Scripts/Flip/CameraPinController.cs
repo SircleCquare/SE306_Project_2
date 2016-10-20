@@ -159,4 +159,10 @@ public class CameraPinController : MonoBehaviour {
     rotationLerpProgress += Time.deltaTime * rotationSpeed / 30;
     transform.rotation = Quaternion.Slerp(fromRotation, toRotation, rotationLerpProgress);
   }
+
+
+    public Vector3 getGravityDirection()
+    {
+        return Vector3.Normalize(Quaternion.Euler(0f, 0f, -transform.eulerAngles.z) * Vector3.down);
+    }
 }
