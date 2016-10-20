@@ -4320,7 +4320,7 @@ GameObject:
   - 4: {fileID: 1104458881}
   - 65: {fileID: 1104458883}
   - 114: {fileID: 1104458882}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6081,7 +6081,7 @@ GameObject:
   - 4: {fileID: 1530657935}
   - 65: {fileID: 1530657937}
   - 114: {fileID: 1530657936}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6523,7 +6523,7 @@ GameObject:
   - 4: {fileID: 1647537862}
   - 65: {fileID: 1647537864}
   - 114: {fileID: 1647537863}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7982,6 +7982,10 @@ Prefab:
     - target: {fileID: 169912, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
       propertyPath: m_Name
       value: Dark Platform (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557362, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3196114ffe4b04fba5920268be3141, type: 2}
