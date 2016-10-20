@@ -9,7 +9,7 @@ public class PressurePlate : Switch
 
     
     private Vector3 uncompressedPosition, compressedPosition;
-    private float compressionDistance;
+    public float compressionDistance = 0.5f;
     private Transform plate;
     public PlateState state = PlateState.IDLE;
 
