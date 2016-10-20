@@ -56,7 +56,7 @@ public class Collectible : MonoBehaviour {
   }
 
   /// <summary>
-  /// Reset the collectible's position state and visiblility.
+  /// Reset the collectible's position, state and visiblility on level reset.
   /// </summary>
   public virtual void ResetBehaviour()
   {
