@@ -25,7 +25,7 @@ public class GameController : SingletonObject<GameController> {
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 
-    private const int MAX_HEALTH = 5;
+    public const int MAX_HEALTH = 5;
 
     public CameraPinController cameraPinController;
     private bool disableInput = false;
@@ -280,7 +280,7 @@ public class GameController : SingletonObject<GameController> {
     {
         if (getCurrentHealth() < MAX_HEALTH)
         {
-            gameData.Heart = MAX_HEALTH;
+            gameData.Heart++;
 			healthBar.showLastHeart ();
             //healthBar.value = MAX_HEALTH;
             return true;
