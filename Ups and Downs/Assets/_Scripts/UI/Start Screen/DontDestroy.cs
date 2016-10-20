@@ -3,10 +3,17 @@ using System.Collections;
 
 public class DontDestroy : MonoBehaviour {
 
-	void Start()
+	private static DontDestroy singleton;
+
+	void Awake()
 	{
+		if (singleton)
+		{
+			Destroy(singleton.gameObject);
+		}
+		singleton = this;
 		//Causes UI object not to be destroyed when loading a new scene. If you want it to be destroyed, destroy it manually via script.
-		DontDestroyOnLoad(this.gameObject);
+		DontDestroyOnLoad(gameObject);
 	}
 
 }
