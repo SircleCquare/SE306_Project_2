@@ -1777,8 +1777,8 @@ MonoBehaviour:
   timeText: {fileID: 2142669246}
   deathsText: {fileID: 44490316}
   scoreText: {fileID: 468730170}
-  achievementPopUp: {fileID: 0}
-  achievementText: {fileID: 0}
+  achievementPopUp: {fileID: 1761984183}
+  achievementText: {fileID: 1761984182}
   scoreObjects: []
   highScoreEntryGroup: {fileID: 0}
   highScoreNameInput: {fileID: 0}
@@ -2146,6 +2146,16 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d320e8457cb012d4dbd6567f86415976, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1761984182 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11455404, guid: d320e8457cb012d4dbd6567f86415976,
+    type: 2}
+  m_PrefabInternal: {fileID: 1761984181}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &1761984183 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 138030, guid: d320e8457cb012d4dbd6567f86415976, type: 2}
+  m_PrefabInternal: {fileID: 1761984181}
 --- !u!1 &1793161979
 GameObject:
   m_ObjectHideFlags: 0

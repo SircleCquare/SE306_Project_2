@@ -10,7 +10,7 @@ public class FinishController : MonoBehaviour
 {
 	public Text levelNameText;
 	public Text coinsText;
-    public Text timeText;
+  public Text timeText;
 	public Text deathsText;
 	public Text scoreText;
 
@@ -37,7 +37,7 @@ public class FinishController : MonoBehaviour
 	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
         UnlockAchievement(ApplicationModel.levelName);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         // Handle hiding an achievement if it is visible
@@ -61,11 +61,11 @@ public class FinishController : MonoBehaviour
     {
         Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, GameController.Singleton.GetGameData());
         achievementPopUpCountdown = 2.0f;
-        achievementDisplayed = true; 
+        achievementDisplayed = true;
     }
 
     /*
-     * Hides the achievement popup when the achievement countdown ends. 
+     * Hides the achievement popup when the achievement countdown ends.
      */
     void TryHideAchivementPopup()
     {
@@ -78,7 +78,7 @@ public class FinishController : MonoBehaviour
         }
 
         Achievements.HideAchivementPopup(achievementPopUp);
-        achievementDisplayed = false; 
+        achievementDisplayed = false;
     }
 
     /*

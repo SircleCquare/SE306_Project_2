@@ -2,8 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// This class keeps both player characters within view on the screen.
+/// It also flashes the borders of the window as the players approach the edge.
+/// </summary>
 public class CameraMovement : MonoBehaviour {
-	
+
 	/** Both of these fields need to be configured within the Unity scene builder */
 	public Transform lightPlayer;
 	public Transform darkPlayer;
@@ -27,7 +31,7 @@ public class CameraMovement : MonoBehaviour {
 		keepOnScreen(darkPlayer);
 
         // Flash bounds on screen if edge reached
-        // TODO ensure that this image is set for all scenes 
+        // TODO ensure that this image is set for all scenes
 	    if (CameraBoundImage != null)
 	    {
             CameraBoundImage.color = flash ? Color.white : Color.Lerp(CameraBoundImage.color, Color.clear, 5 * Time.deltaTime);
@@ -35,7 +39,7 @@ public class CameraMovement : MonoBehaviour {
         }
         flash = false;
     }
-	
+
 	/*
 	*	Ensures both players are visible on the screen at all times
 	*/
@@ -54,11 +58,11 @@ public class CameraMovement : MonoBehaviour {
         {
             if (pos.x.Equals(0 + boundsPadding) || pos.x.Equals(1 - boundsPadding))
             {
-                flash = true; 
-            } 
+                flash = true;
+            }
             trans.position = Camera.main.ViewportToWorldPoint(pos);
         }
-       
+
 	}
-	
+
 }
