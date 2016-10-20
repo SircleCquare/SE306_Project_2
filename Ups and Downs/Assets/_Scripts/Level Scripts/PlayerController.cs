@@ -332,7 +332,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (checkPoint.checkpointSide == PlayerSide)
         {
-            if (checkPoint.isActive() && checkPoint.order >= currentCheckpoint.order)
+            if ((currentCheckpoint == null) || checkPoint.isActive() && checkPoint.order >= currentCheckpoint.order)
             {
                 currentCheckpoint = checkPoint;
                 checkPoint.activate();

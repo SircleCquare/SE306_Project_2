@@ -28,6 +28,7 @@ public class GameController : SingletonObject<GameController> {
     public const int MAX_HEALTH = 5;
 
     public CameraPinController cameraPinController;
+    public CameraMovement cameraMovement;
     private bool disableInput = false;
     private float coolDownCount;
     private bool coolDownActive; 
@@ -313,10 +314,22 @@ public class GameController : SingletonObject<GameController> {
         
     }
 
+    private IEnumerator allowPlayerOffScreen()
+    {
+        cameraMovement.allowOffScreen(true);
+        yield return 0;
+        yield return 0;
+        cameraMovement.allowOffScreen(false);
+    }
+
 
     // Handle level behaviour on player death
     public void playerDeath()
     {
+        if (cameraMovement != null)
+        {
+            StartCoroutine(allowPlayerOffScreen());
+        }
         gameData.Deaths++;
         removeHeart();
 
