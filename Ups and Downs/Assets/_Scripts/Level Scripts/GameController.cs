@@ -75,6 +75,9 @@ public class GameController : SingletonObject<GameController> {
 
     void Start()
     {
+        // Ensures transparent objects are renderered in the correct order.
+        Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
+
         //Debug.Log("Loading save");
         gameData = GameData.LoadInstance();
 		gameData.clearLevelState ();
@@ -494,7 +497,7 @@ public class GameController : SingletonObject<GameController> {
 	*/
 	public bool isJump() {
 		if (!disableInput) {
-			return Input.GetButton("Jump");
+            return Input.GetButton("Jump") || Input.GetButton("Vertical");
 		} else {
 			return false;
 		}
