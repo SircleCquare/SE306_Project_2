@@ -8,152 +8,191 @@ using UnityEngine.UI;
 /// </summary>
 public class FinishController : MonoBehaviour
 {
-	/// <summary>
-	/// The name of the level just completed.
-	/// </summary>
-	public Text levelNameText;
+    /// <summary>
+    /// The name of the level just completed.
+    /// </summary>
+    public Text levelNameText;
 
-	/// <summary>
-	/// The number of coins collected, out of the total.
-	/// </summary>
-	public Text coinsText;
+    /// <summary>
+    /// The number of coins collected, out of the total.
+    /// </summary>
+    public Text coinsText;
 
-	/// <summary>
-	/// The time taken to complete the level, in seconds.
-	/// </summary>
-  public Text timeText;
+    /// <summary>
+    /// The time taken to complete the level, in seconds.
+    /// </summary>
+    public Text timeText;
 
-	/// <summary>
-	/// The number of times the player died during the level.
-	/// </summary>
-	public Text deathsText;
+    /// <summary>
+    /// The number of times the player died during the level.
+    /// </summary>
+    public Text deathsText;
 
-	/// <summary>
-	/// The player's score.
-	/// </summary>
-	public Text scoreText;
+    /// <summary>
+    /// The player's score.
+    /// </summary>
+    public Text scoreText;
 
     public Text timeMultiplier;
     public Text deathMultiplier;
-    public Text coinScore; 
+    public Text coinScore;
 
-	/// <summary>
-	/// The achievement popup.
-	/// </summary>
-  public GameObject achievementPopUp;
+    /// <summary>
+    /// The achievement popup.
+    /// </summary>
+    public GameObject achievementPopUp;
 
-	/// <summary>
-	/// The text to display for the achivement.
-	/// </summary>
-  public Text achievementText;
+    /// <summary>
+    /// Sound played when achievement pops
+    /// </summary>
+    public AudioClip achievementAudioClip;
 
-  public List<GameObject> scoreObjects;
-  public GameObject highScoreEntryGroup;
-  public InputField highScoreNameInput;
+    /// <summary>
+    /// The text to display for the achivement.
+    /// </summary>
+    public Text achievementText;
 
-  // Time remaining to display the achievement popup.
-  private float achievementPopUpCountdown = 2.0f;
+    public List<GameObject> scoreObjects;
+    public GameObject highScoreEntryGroup;
+    public InputField highScoreNameInput;
 
-  private bool achievementDisplayed = false;
-  private bool savedHighScoreName = false;
+    // Time remaining to display the achievement popup.
+    private float achievementPopUpCountdown = 2.0f;
 
-  // Use this for initialization
-  void Start ()
-	{
+    private bool achievementDisplayed = false;
+    private bool savedHighScoreName = false;
+
+    private Queue<string> achievementQueue = new Queue<string>(); 
+
+    // Use this for initialization
+    void Start()
+    {
         // Show raw information
-		levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
-		coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
-	    deathsText.text = ApplicationModel.deathCount.ToString();
-	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
+        levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
+        coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
+        deathsText.text = ApplicationModel.deathCount.ToString();
+        timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
 
-	    var gameData = GameData.GetInstance();
+        var gameData = GameData.GetInstance();
 
         // Show scores and multipliers to explain how score is used calculated
-	    coinScore.text = (gameData.CoinScore * 100).ToString("#,##0");
-	    timeMultiplier.text = "x" + (ApplicationModel.timeMultiplier).ToString("0.00");
-	    deathMultiplier.text = "x" + (1 / (ApplicationModel.deathMultiplier)).ToString("0.00");
+        coinScore.text = (gameData.CoinScore * 100).ToString("#,##0");
+        timeMultiplier.text = "x" + (ApplicationModel.timeMultiplier).ToString("0.00");
+        deathMultiplier.text = "x" + (1 / (ApplicationModel.deathMultiplier)).ToString("0.00");
         scoreText.text = ApplicationModel.score.ToString("#,##0");
 
-
+        // Unlock level completed achievement
         UnlockAchievement(ApplicationModel.levelName);
-	}
 
-	// Update is called once per frame
-	void Update () {
-    // Handle hiding an achievement if it is visible
-    if (achievementDisplayed)
-    {
-      TryHideAchivementPopup();
+        // Unlock score based achievements
+        var score = ApplicationModel.score;
+        if (score >= 10000)
+        {
+            UnlockAchievement("10,000 Club");
+        }
+        if (score >= 50000)
+        {
+            UnlockAchievement("50,000 Club");
+        }
+        if (score >= 75000)
+        {
+            UnlockAchievement("75,000 Club");
+        }
+        if (score >= 100000)
+        {
+           UnlockAchievement("100,000 Club"); 
+        }
     }
 
-    DisplayHighScores(ApplicationModel.levelName);
-
-    if (!GameData.GetInstance().IsHighScore(ApplicationModel.levelName, ApplicationModel.score) || savedHighScoreName)
+    // Update is called once per frame
+    void Update()
     {
-      highScoreEntryGroup.SetActive(false);
-    }
-  }
+        if (achievementDisplayed)
+        {
+            // Handle hiding an achievement if it is visible
+            TryHideAchivementPopup();
+        }else if (achievementQueue.Count > 0)
+        {
+            // Unlock any queued up achievements
+            UnlockAchievement(achievementQueue.Dequeue());
+        }
 
-  /*
-   * Record an achievement as unlocked and display it, if this is the first time it was unlocked
-   */
-  void UnlockAchievement(string achievementName)
-  {
-    Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, GameController.Singleton.GetGameData());
-    achievementPopUpCountdown = 2.0f;
-    achievementDisplayed = true;
-  }
+        DisplayHighScores(ApplicationModel.levelName);
 
-  /*
-   * Hides the achievement popup when the achievement countdown ends.
-   */
-  void TryHideAchivementPopup()
-  {
-    achievementPopUpCountdown -= Time.deltaTime;
-
-    // Don't hide popup if countdown time still remains
-    if (achievementPopUpCountdown > 0)
-    {
-      return;
+        if (!GameData.GetInstance().IsHighScore(ApplicationModel.levelName, ApplicationModel.score) || savedHighScoreName)
+        {
+            highScoreEntryGroup.SetActive(false);
+        }
     }
 
-    Achievements.HideAchivementPopup(achievementPopUp);
-    achievementDisplayed = false;
-  }
-
-  /*
-   * Show high scores in the list of high scores
-   * TODO (low priority) - move to a better approach than hard coded score fields (table?) if time allows
-   */
-  void DisplayHighScores(string levelName)
-  {
-    var gameData = GameData.GetInstance();
-    int i = 0;
-
-    foreach (var highScore in gameData.GetOrderedHighScoresForLevel(levelName))
+    /*
+     * Record an achievement as unlocked and display it, if this is the first time it was unlocked
+     */
+    void UnlockAchievement(string achievementName)
     {
-      if (i >= scoreObjects.Count)
-      {
-        throw new System.IndexOutOfRangeException("More high scores than available score object entries");
-      }
+        // If an achievement is currently being shown, queue this one to be shown later
+        if (achievementDisplayed)
+        {
+            achievementQueue.Enqueue(achievementName);
+            return;
+        }
 
-      var currentScoreObj = scoreObjects[i]; i++;
-      Text[] fields = currentScoreObj.GetComponentsInChildren<Text>();
-
-      Text nameField = fields[0],
-          scoreField = fields[1];
-
-      nameField.text = highScore.PlayerName;
-      scoreField.text = highScore.PointsValue.ToString("#,##0");
+        // Show an achievement
+        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, GameController.Singleton.GetGameData(), achievementAudioClip);
+        achievementPopUpCountdown = 2.0f;
+        achievementDisplayed = true;
     }
-  }
 
-  public void SaveHighScore()
-  {
-    var gameData = GameData.GetInstance();
-    gameData.AddHighScore(ApplicationModel.levelName, highScoreNameInput.text, ApplicationModel.score);
-    gameData.Save(); // persist new high score
+    /*
+     * Hides the achievement popup when the achievement countdown ends.
+     */
+    void TryHideAchivementPopup()
+    {
+        achievementPopUpCountdown -= Time.deltaTime;
 
-    savedHighScoreName = true; // hide high score entry form
-  }
+        // Don't hide popup if countdown time still remains
+        if (achievementPopUpCountdown > 0)
+        {
+            return;
+        }
+
+        Achievements.HideAchivementPopup(achievementPopUp);
+        achievementDisplayed = false;
+    }
+
+    /*
+     * Show high scores in the list of high scores
+     * TODO (low priority) - move to a better approach than hard coded score fields (table?) if time allows
+     */
+    void DisplayHighScores(string levelName)
+    {
+        var gameData = GameData.GetInstance();
+        int i = 0;
+
+        foreach (var highScore in gameData.GetOrderedHighScoresForLevel(levelName))
+        {
+            if (i >= scoreObjects.Count)
+            {
+                throw new System.IndexOutOfRangeException("More high scores than available score object entries");
+            }
+
+            var currentScoreObj = scoreObjects[i]; i++;
+            Text[] fields = currentScoreObj.GetComponentsInChildren<Text>();
+
+            Text nameField = fields[0],
+                scoreField = fields[1];
+
+            nameField.text = highScore.PlayerName;
+            scoreField.text = highScore.PointsValue.ToString("#,##0");
+        }
+    }
+
+    public void SaveHighScore()
+    {
+        var gameData = GameData.GetInstance();
+        gameData.AddHighScore(ApplicationModel.levelName, highScoreNameInput.text, ApplicationModel.score);
+        gameData.Save(); // persist new high score
+
+        savedHighScoreName = true; // hide high score entry form
+    }
 }
