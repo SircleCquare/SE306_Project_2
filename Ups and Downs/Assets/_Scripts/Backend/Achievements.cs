@@ -25,7 +25,7 @@ public class Achievements {
     public static void UnlockAchievement(string achievementName, GameObject achievementPopUp, Text achievementText, GameData gameData, AudioClip achievementSound)
     {
         // If this achievement has not already been awarde, then display it and update the game state.
-        if (gameData.awardedAchievements.Contains(achievementName))
+        if (!gameData.awardedAchievements.Contains(achievementName))
         {
             // Record achievement
             gameData.awardedAchievements.Add(achievementName);
