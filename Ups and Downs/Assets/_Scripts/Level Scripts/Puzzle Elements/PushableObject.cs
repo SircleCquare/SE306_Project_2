@@ -46,7 +46,6 @@ public class PushableObject : MonoBehaviour  {
             return;
         }
 
-		// TODO: check if player is carrying anything
 		// if player, get the transform and make this parent to transform.
 		this.transform.SetParent (pushingPlayer.transform);
 		attached = true;
@@ -60,11 +59,6 @@ public class PushableObject : MonoBehaviour  {
         Vector3 newPosition =  pushingPlayer.transform.position + directionToObject;
         newPosition.y = attachedHeight;
         transform.position = newPosition;
-
-
-        // TODO: set character's carrying object boolean value
-        // TODO: reduce character speed and jump height if object is heavy
-
     }
 
     public void detach()

@@ -9,6 +9,7 @@ using System.Collections;
 /// </summary>
 public class PlayerToChild : MonoBehaviour {
 
+    // if player enters collider, attach player to self, and thus make the players transforms relative to self
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag (GameController.PLAYER_TAG)) {
 			other.gameObject.transform.SetParent (this.gameObject.transform);
@@ -20,7 +21,8 @@ public class PlayerToChild : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit(Collider other){
+    // if player enters collider, dettach player from self, and thus make the players transforms no longer relative to self
+    void OnTriggerExit(Collider other){
 		if (other.gameObject.CompareTag (GameController.PLAYER_TAG)){
 			other.gameObject.transform.SetParent (null);
 		}

@@ -41,9 +41,11 @@ public class ToggleBlock : Switchable {
 	void Start () {
 		doorCollider = GetComponent<Collider>();
 		rend = GetComponent<Renderer>();
+        // set current state
         deactivate();
     }
 
+    // activate toggle block, toggling current state to the other state
     public override void activate() {
         switch (defaultState)
         {
@@ -56,6 +58,7 @@ public class ToggleBlock : Switchable {
         }
     }
 
+    // set current state to reflect enum
     public override void deactivate()
     {
         switch (defaultState)
@@ -69,6 +72,7 @@ public class ToggleBlock : Switchable {
         }
     }
 
+    // toggle current state of toggleblock
     public override void toggle()
     {
         switch (currentState)

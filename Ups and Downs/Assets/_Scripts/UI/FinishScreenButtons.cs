@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class FinishScreenButtons : MonoBehaviour {
 
+    // Loads the given levels scene
 	public void NextLevelButton(int index)
 	{
 	    SceneManager.LoadScene(index);
 	}
 
+    // Loads the next levels scene
 	public void NextLevelButton()
 	{
 		int levelNum = GameData.GetInstance ().LevelNumber;
@@ -19,6 +21,7 @@ public class FinishScreenButtons : MonoBehaviour {
 		}
 	}
 
+    // Reloads the current scene
 	public void RetryLevel()
 	{
 		int levelNum = GameData.GetInstance ().LevelNumber;

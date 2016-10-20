@@ -18,23 +18,19 @@ public class ToggleSwitch : Switch {
     protected override void Start() {
         base.Start();
 		// get switch material color, and set to default red
-		gameObject.GetComponent<Renderer> ().material.color =  Color.red;
+		gameObject.GetComponent<Renderer>().material.color =  Color.red;
 	}
 	/*
 		Toggles the state of this switch
 	*/
 	public void toggle() {
 
-		if (GameController.Singleton.getSide () == switchSide) {
+		if (GameController.Singleton.getSide() == switchSide)
+		{
+		    // toggle color of switch
+		    gameObject.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color == Color.red ? Color.green : Color.red;
 
-			// toggle color of switch
-			if (gameObject.GetComponent<Renderer> ().material.color == Color.red) {
-				gameObject.GetComponent<Renderer> ().material.color = Color.green;
-			} else {
-				gameObject.GetComponent<Renderer> ().material.color = Color.red;
-			}
-			
-			foreach (Switchable target in targetList)
+		    foreach (Switchable target in targetList)
 			{
 				target.toggle();
 			}
