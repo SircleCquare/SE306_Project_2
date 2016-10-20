@@ -69,7 +69,7 @@ public class FinishController : MonoBehaviour
     {
         // Show raw information
         levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
-        coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
+        coinsText.text = ApplicationModel.coinsFound.ToString();
         deathsText.text = ApplicationModel.deathCount.ToString();
         timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
 
@@ -78,7 +78,7 @@ public class FinishController : MonoBehaviour
         // Show scores and multipliers to explain how score is used calculated
         coinScore.text = (gameData.CoinScore * 100).ToString("#,##0");
         timeMultiplier.text = "x" + (ApplicationModel.timeMultiplier).ToString("0.00");
-        deathMultiplier.text = "x" + (1 / (ApplicationModel.deathMultiplier)).ToString("0.00");
+        deathMultiplier.text = "x" + (ApplicationModel.deathMultiplier).ToString("0.00");
         scoreText.text = ApplicationModel.score.ToString("#,##0");
 
         // Unlock level completed achievement
