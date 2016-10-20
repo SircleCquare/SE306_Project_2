@@ -992,7 +992,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475342, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.18
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 10272938, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
       propertyPath: m_Text
@@ -1000,7 +1000,7 @@ Prefab:
 
         troubles may
 
-        seem             invisible'
+        seem invisible'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1633408b1f65d7540bba80fdfc87f7c0, type: 2}
