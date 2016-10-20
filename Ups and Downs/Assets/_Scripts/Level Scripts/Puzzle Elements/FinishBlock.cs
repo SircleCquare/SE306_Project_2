@@ -13,6 +13,8 @@ public class FinishBlock : MonoBehaviour {
         {
 			GameController controller = GameController.Singleton;
 			controller.setFinishedLevel (true);
+            Light glow = GetComponentInChildren<Light>();
+            if (glow != null) glow.enabled = true;
 		}
 	}
 
@@ -21,7 +23,9 @@ public class FinishBlock : MonoBehaviour {
         if (other.tag == GameController.PLAYER_TAG)
         {
 			GameController controller = GameController.Singleton;
-			controller.setFinishedLevel (false);
-		}
+            controller.setFinishedLevel (false);
+            Light glow = GetComponentInChildren<Light>();
+            if (glow != null) glow.enabled = false;
+        }
 	}
 }
