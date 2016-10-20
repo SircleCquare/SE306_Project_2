@@ -316,7 +316,9 @@ public class PlayerController : MonoBehaviour {
 			PushableObject pushblock = hitColliders[i].gameObject.GetComponent<PushableObject>();
 			if (pushblock != null) {
                 Debug.Log("Pushblock found and returning");
-                if (playerFacingObject(pushblock.transform.position))
+                var relativePoint = transform.InverseTransformPoint(pushblock.transform.position);
+                // relative point is the position of block relative to the player, when z < 0 block is behind player
+                if (relativePoint.z > 0)
                 {
                     return pushblock;
                 }
@@ -324,26 +326,6 @@ public class PlayerController : MonoBehaviour {
 		}
 		return null;
 	}
-
-    private bool playerFacingObject(Vector3 objPosition)
-    {
-        // relative point is the position of the object relative to the player 
-        var relativePoint = transform.InverseTransformPoint(objPosition);
-
-        // if object is right of player and player is facing right
-        if (relativePoint.x > 0.000 && transform.eulerAngles.y > 180)
-        {
-            return true;
-        }
-
-        // if object is left of player and player is facing left
-        if (relativePoint.x < 0.000 && transform.eulerAngles.y < 180)
-        {
-            return true;
-        }
-
-        return false;
-    }
 
     /** Updates the players checkpoint */
     public void addCheckPoint(Checkpoint checkPoint)

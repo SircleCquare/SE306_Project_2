@@ -40,21 +40,10 @@ public class GameOverController : MonoBehaviour
 
 		Debug.Log ("setting screen name: game over screen");
 		levelNameText.text = "Game Over";
-
-		coinsText.text = ApplicationModel.coinsFound + "/" + ApplicationModel.totalCoins;
-	    deathsText.text = ApplicationModel.deathCount.ToString();
-	    scoreText.text = ApplicationModel.score.ToString();
-	    timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
-       /* UnlockAchievement(ApplicationModel.levelName);*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        // Handle hiding an achievement if it is visible
-        /*if (achievementDisplayed)
-        {
-            TryHideAchivementPopup();
-        }*/
 
         DisplayHighScores(ApplicationModel.levelName);
 
@@ -63,33 +52,6 @@ public class GameOverController : MonoBehaviour
             highScoreEntryGroup.SetActive(false);
         }
     }
-
-    /*
-     * Record an achievement as unlocked and display it, if this is the first time it was unlocked
-     */
-   /* void UnlockAchievement(string achievementName)
-    {
-        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, GameController.Singleton.GetGameData());
-        achievementPopUpCountdown = 2.0f;
-        achievementDisplayed = true; 
-    }*/
-
-    /*
-     * Hides the achievement popup when the achievement countdown ends. 
-     */
-    /*void TryHideAchivementPopup()
-    {
-        achievementPopUpCountdown -= Time.deltaTime;
-
-        // Don't hide popup if countdown time still remains
-        if (achievementPopUpCountdown > 0)
-        {
-            return;
-        }
-
-        Achievements.HideAchivementPopup(achievementPopUp);
-        achievementDisplayed = false; 
-    }*/
 
     /*
      * Show high scores in the list of high scores
@@ -117,13 +79,4 @@ public class GameOverController : MonoBehaviour
             scoreField.text = highScore.PointsValue.ToString("#,##0");
         }
     }
-
-    /*public void SaveHighScore()
-    {
-        var gameData = GameData.GetInstance();
-        gameData.AddHighScore(ApplicationModel.levelName, highScoreNameInput.text, ApplicationModel.score);
-        gameData.Save(); // persist new high score
-
-        savedHighScoreName = true; // hide high score entry form
-    }*/
 }

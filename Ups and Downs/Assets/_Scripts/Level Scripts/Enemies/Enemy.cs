@@ -26,19 +26,19 @@ public abstract class Enemy : MonoBehaviour {
 
 	protected virtual void Update ()
 	{
-    // If the currently active side is the dark side
-    if (GameController.Singleton.getSide() == Side.DARK)
-    {
-      // Call dark-side specific update methods.
-      UpdateActive();
-      // Enable rendering of the enemy.
-      GetComponent<Renderer>().enabled = true;
-    }
-    else
-    {
-      // Disable rendering of the enemy.
-      GetComponent<Renderer>().enabled = false;
-    }
+        // If the currently active side is the dark side
+        if (GameController.Singleton.getSide() == Side.DARK)
+        {
+          // Call dark-side specific update methods.
+          UpdateActive();
+          // Enable rendering of the enemy.
+          GetComponent<Renderer>().enabled = true;
+        }
+        else
+        {
+          // Disable rendering of the enemy.
+          GetComponent<Renderer>().enabled = false;
+        }
 	}
 
   /// <summary>
