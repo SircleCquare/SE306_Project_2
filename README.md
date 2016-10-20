@@ -1,5 +1,15 @@
 # Ups and Downs, by dynam.io (SE306 Project 2) 
 
+## Team member Github IDs
+- SircleCquare - Asheer Ahmad
+- MisterAndersen - Ben Andersen
+- hchokshi - Harsh Chokshi
+- PastaTime - Arran Davis
+- T77GIT - Tim Hughes
+- michaelieti - Michael Ieti
+- EmandM - Emma McMillan
+- zhsitao - Sitao Zheng
+
 ## Building
 This project is still in its prototype phase. At this point, we suggest building it as a standalone application and running the produced output. The PROTOTYPE release contains a compiled version of the Windows standalone. If you use this, you will not not need to build the project yourself. 
 
