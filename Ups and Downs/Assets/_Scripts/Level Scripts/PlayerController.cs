@@ -311,6 +311,9 @@ public class PlayerController : MonoBehaviour {
         currentCheckpoint = gameController.getCheckpoint(PlayerSide, checkpoint);
         transform.position = currentCheckpoint.getPosition();
 		AdjustFacing(FORWARD); 
+		PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
+
+        if (attachedBlock != null && attachedBlock.isAttached()) attachedBlock.detach();
     }
 
     public int getCheckpointNumber()
