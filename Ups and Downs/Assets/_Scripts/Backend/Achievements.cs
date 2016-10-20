@@ -15,8 +15,11 @@ public class Achievements {
     {
         {"Tutorial", "Completed the Tutorial"},
         {"Level 1", "Completed Level One"},
-		{"I'm rich", "Collected your first coin"},
-        {"100 coins", "Collected 100 coins total"}
+        {"Level 2", "Completed Level Two"},
+        {"I'm rich", "Collected your first coin"},
+        {"10,000 Club", "Get a score of over 10,000 on any level" },
+        {"50,000 Club", "Get a score of over 50,000 on any level" },
+        {"100,000 Club", "Get a score of over 100,000 on any level" }
     };
 
     /*
