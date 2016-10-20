@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour {
             // If the player is on the ground and jumping, apply jump force.
 			if (gameController.isJump ()) {
 				animator.SetBool ("isJumping", true);
-				rb.AddForce (Vector3.up * jumpForce, ForceMode.Impulse);
+				rb.AddForce (Vector3.up * jumpForce, ForceMode.VelocityChange);
 				airTimeCount = airtime;
 			} else {
 				animator.SetBool ("isJumping", false);

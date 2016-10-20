@@ -2332,7 +2332,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -10.07, y: -3.787, z: -3.98}
+  m_LocalPosition: {x: -9.711687, y: -2.73, z: -3.580503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
@@ -2417,11 +2417,12 @@ MonoBehaviour:
   maxSpeed: 10
   maxFallSpeed: 30
   runningForce: 13
-  jumpForce: 12
+  jumpForce: 20
   gravity: 40
   airtime: 0.4
-  deadzone: 0.01
+  deadzone: 0.2
   leechPullFactor: 10
+  markedAsDead: 0
 --- !u!136 &13621378
 CapsuleCollider:
   m_ObjectHideFlags: 1
