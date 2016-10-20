@@ -29,7 +29,9 @@ public class TriggerSphere : MonoBehaviour {
 			setToggle();
 		}
     }
-	
+
+
+	// Toggles the state of all targets attached to this trigger sphere
 	public virtual void setToggle() {
 		for (int i = 0; i < targetList.Length; i++)
         {

@@ -26,7 +26,6 @@ public class Checkpoint : MonoBehaviour {
     void Awake()
     {
         GameController.Singleton.RegisterCheckpoint(this);
-        //Debug.Log(GameController.Singleton.getCheckpoint(checkpointSide, 0));
     }
 
     public Vector3 getPosition()

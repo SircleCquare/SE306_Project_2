@@ -192,8 +192,8 @@ public class FinishController : MonoBehaviour
             Text nameField = fields[0],
                 scoreField = fields[1];
 
-            nameField.text = highScore.PlayerName;
-            scoreField.text = highScore.PointsValue.ToString("#,##0");
+            nameField.text = highScore.playerName;
+            scoreField.text = highScore.pointsValue.ToString("#,##0");
         }
     }
 

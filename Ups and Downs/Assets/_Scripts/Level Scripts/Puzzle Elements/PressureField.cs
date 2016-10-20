@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PressureField : TriggerSphere
 {
-
+    // used for testing purposes, logs whether or not player is in pressure plate collider
     public PressurePlate plate;
 
     void OnTriggerEnter(Collider col)
@@ -11,7 +11,6 @@ public class PressureField : TriggerSphere
         if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             Debug.Log("Enter -  Child");
-//            plate.setPlayerStandingOn(true);
         }
     }
 
@@ -20,7 +19,6 @@ public class PressureField : TriggerSphere
         if (col.gameObject.tag == GameController.PLAYER_TAG)
         {
             Debug.Log("Exit - Child");
-//            plate.setPlayerStandingOn(false);
         }
     }
 }

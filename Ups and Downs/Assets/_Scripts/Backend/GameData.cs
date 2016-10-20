@@ -189,12 +189,12 @@ public class GameData
         foreach (var score in highScoreList)
         {
             // Create a list to hold scores for a level if none exists
-            if (!HighScores.ContainsKey(score.LevelName))
+            if (!HighScores.ContainsKey(score.levelName))
             {
-                HighScores.Add(score.LevelName, new List<HighScoreValue>());
+                HighScores.Add(score.levelName, new List<HighScoreValue>());
             }
 
-            HighScores[score.LevelName].Add(score);
+            HighScores[score.levelName].Add(score);
         }
     }
 
@@ -207,7 +207,7 @@ public class GameData
     {
         var highScores = GetOrderedHighScoresForLevel(levelName);
 
-        return highScores.Count < MAX_HIGH_SCORES || score >= highScores[highScores.Count - 1].PointsValue;
+        return highScores.Count < MAX_HIGH_SCORES || score >= highScores[highScores.Count - 1].pointsValue;
     }
 
     /// <summary>
