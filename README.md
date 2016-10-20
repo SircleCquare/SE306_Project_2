@@ -1,4 +1,4 @@
-# Flip Side, by dynam.io (SE306 Project 2) 
+# Ex Umbra, by dynam.io (SE306 Project 2) 
 Note: The game was renamed from 'Ups and Downs' to 'Flip Side'. There may still be legacy references to this working title, including in file names. 
 
 ## Team member Github IDs
