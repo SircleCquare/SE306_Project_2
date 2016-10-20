@@ -105,11 +105,11 @@ public class HighScorePanelDisplay : MonoBehaviour
         // Set score details. Only show points if needed. 
         if (showPoints)
         {
-            highScoreScript.SetDetails(highScore.PlayerName, highScore.PointsValue);
+            highScoreScript.SetDetails(highScore.playerName, highScore.pointsValue);
         }
         else
         {
-            highScoreScript.SetNameOnly(highScore.PlayerName);
+            highScoreScript.SetNameOnly(highScore.playerName);
         }
 
         // Add to the scroll pane of panel

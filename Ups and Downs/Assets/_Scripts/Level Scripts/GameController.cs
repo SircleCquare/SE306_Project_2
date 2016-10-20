@@ -78,7 +78,6 @@ public class GameController : SingletonObject<GameController> {
         // Ensures transparent objects are renderered in the correct order.
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
 
-        //Debug.Log("Loading save");
         gameData = GameData.LoadInstance();
 		gameData.clearLevelState ();
 
@@ -90,10 +89,6 @@ public class GameController : SingletonObject<GameController> {
         gameData.TotalNumberOfCoins = coinObjectList.Length;
 
         // Set limit for healthbar to allow proper proportion highlighted
-		if (healthBar != null) {
-			
-			//healthBar.maxValue = MAX_HEALTH;
-		}
 
         // Update current character selected
         UpdateCurrentCharacterDisplay();
@@ -134,7 +129,6 @@ public class GameController : SingletonObject<GameController> {
 
             if (isFlipDown())
             {
-                //Debug.Log("Flipping");
                 flipWorld();
                 coolDownCount = flipCoolDown;
                 return;
@@ -143,18 +137,12 @@ public class GameController : SingletonObject<GameController> {
         else
         {
             coolDownCount -= Time.deltaTime;
-            if (isFlipDown())
-            {
-				//Logging on every frame is bad, mkay?
-               // Debug.Log("Cannot Flip. Cooldown remaining: " + coolDownCount);
-            }
         }
 
 		score.text = "Coins: " + getCoinsFound();
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
-		//Debug.Log ("REGISTER");
 		if (controller.PlayerSide == Side.LIGHT) {
 			lightPlayer = controller;
 		} else {
@@ -174,12 +162,9 @@ public class GameController : SingletonObject<GameController> {
         if (checkpoint.checkpointSide == Side.DARK)
         {
             darkSideCheckpoints.Add(checkpoint);
-            //Debug.Log("DARK: " + darkSideCheckpoints);
-            //Debug.Log(">>" + darkSideCheckpoints.Count);
         } else
         {
             lightSideCheckpoints.Add(checkpoint);
-            //Debug.Log("LIGHT: " + darkSideCheckpoints);
         }
     }
 
@@ -201,9 +186,7 @@ public class GameController : SingletonObject<GameController> {
             {
                 return check;
             }
-            //Debug.Log(">" + check);
         }
-        //Debug.Log("NO Checkpoint of order: " + order + " exists.");
         return null;
     }
 
@@ -214,8 +197,6 @@ public class GameController : SingletonObject<GameController> {
     /// </summary>
     public void gameOver()
     {
-        //Debug.Log("GAMEOVER");
-
 		ApplicationModel.time = gameData.Time;
 		ApplicationModel.coinsFound = gameData.CoinsFound;
 		ApplicationModel.totalCoins = getTotalCoins();
@@ -289,13 +270,9 @@ public class GameController : SingletonObject<GameController> {
         {
             gameData.Heart++;
 			healthBar.showLastHeart ();
-            //healthBar.value = MAX_HEALTH;
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     /// <summary>
@@ -372,7 +349,6 @@ public class GameController : SingletonObject<GameController> {
 	public void resetHealth(){
 		gameData.Heart = MAX_HEALTH;
 		healthBar.showAllHearts ();
-		//healthBar.value = MAX_HEALTH;
 	}
 
     public PlayerController getActivePlayer()
@@ -403,8 +379,6 @@ public class GameController : SingletonObject<GameController> {
 		Called by the Game Controller to flip the world.
 	*/
 	private void flipWorld() {
-		//Debug.Log("Side: " + currentSide);
-
         // Since a flip has occurred, set cool down as active
         coolDownActive = true;
 
@@ -437,12 +411,9 @@ public class GameController : SingletonObject<GameController> {
 	}
 	
 	
-	public bool isActivate() {
-		if (!disableInput) {
-			return Input.GetKeyDown(activateAction);
-		} else {
-			return false;
-		}
+	public bool isActivate()
+	{
+	    return !disableInput && Input.GetKeyDown(activateAction);
 	}
 	/*
 	*	Will return true as long as the move right action key is being held down.
@@ -484,9 +455,8 @@ public class GameController : SingletonObject<GameController> {
 		}
 		if (!disableInput) {
 			return adjust * Input.GetAxis("Horizontal");
-		} else {
-			return 0f;
 		}
+	    return 0f;
 	}
 	
 	/*
@@ -495,12 +465,12 @@ public class GameController : SingletonObject<GameController> {
 	*	If input is disabled for the GameController, this method will always
 	*	return false.
 	*/
-	public bool isJump() {
-		if (!disableInput) {
+	public bool isJump()
+	{
+	    if (!disableInput) {
             return Input.GetButton("Jump") || Input.GetButton("Vertical");
-		} else {
-			return false;
 		}
+	    return false;
 	}
 
     /*

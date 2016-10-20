@@ -9,16 +9,17 @@ public class FinishBlock : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		//If the colliding object is a player character
-    if (other.tag == GameController.PLAYER_TAG)
-    {
+        if (other.tag == GameController.PLAYER_TAG)
+        {
 			GameController controller = GameController.Singleton;
 			controller.setFinishedLevel (true);
 		}
 	}
 
 	void OnTriggerExit(Collider other){
-    if (other.tag == GameController.PLAYER_TAG)
-    {
+        //If the colliding object is a player character
+        if (other.tag == GameController.PLAYER_TAG)
+        {
 			GameController controller = GameController.Singleton;
 			controller.setFinishedLevel (false);
 		}

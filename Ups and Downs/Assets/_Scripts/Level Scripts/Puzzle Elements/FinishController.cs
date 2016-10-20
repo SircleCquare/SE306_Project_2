@@ -172,7 +172,6 @@ public class FinishController : MonoBehaviour
 
     /*
      * Show high scores in the list of high scores
-     * TODO (low priority) - move to a better approach than hard coded score fields (table?) if time allows
      */
     void DisplayHighScores(string levelName)
     {
@@ -192,8 +191,8 @@ public class FinishController : MonoBehaviour
             Text nameField = fields[0],
                 scoreField = fields[1];
 
-            nameField.text = highScore.PlayerName;
-            scoreField.text = highScore.PointsValue.ToString("#,##0");
+            nameField.text = highScore.playerName;
+            scoreField.text = highScore.pointsValue.ToString("#,##0");
         }
     }
 

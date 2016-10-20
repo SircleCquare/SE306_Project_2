@@ -147,15 +147,6 @@ public class SliderMenu : MonoBehaviour {
 						LevelThumbnails [s].transform.localScale = Vector2.Lerp (LevelThumbnails [s].transform.localScale, new Vector2 (Element_Scale, Element_Scale), Transition_In);
 						LevelThumbnails [s].gameObject.transform.SetAsLastSibling();
 					}
-
-					//else if(t<s){
-						//In Pro Version Change Color Of Previous Slide
-					//}
-
-					//else if(t>s){
-						//In Pro Version Change Color Of Next Slide
-					//}
-
 				}
 			}
 		}

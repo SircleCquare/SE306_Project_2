@@ -47,6 +47,7 @@ public class Achievements {
 
             Debug.Log("Unlocked achievement: " + achievementName);
 
+            // Persist game data with the unlocked achievement 
             gameData.Save();
         }
 
