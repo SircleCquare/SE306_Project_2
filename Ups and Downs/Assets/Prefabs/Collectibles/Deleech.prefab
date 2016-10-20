@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3373338}
   - 23: {fileID: 2309354}
   - 65: {fileID: 6529936}
+  - 114: {fileID: 11429470}
   m_Layer: 2
   m_Name: Health
   m_TagString: Untagged
@@ -28,7 +29,7 @@ GameObject:
   - 4: {fileID: 496172}
   - 114: {fileID: 11424584}
   m_Layer: 2
-  m_Name: Health Alternate
+  m_Name: Deleech
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +72,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: ad4263ed7ac78f5429cf840ce9702f5b, type: 2}
+  - {fileID: 2100000, guid: 55e33aba0b6c151429142a653ba23620, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -119,6 +120,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doFloat: 0
   spinFactor: 1
+--- !u!114 &11429470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4be149a5c0611d44828ff7000fa3a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isResetOnDeath: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
