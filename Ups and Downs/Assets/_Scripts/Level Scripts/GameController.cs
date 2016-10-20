@@ -75,6 +75,9 @@ public class GameController : SingletonObject<GameController> {
 
     void Start()
     {
+        // Ensures transparent objects are renderered in the correct order.
+        Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
+
         //Debug.Log("Loading save");
         gameData = GameData.LoadInstance();
 		gameData.clearLevelState ();
