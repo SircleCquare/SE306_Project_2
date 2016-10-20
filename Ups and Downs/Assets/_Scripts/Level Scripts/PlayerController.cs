@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     /** Configurable Player Movement Variables */
     public float maxSpeed = 10f;
+    public float maxFallSpeed = 30f;
     public float runningForce = 13f;
     public float jumpForce = 10f;
     public float gravity = 5f;
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour {
         // Enforce terminal velocity.
         Vector3 clampedVelocity = rb.velocity;
         clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeed, maxSpeed);
-        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -jumpForce, jumpForce);
+        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -maxFallSpeed, maxFallSpeed);
         clampedVelocity.z = 0;
         rb.velocity = clampedVelocity;
 
@@ -117,10 +118,27 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                rb.AddForce(Vector3.down * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                Debug.Log(getGravityDirection());
+                rb.AddForce(getGravityDirection() * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
 
         }
+    }
+
+    private Vector3 getGravityDirection()
+    {
+        Vector3 gravity = Vector3.down;
+
+        if (PlayerSide != Side.DARK) return gravity;
+        
+        CameraPinController cameraPin = GameObject.FindObjectOfType<CameraPinController>();
+        if (cameraPin == null)
+        {
+            Debug.LogError("Could not locate Camera Pin Object");
+            return gravity;
+        }
+        
+        return cameraPin.transform.rotation * gravity;
     }
 
     // Determines whether the player is on the ground.
