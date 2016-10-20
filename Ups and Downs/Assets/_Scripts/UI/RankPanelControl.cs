@@ -18,7 +18,6 @@ public class HighScore : MonoBehaviour
 
     /*
      * Show high scores in the list of high scores
-     * TODO (low priority) - move to a better approach than hard coded score fields (table?) if time allows
      */
     void DisplayHighScores(string levelName)
     {

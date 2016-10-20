@@ -162,7 +162,6 @@ public class PlayerController : MonoBehaviour {
 
     public void addHeart()
     {
-        //Debug.Log("Add Heart");
         gameController.addHeart();
     }
 
@@ -176,17 +175,10 @@ public class PlayerController : MonoBehaviour {
     /// <returns></returns>
     public bool addToInventory(SpecialCollectible specialItem)
     {
-        if (getInventoryItemType() == SpecialItem.None)
-        {
-           //Debug.Log("Added");
-            gameController.setInventoryItem(specialItem);
-            return true;
-        } else
-        {
-            //Debug.Log("Inventory Full");
-            return false;
-        }
-	}
+        if (getInventoryItemType() != SpecialItem.None) return false;
+        gameController.setInventoryItem(specialItem);
+        return true;
+    }
 
 
     public SpecialItem getInventoryItemType()
@@ -318,6 +310,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // reset the player to the given checkpoint
     public void resetToCheckpoint(int checkpoint)
     {
         currentCheckpoint = gameController.getCheckpoint(PlayerSide, checkpoint);

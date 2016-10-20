@@ -271,7 +271,6 @@ public class GameData
         if (!PlayerPrefs.HasKey("data"))
         {
             // If no save exists, create new game data and save
-            ////Debug.Log("No save found");
             CreateFreshSave();
         }
         else
@@ -286,13 +285,10 @@ public class GameData
                 {
                     var serializer = new BinaryFormatter();
                     instance = serializer.Deserialize(binaryStream) as GameData;
-                    //Debug.Log("Save data loaded");
                 }
                 catch (SerializationException)
                 {
                     // If the load is not possible because the save is corrupt, create a new one
-                    // TODO either remove this when no more changes will occur to game data or show message to user to inform them it happened
-                    //Debug.Log("Save data corrupted, creating new one");
                     CreateFreshSave();
                 }
 

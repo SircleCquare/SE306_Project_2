@@ -9,22 +9,18 @@ using System.Collections;
 /// </summary>
 public class StoryTextTrigger : MonoBehaviour {
 
-  /// <summary>
-  /// The text that should be triggerd on coming in range of this trigger.
-  /// </summary>
-  private GameObject[] storyText;
+    /// <summary>
+    /// The text that should be triggerd on coming in range of this trigger.
+    /// </summary>
+    private GameObject[] storyText;
 
-  /// <summary>
-  /// External other targets that should be made active upon reaching this trigger.
-  /// </summary>
-  public GameObject[] externalTargets;
+    /// <summary>
+    /// External other targets that should be made active upon reaching this trigger.
+    /// </summary>
+    public GameObject[] externalTargets;
 
-  void Start () {
-//        storyText = existing.Concat(externalTargets).ToArray();
-//        foreach (GameObject text in storyText)
-//        {
-//            text.SetActive (false);
-//        }
+    void Start () {
+      // get all children  
       var existing = new GameObject[transform.childCount];
       for (var i = 0; i < transform.childCount; i++)
       {
@@ -35,6 +31,7 @@ public class StoryTextTrigger : MonoBehaviour {
       {
           obj.SetActive (false);
       }
+      //combine children and external tagets to storytext array
       storyText = existing.Concat(externalTargets).ToArray();
 	}
 

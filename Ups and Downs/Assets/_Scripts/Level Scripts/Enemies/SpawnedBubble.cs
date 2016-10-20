@@ -61,7 +61,6 @@ public class SpawnedBubble : Enemy
 
   /// <summary>
   /// When a bubble is touched by the player it starts growing smaller and steps a small distance away.
-  /// TODO: Consider Lerping away for smoother effect.
   /// </summary>
   /// <param name="other"></param>
   void OnTriggerEnter(Collider other)
