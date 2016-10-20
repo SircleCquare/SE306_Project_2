@@ -19,12 +19,6 @@ public class FinishScreenButtons : MonoBehaviour {
 		}
 	}
 
-	public void NextLevelButtonPredictive()
-	{
-		//int levelNumber = ApplicationModel.levelNumber;
-	    //SceneManager.LoadScene(levelNumber + 3);
-	}
-
 	public void RetryLevel()
 	{
 		int levelNum = GameData.GetInstance ().LevelNumber;
