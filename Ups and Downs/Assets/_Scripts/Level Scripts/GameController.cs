@@ -494,7 +494,7 @@ public class GameController : SingletonObject<GameController> {
 	*/
 	public bool isJump() {
 		if (!disableInput) {
-			return Input.GetButton("Jump");
+            return Input.GetButton("Jump") || Input.GetButton("Vertical");
 		} else {
 			return false;
 		}
