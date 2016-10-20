@@ -1779,7 +1779,12 @@ MonoBehaviour:
   scoreText: {fileID: 468730170}
   achievementPopUp: {fileID: 1761984183}
   achievementText: {fileID: 1761984182}
-  scoreObjects: []
+  scoreObjects:
+  - {fileID: 2112645622}
+  - {fileID: 288778897}
+  - {fileID: 881110877}
+  - {fileID: 1845142570}
+  - {fileID: 1686045451}
   highScoreEntryGroup: {fileID: 0}
   highScoreNameInput: {fileID: 0}
 --- !u!114 &1596590868
