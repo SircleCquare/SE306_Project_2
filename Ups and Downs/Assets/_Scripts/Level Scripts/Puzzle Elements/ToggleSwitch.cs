@@ -9,6 +9,9 @@ using System.Collections;
 
 */
 public class ToggleSwitch : Switch {
+
+	public Side switchSide = Side.LIGHT;
+
 	/*
 		Fire switch when loading scene to ensure all game objects are in right state
 	*/
@@ -19,9 +22,13 @@ public class ToggleSwitch : Switch {
 		Toggles the state of this switch
 	*/
 	public void toggle() {
-        foreach (Switchable target in targetList)
-        {
-            target.toggle();
-        }
+
+		if (GameController.Singleton.getSide () == switchSide) {
+			
+			foreach (Switchable target in targetList)
+			{
+				target.toggle();
+			}
+		}
     }
 }
