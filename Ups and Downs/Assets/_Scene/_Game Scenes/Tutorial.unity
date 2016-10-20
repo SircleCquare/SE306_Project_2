@@ -727,7 +727,7 @@ Transform:
   - {fileID: 2051381464}
   - {fileID: 1158018093}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
 --- !u!1001 &279724181
 Prefab:
   m_ObjectHideFlags: 0
@@ -1034,7 +1034,7 @@ Transform:
   - {fileID: 1893890480}
   - {fileID: 1315130523}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
 --- !u!1001 &312358091
 Prefab:
   m_ObjectHideFlags: 0
@@ -3060,7 +3060,7 @@ Transform:
   - {fileID: 1222704492}
   - {fileID: 1988371993}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 6
 --- !u!4 &847951986 stripped
 Transform:
   m_PrefabParentObject: {fileID: 433648, guid: 9ed090c2bb8239641b8291862eb697b7, type: 2}
@@ -4388,7 +4388,7 @@ Transform:
   - {fileID: 1462790140}
   - {fileID: 141570927}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
 --- !u!1001 &1127459251
 Prefab:
   m_ObjectHideFlags: 0
@@ -4897,7 +4897,7 @@ Transform:
   - {fileID: 739879278}
   - {fileID: 1402477864}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 4
 --- !u!4 &1216480037 stripped
 Transform:
   m_PrefabParentObject: {fileID: 430750, guid: 79ed92855f0e21d419989969259d9ad2, type: 2}
@@ -6732,7 +6732,7 @@ Transform:
   - {fileID: 163375097}
   - {fileID: 1365414273}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 5
 --- !u!1001 &1724576692
 Prefab:
   m_ObjectHideFlags: 0
