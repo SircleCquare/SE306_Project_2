@@ -2362,7 +2362,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128536}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -9.547, y: -3.704, z: -9.001}
+  m_LocalPosition: {x: -9.91, y: -3.79, z: -9.044272}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
@@ -2490,15 +2490,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSide: 0
   switchSearchRadius: 2
-  darkSideZ: -2.5
-  lightSideZ: 2.5
-  terminalVelocity: 200
   maxSpeed: 10
-  speed: 13
-  jumpForce: 15
+  maxFallSpeed: 30
+  runningForce: 13
+  jumpForce: 12
   gravity: 40
   airtime: 0.4
-  deadzone: 0.2
+  deadzone: 0.01
+  leechPullFactor: 10
 --- !u!136 &13601646
 CapsuleCollider:
   m_ObjectHideFlags: 1

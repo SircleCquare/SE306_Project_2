@@ -25,7 +25,7 @@ public class GameController : SingletonObject<GameController> {
 	public KeyCode flipAction = KeyCode.F;
 	public KeyCode activateAction = KeyCode.E;
 
-    private const int MAX_HEALTH = 5;
+    public const int MAX_HEALTH = 5;
 
     public CameraPinController cameraPinController;
     private bool disableInput = false;
@@ -143,7 +143,7 @@ public class GameController : SingletonObject<GameController> {
             }
         }
 
-		score.text = "Coins: " + getCoinsFound() + "/" + getTotalCoins();
+		score.text = "Coins: " + getCoinsFound();
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
@@ -280,7 +280,7 @@ public class GameController : SingletonObject<GameController> {
     {
         if (getCurrentHealth() < MAX_HEALTH)
         {
-            gameData.Heart = MAX_HEALTH;
+            gameData.Heart++;
 			healthBar.showLastHeart ();
             //healthBar.value = MAX_HEALTH;
             return true;
@@ -589,9 +589,14 @@ public class GameController : SingletonObject<GameController> {
 	    SceneManager.LoadScene("Finish Scene");
     }
 
-	public int calculateScore(int CoinScore, float time, int deaths) {
-		float result = CoinScore / Mathf.Log10 (time + 5f);
-		return (int)(result * 1000f / (deaths + 1f));
+	public int calculateScore(int CoinScore, float time, int deaths)
+	{
+        // Work our multipliers
+	    ApplicationModel.timeMultiplier =Math.Round(10/Mathf.Log10(time + 5f), 2);
+        ApplicationModel.deathMultiplier = Math.Round(1/(deaths + 1f), 2);
+        
+        // Work out final score
+		return (int)(CoinScore * 100 * ApplicationModel.timeMultiplier * ApplicationModel.deathMultiplier);
 	}
 
     public GameData GetGameData()
