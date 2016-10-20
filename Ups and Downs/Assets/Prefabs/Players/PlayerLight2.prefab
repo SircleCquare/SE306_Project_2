@@ -2417,10 +2417,11 @@ MonoBehaviour:
   maxSpeed: 10
   maxFallSpeed: 30
   runningForce: 13
-  jumpForce: 15
+  jumpForce: 12
   gravity: 40
   airtime: 0.4
   deadzone: 0.01
+  leechPullFactor: 10
 --- !u!136 &13621378
 CapsuleCollider:
   m_ObjectHideFlags: 1
