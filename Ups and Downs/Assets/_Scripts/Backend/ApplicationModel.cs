@@ -15,4 +15,6 @@ public static class ApplicationModel {
 	public static int totalCoins;
     public static int deathCount;
 
+    public static double timeMultiplier;
+    public static double deathMultiplier; 
 }
