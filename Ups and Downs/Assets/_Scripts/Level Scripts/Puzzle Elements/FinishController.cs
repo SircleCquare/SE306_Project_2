@@ -62,6 +62,8 @@ public class FinishController : MonoBehaviour
     private bool achievementDisplayed = false;
     private bool savedHighScoreName = false;
 
+    private Queue<string> achievementQueue = new Queue<string>(); 
+
     // Use this for initialization
     void Start()
     {
@@ -79,17 +81,40 @@ public class FinishController : MonoBehaviour
         deathMultiplier.text = "x" + (1 / (ApplicationModel.deathMultiplier)).ToString("0.00");
         scoreText.text = ApplicationModel.score.ToString("#,##0");
 
-
+        // Unlock level completed achievement
         UnlockAchievement(ApplicationModel.levelName);
+
+        // Unlock score based achievements
+        var score = ApplicationModel.score;
+        if (score >= 10000)
+        {
+            UnlockAchievement("10,000 Club");
+        }
+        if (score >= 50000)
+        {
+            UnlockAchievement("50,000 Club");
+        }
+        if (score >= 75000)
+        {
+            UnlockAchievement("75,000 Club");
+        }
+        if (score >= 100000)
+        {
+           UnlockAchievement("100,000 Club"); 
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Handle hiding an achievement if it is visible
         if (achievementDisplayed)
         {
+            // Handle hiding an achievement if it is visible
             TryHideAchivementPopup();
+        }else if (achievementQueue.Count > 0)
+        {
+            // Unlock any queued up achievements
+            UnlockAchievement(achievementQueue.Dequeue());
         }
 
         DisplayHighScores(ApplicationModel.levelName);
@@ -105,6 +130,14 @@ public class FinishController : MonoBehaviour
      */
     void UnlockAchievement(string achievementName)
     {
+        // If an achievement is currently being shown, queue this one to be shown later
+        if (achievementDisplayed)
+        {
+            achievementQueue.Enqueue(achievementName);
+            return;
+        }
+
+        // Show an achievement
         Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, GameController.Singleton.GetGameData(), achievementAudioClip);
         achievementPopUpCountdown = 2.0f;
         achievementDisplayed = true;
