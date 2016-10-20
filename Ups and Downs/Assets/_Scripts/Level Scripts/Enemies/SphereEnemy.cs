@@ -33,10 +33,6 @@ public class SphereEnemy : Enemy {
   /// </summary>
   public float refrainRadius;
 
-  /// <summary>
-  /// How far away from the play bubbles will spawn
-  /// </summary>
-  public float spawnDistance;
 
   /// <summary>
   /// The radius of the space around the sphere enemy in which bubbles will be spawned.
