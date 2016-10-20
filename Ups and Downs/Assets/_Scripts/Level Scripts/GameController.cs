@@ -324,10 +324,20 @@ public class GameController : SingletonObject<GameController> {
             darkCheckpoint = darkPlayer.getCheckpointNumber();
         int resetTo = Math.Min(lightCheckpoint, darkCheckpoint);
 
+        // Move the camera to the midpoint between the two players checkpoint.
+        Vector3 lightCheckPoint = getCheckpoint(Side.LIGHT, resetTo).getPosition();
+        Vector3 darkCheckPoint = getCheckpoint(Side.DARK, resetTo).getPosition();
+
+        Vector3 newCameraPosition = (lightCheckPoint + darkCheckPoint) / 2.0f;
+        newCameraPosition.z = cameraPinController.transform.position.z;
+        cameraPinController.transform.position = newCameraPosition;
+
         cameraPinController.resetShakyCam();
 
-        lightPlayer.resetToCheckpoint(resetTo);
         darkPlayer.resetToCheckpoint(resetTo);
+        lightPlayer.resetToCheckpoint(resetTo);
+        //not running
+
 
         // Reset all enemies and collectables in level.
         foreach (Enemy e in FindObjectsOfType<Enemy>()) {
