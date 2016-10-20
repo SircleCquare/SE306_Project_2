@@ -143,7 +143,7 @@ public class GameController : SingletonObject<GameController> {
             }
         }
 
-		score.text = "Coins: " + getCoinsFound() + "/" + getTotalCoins();
+		score.text = "Coins: " + getCoinsFound();
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
