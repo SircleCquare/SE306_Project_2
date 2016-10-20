@@ -30,7 +30,7 @@ GameObject:
   - 4: {fileID: 409958}
   - 65: {fileID: 6554136}
   - 114: {fileID: 11489624}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
