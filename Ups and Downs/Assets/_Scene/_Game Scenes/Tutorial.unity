@@ -5520,6 +5520,10 @@ Prefab:
       propertyPath: score
       value: 
       objectReference: {fileID: 570787927}
+    - target: {fileID: 11436374, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
+      propertyPath: achievementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 886425f412b0f61499ee38133d9f00f9, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddc1efb5766b1a44a9b3e652263dcf2e, type: 2}
   m_IsPrefabParent: 0

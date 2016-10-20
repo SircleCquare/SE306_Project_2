@@ -37,6 +37,9 @@ public class GameController : SingletonObject<GameController> {
 
 	private bool inMainMenu;
 
+    // Sound played when achievement pops
+    public AudioClip achievementSound; 
+
     /* UI components */
     public HealthController healthBar;
     public Text timeText;
@@ -512,7 +515,7 @@ public class GameController : SingletonObject<GameController> {
      */
     void unlockAchievement(string achievementName)
     {
-        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, gameData);
+        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, gameData, achievementSound);
         achievementPopUpCountdown = 2.0f;
         achievementDisplayed = true; 
     }
