@@ -18,7 +18,7 @@ public class GameController : SingletonObject<GameController> {
 	private const int TUTORIAL_SCENE_INDEX = 2;
 
     /** The number of seconds a player has to wait between flips */
-    public float flipCoolDown = 2.0f;
+    public float flipCoolDown = 0.8f;
 
     // If you want to change the initial side, update the camera pin controller.
     private Side currentSide = Side.DARK;

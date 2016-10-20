@@ -768,10 +768,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderSwitchPaths: 1
-  flipCoolDown: 2
+  flipCoolDown: 0.8
   flipAction: 102
   activateAction: 101
   cameraPinController: {fileID: 0}
+  cameraMovement: {fileID: 0}
+  achievementSound: {fileID: 0}
   healthBar: {fileID: 11492786}
   timeText: {fileID: 11484606}
   characterName: {fileID: 11448496}
