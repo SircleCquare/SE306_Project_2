@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour {
 		AdjustFacing(FORWARD); 
 		PushableObject attachedBlock = GetComponentInChildren<PushableObject>();
 
-		if (attachedBlock != null && attachedBlock.isAttachedIO) attachedBlock.detach();
+        if (attachedBlock != null && attachedBlock.isAttached()) attachedBlock.detach();
     }
 
     public int getCheckpointNumber()
