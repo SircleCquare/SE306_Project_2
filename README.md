@@ -11,24 +11,26 @@
 - zhsitao - Sitao Zheng
 
 ## Building
-This project is still in its prototype phase. At this point, we suggest building it as a standalone application and running the produced output. The PROTOTYPE release contains a compiled version of the Windows standalone. If you use this, you will not not need to build the project yourself. 
+We suggest building the project as a standalone application and running the produced output. The FINAL release contains a compiled version of the Windows standalone. If you use this, you will not not need to build the project yourself. 
 
 To build this as a standalone application for yourself...
 - Open the project in Unity 
 - Select File > Build Settings ... (or use the shortcut 'Ctrl + Shift + B')
-- For the protoype, make sure the following 5 scenes are in the build: 
+- For the final build, make sure the following 7 scenes are in the build: 
    - Start
    - Level Select 
-   - Michael's tutorial level
-   - level
+   - Tutorial
+   - Level 1
+   - Level 2
    - Finish Scene
+   - Game Over Scene
 - Select the PC, Mac & Linux Standalone option from the list of platforms
 - Choose the 'Target Platform' to build to (e.g. 'Windows') 
-- Press 'Build' and choose where to store the output. 
+- Press 'Build' and choose where to store the output
 
 ## Running 
 Either
-- Download the binary supplied with the PROTOTYPE release, unzip the file, and run prototype.exe from within it
+- Download the binary supplied with the FINAL release, unzip the file, and run final.exe from within it
 
 Or
 - Navigate to the build output you generate and run that application
@@ -44,10 +46,12 @@ Or
 - Complete every level to finish the game
 - Try to achieve higher scores in levels
 - Collect coins to increase your score
-- Dying will also impact your score in future versions
-- Finishing the stage with full health or in shorter times will also impact your score in later versions
+- Dying will negatively impact your score
+- Finishing the stage in shorter times will positively impact your score
 
 ## Enemies
-- Currently there is one enemy in the game.
-- The enemy will chase you in a short radius.
-- Making contact with the enemy will reduce your health, and may push you off platforms and into hazards.
+- Currently there are two enemies in the game.
+- The sphere enemy will chase you in a short radius.
+- Making contact with the sphere enemy will knock you back, and may push you off platforms and into hazards.
+- The leech enemy will latch onto you if you approach it
+- After latching onto you, the leech will cause dizzyness and loss of balance
