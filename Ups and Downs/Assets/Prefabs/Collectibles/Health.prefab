@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3373338}
   - 23: {fileID: 2309354}
   - 65: {fileID: 6529936}
-  - 114: {fileID: 11429470}
+  - 114: {fileID: 11412078}
   m_Layer: 2
   m_Name: Health
   m_TagString: Untagged
@@ -41,10 +41,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155056}
-  m_LocalRotation: {x: -0.00000013345682, y: -0.8191521, z: 0.57357633, w: -0.00000009344745}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 110, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 496172}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 55e33aba0b6c151429142a653ba23620, type: 2}
+  - {fileID: 2100000, guid: 4bab2ed8a6908d14e904e104bbf0a8e7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -94,7 +94,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155056}
-  m_Mesh: {fileID: 4300000, guid: a9a5dbd7dc8ad434c830b12349df4455, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 9c2413a1021af9f40a88a30ec6cbd888, type: 3}
 --- !u!65 &6529936
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -107,6 +107,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7799999, y: 0.39000002, z: 0.78000003}
   m_Center: {x: -2.329159e-13, y: 0.19500096, z: 0}
+--- !u!114 &11412078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd336742715fc84d92dae3d95d9396d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isResetOnDeath: 0
 --- !u!114 &11424584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,19 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764b60f3d4c3710448927f6e62b204ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doFloat: 0
+  doFloat: 1
   spinFactor: 1
---- !u!114 &11429470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4be149a5c0611d44828ff7000fa3a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
