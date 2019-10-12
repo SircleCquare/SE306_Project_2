@@ -14,11 +14,6 @@ public class FinishController : MonoBehaviour
     public Text levelNameText;
 
     /// <summary>
-    /// The number of coins collected, out of the total.
-    /// </summary>
-    public Text coinsText;
-
-    /// <summary>
     /// The time taken to complete the level, in seconds.
     /// </summary>
     public Text timeText;
@@ -35,7 +30,6 @@ public class FinishController : MonoBehaviour
 
     public Text timeMultiplier;
     public Text deathMultiplier;
-    public Text coinScore;
 
     /// <summary>
     /// The achievement popup.
@@ -73,14 +67,12 @@ public class FinishController : MonoBehaviour
     {
         // Show raw information
         levelNameText.text = "Completed " + ApplicationModel.levelName + "!";
-        coinsText.text = ApplicationModel.coinsFound.ToString();
         deathsText.text = ApplicationModel.deathCount.ToString();
         timeText.text = ApplicationModel.time.ToString("0.0") + " seconds";
 
         var gameData = GameData.GetInstance();
 
         // Show scores and multipliers to explain how score is used calculated
-        coinScore.text = (gameData.CoinScore * 100).ToString("#,##0");
         timeMultiplier.text = "x" + (ApplicationModel.timeMultiplier).ToString("0.00");
         deathMultiplier.text = "x" + (ApplicationModel.deathMultiplier).ToString("0.00");
         scoreText.text = ApplicationModel.score.ToString("#,##0");

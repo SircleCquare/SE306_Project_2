@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Serialization;
 
 /// <summary>
 /// A class that represents a high score for a level. 
