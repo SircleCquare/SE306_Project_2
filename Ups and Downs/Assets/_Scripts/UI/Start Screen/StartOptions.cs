@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -64,8 +65,18 @@ public class StartOptions : MonoBehaviour {
 
 	}
 
+	private void OnEnable()
+	{
+		SceneManager.sceneLoaded += PlayMusicOnLoad;
+	}
+
+	private void OnDisable()
+	{
+		SceneManager.sceneLoaded -= PlayMusicOnLoad;
+	}
+
 	//Once the level has loaded, check if we want to call PlayLevelMusic
-	void OnLevelWasLoaded()
+	void PlayMusicOnLoad(Scene scene, LoadSceneMode mode)
 	{
 		//if changeMusicOnStart is true, call the PlayLevelMusic function of playMusic
 		if (changeMusicOnStart)

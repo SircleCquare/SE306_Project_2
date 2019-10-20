@@ -2,11 +2,22 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class EventSystemChecker : MonoBehaviour
 {
+	private void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnLoaded;
+	}
+
+	private void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnLoaded;
+	}
+
 	//OnLevelWasLoaded is called after a new scene has finished loading
-	void OnLevelWasLoaded ()
+	void OnLoaded(Scene scene, LoadSceneMode mode)
 	{
 		//If there is no EventSystem (needed for UI interactivity) present
 		if(!FindObjectOfType<EventSystem>())
