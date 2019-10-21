@@ -18,7 +18,7 @@ public class HighScorePanelDisplay : MonoBehaviour
     public GameObject HighScorePrefab;
 
     /// <summary>
-    /// Scroll pane holding all the achievements
+    /// Scroll pane holding all the high scores
     /// </summary>
     public GameObject ScrollPaneContent;
 

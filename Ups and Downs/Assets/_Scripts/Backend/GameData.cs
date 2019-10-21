@@ -10,7 +10,7 @@ using UnityEngine;
 /// <summary>
 /// GameData is the main class for storing and retrieving the state of the game.
 /// It can be serialized to file and retrieved later to store the game state between sessions.
-/// Data stored includes achievements unlocked, high scores, the current level number, number of coins found,
+/// Data stored includes high scores, the current level number, number of coins found,
 /// number of deaths and the current level's play time.
 /// </summary>
 public class GameData
@@ -19,11 +19,6 @@ public class GameData
     [NonSerialized] private static GameData instance;
 
     [NonSerialized] private static string saveFile;
-
-    /// <summary>
-    /// A list of achievements the player has unlocked
-    /// </summary>
-    public List<string> awardedAchievements { get; set; }
 
     /// <summary>
     /// A dictionary of highscores for levels.
@@ -90,8 +85,6 @@ public class GameData
         // Initialise level state
         clearLevelState();
 
-        // List to store names of achievements
-        awardedAchievements = new List<String>();
         HighScores = new Dictionary<string, List<HighScoreValue>>(5);
     }
 
