@@ -16,8 +16,10 @@ public class MapSwitch : MonoBehaviour {
         origin = parentObj.transform;
 
         ToggleSwitch switchObj = parentObj.GetComponent<ToggleSwitch>();
-        line.SetWidth(.2f, .2f);
-        line.SetVertexCount(2 * destList.Length);
+
+        line.startWidth = .2f;
+        line.endWidth = .2f;
+        line.positionCount = 2 * destList.Length;
     }
 	
 	// Update is called once per frame

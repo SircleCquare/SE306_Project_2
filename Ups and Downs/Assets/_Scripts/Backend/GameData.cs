@@ -55,24 +55,9 @@ public class GameData
     public int HighestLevelUnlockedNumber { get; set; }
 
     /// <summary>
-    /// The total number of coins in the currently active level.
-    /// </summary>
-    public int TotalNumberOfCoins { get; set; }
-
-    /// <summary>
     /// The number of the currently playing level, as specified in the build settings order.
     /// </summary>
     public int LevelNumber { get; set; }
-
-    /// <summary>
-    /// The number of Coins the player has found in this play through
-    /// </summary>
-    public int CoinsFound { get; set; }
-
-    /// <summary>
-    /// The score as contributed by coins (each coin can have a custom point setting)
-    /// </summary>
-    public int CoinScore { get; set; }
 
     /// <summary>
     /// The number of times the player has died in this play through
@@ -124,8 +109,6 @@ public class GameData
      */
     public void clearLevelState()
     {
-        CoinsFound = 0;
-        CoinScore = 0;
         Heart = MAX_HEALTH;
         Time = 0.0f;
         Deaths = 0;

@@ -41,7 +41,7 @@ public class CameraPinController : MonoBehaviour {
   private Quaternion defaultRotation, toRotation, fromRotation;
   private float fovLerpProgress = 0f,
       rotationLerpProgress = 0f;
-  private new Camera camera;
+  private Camera camera;
 
   public bool enableShakyCam { get; set; }
 

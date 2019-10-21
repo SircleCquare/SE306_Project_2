@@ -15,7 +15,6 @@ public class GameOverController : MonoBehaviour
 	public const string GAME_OVER_SCENE_NAME = "Game Over Scene";
 
 	public Text levelNameText;
-	public Text coinsText;
     public Text timeText;
 	public Text deathsText;
 	public Text scoreText;

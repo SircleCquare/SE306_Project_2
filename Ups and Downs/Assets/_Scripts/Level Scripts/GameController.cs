@@ -83,11 +83,6 @@ public class GameController : SingletonObject<GameController> {
 
         coolDownCount = flipCoolDown;
 
-        //Calculates the number of coins in this level based on the number of objects tagged as Coin.
-        GameObject[] coinObjectList;
-        coinObjectList = GameObject.FindGameObjectsWithTag("Coin");
-        gameData.TotalNumberOfCoins = coinObjectList.Length;
-
         // Set limit for healthbar to allow proper proportion highlighted
 
         // Update current character selected
@@ -138,8 +133,6 @@ public class GameController : SingletonObject<GameController> {
         {
             coolDownCount -= Time.deltaTime;
         }
-
-		score.text = "Coins: " + getCoinsFound();
 	}
 
 	public void RegisterPlayer(PlayerController controller) {
@@ -198,11 +191,9 @@ public class GameController : SingletonObject<GameController> {
     public void gameOver()
     {
 		ApplicationModel.time = gameData.Time;
-		ApplicationModel.coinsFound = gameData.CoinsFound;
-		ApplicationModel.totalCoins = getTotalCoins();
 		ApplicationModel.deathCount = gameData.Deaths;
 		ApplicationModel.levelNumber = gameData.LevelNumber;
-		ApplicationModel.score = calculateScore (gameData.CoinScore, gameData.Time, gameData.Deaths);
+		ApplicationModel.score = calculateScore (gameData.Time, gameData.Deaths);
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
@@ -213,32 +204,10 @@ public class GameController : SingletonObject<GameController> {
 
     }
 
-
-    public void foundCoin(int score)
-    {
-        gameData.CoinsFound++;
-        gameData.CoinScore += score;
-    }
-
-    public int getCoinsFound()
-    {
-        return gameData.CoinsFound;
-    }
-
-    public int getTotalCoins()
-    {
-        return gameData.TotalNumberOfCoins;
-    }
-
     public int getTime()
     {
         return (int)gameData.Time;
     }
-
-	public int getScore()
-	{
-		return gameData.CoinScore;
-	}
 
     public void setInventoryItem(SpecialCollectible specialItem)
     {
@@ -573,11 +542,9 @@ public class GameController : SingletonObject<GameController> {
 	void finishTheGame(){
 		//send score and time to ApplicationModel
 		ApplicationModel.time = gameData.Time;
-	    ApplicationModel.coinsFound = gameData.CoinsFound;
-	    ApplicationModel.totalCoins = getTotalCoins();
 	    ApplicationModel.deathCount = gameData.Deaths;
 		ApplicationModel.levelNumber = gameData.LevelNumber;
-		ApplicationModel.score = calculateScore (gameData.CoinScore, gameData.Time, gameData.Deaths);
+		ApplicationModel.score = calculateScore (gameData.Time, gameData.Deaths);
 		if (gameData.LevelNumber == 0) {
 			ApplicationModel.levelName = "Tutorial";
 		} else {
@@ -588,14 +555,14 @@ public class GameController : SingletonObject<GameController> {
 	    SceneManager.LoadScene("Finish Scene");
     }
 
-	public int calculateScore(int CoinScore, float time, int deaths)
+	public int calculateScore(float time, int deaths)
 	{
         // Work our multipliers
 	    ApplicationModel.timeMultiplier =Math.Round(10/Mathf.Log10(time + 5f), 2);
         ApplicationModel.deathMultiplier = Math.Round(1/(deaths + 1f), 2);
         
         // Work out final score
-		return (int)(CoinScore * 100 * ApplicationModel.timeMultiplier * ApplicationModel.deathMultiplier);
+		return (int)(100 * ApplicationModel.timeMultiplier * ApplicationModel.deathMultiplier);
 	}
 
     public GameData GetGameData()
