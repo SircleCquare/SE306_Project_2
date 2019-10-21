@@ -241,8 +241,6 @@ MonoBehaviour:
   characterAvatar: {fileID: 0}
   flipText: {fileID: 0}
   score: {fileID: 0}
-  achievementPopUp: {fileID: 0}
-  achievementText: {fileID: 0}
   dialogBox: {fileID: 0}
   dialogBoxCharacterName: {fileID: 0}
   dialogBoxMessage: {fileID: 0}

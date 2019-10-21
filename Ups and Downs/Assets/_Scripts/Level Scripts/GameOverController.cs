@@ -19,17 +19,10 @@ public class GameOverController : MonoBehaviour
 	public Text deathsText;
 	public Text scoreText;
 
-    public GameObject achievementPopUp;
-    public Text achievementText;
-
     public List<GameObject> scoreObjects;
     public GameObject highScoreEntryGroup;
     public InputField highScoreNameInput;
 
-    // Countdown for when to hide achievement popup
-    private float achievementPopUpCountdown = 2.0f;
-
-    private bool achievementDisplayed = false;
     private bool savedHighScoreName = false;
 
     // Use this for initialization

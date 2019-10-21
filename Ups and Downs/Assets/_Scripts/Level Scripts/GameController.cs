@@ -1,11 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary; 
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using UnityEngine.SceneManagement;
 
 public class GameController : SingletonObject<GameController> {
@@ -38,27 +35,18 @@ public class GameController : SingletonObject<GameController> {
 
 	private bool inMainMenu;
 
-    // Sound played when achievement pops
-    public AudioClip achievementSound; 
-
     /* UI components */
     public HealthController healthBar;
     public Text timeText;
     public Text characterName;
     public Image characterAvatar;
     public Text flipText;
-	public Text score;
-    public GameObject achievementPopUp;
-    public Text achievementText;
     public GameObject dialogBox;
     public Text dialogBoxCharacterName;
     public Text dialogBoxMessage;
 
     public float darkSideZ = -2.5f;
     public float lightSideZ = 2.5f;
-
-    private bool achievementDisplayed = false;
-    private float achievementPopUpCountdown = 2.0f;
 
     private PlayerController lightPlayer, darkPlayer;
 
@@ -106,12 +94,6 @@ public class GameController : SingletonObject<GameController> {
 
         gameData.Time += Time.deltaTime;
         updateTimeDisplay();
-
-        // Handle hiding an achievement if it is visible
-        if (achievementDisplayed)
-        {
-            tryHideAchivementPopup();
-        }
 
         if (coolDownCount < 0)
         {
@@ -473,33 +455,6 @@ public class GameController : SingletonObject<GameController> {
     void updateFlipText()
     {
         flipText.color = (coolDownActive) ? nearlyTransparentWhite : flipText.color = Color.white;
-    }
-
-    /*
-     * Record an achievement as unlocked and display it, if this is the first time it was unlocked
-     */
-    void unlockAchievement(string achievementName)
-    {
-        Achievements.UnlockAchievement(achievementName, achievementPopUp, achievementText, gameData, achievementSound);
-        achievementPopUpCountdown = 2.0f;
-        achievementDisplayed = true; 
-    }
-
-    /*
-     * Hides the achievement popup when the achievement countdown ends. 
-     */
-    void tryHideAchivementPopup()
-    {
-        achievementPopUpCountdown -= Time.deltaTime;
-
-        // Don't hide popup if countdown time still remains
-        if (achievementPopUpCountdown > 0)
-        {
-            return;
-        }
-
-        Achievements.HideAchivementPopup(achievementPopUp);
-        achievementDisplayed = false; 
     }
 
     /*
